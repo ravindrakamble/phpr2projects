@@ -39,7 +39,7 @@ body{
  ===============================================*/
 .header{
 	background-color: #f5c34c;
-	padding: 21px 0 0 0;
+	/*padding: 21px 0 0 0;*/
 	border-top: 10px dotted #000;
 }
 .top-header-left{
@@ -49,7 +49,7 @@ body{
 }
 .top-header-right{
 	float:right;
-	width: 38%;
+	width: 50%;
 }
 .top-header-left p{
 	font-family: 'Raleway', sans-serif;
@@ -117,7 +117,8 @@ body{
 	border:none;
 }
 .top-nav ul li a{
-	background: url(../images/nav.png) right repeat-y #141414;
+	/*background: url(../images/nav.png) right repeat-y #141414;*/
+	background:  right repeat-y #141414;
 	border: none;
 	float: none;
 	display: inline-block;
@@ -140,7 +141,7 @@ body{
 	float:right;
 }
 .main-header {
-	margin-top: 16px;
+	/*top-nav-top: 16px;*/
 }
 .frist:before{
 	content:url(../images/men-icon.png);
@@ -1239,10 +1240,10 @@ body{
 		width: 60%;
 	}
 	.wrap{
-		width:90%;
+		width:100%;
 	}
 	.top-header-contact-info {
-		width: 57%;
+		width: 60%;
 	}
 	.top-header-contact-account {
 		width: 41%;
@@ -1519,3 +1520,4 @@ body{
 		font-size: 0.8em;
 	}
 }
+
