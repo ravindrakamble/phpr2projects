@@ -3,6 +3,28 @@
 		<div class="content-boxs">
 		<!--Outstation Div Start-->
 		<div id='outstation>
+		<?php 
+		$city = array();
+		$city['ALL']='ALL';
+		    foreach($cities as $c){
+			  $city[$c->city_name]=$c->city_name;
+		}
+		$type = array();
+		$type['ALL']='ALL';
+		    foreach($car_type as $c){
+			  $type[$c->type_name]=$c->type_name;
+		}
+		$local_Package = array();
+		$local_Package['ALL']='ALL';
+		    foreach($local as $c){
+			  $local_Package[$c->PACKAGE_NAME]=$c->PACKAGE_NAME;
+		}
+		$out_Package = array();
+		$out_Package['ALL']='ALL';
+		    foreach($outstation as $c){
+			  $out_Package[$c->PACKAGE_NAME]=$c->PACKAGE_NAME;
+		}
+		?>
 			<table style="width: 40%">
 	            <tr>
 	                <td>Journey Date : </td>
@@ -10,7 +32,7 @@
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
-	                <td><select><option value="0">--</option></select></td>
+	                <td><?php echo form_dropdown('',$city);?></td>
 	            </tr>
 	            <tr>
 	                <td>From Area :   </td>
@@ -36,7 +58,7 @@
 	            </tr>
 	             <tr>
 	                <td>Car Type :   </td>
-	                <td><select><option value="0">--</option></select></td>
+	                <td><?php echo form_dropdown('',$type);?></td>
 	            </tr>
 	            <tr> <td colspan="2"><input type="button" name="flexiblebtn" value="SEARCH"/></td></tr>
 	        </table>
@@ -45,11 +67,11 @@
         	<table style="width: 40%">
 	            <tr>
 	                <td>Choose Package : </td>
-	                <td><select><option value="0">--</option></select></td>
+	                <td><?php echo form_dropdown('',$out_Package);?></td>
 	            </tr>
 	             <tr>
 	                <td>Car Type :   </td>
-	                <td><select><option value="0">--</option></select></td>
+	                <td><?php echo form_dropdown('',$type);?></td>
 	            </tr>
 	             <tr> <td colspan="2"><input type="button" name="packagebtn" value="SEARCH"/></td></tr>
 	        </table>
@@ -64,7 +86,7 @@
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
-	                <td><select><option value="0">--</option></select></td>
+	                <td><?php echo form_dropdown('',$city);?></td>
 	            </tr>
 	            <tr>
 	                <td>From Area :   </td>
@@ -90,7 +112,7 @@
 	            </tr>
 	             <tr>
 	                <td>Car Type :   </td>
-	                <td><select><option value="0">--</option></select></td>
+	                <td><?php echo form_dropdown('',$type);?></td>
 	            </tr>
 	            <tr> <td colspan="2"><input type="button" name="localflexiblebtn" value="SEARCH"/></td></tr>
 	        </table>
@@ -99,11 +121,11 @@
         	<table style="width: 40%">
 	            <tr>
 	                <td>Choose Package : </td>
-	                <td><select><option value="0">--</option></select></td>
+	                <td><?php echo form_dropdown('',$local_Package);?></td>
 	            </tr>
 	             <tr>
 	                <td>Car Type :   </td>
-	                <td><select><option value="0">--</option></select></td>
+	                <td><?php echo form_dropdown('',$type);?></td>
 	            </tr>
 	             <tr> <td colspan="2"><input type="button" name="localpackagebtn" value="SEARCH"/></td></tr>
 	        </table>

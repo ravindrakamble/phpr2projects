@@ -111,7 +111,7 @@ body{
 .top-nav ul li{
 	display:inline-block;
 	float:left;
-	border-left: 1px solid rgba(22, 22, 22, 0.91);
+	border-left: 1px solid white;
 }
 .top-nav ul li:nth-child(1){
 	border:none;

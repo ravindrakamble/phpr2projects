@@ -4,6 +4,7 @@ class Cancellation extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('cancellation');
+		$data['cancellation'] = 'active';
+		$this->load->view('cancellation',$data);
 	}
 }
