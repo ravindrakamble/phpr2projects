@@ -122,7 +122,8 @@ body{
 	border: none;
 	float: none;
 	display: inline-block;
-	padding: 35px 56.87px;
+	/*padding: 35px 56.87px;*/
+	padding:20px 40px;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	position: relative;
@@ -134,8 +135,8 @@ body{
 	-webkit-transition: 0.5s ease;
 }
 .top-nav li.active> a, .top-nav li> a:hover {
-	color: #FFF;
-	background:#f5c34c;
+	color: #000;
+	background:white;
 }
 .top-nav{
 	float:right;

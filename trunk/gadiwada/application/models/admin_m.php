@@ -34,4 +34,12 @@ Class Admin_m extends CI_Model{
 		return $query->result();
 	}
 	
+	function get_all_feature()
+	{
+		$this->db->distinct('FEATURE_NAME');
+		$this->db->select('FEATURE_NAME');
+		$query=$this->db->get('features');
+		return $query->result();
+	}
+	
 }

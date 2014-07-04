@@ -9,6 +9,9 @@
 		<!--Templete CSS End -->
 		<link href='<?php echo base_url();?>css/datepicker.css' rel='stylesheet' type='text/css'/>
 		<link href='<?php echo base_url();?>css/bootstrap.css' rel='stylesheet' type='text/css'/>
+		
+		
+        <link rel="stylesheet" href="<?php echo base_url();?>css/jquery.fancybox.css?v=2.1.0" type="text/css" media="screen" />
 		<!--Jquery Tab CSS-->
 		<!--<link href="<?php echo base_url()?>css/ion.tabs.css" rel="stylesheet" type="text/css"  media="all" />
 		<link href="<?php echo base_url()?>css/ion.tabs.skinBordered.css" rel="stylesheet" type="text/css"  media="all" />
@@ -21,6 +24,9 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		<script src="<?php echo base_url()?>js/bootstrap.js"></script>
 		<script src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>
+		
+        <script type="text/javascript" src="<?php echo base_url()?>js/jquery.fancybox.pack.js?v=2.1.0"></script>
+        
 		<!--<script src="<?php echo base_url()?>js/responsiveslides.min.js"></script>-->
 		<!--Jquery Tab JS-->
 		<!--<script src="<?php echo base_url()?>js/ion-tabs/ion.tabs.min.js"></script>
@@ -51,6 +57,11 @@
 									<li><a href="#"><img src="images/twitter.png" title="Twiiter"></a></li>
 									<li><a href="#"><img src="images/rss.png" title="Rss"></a></li>
 									<li><a href="#"><img src="images/gpluse.png" title="Google+"></a></li>
+									<li><a href="javascript:parent.jQuery.fancybox.open({href :'#signup'});">
+											<img src="images/login.jpg" title="Login">
+										</a>
+									</li>
+										
 								</ul>
 							</div>
 						</div>
@@ -75,10 +86,23 @@
 							<li <?php if(isset($cancellation)&& !empty($cancellation)) echo "class='active'"; ?> >
 								<a href="<?php echo base_url()?>cancellation">Cancellation</a></li>
 							
-							<li><a href="blog.html">Blog</a></li>
+							<li  <?php if(isset($inventory)&& !empty($inventory)) echo "class='active'"; ?>>
+							<a href="<?php echo base_url()?>inventory"> Inventory </a></li>
+							
+							
+							<li  <?php if(isset($registration)&& !empty($registration)) echo "class='active'"; ?>>
+							<a href="<?php echo base_url()?>registration"> Registration </a></li>
+							
+							<!--<li  <?php if(isset($login)&& !empty($login)) echo "class='active'"; ?>>
+							<a href="<?php echo base_url()?>login"> Login </a></li>
+							
+							
 							<li  <?php if(isset($login)&& !empty($login)) echo "class='active'"; ?>>
-							<a href="<?php echo base_url()?>login">My Booking(Login)</a></li>
-							<div class="clear"> </div>
+							<a href="<?php echo base_url()?>login"> Login </a></li>
+							
+							<li  <?php if(isset($login)&& !empty($login)) echo "class='active'"; ?>>
+							<a href="<?php echo base_url()?>login"> Login </a></li>-->
+							
 						</ul>
 					</div>
 					<div class="clear"> </div>
@@ -87,3 +111,38 @@
 			</div>
 		</div>
 		<div class="clear"> </div>
+<div id="signup" style="display: none">
+	<form name="signup" method="POST" action="#">
+		<h4>Create a new account</h4>
+		<table>
+			<tr>
+				<td>Enter your name:</td>
+				<td><input type="text" name="name" maxlength='30'/> </td>
+			</tr>
+			<tr>
+				<td>Enter  email id:</td>
+				<td><input type="email" name="email" maxlength='35'/> </td>
+			</tr>
+			<tr>
+				<td>Enter your phone number:</td>
+				<td><input type="tel" name="phone" maxlength='12'/> </td>
+			</tr>
+			<tr>
+				<td>Enter password:</td>
+				<td><input type="password" name="password" maxlength='15'/> </td>
+			</tr>
+			<tr>
+				<td>Retype password:</td>
+				<td><input type="password" name="repassword" maxlength='15'/> </td>
+			</tr>
+			<tr>
+				<td><input type="submit" name="submit" value="Submit" class="btn btn-info"/> </td>
+				<td><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
+			</tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+});
+</script>
