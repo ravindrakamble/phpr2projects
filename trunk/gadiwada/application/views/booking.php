@@ -6,16 +6,17 @@ var TSort_Data = new Array ('mytable', 'd', 's', 's','s','i','d','');
 </script>
 <!-- content -->
 <div class="content-boxs">
-	<table width="70%" frame="box">
+	<table width="100%" frame="box">
 		<tr>
 			<td style="border: none" align="center" width="100%" colspan="6"><h3>Booking</h3></td>
 		</tr>
 		<tr>
+			<td style="width: 30%"></td>
 			<td>From Date :</td>
 			<td><input name="fromdate" type="text" id="fromdate" /></td>
 			<td>To Date :</td>
 			<td><input name="todate" type="text" id="todate" /></td>
-			<td><input type="submit" name="btnSubmit" value="SHOW" id="btnSubmit" />	</td>
+			<td style="width: 30%"><input type="submit" name="btnSubmit" value="SHOW" id="btnSubmit" />	</td>
 		</tr>
 	</table>
 	<table width="100%" class="table table-bordered table-striped table-condensed" id="mytable">
@@ -35,7 +36,7 @@ var TSort_Data = new Array ('mytable', 'd', 's', 's','s','i','d','');
 			<td>OR-05-AB-1990</td>
 			<td>2012</td>
 			<td>31/01/2014</td>
-			<td><font color="green">BOOK</font></td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>14/03/2014</td>
@@ -44,7 +45,7 @@ var TSort_Data = new Array ('mytable', 'd', 's', 's','s','i','d','');
 			<td>OR-05-AB-1992</td>
 			<td>2015</td>
 			<td>31/06/2014</td>
-			<td><font color="red">CANCEL</font></td>
+			<td></td>
 		</tr>
 	</table>
 </div>
