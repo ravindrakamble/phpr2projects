@@ -19,6 +19,8 @@
 		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="<?php echo base_url()?>js/bootstrap.js"></script>
+		<script src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>
 		<!--<script src="<?php echo base_url()?>js/responsiveslides.min.js"></script>-->
 		<!--Jquery Tab JS-->
 		<!--<script src="<?php echo base_url()?>js/ion-tabs/ion.tabs.min.js"></script>
@@ -64,12 +66,18 @@
 					</div>
 					<div class="top-nav">
 						<ul>
-							<li class="active"><a href="<?php echo base_url()?>search">Home</a></li>
-							<li><a href="<?php echo base_url()?>cancellation">Cancellation</a></li>
-							<li><a href="projects.html">Projects</a></li>
-							<li><a href="services.html">Services</a></li>
+							<li <?php if(isset($search) && !empty($search) ) echo "class='active'"; ?>>
+								<a href="<?php echo base_url()?>search">Search</a></li>
+								
+							<li <?php if(isset($booking)&&!empty($booking)) echo "class='active'"; ?> >
+								<a href="<?php echo base_url()?>booking">Booking</a></li>
+								
+							<li <?php if(isset($cancellation)&& !empty($cancellation)) echo "class='active'"; ?> >
+								<a href="<?php echo base_url()?>cancellation">Cancellation</a></li>
+							
 							<li><a href="blog.html">Blog</a></li>
-							<li><a href="contact.html">Contact</a></li>
+							<li  <?php if(isset($login)&& !empty($login)) echo "class='active'"; ?>>
+							<a href="<?php echo base_url()?>login">My Booking(Login)</a></li>
 							<div class="clear"> </div>
 						</ul>
 					</div>
