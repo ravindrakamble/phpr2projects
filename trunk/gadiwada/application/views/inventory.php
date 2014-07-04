@@ -65,11 +65,11 @@ var TSort_Data = new Array ('inventory_table', 's', 's', 'i','i','d','d','');
 						</tr>
 						<tr>
 							<td>Agreement start date</td>
-							<td><input type="text" class="dt"/></td>
+							<td><input type="text" id="start"/></td>
 						</tr>
 						<tr>
 							<td>Agreement end date</td>
-							<td><input type="text" class="dt"/></td>
+							<td><input type="text" id="end"/></td>
 						</tr>
 						<tr>
 							<td><input type="checkbox" name="ac_nonac[]" value="AC"/> AC</td>
@@ -125,4 +125,37 @@ var TSort_Data = new Array ('inventory_table', 's', 's', 'i','i','d','d','');
 		</table>
 	</div>
 </div>
+<script type="text/javascript">
+var nowTemp = new Date();
+var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+var start = $('#start').datepicker(
+{
+	format:'dd/mm/yyyy',
+	onRender: function(date)
+	{
+		return date.valueOf() < now.valueOf() ? 'disabled' : '';
+	}
+}).on('changeDate', function(ev)
+{
+	if (ev.date.valueOf() > end.date.valueOf())
+	{
+		var newDate = new Date(ev.date)
+		newDate.setDate(newDate.getDate() + 1);
+		end.setValue(newDate);
+	}
+	start.hide();
+	$('#end')[0].focus();
+}).data('datepicker');
+var end = $('#end').datepicker(
+{
+	format:'dd/mm/yyyy',
+	onRender: function(date)
+	{
+		return date.valueOf() <= start.date.valueOf() ? 'disabled' : '';
+	}
+}).on('changeDate', function(ev)
+{
+	end.hide();
+}).data('datepicker');
+</script>
 <?php $this->load->view('include/footer');?>
