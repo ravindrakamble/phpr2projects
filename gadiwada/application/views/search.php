@@ -3,22 +3,22 @@
 	<div class="content-boxs">
 		<?php 
 		$city = array();
-		$city['ALL']='ALL';
+		$city['0']='--';
 		    foreach($cities as $c){
 			  $city[$c->city_name]=$c->city_name;
 		}
 		$type = array();
-		$type['ALL']='ALL';
+		$type['0']='--';
 		    foreach($car_type as $c){
 			  $type[$c->type_name]=$c->type_name;
 		}
 		$local_Package = array();
-		$local_Package['ALL']='ALL';
+		$local_Package['0']='--';
 		    foreach($local as $c){
 			  $local_Package[$c->PACKAGE_NAME]=$c->PACKAGE_NAME;
 		}
 		$out_Package = array();
-		$out_Package['ALL']='ALL';
+		$out_Package['0']='--';
 		    foreach($outstation as $c){
 			  $out_Package[$c->PACKAGE_NAME]=$c->PACKAGE_NAME;
 		}

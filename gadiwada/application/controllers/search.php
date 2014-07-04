@@ -9,10 +9,10 @@ class Search extends CI_Controller {
 	public function index()
 	{
 		$data['search'] = 'active';
-		$data['cities'] = $this->admin_m->get_all_cities();;
-		$data['local'] = $this->admin_m->get_all_local_packages();;
-		$data['outstation'] = $this->admin_m->get_all_outstation_packages();;
-		$data['car_type'] = $this->admin_m->get_all_car_type();;
+		$data['cities'] = $this->admin_m->get_all_cities();
+		$data['local'] = $this->admin_m->get_all_local_packages();
+		$data['outstation'] = $this->admin_m->get_all_outstation_packages();
+		$data['car_type'] = $this->admin_m->get_all_car_type();
 		$this->load->view('search',$data);
 	}
 }
