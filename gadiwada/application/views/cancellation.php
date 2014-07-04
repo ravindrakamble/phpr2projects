@@ -2,7 +2,6 @@
 <!-- content -->
 <div class="content-boxs">
 	<table align="center" width="70%" frame="box">
->>>>>>> .r12
 		<tr>
 			<td style="border: none" align="center" width="100%" colspan="6"><h3>Booking Cancellation</h3></td>
 		</tr>
