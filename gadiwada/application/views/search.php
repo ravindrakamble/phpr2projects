@@ -15,12 +15,12 @@
 		$local_Package = array();
 		$local_Package['0']='--';
 		    foreach($local as $c){
-			  $local_Package[$c->PACKAGE_NAME]=$c->PACKAGE_NAME;
+			  $local_Package[$c->local_name]=$c->local_name;
 		}
 		$out_Package = array();
 		$out_Package['0']='--';
 		    foreach($outstation as $c){
-			  $out_Package[$c->PACKAGE_NAME]=$c->PACKAGE_NAME;
+			  $out_Package[$c->outstation_name]=$c->outstation_name;
 		}
 		?>
 		<ul class="nav nav-tabs" id="myTab">
@@ -30,6 +30,7 @@
 		<div class="tab-content">
 			<!--Outstation Div Start-->
 			<div id='outstation' class="tab-pane fade" >
+			<form name="outsearch" method="POST" action="<?php echo base_url()?>search_result">
 				<table style="width: 40%">
 	            <tr>
 	                <td>Journey Date : </td>
@@ -37,11 +38,11 @@
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
-	                <td><?php echo form_dropdown('',$city);?></td>
+	                <td><?php echo form_dropdown('city',$city);?></td>
 	            </tr>
 	            <tr>
 	                <td>From Area :   </td>
-	                <td><select><option value="0">--</option></select></td>
+	                <td><?php echo form_dropdown('area',array());?></td>
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
@@ -62,29 +63,31 @@
 			            </tr>
 			             <tr>
 			                <td>Car Type :   </td>
-			                <td><?php echo form_dropdown('',$type);?></td>
+			                <td><?php echo form_dropdown('car_type',$type);?></td>
 			            </tr>
-			            <tr> <td colspan="2"><input type="button" name="flexiblebtn" value="SEARCH"/></td></tr>
+			           <tr> <td colspan="2"><input type="submit" name="outstation" value="SEARCH"/></td></tr>
 			        </table>
         		</div>
 		       	<div id="packageDiv" style="display: none" >
 		        	<table style="width: 40%">
 			            <tr>
 			                <td>Choose Package : </td>
-			                <td><?php echo form_dropdown('',$out_Package);?></td>
+			                <td><?php echo form_dropdown('outpackage',$out_Package);?></td>
 			            </tr>
 			             <tr>
 			                <td>Car Type :   </td>
-			                <td><?php echo form_dropdown('',$type);?></td>
+			                <td><?php echo form_dropdown('outCarType',$type);?></td>
 			            </tr>
-			             <tr> <td colspan="2"><input type="button" name="packagebtn" value="SEARCH"/></td></tr>
+			             <tr> <td colspan="2"><input type="submit" name="outstation" value="SEARCH"/></td></tr>
 			        </table>
 	       		</div>
+				
+	     	</form>
 			</div>
-	     
 			<!--Outstation Div End -->
 			<!--Local Div Start -->
 		<div id='local' class="tab-pane fade  active in">
+			<form name="localsearch" method="POST" action="<?php echo base_url()?>search_result">
 			<table style="width: 40%">
 	            <tr>
 	                <td>Journey Date : </td>
@@ -92,11 +95,11 @@
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
-	                <td><?php echo form_dropdown('',$city);?></td>
+	                <td><?php echo form_dropdown('localcity',$city);?></td>
 	            </tr>
 	            <tr>
 	                <td>From Area :   </td>
-	                <td><select><option value="0">--</option></select></td>
+	                <td><?php echo form_dropdown('localarea',array());?></td>
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
@@ -105,7 +108,6 @@
 	                </td>
 	            </tr>
 	        </table>
-	        
 	        <div id="localflexibleDiv" style="display: none">
 		        <table style="width: 40%">
 		            <tr>
@@ -118,24 +120,25 @@
 		            </tr>
 		             <tr>
 		                <td>Car Type :   </td>
-		                <td><?php echo form_dropdown('',$type);?></td>
+		                <td><?php echo form_dropdown('localCarType',$type);?></td>
 		            </tr>
-		            <tr> <td colspan="2"><input type="button" name="localflexiblebtn" value="SEARCH"/></td></tr>
+		            <tr> <td colspan="2"><input type="submit" name="local" value="SEARCH"/></td></tr>
 		        </table>
        		</div>
 	        <div id="localpackageDiv" style="display: none" >
 	        	<table style="width: 40%">
 		            <tr>
 		                <td>Choose Package : </td>
-		                <td><?php echo form_dropdown('',$local_Package);?></td>
+		                <td><?php echo form_dropdown('localpackage',$local_Package);?></td>
 		            </tr>
 		             <tr>
 		                <td>Car Type :   </td>
-		                <td><?php echo form_dropdown('',$type);?></td>
+		                <td><?php echo form_dropdown('localCarTypePackage',$type);?></td>
 		            </tr>
-		             <tr> <td colspan="2"><input type="button" name="localpackagebtn" value="SEARCH"/></td></tr>
+		             <tr> <td colspan="2"><input type="submit" name="local" value="SEARCH"/></td></tr>
 		        </table>
         	</div>
+			</form>
 		</div>
 			<!--Local Div End -->
 		</div>
@@ -147,10 +150,9 @@ $(document).ready(function() {
 
 	$(".dt").datepicker(
 	{
-		/*changeMonth: true,
-		changeYear: true,
-		yearRange: '1990:2000',*/
 		format: 'dd/mm/yyyy'
+	}).on('changeDate', function(e){
+    $(this).datepicker('hide');
 	});
 });
 

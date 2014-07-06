@@ -1,5 +1,4 @@
 <?php $this->load->view('include/header');?>
-<script type="text/javascript" src="<?php echo base_url();?>js/gs_sortable.js"></script>
 <script type="text/javascript">
 var TSort_Data = new Array ('mytable', 'd', 's', 's','s','i','d','');
 /*tsRegister();*/
@@ -11,7 +10,6 @@ var TSort_Data = new Array ('mytable', 'd', 's', 's','s','i','d','');
 			<td style="border: none" align="center" width="100%" colspan="6"><h3>Booking</h3></td>
 		</tr>
 		<tr>
-			<td style="width: 30%"></td>
 			<td>From Date :</td>
 			<td><input name="fromdate" type="text" id="fromdate" /></td>
 			<td>To Date :</td>
