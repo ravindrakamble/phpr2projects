@@ -25,8 +25,14 @@
 		<script src="<?php echo base_url()?>js/bootstrap.js"></script>
 		<script src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>
 		
+		<script type="text/javascript" src="<?php echo base_url();?>js/gs_sortable.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.fancybox.pack.js?v=2.1.0"></script>
-        
+        <script type="text/javascript" src="<?php echo base_url()?>js/gen_validatorv4.js"></script>
+		<!--Block UI Start-->
+        <script type="text/javascript" src="<?php echo base_url();?>js/jquery.blockUI.js"></script>
+		<script src="<?php echo base_url();?>js/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+		<!--Block UI End-->
+		
 		<!--<script src="<?php echo base_url()?>js/responsiveslides.min.js"></script>-->
 		<!--Jquery Tab JS-->
 		<!--<script src="<?php echo base_url()?>js/ion-tabs/ion.tabs.min.js"></script>
@@ -53,15 +59,28 @@
 						<div class="top-header-contact-account">
 							<div class="sub-about-grid-social">
 								<ul>
-									<li><a href="#"><img src="images/facebook.png" title="facebook"></a></li>
-									<li><a href="#"><img src="images/twitter.png" title="Twiiter"></a></li>
-									<li><a href="#"><img src="images/rss.png" title="Rss"></a></li>
-									<li><a href="#"><img src="images/gpluse.png" title="Google+"></a></li>
+									<li><a href="#"><img src="<?php echo base_url()?>images/facebook.png" title="facebook"></a></li>
+									<li><a href="#"><img src="<?php echo base_url()?>images/twitter.png" title="Twiiter"></a></li>
+									<li><a href="#"><img src="<?php echo base_url()?>images/rss.png" title="Rss"></a></li>
+									<li><a href="#"><img src="<?php echo base_url()?>images/gpluse.png" title="Google+"></a></li>
 									<li><a href="javascript:parent.jQuery.fancybox.open({href :'#signup'});">
-											<img src="images/login.jpg" title="Login">
+											<img src="<?php echo base_url()?>images/login.jpg" title="Login">
 										</a>
 									</li>
+									<?php if($this->session->userdata('type') == 'agent' && $this->session->userdata('is_logged_in') == 'ture' ){
+									echo "<a href='".base_url()."login/logout'>
+											Logout
+										</a>";
+									}
+									else {
 										
+										echo 
+									"<li><a href='javascript:parent.jQuery.fancybox.open({href :&apos;#travelAgent&apos;});'>
+											Travel Agent
+										</a>
+									</li>" ;
+									}
+									?>
 								</ul>
 							</div>
 						</div>
@@ -73,35 +92,48 @@
 				<!----start-main-header----->
 				<div class="main-header">
 					<div class="logo">
-						<a href="index.html"><img src="images/logo1.png" title="logo" /></a>
+						<a href="index.html"><img src="<?php echo base_url()?>images/logo1.png" title="logo" /></a>
 					</div>
 					<div class="top-nav">
 						<ul>
 							<li <?php if(isset($search) && !empty($search) ) echo "class='active'"; ?>>
 								<a href="<?php echo base_url()?>search">Search</a></li>
 								
-							<li <?php if(isset($booking)&&!empty($booking)) echo "class='active'"; ?> >
-								<a href="<?php echo base_url()?>booking">Booking</a></li>
+							
 								
 							<li <?php if(isset($cancellation)&& !empty($cancellation)) echo "class='active'"; ?> >
 								<a href="<?php echo base_url()?>cancellation">Cancellation</a></li>
 							
-							<li  <?php if(isset($inventory)&& !empty($inventory)) echo "class='active'"; ?>>
-							<a href="<?php echo base_url()?>inventory"> Inventory </a></li>
 							
 							
 							<li  <?php if(isset($registration)&& !empty($registration)) echo "class='active'"; ?>>
 							<a href="<?php echo base_url()?>registration"> Registration </a></li>
 							
-							<!--<li  <?php if(isset($login)&& !empty($login)) echo "class='active'"; ?>>
-							<a href="<?php echo base_url()?>login"> Login </a></li>
 							
-							
-							<li  <?php if(isset($login)&& !empty($login)) echo "class='active'"; ?>>
-							<a href="<?php echo base_url()?>login"> Login </a></li>
-							
-							<li  <?php if(isset($login)&& !empty($login)) echo "class='active'"; ?>>
-							<a href="<?php echo base_url()?>login"> Login </a></li>-->
+							<?php if($this->session->userdata('type') == 'agent' && $this->session->userdata('is_logged_in') == 'ture' ) { ?>
+							<li <?php if(isset($inventory) || isset($booking) || isset($pricing) || isset($billing) ) echo "class='active dropdown'" ; else echo "class='dropdown'" ; ?> >
+								<a  class="dropdown-toggle" data-toggle="dropdown" 
+									href=""> 
+									Agent <b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">
+									<li <?php if(isset($inventory)&& !empty($inventory)) echo "class='active'"; ?>>
+										<a href="<?php echo base_url()?>inventory/show/"> 
+											Inventory
+										</a>
+									</li>
+									<li <?php if(isset($booking)&&!empty($booking)) echo "class='active'"; ?> >
+										<a href="<?php echo base_url()?>booking">Booking</a>
+									</li>
+									<li <?php if(isset($pricing)&&!empty($pricing)) echo "class='active'"; ?> >
+										<a href="<?php echo base_url()?>pricing">Pricing</a>
+									</li>
+									<li <?php if(isset($billing)&&!empty($billing)) echo "class='active'"; ?> >
+										<a href="<?php echo base_url()?>billing">Billing</a>
+									</li>
+								</ul>
+							<?php } ?>
+							</li>
 							
 						</ul>
 					</div>
@@ -111,6 +143,25 @@
 			</div>
 		</div>
 		<div class="clear"> </div>
+<div id="travelAgent" style="display: none">
+	<p class="alert alert-error" id='error'></p>
+	<p class="alert alert-success" id='success'></p>
+	<h4>Login</h4>
+	<table>
+		<tr>
+			<td>Username:</td>
+			<td><input type="email" required="" name="username" id="username" maxlength='30'/> </td>
+		</tr>
+		<tr>
+			<td>Password:</td>
+			<td><input type="password" required="" name="password" id="password" maxlength='40'/> </td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="submit" onclick="checkLogin()" name="submit" 
+				value="Submit" class="btn btn-info"/> </td>
+		</tr>
+	</table>
+</div>
 <div id="signup" style="display: none">
 	<form name="signup" method="POST" action="#">
 		<h4>Create a new account</h4>
@@ -143,6 +194,34 @@
 	</form>
 </div>
 <script type="text/javascript">
+function checkLogin()
+{
+	var username = $('input#username').val();	
+	var password = $('input#password').val();
+	var dataString = 'username='+ username
+					+ '&password=' + password
+	jQuery.ajax({
+		type:"POST",
+		url: "<?php echo base_url();?>login/checkAgentLogin",
+		data: dataString,
+		success: function(data)
+		{
+			if(data==0)
+			{
+				jQuery("#error").html("Please check username and password !!!")
+			    jQuery("#error").fadeIn();
+			    setTimeout(function(){ jQuery("#error").fadeOut(); }, 3500);
+			}
+			else{
+				//$("#success").fadeIn();
+				window.location.reload(true);
+			    setTimeout(function(){ window.location = "<?php echo base_url() ?>"; }, 500);
+			}
+		}
+	});  			
+}
 $(document).ready(function() {
+	$('#error').hide();
+	$('#success').hide();
 });
 </script>
