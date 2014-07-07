@@ -10,7 +10,6 @@ class Search_result extends CI_Controller {
 
 	public function index()
 	{
-		 //$this->session->sess_destroy();
 		$this->session->unset_userdata('post-data');
 		$_SESSION['post-data'] = $_POST;
 		$this->session->set_userdata($_SESSION['post-data']);
@@ -23,9 +22,9 @@ class Search_result extends CI_Controller {
 		if($this->input->post('type')){
 			$type = $this->input->post('type');
 		}
-		$this->load->library('pagination');
-		$config['base_url']= site_url()."search/page/-/";
-		$config['total_rows']= 10;//$this->search_m->search();
+		//$this->load->library('pagination');
+		/*$config['base_url']= base_url()."search/page/-/";
+		$config['total_rows']= $this->search_m->search();
 		$config['per_page'] = 5;
 		$config['num_links'] = 4;
  		$config['uri_segment'] = 4;
@@ -34,33 +33,76 @@ class Search_result extends CI_Controller {
 		
 
 		$this->pagination->initialize($config);
-		$this->pagination->cur_page = 1;//$offset;
+		$this->pagination->cur_page = $offset;*/
 		
 		//$result = $this->search_m->search();
 		
 		//$pagination = $this->pagination->create_links();
 
+		$result = $this->admin_m->search();
 		if($type =='ajax'){
-			$search_result = $this->build_result_html();
+			$search_result = $this->build_result_html($result);
 			echo $search_result;
 		}
 		else{
-			$data['search_result'] = $this->build_result_html();
-			$data['filter_data'] = $this->build_filter_html($filter=null);
+			$data['search_result'] = $this->build_result_html($result);
+			$data['filter_data'] = $this->build_filter_html(0,$filter=null);
 			$data['header'] = $this->search_header();
 			$this->load->view('search_result',$data);
 		}
 	}
 	
-	public function build_result_html()
+	public function filter($offset =0)
+	{
+		$selval = $this->input->post('val');
+		$this->filter_data($selval,$firstcall=false);
+	}
+	
+	public function filter_data($selval,$firstcall)
+	{
+		$result = $this->admin_m->search($selval);
+		if($firstcall == false){
+			$search_data = $this->build_result_html($result);
+			$filter_data = $this->build_filter_html($selval);
+			$all_result = $search_data.'~'.$filter_data;
+			echo $all_result;
+		}
+		else{
+			$data['search_result'] = $this->build_result_html($result);
+			$data['filter_data'] = $this->build_filter_html($selval);
+			$data['header'] = $this->search_header();
+			$this->load->view('search_result',$data);
+		}
+	}
+	
+	public function build_result_html($result)
 	{
 		$search_result="";
-		$search_result.="<center><h6>No matching car found, try changing your filters.</h6></center>";
+		$search_result.="<center>
+						<table class='table table-bordered' width=100% id='search_table'>
+						<tr><th>Operator name</th><th>Car name</th><th>Features</th><th>AC NON-AC</th><th>Price</th><th></th></tr>";
+						foreach($result as $row):
+						$search_result.= "<tr><td>".$row->BUSINESS_NAME."</td><td>".$row->CAR_NAME."</td><td>".$row->CAR_FEATURES."</td><td>";
+						if($row->AC == 1)
+						$acnonac = 'AC';
+						if($row->NON_AC == 1)
+						$acnonac = 'NON AC';
+						if($row->AC == 1 && $row->NON_AC == 1)
+						$acnonac = 'AC, NON AC';
+		$search_result.= $acnonac."</td><td>price</td>
+						<td><a href='".base_url()."booking/".$row->ID."' class='btn btn-small btn-info'>Book</a></td></tr>";
+						endforeach;
+		$search_result.="</table>
+						</center>";
 		return $search_result;
 	}
 	
-	public function build_filter_html($filter)
+	public function build_filter_html($selval)
 	{
+		if($selval != '0')
+		$check = explode(',',$selval);
+		else 
+		$check = array();
 		$car_model = $this->admin_m->get_all_car_model();
 		$feature = $this->admin_m->get_all_feature();
 		$operator = $this->admin_m->get_all_operator();
@@ -75,8 +117,17 @@ class Search_result extends CI_Controller {
 		$filter_result .= form_open("#",$attributes);
 		$filter_result .= form_fieldset();
 		
+		$isChecked = false;
 		foreach ($car_model as $model){
-			$attributes = array('name' =>$model->MODEL_NAME, 'id' => $model->MODEL_NAME,'class' => 'ajx','value' => $model->MODEL_NAME);
+			$isChecked = false;
+			if(count($check) > 0)
+			foreach ($check as $chkvalue)
+				if($chkvalue == $model->MODEL_NAME)
+				$isChecked = true;
+			$attributes = array('name' =>'car_model', 'id' => $model->MODEL_NAME,'class' => 'ajx','value' => $model->MODEL_NAME);
+			if($isChecked)
+			$filter_result .= "<tr><td>".form_checkbox($attributes,$model->MODEL_NAME,$model->MODEL_NAME)."&nbsp;&nbsp;&nbsp;</td><td>".$model->MODEL_NAME."</td></tr>";
+			else
 			$filter_result .= "<tr><td>".form_checkbox($attributes,$model->MODEL_NAME)."&nbsp;&nbsp;&nbsp;</td><td>".$model->MODEL_NAME."</td></tr>";
 		}
 		$filter_result .= '</table><hr><li><h5>Price</h5></li><table>';
@@ -104,7 +155,6 @@ class Search_result extends CI_Controller {
 	public function search_header()
 	{
 		$curr_session = $this->session->all_userdata();
-		var_dump($curr_session);
 		if($this->session->userdata('localcity') || $this->session->userdata('city')){
 			echo "<lable>City : </lable>";
 		}

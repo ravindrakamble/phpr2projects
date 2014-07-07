@@ -167,7 +167,7 @@ if(isset($info) && !empty($info))
 				<td><?php echo $row->AGREEMEST_START_DATE ?></td>
 				<td><?php echo $row->AGREEMEST_END_DATE ?></td>
 			<?php  if($row->ISEXPIRED == '0')  $status ='Active';  else $status ='Inactive';?>
-				<td><span class="btn btn-danger btn-small"><?php echo $status ?></span></td>
+				<td><span class="btn-danger btn-small"><?php echo $status ?></span></td>
 				<td><a href="<?php echo base_url().'inventory/edit/'.$row->ID ?>" 
 					class="btn btn-warning btn-small">Edit</a></td>
 					
