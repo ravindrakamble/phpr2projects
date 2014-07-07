@@ -22,7 +22,7 @@ var TSort_Data = new Array ('search_table', 's', 's', 's','s','s','');
 			<!-- BEGIN LEFT-SIDEBAR -->                        
 			 <div id="sidebar"> 
 			<!-- LEFT-SIDEBAR: SIDEBAR NAVIGATION -->
-			<div class="side-nav sidebar-block" id="filter_data">
+			<div align="left" class="side-nav sidebar-block" id="filter_data">
 				<?php 
 				if(isset($filter_data))
 				echo $filter_data;?>	
