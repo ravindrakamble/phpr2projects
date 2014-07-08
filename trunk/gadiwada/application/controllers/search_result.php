@@ -131,7 +131,8 @@ class Search_result extends CI_Controller {
 			$filter_result .= "<tr><td>".form_checkbox($attributes,$model->MODEL_NAME)."&nbsp;&nbsp;&nbsp;</td><td>".$model->MODEL_NAME."</td></tr>";
 		}
 		$filter_result .= '</table><hr><li><h5>Price</h5></li><table>';
-		$filter_result .= "<tr><td colspan=2><input type ='range' name='range' /></td></tr>";
+		$filter_result .= "<tr><td colspan=2><label id='labelprice' for='pricerange'>Rs. 10</label></td></tr>";
+		$filter_result .= "<tr><td colspan=2><input type ='range' name='range' id='pricerange' /></td></tr>";
 		$filter_result .= '</table><hr><li><h5>Features</h5></li><table>';
 		
 		foreach ($feature as $f){
