@@ -5,7 +5,9 @@ class Inventory extends CI_Controller {
 	{
 		parent ::__construct();
 		$this->load->model('admin_m');
+		$this->load->model('city_m');
 		$this->load->model('inventory_m');
+		$this->load->model('car_type_m');
 	}
 	public function show($action='',$id=0)
 	{
@@ -50,7 +52,7 @@ class Inventory extends CI_Controller {
 		$data['result'] = $this->inventory_m->get_all_data();
 		$data['inventory'] = 'active';
 		$data['feature'] = $this->admin_m->get_all_feature();
-		$data['car_type'] = $this->admin_m->get_all_car_type();
+		$data['car_type'] = $this->car_type_m->get_all_car_type();
 		$this->load->view('inventory',$data);
 	}
 	
@@ -78,7 +80,7 @@ class Inventory extends CI_Controller {
 		$data['result'] = $this->inventory_m->get_all_data();
 		$data['inventory'] = 'active';
 		$data['feature'] = $this->admin_m->get_all_feature();
-		$data['car_type'] = $this->admin_m->get_all_car_type();
+		$data['car_type'] = $this->car_type_m->get_all_car_type();
 		$data['info'] = $this->inventory_m->get_inventory_details($id);
 		$this->load->view('inventory',$data);
 	}

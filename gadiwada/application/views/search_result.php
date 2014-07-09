@@ -9,6 +9,9 @@ var TSort_Data = new Array ('search_table', 's', 's', 's','s','s','');
 #header {width:60%;min-height:120px;background-color: #f8f9f7}
 #content {width:70%;float:left; margin-left: 50px;}
 #sidebar{width:20%;float:left; background-color: #f8f9f7}
+#labelprice{
+	align:center;
+}
 </style>
 <div class="content-boxs" id="outer" align="center">
 	<div id="wrappers">	
@@ -46,7 +49,14 @@ var TSort_Data = new Array ('search_table', 's', 's', 's','s','s','');
 </div>
 <script type="text/javascript">
 $(document).ready(function($) {
-// on submit...
+
+	var p = document.getElementById("pricerange"),
+    res = document.getElementById("labelprice");
+
+	p.addEventListener("input", function() {
+    	res.innerHTML = "Rs. " + p.value;
+	}, false); 
+	
 	//$('body').on('click','.ajx',function() {
 	$('#sidebar').on('click', ':checkbox', function() {
 		$('#results').html('<center><img src="<?php echo base_url(); ?>images/loading.gif" /></center>');

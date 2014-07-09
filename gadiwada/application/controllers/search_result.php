@@ -6,6 +6,7 @@ class Search_result extends CI_Controller {
 		parent ::__construct();
 		$this->load->model('search_m');
 		$this->load->model('admin_m');
+		$this->load->model('city_m');
 	}
 
 	public function index()
@@ -39,7 +40,7 @@ class Search_result extends CI_Controller {
 		
 		//$pagination = $this->pagination->create_links();
 
-		$result = $this->admin_m->search();
+		$result = $this->search_m->search();
 		if($type =='ajax'){
 			$search_result = $this->build_result_html($result);
 			echo $search_result;
@@ -60,7 +61,7 @@ class Search_result extends CI_Controller {
 	
 	public function filter_data($selval,$firstcall)
 	{
-		$result = $this->admin_m->search($selval);
+		$result = $this->search_m->search($selval);
 		if($firstcall == false){
 			$search_data = $this->build_result_html($result);
 			$filter_data = $this->build_filter_html($selval);
@@ -131,8 +132,8 @@ class Search_result extends CI_Controller {
 			$filter_result .= "<tr><td>".form_checkbox($attributes,$model->MODEL_NAME)."&nbsp;&nbsp;&nbsp;</td><td>".$model->MODEL_NAME."</td></tr>";
 		}
 		$filter_result .= '</table><hr><li><h5>Price</h5></li><table>';
-		$filter_result .= "<tr><td colspan=2><label id='labelprice' for='pricerange'>Rs. 10</label></td></tr>";
-		$filter_result .= "<tr><td colspan=2><input type ='range' name='range' id='pricerange' /></td></tr>";
+		$filter_result .= "<tr><td colspan=2><center><label id='labelprice' for='pricerange'>Rs. 10</label></center></td></tr>";
+		$filter_result .= "<tr><td colspan=2><input type ='range' name='range' id='pricerange' min='0' max='1000' step='10'/></td></tr>";
 		$filter_result .= '</table><hr><li><h5>Features</h5></li><table>';
 		
 		foreach ($feature as $f){
@@ -156,9 +157,6 @@ class Search_result extends CI_Controller {
 	public function search_header()
 	{
 		$curr_session = $this->session->all_userdata();
-		if($this->session->userdata('localcity') || $this->session->userdata('city')){
-			echo "<lable>City : </lable>";
-		}
 		$header ='';
 		$header .= "<table class='table table_bordered'>";
 		$header .= "<tr>";
