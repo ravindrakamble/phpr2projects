@@ -5,12 +5,12 @@
 		$city = array();
 		$city['0']='--';
 		    foreach($cities as $c){
-			  $city[$c->city_name]=$c->city_name;
+			  $city[$c->CITY_NAME]=$c->CITY_NAME;
 		}
 		$type = array();
 		$type['0']='--';
 		    foreach($car_type as $c){
-			  $type[$c->type_name]=$c->type_name;
+			  $type[$c->TYPE_NAME]=$c->TYPE_NAME;
 		}
 		$local_Package = array();
 		$local_Package['0']='--';

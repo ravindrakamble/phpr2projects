@@ -5,6 +5,7 @@ class Registration extends CI_Controller {
 	{
 		parent ::__construct();
 		$this->load->model('admin_m');
+		$this->load->model('city_m');
 		$this->load->model('registration_m');
 	}
 	public function index()
@@ -51,7 +52,7 @@ class Registration extends CI_Controller {
 		}
 		
 		$data['registration'] = 'active';
-		$data['cities'] = $this->admin_m->get_all_cities();
+		$data['cities'] = $this->city_m->get_all_cities();
 		$this->load->view('registration',$data);
 	}
 	

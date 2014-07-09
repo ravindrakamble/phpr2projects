@@ -30,7 +30,7 @@ Class Inventory_m extends CI_Model{
 		$AGENT_ID = $this->session->userdata('id');
 		$query = $this->db->select('*')->where('ID',$id)->where('AGENT_ID',$AGENT_ID)->get('inventory');
 		$this->db->distinct();
-		return $query->result();
+		return $query->row();
 	}
 }
 ?>

@@ -54,7 +54,7 @@ if(isset($info) && !empty($info))
 		$type = array();
 			$type['0']='--';
 			    foreach($car_type as $c){
-				  $type[$c->type_name]=$c->type_name;
+				  $type[$c->TYPE_NAME]=$c->TYPE_NAME;
 			}
 		$features = array();
 			    foreach($feature as $f){

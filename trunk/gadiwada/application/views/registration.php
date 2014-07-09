@@ -6,7 +6,7 @@
 		$city = array();
 			$city['--']='--';
 			    foreach($cities as $c){
-				  $city[$c->city_name]=$c->city_name;
+				  $city[$c->CITY_NAME]=$c->CITY_NAME;
 			}
 		?>
 		<?php if(isset($retmsg) && !empty($retmsg)){
