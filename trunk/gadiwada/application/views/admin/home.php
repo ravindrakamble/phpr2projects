@@ -153,24 +153,97 @@
 			</div>
 			<div id='features' class="tab-pane fade" >
 				<h2>Features</h2>
-				<form name='cityform' method='post' action='<?php echo base_url()?>admin/features'>
+				<form name='featuresform' id='featuresform' method='post' action='<?php echo base_url()?>admin/features'>
 					<input type='text' name='feature' id='feature'><br>
-					<input type='submit' name='submit' value='ADD'>
+					<input type='hidden' name='featureid' id='featureid'><br>
+					<input type='submit' name='submitfeatures' id='submitfeatures' value='ADD'>
+					<input type='submit' name='updatefeatures'id='updatefeatures' onclick="changeBtnName()" value='UPDATE'>
 				</form>
+				<div id='showsfeatures'>
+					<table class="table table-bordered">
+						<tr><th>Feature Name</th><th>Edit</th><th>Delete</th></tr>
+						<?php foreach($features as $c){
+							echo "<tr><td>".$c->FEATURE_NAME."</td>
+							<td>
+								<a href=\"javascript: editfeature(".$c->ID.")\">
+									<img src='".base_url()."img/mono-icons/notepencil32.png' 
+									title='Edit' alt='Edit' class='alignleft' style='width:15px;' />
+								</a>
+							</td>
+							<td>
+								<a href=\"javascript: removefeature(".$c->ID.")\">
+									<img src='".base_url()."img/mono-icons/minus32.png' 
+									title='Delete' alt='Delete' class='alignleft' style='width:15px;' />
+								</a>
+							</td></tr>";
+							} ?>
+					</table>
+				</div>
 			</div>
 			<div id='packages' class="tab-pane fade" >
 				<h2>Packages</h2>
-				<form name='packagesform' method='post' action='<?php echo base_url()?>admin/packages'>
-					<input type="radio" required="true" name="chkpackage" value="Local"/>Local <br/>
-					<input type="radio" required="true" name="chkpackage" value="Outstation"/>Outstation <br/>
+				<form name='packagesform' id='packagesform' method='post' action='<?php echo base_url()?>admin/packages'>
+					<input type="radio" required="true" onclick="setTarget(this.value)" name="chkpackage" value="Local"/>&nbsp;&nbsp;Local
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" required="true" onclick="setTarget(this.value)" name="chkpackage" value="Outstation"/>&nbsp;&nbsp;
+					Outstation <br/>
 					<?php echo form_dropdown('city',$city);?><br>
 					<input type='text' name='package' id='package'><br>
-					<input type='submit' name='submit' value='ADD'>
+					<input type='hidden' name='packageid' id='packageid'><br>
+					<input type='submit' name='submitpackage' id='submitpackage' value='ADD'>
+					<input type='submit' name='updatepackage'  onclick="changeBtnName()" id='updatepackage' value='UPDATE'>
 				</form>
+				<div>
+					<div id='Local' style="width:45%;float: left;">
+						<fieldset><legend>Local Packages</legend>
+							<table class="table table-bordered">
+							<tr><th>Name</th><th>Edit</th><th>Delete</th></tr>
+							<?php foreach($local as $c){
+								echo "<tr><td>".$c->LOCAL_NAME."</td><td>".$c->CITY_NAME."</td>
+								<td>
+									<a href=\"javascript: editlocal(".$c->ID.")\">
+										<img src='".base_url()."img/mono-icons/notepencil32.png' 
+										title='Edit' alt='Edit' class='alignleft' style='width:15px;' />
+									</a>
+								</td>
+								<td>
+									<a href=\"javascript: removelocal(".$c->ID.")\">
+										<img src='".base_url()."img/mono-icons/minus32.png' 
+										title='Delete' alt='Delete' class='alignleft' style='width:15px;' />
+									</a>
+								</td></tr>";
+								} ?>
+							</table>
+						</fieldset>
+					</div>
+					<div id='Outstation' style='width:45%;float: right;' >
+						<fieldset><legend>Outstation Packages</legend>
+							<table class="table table-bordered">
+							<tr><th>Name</th><th>City</th><th>Edit</th><th>Delete</th></tr>
+							<?php foreach($outstation as $c){
+								echo "<tr><td>".$c->OUTSTATION_NAME."</td><td>".$c->CITY_NAME."</td>
+								<td>
+									<a href=\"javascript: editout(".$c->ID.")\">
+										<img src='".base_url()."img/mono-icons/notepencil32.png' 
+										title='Edit' alt='Edit' class='alignleft' style='width:15px;' />
+									</a>
+								</td>
+								<td>
+									<a href=\"javascript: removeout(".$c->ID.")\">
+										<img src='".base_url()."img/mono-icons/minus32.png' 
+										title='Delete' alt='Delete' class='alignleft' style='width:15px;' />
+									</a>
+								</td></tr>";
+								} ?>
+							</table>
+						</fieldset>
+					</div>
+				</div>
 			</div>
 			<div id='discounts' class="tab-pane fade" >
 				<h2>Discounts</h2>
-				<form name='discountform' method='post' action='<?php echo base_url()?>admin/discount'>
+				<form name='discountform' id="discountform" method='post' action='<?php echo base_url()?>admin/discount'>
+				<input type="hidden" name='discountid' id='discountid'>
 				<table>
 					<tr>
 						<th>Coupon code</th>
@@ -183,7 +256,7 @@
 					</tr>
 					<tr>
 						<th>Discount Percentage</th>
-						<td><input type='text' name='percentage' id='percentage'></td>
+						<td><input type='text' name='percentage' maxlength="3" id='percentage'></td>
 					</tr>
 					<tr><th colspan="2">Criteria of Discount</th></tr>
 					<tr>
@@ -196,8 +269,11 @@
 					</tr>
 					<tr>
 						<th>Coupon type</th>
-						<td><input type="radio" name='coupontype' value="General" id='coupontype'>&nbsp;&nbsp;General
-						&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name='coupontype' value="Specific" id='coupontype'>&nbsp;&nbsp;Specific</td>
+						<td><input type="radio" name='coupontype' required="true" value="General">
+						&nbsp;&nbsp;General
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" required="true" name='coupontype' value="Specific" >
+						&nbsp;&nbsp;Specific</td>
 					</tr>
 					
 					<tr>
@@ -206,24 +282,78 @@
 					</tr>
 					<tr>
 						<th>passenger mobile number</th>
-						<td><input type='text' name='mobile' id='mobile'></td>
+						<td><input type='text' name='mobile' maxlength="10" id='mobile'></td>
 					</tr>
+					<tr><td colspan="2">
+					<input type="submit" name="submitdiscount" id="submitdiscount" value="ADD"/>
+					<input type="submit" name="updatediscount" onclick="changeBtnName()" id="updatediscount" value="UPDATE"/>
+					</td></tr>
 				</table>
 				</form>
+				<div id='showdiscounts'>
+					<table class="table table-bordered">
+						<tr>
+							<th>Coupon code</th>
+							<th>Discount Amount</th>
+							<th>Discount Percentage</th>
+							<th>Last date of discount</th>
+							<th>Minimum Purchase price</th>
+							<th>Coupon type</th>
+							<th>Max limit</th>
+							<th>passenger mobile number</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+						<?php foreach($discount as $c){
+							echo "<tr>
+								<td>".$c->COUPON_CODE."</td>
+								<td>".$c->DISCOUNT_AMOUNT."</td>
+								<td>".$c->DISCOUNT_PERCENTAGE."</td>
+								<td>".$c->EXPIRY_DATE."</td>
+								<td>".$c->MIN_PURCHASE_PRICE."</td>
+								<td>".$c->COUPON_TYPE."</td>
+								<td>".$c->MAX_LIMIT."</td>
+								<td>".$c->PASSENGER_MOBILE_NO."</td>
+							<td>
+								<a href=\"javascript: editdiscount(".$c->ID.")\">
+									<img src='".base_url()."img/mono-icons/notepencil32.png' 
+									title='Edit' alt='Edit' class='alignleft' style='width:15px;' />
+								</a>
+							</td>
+							<td>
+								<a href=\"javascript: removediscount(".$c->ID.")\">
+									<img src='".base_url()."img/mono-icons/minus32.png' 
+									title='Delete' alt='Delete' class='alignleft' style='width:15px;' />
+								</a>
+							</td></tr>";
+							} ?>
+					</table>
+				</div>
 			</div>
 </div>
 <script type="text/javascript">
+var targetname='';
 function changeBtnName()
 {
 	$("#submitcity").show();
 	$("#submitarea").show();
 	$("#submitcartype").show();
 	$("#submitseater").show();
+	$("#submitfeatures").show();
+	$("#submitpackage").show();
+	$("#submitdiscount").show();
 
 	$("#updatecity").hide();
 	$("#updatearea").hide();
 	$("#updatecartype").hide();
 	$("#updateseater").hide();
+	$("#updatefeatures").hide();
+	$("#updatepackage").hide();
+	$("#updatediscount").hide();
+}
+function setTarget(chk)
+{
+	targetname = chk;
 }
 $(document).ready(function()	
 {
@@ -231,6 +361,9 @@ $(document).ready(function()
 	$("#updatearea").hide();
 	$("#updatecartype").hide();
 	$("#updateseater").hide();
+	$("#updatefeatures").hide();
+	$("#updatepackage").hide();
+	$("#updatediscount").hide();
 
 
 	var cityform = { 
@@ -238,8 +371,7 @@ $(document).ready(function()
 		beforeSubmit:  function(){
 			$.blockUI({ message: "<h6>Submiting data...please wait.</h6>" }) 			
 		},  // pre-submit callback 
-		success: function(){
-			$('#cityform').ajaxForm(cityform);	 	 		 
+		success: function(){	 		 
 			$.unblockUI();
 			$('input#city').val("");	
 		},  // post-submit callback 
@@ -252,8 +384,7 @@ $(document).ready(function()
 		beforeSubmit:  function(){
 			$.blockUI({ message: "<h6>Submiting data...please wait.</h6>" }) 			
 		},  // pre-submit callback 
-		success: function(){
-			$('#areaform').ajaxForm(areaform);	 		 
+		success: function(){		 
 			$.unblockUI();
 			$('input#area').val("");	
 		},  // post-submit callback 
@@ -279,8 +410,7 @@ $(document).ready(function()
 		beforeSubmit:  function(){
 			$.blockUI({ message: "<h6>Submiting data...please wait.</h6>" }) 			
 		},  // pre-submit callback 
-		success: function(){	 
-			$('#seaterform').ajaxForm(seaterform);			 
+		success: function(){	 		 
 			$.unblockUI();
 			//$('input#seater').val("");	
 		},  // post-submit callback 
@@ -288,11 +418,51 @@ $(document).ready(function()
 		cache:false
 	};
 
+	var featuresform = { 
+		target:        '#showsfeatures', // target element(s) to be updated with server response 
+		beforeSubmit:  function(){
+			$.blockUI({ message: "<h6>Submiting data...please wait.</h6>" }) 			
+		},  // pre-submit callback 
+		success: function(){	 	 
+			$.unblockUI();
+			//$('input#seater').val("");	
+		},  // post-submit callback 
+		resetForm: true ,      // reset the form after successful submit 
+		cache:false
+	};
+	
+	var packagesform = {
+		target:        targetname,
+		beforeSubmit:  function(){
+			$.blockUI({ message: "<h6>Submiting data...please wait.</h6>" }) 			
+		},  // pre-submit callback 
+		success: function(){	 	 
+			$.unblockUI();
+		},  // post-submit callback 
+		resetForm: true ,      // reset the form after successful submit 
+		cache:false
+	};
 
+	var discountform = {
+		target:        '#showdiscounts',
+		beforeSubmit:  function(){
+			$.blockUI({ message: "<h6>Submiting data...please wait.</h6>" }) 			
+		},  // pre-submit callback 
+		success: function(){	 	 
+			$.unblockUI();
+		},  // post-submit callback 
+		resetForm: true ,      // reset the form after successful submit 
+		cache:false
+	};
+	
+	
 	$('#cityform').ajaxForm(cityform);
 	$('#areaform').ajaxForm(areaform);
 	$('#cartypeform').ajaxForm(cartypeform);
 	$('#seaterform').ajaxForm(seaterform);
+	$('#featuresform').ajaxForm(featuresform);
+	$('#packagesform').ajaxForm(packagesform);
+	$('#discountform').ajaxForm(discountform);
 });
 
 //City start
@@ -437,6 +607,159 @@ function removecarmodel(id)
        return false; 
     }); 
 }
+
+//Car Features  start
+function editfeature(id)
+{
+	$("#submitfeatures").hide();
+	$.ajax({
+		type:"POST",
+		url: "<?php echo base_url();?>ajax/edit_car_feature/"+id,
+		success: function(response) {
+			var c = response.split("-");
+			$('input#feature').val(c[0]);
+			$('input#featureid').val(c[1]);
+			$("#updatefeatures").show();
+		}
+	});
+}
+
+function removefeature(id)
+{
+	$.blockUI({ message: jQuery('#question'), css: { width: '275px' } }); 
+    jQuery('#yes').click(function() { 
+        $.ajax({
+			type:"POST",
+			url: "<?php echo base_url();?>ajax/delete_car_feature/"+id,
+			success: function(data) {
+				$("#showsfeatures").html(data);
+				$.growlUI('Sucessfully<br> Deleted !'); 
+			}
+		});
+	});
+	jQuery('#no').click(function() { 
+        $.unblockUI(); 
+       return false; 
+    }); 
+}
 //end
+//local package 
+function editlocal(id)
+{
+	$("#submitpackage").hide();
+	$.ajax({
+		type:"POST",
+		url: "<?php echo base_url();?>ajax/edit_local_package/"+id,
+		success: function(response) {
+			var c = response.split("-");
+			//$('input[name="chkpackage"]').val('Local').attr("checked",true);
+			$('input:radio[class=test1][id=test2]').prop('checked', true);
+			$('input#package').val(c[0]);
+			$('input#packageid').val(c[1]);
+			$('select[name="city"]').find('option[value='+c[2]+']').attr("selected",true);
+			$("#updatepackage").show();
+		}
+	});
+}
+
+function removelocal(id)
+{
+	$.blockUI({ message: jQuery('#question'), css: { width: '275px' } }); 
+    jQuery('#yes').click(function() { 
+        $.ajax({
+			type:"POST",
+			url: "<?php echo base_url();?>ajax/delete_local_package/"+id,
+			success: function(data) {
+				$("#Local").html(data);
+				$.growlUI('Sucessfully<br> Deleted !'); 
+			}
+		});
+	});
+	jQuery('#no').click(function() { 
+        $.unblockUI(); 
+       return false; 
+    }); 
+}
+//end 
+
+//outstation package 
+function editout(id)
+{
+	$("#submitpackage").hide();
+	$.ajax({
+		type:"POST",
+		url: "<?php echo base_url();?>ajax/edit_outstaion_package/"+id,
+		success: function(response) {
+			var c = response.split("-");
+			//$('input[name="chkpackage"]').val('Local').attr("checked",true);
+			$('input#package').val(c[0]);
+			$('input#packageid').val(c[1]);
+			$('select[name="city"]').find('option[value='+c[2]+']').attr("selected",true);
+			$("#updatepackage").show();
+		}
+	});
+}
+
+function removeout(id)
+{
+	$.blockUI({ message: jQuery('#question'), css: { width: '275px' } }); 
+    jQuery('#yes').click(function() { 
+        $.ajax({
+			type:"POST",
+			url: "<?php echo base_url();?>ajax/delete_outstaion_package/"+id,
+			success: function(data) {
+				$("#Outstation").html(data);
+				$.growlUI('Sucessfully<br> Deleted !'); 
+			}
+		});
+	});
+	jQuery('#no').click(function() { 
+        $.unblockUI(); 
+       return false; 
+    }); 
+}
+
+//Discount 
+function editdiscount(id)
+{
+	$("#submitdiscount").hide();
+	$.ajax({
+		type:"POST",
+		url: "<?php echo base_url();?>ajax/edit_discount/"+id,
+		success: function(response) {
+			var objJSON = JSON.parse(response);
+			var discount = objJSON.discount[0];
+			$('input#discountid').val(discount.ID);
+			$('input#code').val(discount.COUPON_CODE);
+			$('input#amount').val(discount.DISCOUNT_AMOUNT);
+			$('input#percentage').val(discount.DISCOUNT_PERCENTAGE);
+			$('input#lastdate').val(discount.EXPIRY_DATE);
+			$('input#minprice').val(discount.MIN_PURCHASE_PRICE);
+			$('input#coupontype').val(discount.COUPON_TYPE);
+			$('input#limit').val(discount.MAX_LIMIT);
+			$('input#mobile').val(discount.PASSENGER_MOBILE_NO);
+			$("#updatediscount").show();
+		}
+	});
+}
+
+function removediscount(id)
+{
+	$.blockUI({ message: jQuery('#question'), css: { width: '275px' } }); 
+    jQuery('#yes').click(function() { 
+        $.ajax({
+			type:"POST",
+			url: "<?php echo base_url();?>ajax/delete_discount/"+id,
+			success: function(data) {
+				$("#showdiscounts").html(data);
+				$.growlUI('Sucessfully<br> Deleted !'); 
+			}
+		});
+	});
+	jQuery('#no').click(function() { 
+        $.unblockUI(); 
+       return false; 
+    }); 
+}
 </script>
 <?php $this->load->view('include/footer'); ?>
