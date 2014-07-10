@@ -9,17 +9,22 @@ class Admin extends CI_Controller {
 		$this->load->model('car_type_m');
 		$this->load->model('area_m');
 		$this->load->model('car_model_m');
+		$this->load->model('features_m');
+		$this->load->model('packages_m');
+		$this->load->model('discounts_m');
 	}
 	
 	public function index()
 	{
 		$data['search'] = 'active';
 		$data['cities'] = $this->city_m->get_all_cities();
-		$data['local'] = $this->admin_m->get_all_local_packages();
-		$data['outstation'] = $this->admin_m->get_all_outstation_packages();
+		$data['local'] = $this->packages_m->get_all_local_packages();
+		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
 		$data['car_type'] = $this->car_type_m->get_all_car_type();
 		$data['car_model'] = $this->car_model_m->get_all_car_model();
 		$data['areas']  = $this->area_m->get_all_areas();
+		$data['features']  = $this->features_m->get_all_features();
+		$data['discount']  = $this->discounts_m->get_all_discounts();
 		$this->load->view('admin/home',$data);
 	}
 
@@ -84,6 +89,82 @@ class Admin extends CI_Controller {
 			$this->db->update('car_model',$seater);
 		}
 		$result = $this->car_model_m->get_all_car_model('ajax');
+		echo $result;
+	}
+
+	public function features()
+	{
+		$feature = array('FEATURE_NAME' => $this->input->post('feature'));
+		if(isset($_POST['feature']) != '' && $this->input->post('submitfeatures'))
+		{
+			$this->db->insert('features',$feature);
+		}
+		if($this->input->post('updatefeatures'))
+		{
+			$this->db->where('ID',$this->input->post('featureid'));
+			$this->db->update('features',$feature);
+		}
+		$result = $this->features_m->get_all_features('ajax');
+		echo $result;
+	}
+	
+	public function packages()
+	{
+		if($this->input->post('chkpackage') == 'Local')
+		{
+		$local = array('CITY_ID' => $this->input->post('city'),'LOCAL_NAME' => $this->input->post('package'));
+			if(isset($_POST['package']) != '' && $this->input->post('submitpackage'))
+			{
+				$this->db->insert('package_local',$local);
+			}
+			if($this->input->post('updatepackage'))
+			{
+				$this->db->where('ID',$this->input->post('packageid'));
+				$this->db->update('package_local',$local);
+			}
+			$result = $this->packages_m->get_all_local_packages('ajax');
+			echo $result;
+		}
+		if($this->input->post('chkpackage') == 'Outstation')
+		{
+			$outstation = array('CITY_ID' => $this->input->post('city'),'OUTSTATION_NAME' => $this->input->post('package'));
+			if(isset($_POST['package']) != '' && $this->input->post('submitpackage'))
+			{
+				$this->db->insert('package_outstation',$outstation);
+			}
+			if($this->input->post('updatepackage'))
+			{
+				$this->db->where('ID',$this->input->post('packageid'));
+				$this->db->update('package_outstation',$outstation);
+			}
+			$result = $this->packages_m->get_all_outstation_packages('ajax');
+			echo $result;
+		}
+		
+	}
+	
+	function discount()
+	{
+		$info = array( 
+			'COUPON_CODE' => $this->input->post('code'),
+			'DISCOUNT_AMOUNT' =>$this->input->post('amount'),
+			'DISCOUNT_PERCENTAGE' =>$this->input->post('percentage'),
+			'EXPIRY_DATE' =>$this->input->post('lastdate'),
+			'MIN_PURCHASE_PRICE' =>$this->input->post('minprice'),
+			'COUPON_TYPE' =>$this->input->post('coupontype'),
+			'MAX_LIMIT' =>$this->input->post('limit'),
+			'PASSENGER_MOBILE_NO' =>$this->input->post('mobile')
+		);
+		if($this->input->post('submitdiscount'))
+		{
+			$this->db->insert('discount_coupons',$info);
+		}
+		if($this->input->post('updatediscount'))
+		{
+			$this->db->where('ID',$this->input->post('discountid'));
+			$this->db->update('discount_coupons',$info);
+		}
+		$result = $this->discounts_m->get_all_discounts('ajax');
 		echo $result;
 	}
 	

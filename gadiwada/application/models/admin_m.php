@@ -2,24 +2,6 @@
 
 Class Admin_m extends CI_Model{
 	
-
-	function get_all_local_packages()
-	{
-		$this->db->distinct('local_name');
-		$this->db->select('local_name');
-		$query=$this->db->get('package_local');
-		return $query->result();
-	}
-	
-	function get_all_outstation_packages()
-	{
-		$this->db->distinct('outstation_name');
-		$this->db->select('outstation_name');
-		$query=$this->db->get('package_outstation');
-		return $query->result();
-	}
-	
-		
 	function get_all_car_model()
 	{
 		$this->db->distinct('MODEL_NAME');
