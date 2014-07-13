@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="<?php echo base_url();?>js/gs_sortable.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.fancybox.pack.js?v=2.1.0"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/gen_validatorv4.js"></script>
+        <script src="<?php echo base_url();?>js/jquery.numeric.js"></script>
 		<!--Block UI Start-->
         <script type="text/javascript" src="<?php echo base_url();?>js/jquery.blockUI.js"></script>
 		<script src="<?php echo base_url();?>js/jquery.form.js" type="text/javascript" charset="utf-8"></script>
@@ -63,11 +64,12 @@
 									<li><a href="#"><img src="<?php echo base_url()?>images/twitter.png" title="Twiiter"></a></li>
 									<li><a href="#"><img src="<?php echo base_url()?>images/rss.png" title="Rss"></a></li>
 									<li><a href="#"><img src="<?php echo base_url()?>images/gpluse.png" title="Google+"></a></li>
-									<li><a href="javascript:parent.jQuery.fancybox.open({href :'#signup'});">
+									<!--<li><a href="javascript:parent.jQuery.fancybox.open({href :'#signup'});">
 											<img src="<?php echo base_url()?>images/login.jpg" title="Login">
 										</a>
-									</li>
-									<?php if($this->session->userdata('type') == 'agent' && $this->session->userdata('is_logged_in') == 'ture' ){
+									</li>-->
+									&nbsp;&nbsp;
+									<?php if($this->session->userdata('type') == 'customer' && $this->session->userdata('is_customer_logged_in') == 'ture' ){
 									echo "<a href='".base_url()."login/logout'>
 											Logout
 										</a>";
@@ -75,7 +77,22 @@
 									else {
 										
 										echo 
-									"<li><a href='javascript:parent.jQuery.fancybox.open({href :&apos;#travelAgent&apos;});'>
+									"<li><a href='javascript:login(&apos;cust&apos;);'>
+											My Account
+										</a>
+									</li>" ;
+									}
+									?>
+									&nbsp;&nbsp;&nbsp;
+									<?php if($this->session->userdata('type') == 'agent' && $this->session->userdata('is_agent_logged_in') == 'ture' ){
+									echo "<a href='".base_url()."login/logout'>
+											Logout
+										</a>";
+									}
+									else {
+										
+										echo 
+									"<li><a href='javascript:login(&apos;agent&apos;);'>
 											Travel Agent
 										</a>
 									</li>" ;
@@ -157,52 +174,75 @@
 			<td><input type="password" required="" name="password" id="password" maxlength='40'/> </td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="submit" onclick="checkLogin()" name="submit" 
-				value="Submit" class="btn btn-info"/> </td>
+			<td colspan="2">
+			<input type="button" onclick="checkLogin()" name="submit" value="Submit" class="btn btn-info"/>
+			</td>
 		</tr>
 	</table>
 </div>
 <div id="signup" style="display: none">
-	<form name="signup" method="POST" action="#">
+	<form name="signup" id='signup' method="POST">
 		<h4>Create a new account</h4>
 		<table>
 			<tr>
 				<td>Enter your name:</td>
-				<td><input type="text" name="name" maxlength='30'/> </td>
+				<td><input type="text" name="name" id="name" maxlength='30'/> </td>
 			</tr>
 			<tr>
 				<td>Enter  email id:</td>
-				<td><input type="email" name="email" maxlength='35'/> </td>
+				<td><input type="email" name="email" id="email" maxlength='35'/> </td>
 			</tr>
 			<tr>
 				<td>Enter your phone number:</td>
-				<td><input type="tel" name="phone" maxlength='12'/> </td>
+				<td><input type="tel" name="phone" id="phone" maxlength='12'/> </td>
 			</tr>
 			<tr>
 				<td>Enter password:</td>
-				<td><input type="password" name="password" maxlength='15'/> </td>
+				<td><input type="password" name="password" id="password" maxlength='15'/> </td>
 			</tr>
 			<tr>
 				<td>Retype password:</td>
-				<td><input type="password" name="repassword" maxlength='15'/> </td>
+				<td><input type="password" name="repassword"  id="repassword" maxlength='15'/> </td>
 			</tr>
 			<tr>
-				<td><input type="submit" name="submit" value="Submit" class="btn btn-info"/> </td>
+				<td><input type="button" onclick="customer_register()" name="submit" value="Submit" class="btn btn-info"/> </td>
 				<td><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
+			</tr>
+			<tr><td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+			<tr>
+				<td><font color="#26819b">Already Registered Please</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+				<td>
+				<a  class="btn-warning" href="javascript:parent.jQuery.fancybox.open({href :'#travelAgent'});">LOGIN</a>
+				</td>
 			</tr>
 		</table>
 	</form>
 </div>
 <script type="text/javascript">
+var type ='';
+function login(type1)
+{
+	if(type1 == 'agent')
+	{
+		type = 'agent';
+		parent.jQuery.fancybox.open({href :'#travelAgent'});
+	}
+	else{
+		type = 'cust';
+		parent.jQuery.fancybox.open({href :'#signup'});
+	}
+}
+
 function checkLogin()
 {
 	var username = $('input#username').val();	
 	var password = $('input#password').val();
 	var dataString = 'username='+ username
-					+ '&password=' + password
+					+'&password=' + password
+					+'&type=' + type
 	jQuery.ajax({
 		type:"POST",
-		url: "<?php echo base_url();?>login/checkAgentLogin",
+		url: "<?php echo base_url();?>login/checkLogin",
 		data: dataString,
 		success: function(data)
 		{
@@ -216,6 +256,34 @@ function checkLogin()
 				//$("#success").fadeIn();
 				window.location.reload(true);
 			    setTimeout(function(){ window.location = "<?php echo base_url() ?>"; }, 500);
+			}
+		}
+	});  			
+}
+function customer_register()
+{
+	var name = $('input#name').val();	
+	var email = $('input#email').val();
+	var phone = $('input#phone').val();
+	var password = $('input#password').val();
+	var dataString = 'name='+name
+					+ '&email='+email			
+					+ '&phone='+phone			
+					+ '&password='+password
+	alert(dataString)	
+							
+	jQuery.ajax({
+		type:"POST",
+		url: "<?php echo base_url();?>login/create_customer_login",
+		data: dataString,
+		success: function(res)
+		{
+			if(res == '1'){
+				$.blockUI({ theme: true,baseZ: 99999999, message: "<h5>Your account created successfully please Login...</h5>" }) 
+			    setTimeout(function(){ window.location = "<?php echo base_url() ?>"; }, 2000);
+			}
+			else{
+				$.blockUI({ message: "<h5>Please try again...</h5>" }) 	
 			}
 		}
 	});  			

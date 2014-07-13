@@ -49,14 +49,14 @@
 <div class="footer-grids">
 	<div class="footer-grid1">
 		<a href="#">
-			<img src="images/logo2.png" title="logo">
+			<img src="<?php echo base_url()?>images/logo2.png" title="logo">
 		</a>
-		<p>
+		<!--<p>
 			Design by
 			<a href="http://w3layouts.com/">
 				W3layouts
 			</a>
-		</p>
+		</p>-->
 		<div class="clear">
 		</div>
 	</div>

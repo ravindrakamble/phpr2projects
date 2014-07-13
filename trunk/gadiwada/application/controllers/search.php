@@ -8,6 +8,7 @@ class Search extends CI_Controller {
 		$this->load->model('city_m');
 		$this->load->model('car_type_m');
 		$this->load->model('packages_m');
+		$this->load->model('area_m');
 	}
 	public function index()
 	{
@@ -17,5 +18,14 @@ class Search extends CI_Controller {
 		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
 		$data['car_type'] = $this->car_type_m->get_all_car_type();
 		$this->load->view('search',$data);
+	}
+	
+	public function get_areas($city)
+	{
+		$area = $this->area_m->get_areas($city);
+		foreach($area as $r){
+			echo "<option value=".$r->AREA_NAME.">".$r->AREA_NAME."</option>";
+		}
+		//return $options;
 	}
 }

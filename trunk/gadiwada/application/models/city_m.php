@@ -58,5 +58,6 @@ Class City_m extends CI_Model{
 		$this->db->delete('city');
 		$this->get_all_cities('ajax');
 	}
+	
 }
 ?>

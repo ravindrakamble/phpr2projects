@@ -4,14 +4,12 @@
 var TSort_Data = new Array ('search_table', 's', 's', 's','s','s','');
 </script>
 <style>
-#outer {width:90%;margin:0 auto;}
+#outer {width:100%;margin:0 auto;}
 #inner {overflow:hidden;}
-#header {width:60%;min-height:120px;background-color: #f8f9f7}
-#content {width:70%;float:left; margin-left: 50px;}
+#header {width:60%;min-height:120px; background-color: #f8f9f7}
+#content {width:65%;float:left; margin-left: 20px;}
 #sidebar{width:20%;float:left; background-color: #f8f9f7}
-#labelprice{
-	align:center;
-}
+
 </style>
 <div class="content-boxs" id="outer" align="center">
 	<div id="wrappers">	
@@ -61,7 +59,13 @@ $(document).ready(function($) {
 	$('#sidebar').on('click', ':checkbox', function() {
 		$('#results').html('<center><img src="<?php echo base_url(); ?>images/loading.gif" /></center>');
 		var id_sele = $(this).attr('id'); 
-		//alert(document.getElementById(id_sele).checked) 
+		var p = document.getElementById("pricerange"),
+    	res = document.getElementById("labelprice");
+
+		p.addEventListener("input", function() {
+			alert(1);
+    		res.innerHTML = "Rs." + p.value;
+		}, false); 
 		
 		var checkboxes = document.getElementsByName('car_model');
   		var checkboxesChecked = [];
@@ -74,8 +78,27 @@ $(document).ready(function($) {
      		}
   		}
   		
+  		var opr_names = document.getElementsByName('opr_name');
+  		var opr_names_Checked = [];
+  		// loop over them all
+  		for (var i=0; i<opr_names.length; i++) {
+     		if (opr_names[i].checked) {
+        		opr_names_Checked.push(opr_names[i].id);
+     		}
+  		}
+  		
+  		var features = document.getElementsByName('features');
+  		var features_Checked = [];
+  		// loop over them all
+  		for (var i=0; i<features.length; i++) {
+     		if (features[i].checked) {
+        		features_Checked.push(features[i].id);
+     		}
+  		}
+  		
 		// data string
-		var dataString = 'val=' + checkboxesChecked;
+		var dataString = 'val=' + checkboxesChecked + '&opr_name=' + opr_names_Checked
+		+ '&features=' + features_Checked;
 		  
 		// ajax
 		jQuery.ajax({

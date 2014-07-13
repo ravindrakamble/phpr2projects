@@ -15,12 +15,12 @@
 		$local_Package = array();
 		$local_Package['0']='--';
 		    foreach($local as $c){
-			  $local_Package[$c->local_name]=$c->local_name;
+			  $local_Package[$c->LOCAL_NAME]=$c->LOCAL_NAME;
 		}
 		$out_Package = array();
 		$out_Package['0']='--';
 		    foreach($outstation as $c){
-			  $out_Package[$c->outstation_name]=$c->outstation_name;
+			  $out_Package[$c->OUTSTATION_NAME]=$c->OUTSTATION_NAME;
 		}
 		?>
 		<ul class="nav nav-tabs" id="myTab">
@@ -95,11 +95,11 @@
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
-	                <td><?php echo form_dropdown('localcity',$city);?></td>
+	                <td><?php echo form_dropdown('localcity',$city,'',"id='localcity'");?></td>
 	            </tr>
 	            <tr>
 	                <td>From Area :   </td>
-	                <td><?php echo form_dropdown('localarea',array());?></td>
+	                <td><?php echo form_dropdown('localarea',array(),'',"id='localarea'");?></td>
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
@@ -147,12 +147,25 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	$('#myTab a:first').tab('show');
-
 	$(".dt").datepicker(
 	{
 		format: 'dd/mm/yyyy'
 	}).on('changeDate', function(e){
     $(this).datepicker('hide');
+	});
+	
+	$("#localcity").change(function(){
+    	var selectedValue = this.value;
+    	//Display 'loading' status in the target select list
+    	
+		jQuery.ajax({
+			type:"POST",
+			url: "<?php echo base_url();?>search/get_areas/"+selectedValue,
+			data: selectedValue,
+			success: function(response) {
+				$('#localarea').append(response);
+			}
+		});
 	});
 });
 
