@@ -61,5 +61,16 @@ Class Area_m extends CI_Model{
 		$this->db->delete('area');
 		$this->get_all_areas('ajax');
 	}
+	
+	function get_areas($city)
+	{
+		$this->db->distinct();
+		$this->db->select('area.*');
+		$this->db->from('area');
+		$this->db->join('city','area.CITY_ID = city.ID');
+		$this->db->where('city.CITY_NAME',$city);
+		$query = $this->db->get()->result();
+		return $query;
+	}
 }
 ?>

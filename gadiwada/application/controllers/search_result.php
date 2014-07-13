@@ -44,10 +44,9 @@ class Search_result extends CI_Controller {
 		if($type =='ajax'){
 			$search_result = $this->build_result_html($result);
 			echo $search_result;
-		}
-		else{
+		}else{
 			$data['search_result'] = $this->build_result_html($result);
-			$data['filter_data'] = $this->build_filter_html(0,$filter=null);
+			$data['filter_data'] = $this->build_filter_html(0,0,$filter=null);
 			$data['header'] = $this->search_header();
 			$this->load->view('search_result',$data);
 		}
@@ -56,21 +55,25 @@ class Search_result extends CI_Controller {
 	public function filter($offset =0)
 	{
 		$selval = $this->input->post('val');
-		$this->filter_data($selval,$firstcall=false);
+		$opr_names = $this->input->post('opr_name');
+		$features = $this->input->post('features');
+		
+		$this->filter_data($selval, $opr_names, $features, $firstcall=false);
 	}
 	
-	public function filter_data($selval,$firstcall)
+	public function filter_data($selval,$opr_names, $features, $firstcall)
 	{
-		$result = $this->search_m->search($selval);
+		$result = $this->search_m->search($selval,$opr_names, $features);
+		
 		if($firstcall == false){
 			$search_data = $this->build_result_html($result);
-			$filter_data = $this->build_filter_html($selval);
+			$filter_data = $this->build_filter_html($selval, $opr_names, $features);
 			$all_result = $search_data.'~'.$filter_data;
 			echo $all_result;
 		}
 		else{
 			$data['search_result'] = $this->build_result_html($result);
-			$data['filter_data'] = $this->build_filter_html($selval);
+			$data['filter_data'] = $this->build_filter_html($selval, $opr_names, $features);
 			$data['header'] = $this->search_header();
 			$this->load->view('search_result',$data);
 		}
@@ -91,19 +94,30 @@ class Search_result extends CI_Controller {
 						if($row->AC == 1 && $row->NON_AC == 1)
 						$acnonac = 'AC, NON AC';
 		$search_result.= $acnonac."</td><td>price</td>
-						<td><a href='".base_url()."booking/".$row->ID."' class='btn btn-small btn-info'>Book</a></td></tr>";
+						<td>";
+						
+						if($this->session->userdata('is_customer_logged_in') == 'ture')
+						{
+	$search_result.="<a href='".base_url()."billing/new_booking/".$row->ID."' class='btn-small btn-warning'>Book</a></td></tr>";
+						}
+						else{
+	$search_result.="<span class='btn-small btn-inverse'>Login</spna></td></tr>";
+						}
+						
+		
 						endforeach;
 		$search_result.="</table>
 						</center>";
 		return $search_result;
 	}
 	
-	public function build_filter_html($selval)
+	public function build_filter_html($selval, $opr_names, $features)
 	{
 		if($selval != '0')
-		$check = explode(',',$selval);
+			$check = explode(',',$selval);
 		else 
 		$check = array();
+		
 		$car_model = $this->admin_m->get_all_car_model();
 		$feature = $this->admin_m->get_all_feature();
 		$operator = $this->admin_m->get_all_operator();
@@ -132,19 +146,47 @@ class Search_result extends CI_Controller {
 			$filter_result .= "<tr><td>".form_checkbox($attributes,$model->MODEL_NAME)."&nbsp;&nbsp;&nbsp;</td><td>".$model->MODEL_NAME."</td></tr>";
 		}
 		$filter_result .= '</table><hr><li><h5>Price</h5></li><table>';
-		$filter_result .= "<tr><td colspan=2><center><label id='labelprice' for='pricerange'>Rs. 10</label></center></td></tr>";
-		$filter_result .= "<tr><td colspan=2><input type ='range' name='range' id='pricerange' min='0' max='1000' step='10'/></td></tr>";
+		$filter_result .= "<tr><td colspan=2><label id='labelprice' for='pricerange'>Rs. 10</label></td></tr>";
+		$filter_result .= "<tr><td colspan=2><input type ='range' name='range' id='pricerange' /></td></tr>";
 		$filter_result .= '</table><hr><li><h5>Features</h5></li><table>';
 		
+		if($features != '0')
+			$feature_list = explode(',',$features);
+		else 
+		$feature_list = array();
+		
 		foreach ($feature as $f){
-			$attributes = array('name' =>$f->FEATURE_NAME, 'id' => $f->FEATURE_NAME,'class' => 'ajx','value' => $f->FEATURE_NAME);
+			$isChecked = false;
+			
+			if(count($feature_list) > 0)
+			foreach ($feature_list as $chkvalue)
+				if($chkvalue == $f->FEATURE_NAME)
+				$isChecked = true;
+				
+				$attributes = array('name' =>'features', 'id' => $f->FEATURE_NAME,'class' => 'ajx','value' => $f->FEATURE_NAME);
+				if($isChecked)
+				$filter_result .= "<tr><td>".form_checkbox($attributes,$f->FEATURE_NAME,$f->FEATURE_NAME)."&nbsp;&nbsp;&nbsp;</td><td>".$f->FEATURE_NAME."</td></tr>";
+				else
+			
 			$filter_result .= "<tr><td>".form_checkbox($attributes,$f->FEATURE_NAME)."&nbsp;&nbsp;&nbsp;</td><td>".$f->FEATURE_NAME."</td></tr>";
 		}
 		
 		$filter_result .= '</table><hr><li><h5>Operator name</h5></li><table>';
 		
+		if($opr_names != '0')
+			$operators = explode(',',$opr_names);
+		else 
+		$operators = array();
 		foreach ($operator as $nm){
-			$attributes = array('name' =>$nm->ID, 'id' => $nm->ID,'class' => 'ajx','value' => $nm->ID);
+			$isChecked = false;
+			if(count($operators) > 0)
+			foreach ($operators as $chkvalue)
+				if($chkvalue == $nm->BUSINESS_NAME)
+				$isChecked = true;
+			$attributes = array('name' =>'opr_name', 'id' => $nm->BUSINESS_NAME,'class' => 'ajx','value' => $nm->ID);
+			if($isChecked)
+			$filter_result .= "<tr><td>".form_checkbox($attributes,$nm->BUSINESS_NAME,$nm->BUSINESS_NAME)."&nbsp;&nbsp;&nbsp;</td><td>".$nm->BUSINESS_NAME."</td></tr>";
+			else
 			$filter_result .= "<tr><td>".form_checkbox($attributes,$nm->ID)."&nbsp;&nbsp;&nbsp;</td><td>".$nm->BUSINESS_NAME."</td></tr>";
 		}
 		$filter_result .= form_fieldset_close();
@@ -176,7 +218,7 @@ class Search_result extends CI_Controller {
 		if(array_key_exists('localarea', $curr_session) && $curr_session['localarea'] !== false)
 			$header .= "<td>Area</td><td>".$curr_session['localarea']."</td>";
 		else if(array_key_exists('area', $curr_session) && $curr_session('area') !== false)
-			$header .= "<td>Area</td><td>".$curr_session['localarea']."</td>";
+			$header .= "<td>Area</td><td>".$curr_session['area']."</td>";
 		else
 			$header .= "<td>Area</td><td>--</td>";
 			
@@ -205,10 +247,10 @@ class Search_result extends CI_Controller {
 		else if($curr_session('estimationtime') !== false)
 			$header .= "<td>Est hr:</td><td>".$curr_session['estimationtime']."</td>";
 		
-		if($curr_session['localCarTypePackage'] !== false)
-			$header .= "<td>Car type</td><td>".$curr_session['localCarTypePackage']."</td>";
-		else if($curr_session['CarTypePackage'] !== false)
-			$header .= "<td>Car type</td><td>".$curr_session['localCarTypePackage']."</td>";
+		if($curr_session['localCarType'] !== false)
+			$header .= "<td>Car type</td><td>".$curr_session['localCarType']."</td>";
+		else if($curr_session['carType'] !== false)
+			$header .= "<td>Car type</td><td>".$curr_session['carType']."</td>";
 		
 		$header .= "</tr>";
 		$header .= "</table>";
