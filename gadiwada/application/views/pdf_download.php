@@ -93,12 +93,6 @@
 				<td class="clr">BALANCE</td>
 				<td colspan="2"><input type="text" value="<?php echo $BALANCE ;?>" readonly="readonly" name="amt_balance" size="30" id="amt_balance"  class="decimal"/>	</td>
 			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" name='print' id='print' value="Print Bill" class="btn btn-info" /></td>
-				<td colspan="2"><input type="submit"  name='sms' id='sms' value="Send SMS" class="btn btn-inverse" /></td>
-				<td colspan="2"><input type="submit"  name='email' id='email' value="Send Email" class="btn btn-warning" /></td>
-				
-			</tr>
 		</table>
 	</form>
 </dody>

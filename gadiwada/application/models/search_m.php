@@ -9,6 +9,7 @@ Class Search_m extends CI_Model
 		$this->db->select('inventory.*,travel_agent.BUSINESS_NAME');
 		$this->db->from('inventory');
 		$this->db->join('travel_agent','inventory.AGENT_ID = travel_agent.ID');
+		$this->db->where('STATUS',1);
 		if($curr_session['localcity'] != '0' ){
 			$this->db->where('travel_agent.CITY',$curr_session['localcity']);
 		}

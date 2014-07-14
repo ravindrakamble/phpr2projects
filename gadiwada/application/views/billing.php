@@ -295,9 +295,9 @@ function stopCalc()
 				<td class="clr">PICK-UP</td>
 				<td>
 				
-					<input type="hidden" name="pickup" 
-							value="<?php echo $this->session->userdata('localcity').'&nbsp;&nbsp;Area, '. 
-					 		$this->session->userdata('localarea');?>"/>
+					<input type="hidden" name="area" value="<?php echo $this->session->userdata('localarea');?>"/>
+					<input type="hidden" name="city" value="<?php echo $this->session->userdata('localcity');?>" />
+					 		
 				<span><?php echo $this->session->userdata('localcity').'<br/>'. 
 					 $this->session->userdata('localarea');?></span></td>
 			</tr>

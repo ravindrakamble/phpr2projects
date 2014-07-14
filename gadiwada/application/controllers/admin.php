@@ -17,6 +17,7 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		$data['search'] = 'active';
+		$data['agents'] = $this->admin_m->get_all_agents();	
 		$data['cities'] = $this->city_m->get_all_cities();
 		$data['local'] = $this->packages_m->get_all_local_packages();
 		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
@@ -168,4 +169,52 @@ class Admin extends CI_Controller {
 		echo $result;
 	}
 	
+	function block($id)
+	{
+		$this->db->where('ID',$id);
+		$this->db->set('STATUS',0);
+		$this->db->update('travel_agent');
+		$this->agentlistView();
+	}
+	function unblock($id)
+	{
+		$this->db->where('ID',$id);
+		$this->db->set('STATUS',1);
+		$this->db->update('travel_agent');
+		$this->agentlistView();
+	}
+	
+	function agentlistView()
+	{
+		$agents = $this->admin_m->get_all_agents();	
+		$view = '';
+		$view .= "<table id='dataTable' class='table table-bordered table-condensed table-hover table-striped'>
+			<thead>
+			<tr><th>Agent ID</th><th>Agency name</th><th>Contact name</th><th>Contact number</th><th>Place</th><th>City</th><th>Action</th></tr>
+			</thead>
+			<tbody>";
+			foreach($agents as $ag)
+			{ 
+			$view .= "<tr>
+					<td>".$ag->ID."</td>
+					<td>".$ag->BUSINESS_NAME."</td>
+					<td>*******</td>
+					<td>*******</td>
+					<td>".$ag->ADDRESS_LINE_1.",".$ag->ADDRESS_LINE_2."</td>
+					<td>".$ag->CITY."</td>";
+				if($ag->STATUS == 0)
+				{
+					$view .= "<td><a href='javascript:unblock($ag->ID);' class='btn-danger btn-small'>UnBlock</a></td>";
+				}
+				else{
+					$view .= "<td><a href='javascript:block($ag->ID);' class='btn-success btn-small'>Block</a></td>";
+				}
+				
+				$view .= "</tr>";
+			}
+			$view  .= "</tbody>
+		</table>";
+		
+		echo $view;
+	}
 }
