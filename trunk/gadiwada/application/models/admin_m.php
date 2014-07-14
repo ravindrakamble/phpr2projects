@@ -20,8 +20,19 @@ Class Admin_m extends CI_Model{
 	
 	function get_all_operator()
 	{
-		$this->db->distinct('BUSINESS_NAME');
-		$this->db->select('BUSINESS_NAME,ID')->from('travel_agent');
+		$this->db->distinct();
+		$this->db->select('*')->from('travel_agent');
+		$this->db->where('STATUS',1);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	
+	function get_all_agents()
+	{
+		$this->db->distinct();
+		$this->db->select('*')->from('travel_agent');
+		/*$this->db->join('inventory','inventory.AGENT_ID = travel_agent.ID');*/
+		//$this->db->where('STATUS',1);
 		$query = $this->db->get();
 		return $query->result();
 	}

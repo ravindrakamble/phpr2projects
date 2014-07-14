@@ -10,6 +10,7 @@ Class Login_m extends CI_Model{
                             ->where('USERNAME', $uname)
                           /*  ->where('PASSWORD',md5($pass));*/
 							->where('PASSWORD',($pass));
+							$this->db->where('STATUS',1);
         $query = $q->get()->result();
 		if($query)
 	    	return 1;
@@ -22,6 +23,7 @@ Class Login_m extends CI_Model{
 		$q = $this->db->select('id')
                             ->from('travel_agent')
                             ->where('username',$uname);
+                            $this->db->where('STATUS',1);
         $tmp = $q->get()->result();
 	    foreach($tmp as $t)
 	    {

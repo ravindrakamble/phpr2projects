@@ -8,6 +8,8 @@
 			 <li><a href="#features" role="tab" data-toggle="tab">Features</a></li>
 			 <li><a href="#packages" role="tab" data-toggle="tab">Packages</a></li>
 			 <li><a href="#discounts" role="tab" data-toggle="tab">Discount coupon</a></li>
+			 <li><a href="#block" role="tab" data-toggle="tab">Block/Unblock Agent</a></li>
+			 <li><a href="#user" role="tab" data-toggle="tab">Block/Unblock User</a></li>
 		</ul>
 		<div class="tab-content">
 			<div id="question" style="display:none; cursor: default; padding:10px;"> 
@@ -82,7 +84,6 @@
 					</table>
 				</div>
 			</div>
-
 			<div id='cartypes' class="tab-pane fade" >
 				<h2>Car Type</h2>
 				<form name='cartypeform' id='cartypeform' method='post' action='<?php echo base_url()?>admin/car_type'>
@@ -112,7 +113,6 @@
 					</table>
 				</div>
 			</div>
-
 			<div id='carmodels' class="tab-pane fade" >
 				<h2>Car Model</h2>
 				<?php 
@@ -241,6 +241,7 @@
 				</div>
 			</div>
 			<div id='discounts' class="tab-pane fade" >
+			
 				<h2>Discounts</h2>
 				<form name='discountform' id="discountform" method='post' action='<?php echo base_url()?>admin/discount'>
 				<input type="hidden" name='discountid' id='discountid'>
@@ -329,6 +330,46 @@
 							} ?>
 					</table>
 				</div>
+			</div>
+			<div id='block' class="tab-pane fade" >
+				<div id="blockmsg" style="display:none; cursor: default; padding:10px;">				
+					<h6>Are you sure to block/unblock this agent ?</h6> 
+					<br />
+					<input type="button" id="blkyes" value="Yes" /> 
+					<input type="button" id="blkno" value="No" /> 
+				</div>
+				<div id="agentlist">
+					<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
+						<thead>
+						<tr><th>Agent ID</th><th>Agency name</th><th>Contact name</th><th>Contact number</th><th>Place</th><th>City</th><th>Action</th></tr>
+						</thead>
+						<tbody>
+							<?php foreach($agents as $ag){ ?>
+							<tr>				
+								<td><?php echo $ag->ID ?></td>
+								<td><?php echo $ag->BUSINESS_NAME ?></td>
+								<td>*******</td>
+								<td>*******</td>
+								<td><?php echo $ag->ADDRESS_LINE_1.",".$ag->ADDRESS_LINE_2 ?></td>
+								<td><?php echo $ag->CITY ?></td>
+							<?php 
+							if($ag->STATUS == 0)
+							{
+								echo "<td><a href='javascript:unblock($ag->ID);' class='btn-danger btn-small'>UnBlock</a></td>";
+							}
+							else{
+								echo "<td><a href='javascript:block($ag->ID);' class='btn-success btn-small'>Block</a></td>";
+							}	
+							?>
+									
+							</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="user" class="tab-pane fade">
+				
 			</div>
 </div>
 <script type="text/javascript">
@@ -757,6 +798,44 @@ function removediscount(id)
 		});
 	});
 	jQuery('#no').click(function() { 
+        $.unblockUI(); 
+       return false; 
+    }); 
+}
+
+///block_unblock
+function block(id)
+{
+	$.blockUI({ message: jQuery('#blockmsg'), css: { width: '275px' } }); 
+    jQuery('#blkyes').click(function() { 
+        $.ajax({
+			type:"POST",
+			url: "<?php echo base_url();?>admin/block/"+id,
+			success: function(data) {
+				$("#agentlist").html(data);
+				$.growlUI('Sucessfully<br> Updated !'); 
+			}
+		});
+	});
+	jQuery('#blkno').click(function() { 
+        $.unblockUI(); 
+       return false; 
+    }); 
+}
+function unblock(id)
+{
+	$.blockUI({ message: jQuery('#blockmsg'), css: { width: '275px' } }); 
+    jQuery('#blkyes').click(function() { 
+        $.ajax({
+			type:"POST",
+			url: "<?php echo base_url();?>admin/unblock/"+id,
+			success: function(data) {
+				$("#agentlist").html(data);
+				$.growlUI('Sucessfully<br> Updated !'); 
+			}
+		});
+	});
+	jQuery('#blkno').click(function() { 
         $.unblockUI(); 
        return false; 
     }); 

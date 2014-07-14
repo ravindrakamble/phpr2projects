@@ -151,6 +151,7 @@ function deleteRow(row)
     var i=row.parentNode.parentNode.rowIndex;
     document.getElementById('contacts').deleteRow(i);
 }
+
 var frmvalidator = new Validator("registration");
 frmvalidator.addValidation("bname","req","Please enter your Business Name");
 frmvalidator.addValidation("bname","alpha","Alphabetic chars only");

@@ -30,7 +30,8 @@ class Billing extends CI_Controller {
 			'OWNER_MOBILE'=> $this->input->post('owner_no'),
 			'JOURNEY_DATE'=> $this->input->post('jourdate'),
 			'JOURNEY_TIME'=> $this->input->post('jourtime'),
-			'PICKUP'      => $this->input->post('pickup'),
+			'AREA'      => $this->input->post('area'),
+			'CITY'      => $this->input->post('city'),
 			'DESTINATION' => $this->input->post('destination'),
 			'FARE'        => $this->input->post('fare'),
 			'TOTAL_AMOUNT'=> $this->input->post('totamount'),
@@ -39,12 +40,13 @@ class Billing extends CI_Controller {
 			'REMARKS'     => $this->input->post('remarks')
 		);
 		$this->db->insert('cust_booking',$info);
+		
 		$inventoryid = $this->input->post('inventoryid');
 		$data['TOTAL_AMOUNT'] = $this->input->post('totamount');
 		$data['AMOUNT_PAID'] = $this->input->post('amt_paid');
 		$data['BALANCE'] = $this->input->post('amt_balance');
 		$data['REMARKS'] = $this->input->post('remarks');
-		$data['billno'] = $inventoryid.time();
+		$data['billno'] = $info['BILL_NO'];
 		$data['result'] = $this->inventory_m->get_detailsForBilling($inventoryid); 
 		if($this->input->post('print'))
 		{
