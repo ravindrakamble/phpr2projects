@@ -127,7 +127,7 @@
 							<a href="<?php echo base_url()?>registration"> Registration </a></li>
 							
 							
-							<?php if($this->session->userdata('type') == 'agent' && $this->session->userdata('is_logged_in') == 'ture' ) { ?>
+							<?php if($this->session->userdata('type') == 'agent' && $this->session->userdata('is_agent_logged_in') == 'ture' ) { ?>
 							<li <?php if(isset($inventory) || isset($booking) || isset($pricing) || isset($billing) ) echo "class='active dropdown'" ; else echo "class='dropdown'" ; ?> >
 								<a  class="dropdown-toggle" data-toggle="dropdown" 
 									href=""> 

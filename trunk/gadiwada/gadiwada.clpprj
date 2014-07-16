@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="C:\wamp\www\gadiwada\gadiwada.clpprj">
 	<removed value=";C:\wamp\www\gadiwada\application\controllers\welcome.php;C:\wamp\www\gadiwada\application\views\index.html;C:\wamp\www\gadiwada\application\views\welcome_message.php;"/><added value=""/><lastopfiles>
-		<file name="C:\wamp\www\gadiwada\application\controllers\admin.php"/>
-		<file name="C:\wamp\www\gadiwada\application\models\admin_m.php"/>
 		<file name="C:\wamp\www\gadiwada\application\views\admin\home.php"/>
+		<file name="C:\wamp\www\gadiwada\application\controllers\admin.php"/>
+		<file name="C:\wamp\www\gadiwada\application\controllers\login.php"/>
 		<file name="C:\wamp\www\gadiwada\application\models\login_m.php"/>
-		<file name="C:\wamp\www\gadiwada\application\models\registration_m.php"/>
-		<file name="C:\wamp\www\gadiwada\application\models\search_m.php"/>
+		<file name="C:\wamp\www\gadiwada\application\views\include\header.php"/>
+		<file name="C:\wamp\www\gadiwada\application\views\booking.php"/>
 	</lastopfiles>
 	<errors version="4.5">
 		<errfile name="C:\wamp\www\gadiwada\css\style.css">
@@ -763,111 +763,125 @@
 				<treenode node="_dompdf;PHP:Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\include\abstract_renderer.cls.php;f12;30;20;30;;;;vposDOMPDF;;v;;r;;d-1,-1;;b2,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="Admin;PHP:Class Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f0;2;1;219;;;;vpos;;vCI_Controller;;c;;r;;d34,2;;b0,0;;m">
+			<treenode node="Admin;PHP:Class Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f0;2;1;265;;;;vpos;;vCI_Controller;;c;;r;;d34,2;;b0,0;;m">
 				<treenode node="__construct;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f1;3;2;14;;;;vpos;;v;;r;;d1,4;;b0,0;;m">
 					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;6;7;6;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
-				<treenode node="agentlistView;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f1;186;2;218;;;;vpos;;v;;r;;d1,187;;b0,0;;m">
-					<treenode node="ag;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f22;195;25;195;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="agentlistView;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f1;200;2;232;;;;vpos;;v;;r;;d1,201;;b0,0;;m">
+					<treenode node="ag;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f22;209;25;209;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="agents;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;188;9;188;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="agents;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;202;9;202;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f12;188;17;188;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f12;202;17;202;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="view;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;189;7;189;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-				</treenode>
-				<treenode node="area;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;47;2;61;;;;vpos;;v;;r;;d1,48;;b1,0;;m">
-					<treenode node="_POST;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f11;50;17;50;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="area;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;49;7;49;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;59;9;59;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f32;49;37;49;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="view;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;203;7;203;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
-				<treenode node="block;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f1;171;2;177;;;;vpos;;v;;r;;d1,172;;b0,0;;mid;;p">
-					<treenode node="id;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f16;171;19;171;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="area;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;48;2;62;;;;vpos;;v;;r;;d1,49;;b1,0;;m">
+					<treenode node="_POST;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f11;51;17;51;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;173;7;173;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="area;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;50;7;50;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-				</treenode>
-				<treenode node="car_model;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;79;2;93;;;;vpos;;v;;r;;d1,80;;b1,0;;m">
-					<treenode node="_POST;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f11;82;17;82;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;60;9;60;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;91;9;91;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="seater;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;81;9;81;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f35;81;40;81;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f32;50;37;50;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
-				<treenode node="car_type;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;63;2;77;;;;vpos;;v;;r;;d1,64;;b1,0;;m">
-					<treenode node="_POST;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f11;66;17;66;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="block;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f1;172;2;185;;;;vpos;;v;;r;;d1,173;;b0,0;;mid;;ptype;;p">
+					<treenode node="id;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f16;172;19;172;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="car_type;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;65;11;65;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;174;7;174;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;75;9;75;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f35;65;40;65;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="type;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f20;172;25;172;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
-				<treenode node="city;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;31;2;45;;;;vpos;;v;;r;;d1,32;;b1,0;;m">
-					<treenode node="_POST;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f11;34;17;34;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="car_model;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;80;2;94;;;;vpos;;v;;r;;d1,81;;b1,0;;m">
+					<treenode node="_POST;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f11;83;17;83;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="city;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;33;7;33;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;92;9;92;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;43;9;43;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="seater;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;82;9;82;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f32;33;37;33;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-				</treenode>
-				<treenode node="discount;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f1;146;2;169;;;;vpos;;v;;r;;d1,147;;b0,0;;m">
-					<treenode node="info;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;148;7;148;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;167;9;167;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f20;149;25;149;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f35;82;40;82;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
-				<treenode node="features;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;95;2;109;;;;vpos;;v;;r;;d1,96;;b1,0;;m">
-					<treenode node="_POST;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f11;98;17;98;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="car_type;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;64;2;78;;;;vpos;;v;;r;;d1,65;;b1,0;;m">
+					<treenode node="_POST;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f11;67;17;67;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="feature;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;97;10;97;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="car_type;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;66;11;66;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;107;9;107;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;76;9;76;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f37;97;42;97;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f35;66;40;66;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
-				<treenode node="index;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;16;2;29;;;;vpos;;v;;r;;d1,17;;b1,0;;m">
+				<treenode node="city;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;32;2;46;;;;vpos;;v;;r;;d1,33;;b1,0;;m">
+					<treenode node="_POST;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f11;35;17;35;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="city;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;34;7;34;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;44;9;44;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f32;34;37;34;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+				</treenode>
+				<treenode node="discount;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f1;147;2;170;;;;vpos;;v;;r;;d1,148;;b0,0;;m">
+					<treenode node="info;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;149;7;149;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;168;9;168;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f20;150;25;150;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+				</treenode>
+				<treenode node="features;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;96;2;110;;;;vpos;;v;;r;;d1,97;;b1,0;;m">
+					<treenode node="_POST;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f11;99;17;99;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="feature;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;98;10;98;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;108;9;108;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f37;98;42;98;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+				</treenode>
+				<treenode node="index;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;16;2;30;;;;vpos;;v;;r;;d1,17;;b1,0;;m">
 					<treenode node="data;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;18;7;18;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f20;19;25;19;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
-				<treenode node="packages;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;111;2;144;;;;vpos;;v;;r;;d1,112;;b1,0;;m">
-					<treenode node="_POST;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f12;116;18;116;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="packages;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f8;112;2;145;;;;vpos;;v;;r;;d1,113;;b1,0;;m">
+					<treenode node="_POST;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f12;117;18;117;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="local;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;115;8;115;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="local;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;116;8;116;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="outstation;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f3;130;14;130;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="outstation;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f3;131;14;131;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f3;125;10;125;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="result;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f3;126;10;126;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f5;113;10;113;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f5;114;10;114;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
-				<treenode node="unblock;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f1;178;2;184;;;;vpos;;v;;r;;d1,179;;b0,0;;mid;;p">
-					<treenode node="id;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f18;178;21;178;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="unblock;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f1;186;2;198;;;;vpos;;v;;r;;d1,187;;b0,0;;mid;;ptype;;p">
+					<treenode node="id;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f18;186;21;186;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;180;7;180;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;188;7;188;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="type;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f22;186;27;186;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+				</treenode>
+				<treenode node="userlistView;PHP:Function Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f1;234;2;264;;;;vpos;;v;;r;;d1,235;;b0,0;;m">
+					<treenode node="ag;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f22;243;25;243;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="agents;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;236;9;236;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f12;236;17;236;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="view;PHP:Var Name;C:\wamp\www\gadiwada\application\controllers\admin.php;f2;237;7;237;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
 			</treenode>
-			<treenode node="Admin_m;PHP:Class Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f0;2;1;39;;;;vpos;;vCI_Model;;c;;r;;d30,2;;b0,0;;m">
+			<treenode node="Admin_m;PHP:Class Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f0;2;1;47;;;;vpos;;vCI_Model;;c;;r;;d30,2;;b0,0;;m">
 				<treenode node="get_all_agents;PHP:Function Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f1;29;2;37;;;;vpos;;v;;r;;d1,30;;b0,0;;m">
 					<treenode node="query;PHP:Var Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f2;35;8;35;;;;vposCI_DB_result;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
@@ -880,12 +894,6 @@
 					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f2;6;7;6;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
-				<treenode node="get_all_cities;PHP:Function Name;C:\wamp\www\gadiwada\application\models\Codelobster0.php;f1;3;2;9;;;;vpos;;v;;r;;d1,5;;b0,0;;m">
-					<treenode node="query;PHP:Var Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f2;8;8;8;;C:\wamp\www\gadiwada\application\models\Codelobster0.php;f2;7;8;7;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f2;6;7;6;;C:\wamp\www\gadiwada\application\models\Codelobster0.php;f2;5;7;5;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-				</treenode>
 				<treenode node="get_all_feature;PHP:Function Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f1;12;2;18;;;;vpos;;v;;r;;d1,13;;b0,0;;m">
 					<treenode node="query;PHP:Var Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f2;16;8;16;;;;vposCI_DB_result;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
@@ -896,6 +904,12 @@
 					<treenode node="query;PHP:Var Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f2;25;8;25;;;;vposCI_DB_result;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f2;22;7;22;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+				</treenode>
+				<treenode node="get_all_users;PHP:Function Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f1;39;2;45;;;;vpos;;v;;r;;d1,40;;b0,0;;m">
+					<treenode node="query;PHP:Var Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f2;43;8;43;;;;vposCI_DB_result;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\admin_m.php;f2;41;7;41;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
 			</treenode>
@@ -13118,52 +13132,52 @@
 				</treenode>
 			</treenode>
 			<treenode node="Login_m;PHP:Class Name;C:\wamp\www\gadiwada\application\models\login_mphp;f0;1;1;15;;C:\wamp\www\gadiwada\application\models\login_m.php;f0;1;1;60;;;;vpos;;vCI_Model;;c;;r;;d30,1;;b0,0;;m">
-				<treenode node="checkAgentLogin;PHP:Function Name;C:\wamp\www\gadiwada\application\models\login_mphp;f1;3;2;14;;C:\wamp\www\gadiwada\application\models\login_m.php;f1;5;2;17;;C:\wamp\www\gadiwada\application\models\login_m.php;f1;5;2;18;;;;vpos;;v;;r;;d1,6;;b0,0;;muname;;ppass;;p">
-					<treenode node="pass;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_mphp;f33;3;38;3;;C:\wamp\www\gadiwada\application\models\login_m.php;f33;5;38;5;;C:\wamp\www\gadiwada\application\models\login_m.php;f33;5;38;5;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="checkAgentLogin;PHP:Function Name;C:\wamp\www\gadiwada\application\models\login_mphp;f1;3;2;14;;C:\wamp\www\gadiwada\application\models\login_m.php;f1;5;2;61;;C:\wamp\www\gadiwada\application\models\login_m.php;f1;5;2;18;;C:\wamp\www\gadiwada\application\models\login_m.php;f1;5;2;18;;;;vpos;;v;;r;;d1,6;;b0,0;;muname;;ppass;;p">
+					<treenode node="pass;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_mphp;f33;3;38;3;;C:\wamp\www\gadiwada\application\models\login_m.php;f33;5;38;5;;C:\wamp\www\gadiwada\application\models\login_m.php;f33;5;38;5;;C:\wamp\www\gadiwada\application\models\login_m.php;f33;5;38;5;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="q;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_mphp;f2;5;4;5;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;7;4;7;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;7;4;7;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="q;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_mphp;f2;5;4;5;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;7;4;7;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;7;4;7;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;7;4;7;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="query;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_mphp;f8;9;14;9;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;12;14;12;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;13;14;13;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="query;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_mphp;f8;9;14;9;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;13;14;13;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;13;14;13;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_mphp;f7;5;12;5;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;7;12;7;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;7;12;7;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_mphp;f7;5;12;5;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;7;12;7;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;7;12;7;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;7;12;7;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="uname;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_mphp;f26;3;32;3;;C:\wamp\www\gadiwada\application\models\login_m.php;f26;5;32;5;;C:\wamp\www\gadiwada\application\models\login_m.php;f26;5;32;5;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-				</treenode>
-				<treenode node="checkCustomerLogin;PHP:Function Name;C:\wamp\www\gadiwada\application\models\login_m.php;f1;33;2;45;;C:\wamp\www\gadiwada\application\models\login_m.php;f1;34;2;46;;;;vpos;;v;;r;;d1,35;;b0,0;;muname;;ppass;;p">
-					<treenode node="pass;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f36;33;41;33;;C:\wamp\www\gadiwada\application\models\login_m.php;f36;34;41;34;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="q;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f2;35;4;35;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;36;4;36;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="query;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f8;39;14;39;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;40;14;40;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f7;35;12;35;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;36;12;36;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-					</treenode>
-					<treenode node="uname;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f29;33;35;33;;C:\wamp\www\gadiwada\application\models\login_m.php;f29;34;35;34;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="uname;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_mphp;f26;3;32;3;;C:\wamp\www\gadiwada\application\models\login_m.php;f26;5;32;5;;C:\wamp\www\gadiwada\application\models\login_m.php;f26;5;32;5;;C:\wamp\www\gadiwada\application\models\login_m.php;f26;5;32;5;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
-				<treenode node="getAgentID;PHP:Function Name;C:\wamp\www\gadiwada\application\models\login_m.php;f1;19;2;30;;C:\wamp\www\gadiwada\application\models\login_m.php;f1;20;2;31;;;;vpos;;v;;r;;d1,21;;b0,0;;muname;;p">
-					<treenode node="q;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f2;21;4;21;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;22;4;22;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="checkCustomerLogin;PHP:Function Name;C:\wamp\www\gadiwada\application\models\login_m.php;f1;34;2;46;;C:\wamp\www\gadiwada\application\models\login_m.php;f1;34;2;46;;;;vpos;;v;;r;;d1,35;;b0,0;;muname;;ppass;;p">
+					<treenode node="pass;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f36;34;41;34;;C:\wamp\www\gadiwada\application\models\login_m.php;f36;34;41;34;;C:\wamp\www\gadiwada\application\models\login_m.php;f36;34;41;34;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="t;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f21;26;23;26;;C:\wamp\www\gadiwada\application\models\login_m.php;f21;27;23;27;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="q;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f2;36;4;36;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;36;4;36;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;36;4;36;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f7;21;12;21;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;22;12;22;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="query;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f8;40;14;40;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;40;14;40;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;40;14;40;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="tmp;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f8;25;12;25;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;26;12;26;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f7;36;12;36;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;36;12;36;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;36;12;36;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="uname;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f21;19;27;19;;C:\wamp\www\gadiwada\application\models\login_m.php;f21;20;27;20;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="uname;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f29;34;35;34;;C:\wamp\www\gadiwada\application\models\login_m.php;f29;34;35;34;;C:\wamp\www\gadiwada\application\models\login_m.php;f29;34;35;34;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
-				<treenode node="getCustID;PHP:Function Name;C:\wamp\www\gadiwada\application\models\login_m.php;f1;47;2;57;;C:\wamp\www\gadiwada\application\models\login_m.php;f1;48;2;58;;;;vpos;;v;;r;;d1,49;;b0,0;;muname;;p">
-					<treenode node="q;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f2;49;4;49;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;50;4;50;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="getAgentID;PHP:Function Name;C:\wamp\www\gadiwada\application\models\login_m.php;f1;20;2;31;;C:\wamp\www\gadiwada\application\models\login_m.php;f1;20;2;31;;;;vpos;;v;;r;;d1,21;;b0,0;;muname;;p">
+					<treenode node="q;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f2;22;4;22;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;22;4;22;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;22;4;22;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="t;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f21;53;23;53;;C:\wamp\www\gadiwada\application\models\login_m.php;f21;54;23;54;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="t;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f21;27;23;27;;C:\wamp\www\gadiwada\application\models\login_m.php;f21;27;23;27;;C:\wamp\www\gadiwada\application\models\login_m.php;f21;27;23;27;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f7;49;12;49;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;50;12;50;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f7;22;12;22;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;22;12;22;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;22;12;22;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="tmp;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f8;52;12;52;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;53;12;53;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="tmp;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f8;26;12;26;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;26;12;26;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;26;12;26;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="uname;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f20;47;26;47;;C:\wamp\www\gadiwada\application\models\login_m.php;f20;48;26;48;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="uname;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f21;20;27;20;;C:\wamp\www\gadiwada\application\models\login_m.php;f21;20;27;20;;C:\wamp\www\gadiwada\application\models\login_m.php;f21;20;27;20;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+				</treenode>
+				<treenode node="getCustID;PHP:Function Name;C:\wamp\www\gadiwada\application\models\login_m.php;f1;48;2;58;;C:\wamp\www\gadiwada\application\models\login_m.php;f1;48;2;58;;;;vpos;;v;;r;;d1,49;;b0,0;;muname;;p">
+					<treenode node="q;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f2;50;4;50;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;50;4;50;;C:\wamp\www\gadiwada\application\models\login_m.php;f2;50;4;50;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="t;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f21;54;23;54;;C:\wamp\www\gadiwada\application\models\login_m.php;f21;54;23;54;;C:\wamp\www\gadiwada\application\models\login_m.php;f21;54;23;54;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f7;50;12;50;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;50;12;50;;C:\wamp\www\gadiwada\application\models\login_m.php;f7;50;12;50;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="tmp;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f8;53;12;53;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;53;12;53;;C:\wamp\www\gadiwada\application\models\login_m.php;f8;53;12;53;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					</treenode>
+					<treenode node="uname;PHP:Var Name;C:\wamp\www\gadiwada\application\models\login_m.php;f20;48;26;48;;C:\wamp\www\gadiwada\application\models\login_m.php;f20;48;26;48;;C:\wamp\www\gadiwada\application\models\login_m.php;f20;48;26;48;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
 			</treenode>
@@ -14692,10 +14706,10 @@
 				</treenode>
 			</treenode>
 			<treenode node="Registration_m;PHP:Class Name;C:\wamp\www\gadiwada\application\models\registration_m.php;f0;2;1;13;;;;vpos;;vCI_Model;;c;;r;;d37,2;;b0,0;;m">
-				<treenode node="save;PHP:Function Name;C:\wamp\www\gadiwada\application\models\Codelobster0.php;f1;4;2;8;;C:\wamp\www\gadiwada\application\models\registration_m.php;f1;3;2;7;;;;vpos;;v;;r;;d1,4;;b0,0;;mdata;;p">
-					<treenode node="data;PHP:Var Name;C:\wamp\www\gadiwada\application\models\Codelobster0.php;f15;4;20;4;;C:\wamp\www\gadiwada\application\models\registration_m.php;f15;3;20;3;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="save;PHP:Function Name;C:\wamp\www\gadiwada\application\models\registration_m.php;f1;3;2;7;;;;vpos;;v;;r;;d1,4;;b0,0;;mdata;;p">
+					<treenode node="data;PHP:Var Name;C:\wamp\www\gadiwada\application\models\registration_m.php;f15;3;20;3;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
-					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\Codelobster0.php;f2;6;7;6;;C:\wamp\www\gadiwada\application\models\registration_m.php;f2;5;7;5;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+					<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\models\registration_m.php;f2;5;7;5;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 					</treenode>
 				</treenode>
 				<treenode node="save_contact;PHP:Function Name;C:\wamp\www\gadiwada\application\models\registration_m.php;f1;8;2;12;;;;vpos;;v;;r;;d1,9;;b0,0;;mcontact;;p">
@@ -18065,7 +18079,7 @@
 			</treenode>
 			<treenode node="test_files;PHP:Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\www\examples.php;f2;84;13;84;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
-			<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\views\login.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\inventory.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\search.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\search_result.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\Codelobster0.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\registration.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\include\header.php;f18;71;23;71;;C:\wamp\www\gadiwada\application\views\booking.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\pdf_download.php;f26;10;31;10;;C:\wamp\www\gadiwada\application\views\billing.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\cancellation.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;0;12;0;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="this;PHP:Var Name;C:\wamp\www\gadiwada\application\views\login.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\inventory.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\search.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\search_result.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\Codelobster0.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\registration.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\pdf_download.php;f26;10;31;10;;C:\wamp\www\gadiwada\application\views\billing.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\cancellation.php;f6;0;11;0;;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;0;12;0;;C:\wamp\www\gadiwada\application\views\include\header.php;f18;71;23;71;;C:\wamp\www\gadiwada\application\views\booking.php;f6;0;11;0;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
 			<treenode node="title;PHP:Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\www\examples.php;f4;121;10;121;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
@@ -18082,6 +18096,8 @@
 			<treenode node="unicodemap;PHP:Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\lib\php-font-lib\www\font_info.php;f0;40;11;40;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
 			<treenode node="URI;PHP:Var Name;C:\wamp\www\gadiwada\system\core\CodeIgniter.php;f1;164;5;164;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="users;PHP:Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f21;377;27;377;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
 			<treenode node="v;PHP:Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\www\fonts.php;f10;79;12;79;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
@@ -18765,14 +18781,16 @@
 				<treenode node="overflow;JS:JS Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\lib\php-font-lib\www\js\jquery-ui-1.8.14.custom.min.js;f276;611;284;611;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="block;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;806;1;823;;;;vpos;;v;;r;;d0,807;;b0,0;;mid;;p">
-				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;808;46;808;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="block;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;832;1;854;;;;vpos;;v;;r;;d0,833;;b0,0;;mid;;ptype;;p">
+				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;834;46;834;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f15;806;17;806;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f15;832;17;832;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;808;20;808;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;834;20;834;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;808;55;808;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f18;832;22;832;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;834;55;834;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="bM;JS:Function Name;C:\wamp\www\gadiwada\application\libraries\dompdf\lib\php-font-lib\www\js\jquery-1.5.1.min.js;f2028;15;2273;15;;;;vpos;;v;;r;;d2042,15;;b0,0;;ma;;p">
@@ -19055,7 +19073,7 @@
 				<treenode node="d;JS:JS Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\lib\php-font-lib\www\js\jquery-1.5.1.min.js;f37;15;38;15;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="changeBtnName;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;376;1;393;;;;vpos;;v;;r;;d0,377;;b0,0;;m">
+			<treenode node="changeBtnName;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;402;1;419;;;;vpos;;v;;r;;d0,403;;b0,0;;m">
 			</treenode>
 			<treenode node="CLASS;JS:Function Name;C:\wamp\www\gadiwada\application\libraries\dompdf\www\jquery-1.4.2.js;f287;91;400;91;;;;vpos;;v;;r;;d308,91;;b0,0;;mh;;pl;;pm;;p">
 				<treenode node="h;JS:JS Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\www\jquery-1.4.2.js;f302;91;303;91;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
@@ -19433,120 +19451,120 @@
 				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\www\jquery-1.4.2.js;f217;59;218;59;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="editarea;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;544;1;559;;;;vpos;;v;;r;;d0,545;;b0,0;;mid;;p">
-				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;552;8;552;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="editarea;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;570;1;585;;;;vpos;;v;;r;;d0,571;;b0,0;;mid;;p">
+				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;578;8;578;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f18;544;20;544;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f18;570;20;570;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;550;28;550;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;576;28;576;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;550;9;550;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;576;9;576;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;548;6;548;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;574;6;574;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;549;5;549;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="editcarmodel;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;616;1;630;;;;vpos;;v;;r;;d0,617;;b0,0;;mid;;p">
-				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;623;8;623;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f22;616;24;616;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;622;28;622;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;622;9;622;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;620;6;620;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;621;5;621;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;575;5;575;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="editcartype;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;581;1;594;;;;vpos;;v;;r;;d0,582;;b0,0;;mid;;p">
-				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;588;8;588;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="editcarmodel;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;642;1;656;;;;vpos;;v;;r;;d0,643;;b0,0;;mid;;p">
+				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;649;8;649;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f21;581;23;581;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f22;642;24;642;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;587;28;587;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;648;28;648;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;587;9;587;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;648;9;648;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;585;6;585;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;646;6;646;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;586;5;586;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="editcity;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;509;1;522;;;;vpos;;v;;r;;d0,510;;b0,0;;mid;;p">
-				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;516;8;516;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f18;509;20;509;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;515;28;515;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;515;9;515;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;513;6;513;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;514;5;514;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;647;5;647;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="editdiscount;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;763;1;784;;;;vpos;;v;;r;;d0,764;;b0,0;;mid;;p">
-				<treenode node="discount;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;771;15;771;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="editcartype;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;607;1;620;;;;vpos;;v;;r;;d0,608;;b0,0;;mid;;p">
+				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;614;8;614;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f22;763;24;763;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f21;607;23;607;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="JSON;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f17;770;21;770;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;613;28;613;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="objJSON;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;770;14;770;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;613;9;613;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;769;28;769;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;611;6;611;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;769;9;769;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;767;6;767;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;768;5;768;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;612;5;612;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="editfeature;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;652;1;665;;;;vpos;;v;;r;;d0,653;;b0,0;;mid;;p">
-				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;659;8;659;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="editcity;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;535;1;548;;;;vpos;;v;;r;;d0,536;;b0,0;;mid;;p">
+				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;542;8;542;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f21;652;23;652;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f18;535;20;535;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;658;28;658;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;541;28;541;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;658;9;658;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;541;9;541;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;656;6;656;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;539;6;539;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;657;5;657;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="editlocal;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;687;1;703;;;;vpos;;v;;r;;d0,688;;b0,0;;mid;;p">
-				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;694;8;694;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f19;687;21;687;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;693;28;693;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;693;9;693;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;691;6;691;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;692;5;692;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;540;5;540;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="editout;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;726;1;741;;;;vpos;;v;;r;;d0,727;;b0,0;;mid;;p">
-				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;733;8;733;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="editdiscount;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;789;1;810;;;;vpos;;v;;r;;d0,790;;b0,0;;mid;;p">
+				<treenode node="discount;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;797;15;797;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f17;726;19;726;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f22;789;24;789;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;732;28;732;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="JSON;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f17;796;21;796;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;732;9;732;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="objJSON;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;796;14;796;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;730;6;730;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;795;28;795;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;731;5;731;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;795;9;795;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;793;6;793;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;794;5;794;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="editfeature;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;678;1;691;;;;vpos;;v;;r;;d0,679;;b0,0;;mid;;p">
+				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;685;8;685;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f21;678;23;678;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;684;28;684;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;684;9;684;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;682;6;682;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;683;5;683;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="editlocal;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;713;1;729;;;;vpos;;v;;r;;d0,714;;b0,0;;mid;;p">
+				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;720;8;720;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f19;713;21;713;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;719;28;719;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;719;9;719;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;717;6;717;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;718;5;718;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="editout;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;752;1;767;;;;vpos;;v;;r;;d0,753;;b0,0;;mid;;p">
+				<treenode node="c;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f7;759;8;759;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f17;752;19;752;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="response;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;758;28;758;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="success;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;758;9;758;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;756;6;756;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="url;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;757;5;757;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="error;JS:Function Name;C:\wamp\www\gadiwada\application\libraries\dompdf\www\jquery-1.4.2.js;f380;74;448;74;;;;vpos;;v;;r;;d397,74;;b0,0;;mg;;p">
@@ -19763,90 +19781,90 @@
 			</treenode>
 			<treenode node="nativeTokens;JS:Function Name;C:\wamp\www\gadiwada\application\libraries\phpmailer\examples\scripts\XRegExp.js;f8;119;25;119;;;;vpos;;v;;r;;d23,119;;b0,0;;m">
 			</treenode>
-			<treenode node="removearea;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;561;1;578;;;;vpos;;v;;r;;d0,562;;b0,0;;mid;;p">
-				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;563;46;563;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="removearea;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;587;1;604;;;;vpos;;v;;r;;d0,588;;b0,0;;mid;;p">
+				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;589;46;589;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;561;22;561;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;587;22;587;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;563;20;563;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;589;20;589;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;563;55;563;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="removecarmodel;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;632;1;649;;;;vpos;;v;;r;;d0,633;;b0,0;;mid;;p">
-				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;634;46;634;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f24;632;26;632;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;634;20;634;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;634;55;634;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;589;55;589;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="removecartype;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;596;1;613;;;;vpos;;v;;r;;d0,597;;b0,0;;mid;;p">
-				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;598;46;598;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="removecarmodel;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;658;1;675;;;;vpos;;v;;r;;d0,659;;b0,0;;mid;;p">
+				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;660;46;660;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f23;596;25;596;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f24;658;26;658;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;598;20;598;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;660;20;660;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;598;55;598;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="removecity;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;524;1;541;;;;vpos;;v;;r;;d0,525;;b0,0;;mid;;p">
-				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;526;46;526;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;524;22;524;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;526;20;526;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;526;55;526;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;660;55;660;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="removediscount;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;786;1;803;;;;vpos;;v;;r;;d0,787;;b0,0;;mid;;p">
-				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;788;46;788;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="removecartype;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;622;1;639;;;;vpos;;v;;r;;d0,623;;b0,0;;mid;;p">
+				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;624;46;624;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f24;786;26;786;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f23;622;25;622;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;788;20;788;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;624;20;624;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;788;55;788;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="removefeature;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;667;1;684;;;;vpos;;v;;r;;d0,668;;b0,0;;mid;;p">
-				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;669;46;669;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f23;667;25;667;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;669;20;669;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;669;55;669;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;624;55;624;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="removelocal;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;705;1;722;;;;vpos;;v;;r;;d0,706;;b0,0;;mid;;p">
-				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;707;46;707;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="removecity;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;550;1;567;;;;vpos;;v;;r;;d0,551;;b0,0;;mid;;p">
+				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;552;46;552;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f21;705;23;705;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;550;22;550;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;707;20;707;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;552;20;552;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;707;55;707;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-			</treenode>
-			<treenode node="removeout;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;743;1;760;;;;vpos;;v;;r;;d0,744;;b0,0;;mid;;p">
-				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;745;46;745;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f19;743;21;743;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;745;20;745;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
-				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;745;55;745;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;552;55;552;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="setTarget;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;394;1;397;;;;vpos;;v;;r;;d0,395;;b0,0;;mchk;;p">
-				<treenode node="chk;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f19;394;22;394;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="removediscount;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;812;1;829;;;;vpos;;v;;r;;d0,813;;b0,0;;mid;;p">
+				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;814;46;814;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="targetname;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f1;396;11;396;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f24;812;26;812;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;814;20;814;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;814;55;814;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="removefeature;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;693;1;710;;;;vpos;;v;;r;;d0,694;;b0,0;;mid;;p">
+				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;695;46;695;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f23;693;25;693;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;695;20;695;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;695;55;695;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="removelocal;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;731;1;748;;;;vpos;;v;;r;;d0,732;;b0,0;;mid;;p">
+				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;733;46;733;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f21;731;23;731;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;733;20;733;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;733;55;733;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="removeout;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;769;1;786;;;;vpos;;v;;r;;d0,770;;b0,0;;mid;;p">
+				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;771;46;771;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f19;769;21;769;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;771;20;771;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;771;55;771;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="setTarget;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;420;1;423;;;;vpos;;v;;r;;d0,421;;b0,0;;mchk;;p">
+				<treenode node="chk;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f19;420;22;420;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="targetname;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f1;422;11;422;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="SyntaxHighlighter;JS:Function Name;C:\wamp\www\gadiwada\application\libraries\phpmailer\examples\scripts\shCore.js;f7092;0;20297;0;;;;vpos;;v;;r;;d7120,0;;b0,0;;m">
@@ -25501,14 +25519,16 @@
 				<treenode node="v;JS:JS Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\lib\php-font-lib\www\js\jquery-ui-1.8.14.custom.min.js;f36;448;37;448;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
-			<treenode node="unblock;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;824;1;841;;;;vpos;;v;;r;;d0,825;;b0,0;;mid;;p">
-				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;826;46;826;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="unblock;JS:Function Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f0;855;1;877;;;;vpos;;v;;r;;d0,856;;b0,0;;mid;;ptype;;p">
+				<treenode node="css;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f43;857;46;857;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f17;824;19;824;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="id;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f17;855;19;855;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;826;20;826;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="message;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f13;857;20;857;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
-				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;826;55;826;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				<treenode node="type;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f20;855;24;855;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+				</treenode>
+				<treenode node="width;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f50;857;55;857;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 				</treenode>
 			</treenode>
 			<treenode node="uncommentHTML;JS:Function Name;C:\wamp\www\gadiwada\application\libraries\dompdf\www\cssSandpaper\js\cssSandpaper.js;f7;1704;5;1710;;;;vpos;;v;;r;;d34,1704;;b0,0;;ms;;p">
@@ -28967,7 +28987,7 @@
 			</treenode>
 			<treenode node="Dn;JS:JS Var Name;C:\wamp\www\gadiwada\js\vendor\jquery-1.10.2.min.js;f9350;5;9352;5;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
-			<treenode node="document;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\login.php;f2;2;10;2;;C:\wamp\www\gadiwada\application\views\inventory.php;f2;185;10;185;;C:\wamp\www\gadiwada\js\ion-tabs\ion.tabs.min.js;f2194;3;2202;3;;C:\wamp\www\gadiwada\js\ion-tabs\ion.tabs.js;f14;11;22;11;;C:\wamp\www\gadiwada\js\jquery.fancybox.pack.js;f378;45;386;45;;C:\wamp\www\gadiwada\js\bootstrap.js;f17;34;25;34;;C:\wamp\www\gadiwada\application\views\search.php;f2;147;10;147;;C:\wamp\www\gadiwada\application\views\search_result.php;f2;48;10;48;;C:\wamp\www\gadiwada\application\libraries\dompdf\www\cssSandpaper\js\cssSandpaper.js;f5;23;13;23;;C:\wamp\www\gadiwada\application\views\registration.php;f2;141;10;141;;C:\wamp\www\gadiwada\application\views\include\header.php;f2;290;10;290;;C:\wamp\www\gadiwada\application\views\cancellation.php;f2;67;10;67;;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;398;10;398;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="document;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\login.php;f2;2;10;2;;C:\wamp\www\gadiwada\application\views\inventory.php;f2;185;10;185;;C:\wamp\www\gadiwada\js\ion-tabs\ion.tabs.min.js;f2194;3;2202;3;;C:\wamp\www\gadiwada\js\ion-tabs\ion.tabs.js;f14;11;22;11;;C:\wamp\www\gadiwada\js\jquery.fancybox.pack.js;f378;45;386;45;;C:\wamp\www\gadiwada\js\bootstrap.js;f17;34;25;34;;C:\wamp\www\gadiwada\application\views\search.php;f2;147;10;147;;C:\wamp\www\gadiwada\application\views\search_result.php;f2;48;10;48;;C:\wamp\www\gadiwada\application\libraries\dompdf\www\cssSandpaper\js\cssSandpaper.js;f5;23;13;23;;C:\wamp\www\gadiwada\application\views\registration.php;f2;141;10;141;;C:\wamp\www\gadiwada\application\views\cancellation.php;f2;67;10;67;;C:\wamp\www\gadiwada\application\views\admin\home.php;f2;424;10;424;;C:\wamp\www\gadiwada\application\views\include\header.php;f2;290;10;290;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
 			<treenode node="DOMHelpers;JS:JS Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\www\cssSandpaper\js\cssSandpaper.js;f0;1937;10;1937;;;;vposfunction;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
@@ -29079,7 +29099,7 @@
 			</treenode>
 			<treenode node="from;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\Codelobster0.php;f5;93;9;93;;C:\wamp\www\gadiwada\application\libraries\phpmailer\examples\scripts\XRegExp.js;f35;549;39;549;;C:\wamp\www\gadiwada\application\views\billing.php;f5;93;9;93;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
-			<treenode node="fromdate;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\booking.php;f4;53;12;53;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="fromdate;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\booking.php;f4;65;12;65;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
 			<treenode node="fuchsia;JS:JS Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\lib\php-font-lib\www\js\jquery-ui-1.8.14.custom.min.js;f326;583;333;583;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
@@ -29385,9 +29405,9 @@
 			</treenode>
 			<treenode node="not;JS:JS Var Name;C:\wamp\www\gadiwada\js\vendor\jquery-1.10.2.min.js;f18863;3;18866;3;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
-			<treenode node="now;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\inventory.php;f4;216;7;216;;C:\wamp\www\gadiwada\application\views\booking.php;f4;52;7;52;;;;vposDate;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="now;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\inventory.php;f4;216;7;216;;C:\wamp\www\gadiwada\application\views\booking.php;f4;64;7;64;;;;vposDate;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
-			<treenode node="nowTemp;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\inventory.php;f4;215;11;215;;C:\wamp\www\gadiwada\application\views\booking.php;f4;51;11;51;;;;vposDate;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="nowTemp;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\inventory.php;f4;215;11;215;;C:\wamp\www\gadiwada\application\views\booking.php;f4;63;11;63;;;;vposDate;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
 			<treenode node="nr;JS:JS Var Name;C:\wamp\www\gadiwada\js\vendor\jquery-1.10.2.min.js;f18915;5;18917;5;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
@@ -29721,7 +29741,7 @@
 			</treenode>
 			<treenode node="target;JS:JS Var Name;C:\wamp\www\gadiwada\js\vendor\jquery-1.10.2.min.js;f19546;3;19552;3;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
-			<treenode node="targetname;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f4;375;14;375;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="targetname;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\admin\home.php;f4;401;14;401;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
 			<treenode node="tb;JS:JS Var Name;C:\wamp\www\gadiwada\application\libraries\dompdf\www\jquery-1.4.2.js;f224;118;226;118;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
@@ -29749,7 +29769,7 @@
 			</treenode>
 			<treenode node="to;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\Codelobster0.php;f5;104;7;104;;C:\wamp\www\gadiwada\application\views\billing.php;f5;104;7;104;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
-			<treenode node="todate;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\booking.php;f4;71;10;71;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			<treenode node="todate;JS:JS Var Name;C:\wamp\www\gadiwada\application\views\booking.php;f4;83;10;83;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
 			<treenode node="toggle;JS:JS Var Name;C:\wamp\www\gadiwada\js\bootstrap.js;f6;334;12;334;;;;vposString;;v;;r;;d-1,-1;;b0,0;;m">
 			</treenode>
@@ -30223,9 +30243,9 @@
 		<file name="C:\wamp\www\gadiwada\css\datepicker.css" crc="1235632348"/>
 		<file name="C:\wamp\www\gadiwada\css\custom.css" crc="-1591097022"/>
 		<file name="C:\wamp\www\gadiwada\css\bootstrap.css" crc="-1225905359"/>
-		<file name="C:\wamp\www\gadiwada\application\views\include\header.php" crc="-796387587"/>
+		<file name="C:\wamp\www\gadiwada\application\views\include\header.php" crc="1802250075"/>
 		<file name="C:\wamp\www\gadiwada\application\views\include\footer.php" crc="344758310"/>
-		<file name="C:\wamp\www\gadiwada\application\views\admin\home.php" crc="1232627189"/>
+		<file name="C:\wamp\www\gadiwada\application\views\admin\home.php" crc="-1011985430"/>
 		<file name="C:\wamp\www\gadiwada\application\views\search_result.php" crc="721582593"/>
 		<file name="C:\wamp\www\gadiwada\application\views\search.php" crc="-831933663"/>
 		<file name="C:\wamp\www\gadiwada\application\views\registration.php" crc="-1929674997"/>
@@ -30233,12 +30253,12 @@
 		<file name="C:\wamp\www\gadiwada\application\views\login.php" crc="1614327094"/>
 		<file name="C:\wamp\www\gadiwada\application\views\inventory.php" crc="-2061944810"/>
 		<file name="C:\wamp\www\gadiwada\application\views\cancellation.php" crc="1042442002"/>
-		<file name="C:\wamp\www\gadiwada\application\views\booking.php" crc="1928450218"/>
+		<file name="C:\wamp\www\gadiwada\application\views\booking.php" crc="1210539260"/>
 		<file name="C:\wamp\www\gadiwada\application\views\billing.php" crc="1131480706"/>
 		<file name="C:\wamp\www\gadiwada\application\models\search_m.php" crc="-728905618"/>
 		<file name="C:\wamp\www\gadiwada\application\models\registration_m.php" crc="-1224917803"/>
 		<file name="C:\wamp\www\gadiwada\application\models\packages_m.php" crc="-456464013"/>
-		<file name="C:\wamp\www\gadiwada\application\models\login_m.php" crc="505614214"/>
+		<file name="C:\wamp\www\gadiwada\application\models\login_m.php" crc="1022669140"/>
 		<file name="C:\wamp\www\gadiwada\application\models\inventory_m.php" crc="828146637"/>
 		<file name="C:\wamp\www\gadiwada\application\models\features_m.php" crc="1515615144"/>
 		<file name="C:\wamp\www\gadiwada\application\models\discounts_m.php" crc="1417028296"/>
@@ -30248,7 +30268,7 @@
 		<file name="C:\wamp\www\gadiwada\application\models\car_model_m.php" crc="1513236388"/>
 		<file name="C:\wamp\www\gadiwada\application\models\cancellation_m.php" crc="973242739"/>
 		<file name="C:\wamp\www\gadiwada\application\models\area_m.php" crc="-5429142"/>
-		<file name="C:\wamp\www\gadiwada\application\models\admin_m.php" crc="-1608324674"/>
+		<file name="C:\wamp\www\gadiwada\application\models\admin_m.php" crc="-1106520970"/>
 		<file name="C:\wamp\www\gadiwada\application\libraries\phpmailer\test\testbootstrap-dist.php" crc="-486717252"/>
 		<file name="C:\wamp\www\gadiwada\application\libraries\phpmailer\test\test_callback.php" crc="1380479331"/>
 		<file name="C:\wamp\www\gadiwada\application\libraries\phpmailer\test\phpmailerTest.php" crc="286095548"/>
@@ -30407,6 +30427,7 @@
 		<file name="C:\wamp\www\gadiwada\application\libraries\dompdf\lib\fonts\Times-BoldItalic.afm.php" crc="-546927492"/>
 		<file name="C:\wamp\www\gadiwada\application\libraries\dompdf\lib\fonts\Times-Bold.afm.php" crc="271821774"/>
 		<file name="C:\wamp\www\gadiwada\application\libraries\dompdf\lib\fonts\Helvetica.afm.php" crc="154583924"/>
+		<file name="C:\wamp\www\gadiwada\application\libraries\dompdf\lib\fonts\Helvetica-Oblique.afm.php" crc="-1658770720"/>
 		<file name="C:\wamp\www\gadiwada\application\libraries\dompdf\lib\fonts\Helvetica-BoldOblique.afm.php" crc="-479178895"/>
 		<file name="C:\wamp\www\gadiwada\application\libraries\dompdf\lib\fonts\Helvetica-Bold.afm.php" crc="-1702576502"/>
 		<file name="C:\wamp\www\gadiwada\application\libraries\dompdf\lib\fonts\dompdf_font_family_cache.dist.php" crc="61013562"/>
@@ -30500,7 +30521,7 @@
 		<file name="C:\wamp\www\gadiwada\application\controllers\booking.php" crc="1125584038"/>
 		<file name="C:\wamp\www\gadiwada\application\controllers\billing.php" crc="1293756600"/>
 		<file name="C:\wamp\www\gadiwada\application\controllers\ajax.php" crc="2031045832"/>
-		<file name="C:\wamp\www\gadiwada\application\controllers\admin.php" crc="-1467695307"/>
+		<file name="C:\wamp\www\gadiwada\application\controllers\admin.php" crc="-1604430945"/>
 		<file name="C:\wamp\www\gadiwada\application\config\user_agents.php" crc="-484381080"/>
 		<file name="C:\wamp\www\gadiwada\application\config\smileys.php" crc="-749249654"/>
 		<file name="C:\wamp\www\gadiwada\application\config\routes.php" crc="1187352461"/>

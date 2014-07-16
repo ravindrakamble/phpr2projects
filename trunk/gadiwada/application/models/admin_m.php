@@ -36,5 +36,13 @@ Class Admin_m extends CI_Model{
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	function get_all_users()
+	{
+		$this->db->distinct();
+		$this->db->select('*')->from('customer');
+		$query = $this->db->get();
+		return $query->result();
+	}
 	
 }
