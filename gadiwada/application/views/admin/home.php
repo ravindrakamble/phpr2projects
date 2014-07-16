@@ -333,7 +333,7 @@
 			</div>
 			<div id='block' class="tab-pane fade" >
 				<div id="blockmsg" style="display:none; cursor: default; padding:10px;">				
-					<h6>Are you sure to block/unblock this agent ?</h6> 
+					<h6>Are you sure to block/unblock ?</h6> 
 					<br />
 					<input type="button" id="blkyes" value="Yes" /> 
 					<input type="button" id="blkno" value="No" /> 
@@ -355,10 +355,10 @@
 							<?php 
 							if($ag->STATUS == 0)
 							{
-								echo "<td><a href='javascript:unblock($ag->ID);' class='btn-danger btn-small'>UnBlock</a></td>";
+								echo "<td><a href='javascript:unblock($ag->ID,&apos;agent&apos;);' class='btn-danger btn-small'>UnBlock</a></td>";
 							}
 							else{
-								echo "<td><a href='javascript:block($ag->ID);' class='btn-success btn-small'>Block</a></td>";
+								echo "<td><a href='javascript:block($ag->ID,&apos;agent&apos;);' class='btn-success btn-small'>Block</a></td>";
 							}	
 							?>
 									
@@ -369,7 +369,33 @@
 				</div>
 			</div>
 			<div id="user" class="tab-pane fade">
-				
+				<div id="userlist">
+					<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
+						<thead>
+						<tr><th>User ID</th><th>User Name</th><th>Email</th><th>Contact number</th><th>Action</th></tr>
+						</thead>
+						<tbody>
+							<?php foreach($users as $ag){ ?>
+							<tr>				
+								<td><?php echo $ag->ID ?></td>
+								<td><?php echo $ag->CUST_NAME ?></td>
+								<td><?php echo $ag->EMAIL ?></td>
+								<td><?php echo $ag->PHONE ?></td>
+							<?php 
+							if($ag->STATUS == 0)
+							{
+								echo "<td><a href='javascript:unblock(".$ag->ID.",&apos;user&apos;);' class='btn-danger btn-small'>UnBlock</a></td>";
+							}
+							else{
+								echo "<td><a href='javascript:block(".$ag->ID.",&apos;user&apos;);' class='btn-success btn-small'>Block</a></td>";
+							}	
+							?>
+									
+							</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+				</div>
 			</div>
 </div>
 <script type="text/javascript">
@@ -804,15 +830,20 @@ function removediscount(id)
 }
 
 ///block_unblock
-function block(id)
+function block(id,type)
 {
 	$.blockUI({ message: jQuery('#blockmsg'), css: { width: '275px' } }); 
     jQuery('#blkyes').click(function() { 
         $.ajax({
 			type:"POST",
-			url: "<?php echo base_url();?>admin/block/"+id,
+			url: "<?php echo base_url();?>admin/block/"+id+"/"+type,
 			success: function(data) {
-				$("#agentlist").html(data);
+				if(type =='agent'){
+					$("#agentlist").html(data);
+				}
+				else{
+					$("#userlist").html(data);
+				}
 				$.growlUI('Sucessfully<br> Updated !'); 
 			}
 		});
@@ -822,15 +853,20 @@ function block(id)
        return false; 
     }); 
 }
-function unblock(id)
+function unblock(id,type)
 {
 	$.blockUI({ message: jQuery('#blockmsg'), css: { width: '275px' } }); 
     jQuery('#blkyes').click(function() { 
         $.ajax({
 			type:"POST",
-			url: "<?php echo base_url();?>admin/unblock/"+id,
+			url: "<?php echo base_url();?>admin/unblock/"+id+"/"+type,
 			success: function(data) {
-				$("#agentlist").html(data);
+				if(type =='agent'){
+					$("#agentlist").html(data);
+				}
+				else{
+					$("#userlist").html(data);
+				}
 				$.growlUI('Sucessfully<br> Updated !'); 
 			}
 		});

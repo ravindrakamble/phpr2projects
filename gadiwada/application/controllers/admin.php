@@ -18,6 +18,7 @@ class Admin extends CI_Controller {
 	{
 		$data['search'] = 'active';
 		$data['agents'] = $this->admin_m->get_all_agents();	
+		$data['users'] = $this->admin_m->get_all_users();	
 		$data['cities'] = $this->city_m->get_all_cities();
 		$data['local'] = $this->packages_m->get_all_local_packages();
 		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
@@ -169,19 +170,32 @@ class Admin extends CI_Controller {
 		echo $result;
 	}
 	
-	function block($id)
+	function block($id,$type)
 	{
 		$this->db->where('ID',$id);
 		$this->db->set('STATUS',0);
-		$this->db->update('travel_agent');
-		$this->agentlistView();
+		if($type == 'agent'){
+			$this->db->update('travel_agent');
+			$this->agentlistView();
+		}
+		if($type == 'user'){
+			$this->db->update('customer');
+			$this->userlistView();
+		}
+	
 	}
-	function unblock($id)
+	function unblock($id,$type)
 	{
 		$this->db->where('ID',$id);
 		$this->db->set('STATUS',1);
-		$this->db->update('travel_agent');
-		$this->agentlistView();
+		if($type == 'agent'){
+			$this->db->update('travel_agent');
+			$this->agentlistView();
+		}
+		if($type == 'user'){
+			$this->db->update('customer');
+			$this->userlistView();
+		}
 	}
 	
 	function agentlistView()
@@ -204,10 +218,42 @@ class Admin extends CI_Controller {
 					<td>".$ag->CITY."</td>";
 				if($ag->STATUS == 0)
 				{
-					$view .= "<td><a href='javascript:unblock($ag->ID);' class='btn-danger btn-small'>UnBlock</a></td>";
+					$view .= "<td><a href='javascript:unblock($ag->ID,&apos;agent&apos;);' class='btn-danger btn-small'>UnBlock</a></td>";
 				}
 				else{
-					$view .= "<td><a href='javascript:block($ag->ID);' class='btn-success btn-small'>Block</a></td>";
+					$view .= "<td><a href='javascript:block($ag->ID,&apos;agent&apos;);' class='btn-success btn-small'>Block</a></td>";
+				}
+				
+				$view .= "</tr>";
+			}
+			$view  .= "</tbody>
+		</table>";
+		
+		echo $view;
+	}
+
+	function userlistView()
+	{
+		$agents = $this->admin_m->get_all_users();	
+		$view = '';
+		$view .= "<table id='dataTable' class='table table-bordered table-condensed table-hover table-striped'>
+			<thead>
+			<tr><th>User ID</th><th>User Name</th><th>Email</th><th>Contact number</th><th>Action</th></tr>
+			</thead>
+			<tbody>";
+			foreach($agents as $ag)
+			{ 
+			$view .= "<tr>
+					<td>".$ag->ID."</td>
+					<td>".$ag->CUST_NAME."</td>
+					<td>".$ag->EMAIL."</td>
+					<td>".$ag->PHONE."</td>";
+				if($ag->STATUS == 0)
+				{
+					$view .= "<td><a href='javascript:unblock($ag->ID,&apos;user&apos;);' class='btn-danger btn-small'>UnBlock</a></td>";
+				}
+				else{
+					$view .= "<td><a href='javascript:block($ag->ID,&apos;user&apos;);' class='btn-success btn-small'>Block</a></td>";
 				}
 				
 				$view .= "</tr>";

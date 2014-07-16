@@ -26,6 +26,7 @@ var TSort_Data = new Array ('mytable', 'd', 's', 's','s','i','d','');
 			<th>Purchase Year</th>
 			<th>Agreement End Date</th>
 			<th></th>
+			<th></th>
 		</tr>
 		<tr>
 			<td>12/03/2014</td>
@@ -34,7 +35,8 @@ var TSort_Data = new Array ('mytable', 'd', 's', 's','s','i','d','');
 			<td>OR-05-AB-1990</td>
 			<td>2012</td>
 			<td>31/01/2014</td>
-			<td></td>
+			<td><a class="btn-warning">Book</a></td>
+			<td><a class="btn-danger">Cancel</a></td>
 		</tr>
 		<tr>
 			<td>14/03/2014</td>
@@ -43,7 +45,17 @@ var TSort_Data = new Array ('mytable', 'd', 's', 's','s','i','d','');
 			<td>OR-05-AB-1992</td>
 			<td>2015</td>
 			<td>31/06/2014</td>
-			<td></td>
+			<td colspan="2"><span title="Can not be edited/ cancelled" class="btn-success">Booked by travelder</span></td>
+		</tr>
+		<tr>
+			<td>12/03/2014</td>
+			<td>4 seater</td>
+			<td>Indica</td>
+			<td>OR-05-AB-1990</td>
+			<td>2012</td>
+			<td>31/01/2014</td>
+			<td><a class="btn-inverse">Booked</a></td>
+			<td><a class="btn-danger">Cancel</a></td>
 		</tr>
 	</table>
 </div>
