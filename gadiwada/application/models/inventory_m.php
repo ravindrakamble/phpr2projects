@@ -36,7 +36,7 @@ Class Inventory_m extends CI_Model{
 	function get_detailsForBilling($id)
 	{
 		$query = $this->db->select('*')->from('travel_agent');
-				$this->db->join('travel_agent','travel_agent.id = inventory.AGENT_ID')->where('inventory.ID',$id);
+				$this->db->join('inventory','travel_agent.id = inventory.AGENT_ID')->where('inventory.ID',$id);
 				$this->db->distinct();
 				$this->db->where('STATUS',1);
 		return $query->get()->row_array();

@@ -15,7 +15,7 @@ Class Cancellation_m extends CI_Model{
 				$this->db->join('cust_booking','cust_booking.CUST_ID = customer.ID');
 				$this->db->where('BILL_NO',$billno);
 				$this->db->where('PHONE',$phone);
-				$this->db->where('STATUS',1);
+				$this->db->where('cust_booking.STATUS',1);
 		$info = $query->get()->row_array();
 		if(!empty($info) && isset($info)){
 			$view = '';

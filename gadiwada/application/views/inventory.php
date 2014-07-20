@@ -26,26 +26,26 @@ $disable = '';
 $readonly = '';
 if(isset($info) && !empty($info))
 {
-	foreach($info as $in)
-	{
-		$id = $in->ID;
-		$CAR_TYPES = $in->CAR_TYPE;
-		$CAR_NAME = $in->CAR_NAME;
-		$CAR_NUMBER = $in->CAR_NUMBER;
-		$PURCHASE_YEAR = $in->PURCHASE_YEAR;
-		$CAR_FEATURES =explode(',',$in->CAR_FEATURES);
-		$OWNER_NAME = $in->OWNER_NAME;
-		$OWNER_NUMBER = $in->OWNER_NUMBER;
-		$AGREEMEST_START_DATE = $in->AGREEMEST_START_DATE;
-		$AGREEMEST_END_DATE = $in->AGREEMEST_END_DATE;
-		$AC = $in->AC;
-		$NON_AC = $in->NON_AC;
-		$LOCAL = $in->LOCAL;
-		$OUTSTATION = $in->OUTSTATION;
+	/*foreach($info as $in)
+	{*/
+		$id = $info->ID;
+		$CAR_TYPES = $info->CAR_TYPE;
+		$CAR_NAME = $info->CAR_NAME;
+		$CAR_NUMBER = $info->CAR_NUMBER;
+		$PURCHASE_YEAR = $info->PURCHASE_YEAR;
+		$CAR_FEATURES =explode(',',$info->CAR_FEATURES);
+		$OWNER_NAME = $info->OWNER_NAME;
+		$OWNER_NUMBER = $info->OWNER_NUMBER;
+		$AGREEMEST_START_DATE = $info->AGREEMEST_START_DATE;
+		$AGREEMEST_END_DATE = $info->AGREEMEST_END_DATE;
+		$AC = $info->AC;
+		$NON_AC = $info->NON_AC;
+		$LOCAL = $info->LOCAL;
+		$OUTSTATION = $info->OUTSTATION;
 		$disable = 'disabled';
 		$readonly = 'readonly';
 		$i++;
-	}
+	/*}*/
 }?>
 	<div id='inventory_data'>
 		<h3 align="center">Inventory Details</h3>
