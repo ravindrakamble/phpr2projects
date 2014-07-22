@@ -48,7 +48,7 @@ Class Car_type_m extends CI_Model{
 
 	function get_car_type($id)
 	{
-		$query=$this->db->get_where('car_type',array('ID'=>$id))->result();
+		$query=$this->db->get_where('car_type,ID',array('ID'=>$id))->result();
 		foreach($query as $c)
 		return $c->TYPE_NAME.'-'.$c->ID;
 	}
