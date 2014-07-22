@@ -149,6 +149,7 @@ $(document).ready(function() {
 	$('#myTab a:first').tab('show');
 	$(".dt").datepicker(
 	{
+		minDate: '0',
 		format: 'dd/mm/yyyy'
 	}).on('changeDate', function(e){
     $(this).datepicker('hide');

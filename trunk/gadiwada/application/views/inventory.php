@@ -54,11 +54,11 @@ if(isset($info) && !empty($info))
 		$type = array();
 			$type['0']='--';
 			    foreach($car_type as $c){
-				  $type[$c->TYPE_NAME]=$c->TYPE_NAME;
+				  $type[$c->ID]=$c->TYPE_NAME;
 			}
 		$features = array();
 			    foreach($feature as $f){
-				  $features[$f->FEATURE_NAME]=$f->FEATURE_NAME;
+				  $features[$f->ID]=$f->FEATURE_NAME;
 			}
 		?>
 			<table width="100%">

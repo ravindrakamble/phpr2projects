@@ -1,4 +1,9 @@
 <?php  $this->load->view('include/header'); ?>
+<style>
+.none {
+    display:none;
+}
+</style>
 <div class="content-boxs">
 		<ul class="nav nav-tabs" id="myTab">
 			 <li class="active"><a href="#cities" role="tab" data-toggle="tab">City</a></li>
@@ -241,7 +246,6 @@
 				</div>
 			</div>
 			<div id='discounts' class="tab-pane fade" >
-			
 				<h2>Discounts</h2>
 				<form name='discountform' id="discountform" method='post' action='<?php echo base_url()?>admin/discount'>
 				<input type="hidden" name='discountid' id='discountid'>
@@ -262,7 +266,7 @@
 					<tr><th colspan="2">Criteria of Discount</th></tr>
 					<tr>
 						<th>Last date of discount</th>
-						<td><input type='text' name='lastdate' id='lastdate'></td>
+						<td><input class="dt" type='text' name='lastdate' id="datepicker"></td>
 					</tr>
 					<tr>
 						<th>Minimum Purchase price</th>
@@ -270,18 +274,18 @@
 					</tr>
 					<tr>
 						<th>Coupon type</th>
-						<td><input type="radio" name='coupontype' required="true" value="General">
+						<td><input type="radio" data-id="General" name='coupontype' required="true" value="General">
 						&nbsp;&nbsp;General
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" required="true" name='coupontype' value="Specific" >
+						<input type="radio" data-id="Specific" required="true" name='coupontype' value="Specific" >
 						&nbsp;&nbsp;Specific</td>
 					</tr>
 					
-					<tr>
+					<tr id="Specific" class="none">
 						<th>Max limit</th>
-						<td><input type='text' name='limit' id='limit'></td>
+						<td><input type='text' maxlength="6" name='limit' id='limit'></td>
 					</tr>
-					<tr>
+					<tr id="General" class="none">
 						<th>passenger mobile number</th>
 						<td><input type='text' name='mobile' maxlength="10" id='mobile'></td>
 					</tr>
@@ -424,6 +428,17 @@ function setTarget(chk)
 }
 $(document).ready(function()	
 {
+	$( "#datepicker" ).datepicker({
+        numberOfMonths: 2,
+        showButtonPanel: true,
+        minDate:0
+    });
+	
+	$(':radio').change(function (event) {
+	    var id = $(this).data('id');
+	    $('#' + id).addClass('none').siblings().removeClass('none');
+	});
+	
 	$("#updatecity").hide();
 	$("#updatearea").hide();
 	$("#updatecartype").hide();

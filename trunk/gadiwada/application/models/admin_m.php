@@ -13,7 +13,7 @@ Class Admin_m extends CI_Model{
 	function get_all_feature()
 	{
 		$this->db->distinct('FEATURE_NAME');
-		$this->db->select('FEATURE_NAME');
+		$this->db->select('FEATURE_NAME,ID');
 		$query=$this->db->get('features');
 		return $query->result();
 	}

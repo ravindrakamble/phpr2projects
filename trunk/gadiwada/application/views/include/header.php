@@ -21,6 +21,7 @@
 		
 		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 		<script src="<?php echo base_url()?>js/bootstrap.js"></script>
 		<script src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>
@@ -34,6 +35,12 @@
 		<script src="<?php echo base_url();?>js/jquery.form.js" type="text/javascript" charset="utf-8"></script>
 		<!--Block UI End-->
 		
+		<!--Calculator start-->
+		<link rel="stylesheet" href="<?php echo base_url();?>calculator/jquery.calculator.css">
+		<script src="<?php echo base_url();?>calculator/jquery.plugin.js"></script>
+		<script src="<?php echo base_url();?>calculator/jquery.calculator.js"></script>
+		<!--Calculator end-->
+
 		<!--<script src="<?php echo base_url()?>js/responsiveslides.min.js"></script>-->
 		<!--Jquery Tab JS-->
 		<!--<script src="<?php echo base_url()?>js/ion-tabs/ion.tabs.min.js"></script>
@@ -143,7 +150,7 @@
 										<a href="<?php echo base_url()?>booking">Booking</a>
 									</li>
 									<li <?php if(isset($pricing)&&!empty($pricing)) echo "class='active'"; ?> >
-										<a href="<?php echo base_url()?>pricing">Pricing</a>
+										<a href="<?php echo base_url()?>pricing/show">Pricing</a>
 									</li>
 									<li <?php if(isset($billing)&&!empty($billing)) echo "class='active'"; ?> >
 										<a href="<?php echo base_url()?>billing">Billing</a>
