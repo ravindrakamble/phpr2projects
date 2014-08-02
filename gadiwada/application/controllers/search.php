@@ -23,9 +23,14 @@ class Search extends CI_Controller {
 	public function get_areas($city)
 	{
 		$area = $this->area_m->get_areas($city);
-		foreach($area as $r){
-			echo "<option value=".$r->AREA_NAME.">".$r->AREA_NAME."</option>";
+		if(count($area) == 0){
+			echo "";
+		} else {
+			foreach($area as $r){
+				echo "<option value=".$r->AREA_NAME.">".$r->AREA_NAME."</option>";
+			}
 		}
+		
 		//return $options;
 	}
 }
