@@ -38,11 +38,11 @@
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
-	                <td><?php echo form_dropdown('city',$city);?></td>
+	                <td><?php echo form_dropdown('city',$city,'',"class='city'");?></td>
 	            </tr>
 	            <tr>
 	                <td>From Area :   </td>
-	                <td><?php echo form_dropdown('area',array());?></td>
+	                <td><?php echo form_dropdown('area',array(),'',"class='area'");?></td>
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
@@ -91,15 +91,15 @@
 			<table style="width: 40%">
 	            <tr>
 	                <td>Journey Date : </td>
-	                <td> <input class="dt" name='localjourneydate' id='localjourneydate' /></td>
+	                <td> <input class="dt" name='journeydate' id='localjourneydate' /></td>
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
-	                <td><?php echo form_dropdown('localcity',$city,'',"id='localcity'");?></td>
+	                <td><?php echo form_dropdown('city',$city,'',"class='city'");?></td>
 	            </tr>
 	            <tr>
 	                <td>From Area :   </td>
-	                <td><?php echo form_dropdown('localarea',array(),'',"id='localarea'");?></td>
+	                <td><?php echo form_dropdown('area',array(),'',"class='area'");?></td>
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
@@ -112,11 +112,11 @@
 		        <table style="width: 40%">
 		            <tr>
 		                <td>Estimated total km of journey : </td>
-		                <td> <input name='localestimationjourney' id='localestimationjourney' /> </td>
+		                <td> <input name='estimationjourney' id='estimationjourney' /> </td>
 		            </tr>
 		            <tr>
 		                <td>Estimated total time of hire : </td>
-		                <td> <input name='localestimationtime' id='localestimationtime' />  </td>
+		                <td> <input name='estimationtime' id=estimationtime' />  </td>
 		            </tr>
 		             <tr>
 		                <td>Car Type :   </td>
@@ -129,11 +129,11 @@
 	        	<table style="width: 40%">
 		            <tr>
 		                <td>Choose Package : </td>
-		                <td><?php echo form_dropdown('localpackage',$local_Package);?></td>
+		                <td><?php echo form_dropdown('package',$local_Package);?></td>
 		            </tr>
 		             <tr>
 		                <td>Car Type :   </td>
-		                <td><?php echo form_dropdown('localCarTypePackage',$type);?></td>
+		                <td><?php echo form_dropdown('CarTypePackage',$type);?></td>
 		            </tr>
 		             <tr> <td colspan="2"><input type="submit" name="local" value="SEARCH"/></td></tr>
 		        </table>
@@ -155,21 +155,47 @@ $(document).ready(function() {
     $(this).datepicker('hide');
 	});
 	
-	$("#localcity").change(function(){
+	if($(".city").val() != "--" && $(".city").val() != "0"){
+		sendrequest($(".city").val());
+	}else{
+		$('.area').empty();
+	}
+	$(".city").change(function(){
     	var selectedValue = this.value;
     	//Display 'loading' status in the target select list
-    	
-		jQuery.ajax({
-			type:"POST",
-			url: "<?php echo base_url();?>search/get_areas/"+selectedValue,
-			data: selectedValue,
-			success: function(response) {
-				$('#localarea').append(response);
-			}
-		});
+    	if(selectedValue != "0" && selectedValue != "--"){
+			sendrequest(selectedValue);
+		}else{
+			$('.area').empty();
+		}
 	});
+	//Outstation validation
+	var frmvalidator = new Validator("outsearch");
+	frmvalidator.addValidation("journeydate","req","Please select your journey date");
+	frmvalidator.addValidation("city","dontselect=0","Please select city");
+	frmvalidator.addValidation("area","req","Please select area");
+	frmvalidator.addValidation("estimationjourney","numeric");
+	frmvalidator.addValidation("estimationjourney","req","Please enter estimated total KM");
+	frmvalidator.addValidation("estimationtime","numeric","Please enter only in numbers");
+	frmvalidator.addValidation("estimationtime","req","Please enter estimated total time in hours");
 });
 
+function sendrequest(city){
+	jQuery.ajax({
+			type:"POST",
+			url: "<?php echo base_url();?>search/get_areas/"+city,
+			data: city,
+			success: function(response) {
+				if(response == ""){
+					$('.area').empty();
+				}else{
+					$('.area').append(response);
+				}
+				
+			}
+		});
+	
+}
 function options(val){
 	if(val == 'Flexible'){
 		$('#flexibleDiv').show();
@@ -189,6 +215,11 @@ function localoptions(val){
 		$('#localpackageDiv').show();
 		$('#localflexibleDiv').hide();
 	}
+}
+
+function clearCityAndArea(){
+	$('.area').empty();
+	$('.city').empty();
 }
 </script>
 <?php $this->load->view('include/footer');?>
