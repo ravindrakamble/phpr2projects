@@ -59,4 +59,14 @@ Class Car_type_m extends CI_Model{
 		$this->db->delete('car_type');
 		$this->get_all_car_type('ajax');
 	}
+	
+	function get_car_name($car_type)
+	{
+		$this->db->distinct();
+		$this->db->select('*');
+		$this->db->from('car_model');
+		$this->db->where('TYPE_ID',$car_type);
+		$query = $this->db->get()->result();
+		return $query;
+	}
 }

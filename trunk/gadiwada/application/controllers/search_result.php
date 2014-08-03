@@ -202,55 +202,38 @@ class Search_result extends CI_Controller {
 		$header ='';
 		$header .= "<table class='table table_bordered'>";
 		$header .= "<tr>";
-		if($curr_session['localjourneydate'] !== false){
-			$header .= "<td>Journey date: </td><td>".$curr_session['localjourneydate']."</td>";
-		}else if($curr_session['journeydate'] !== false){
+		if($curr_session['journeydate'] !== false){
 			$header .= "<td>Journey date: </td><td>".$curr_session['journeydate']."</td>";
 		}
 		
-		if($curr_session['localcity'] !== false  || $curr_session['city'] !== false){
-			if($curr_session['localcity'] !== false)
-				$header .= "<td>From City:</td><td>".$curr_session['localcity']."</td>";
-			else
-				$header .= "<td>From City:</td><td>".$curr_session['city']."</td>";
+		if($curr_session['city'] !== false){
+			$header .= "<td>From City:</td><td>".$curr_session['city']."</td>";
 		}
 		
-		if(array_key_exists('localarea', $curr_session) && $curr_session['localarea'] !== false)
-			$header .= "<td>Area</td><td>".$curr_session['localarea']."</td>";
-		else if(array_key_exists('area', $curr_session) && $curr_session('area') !== false)
+		if(array_key_exists('area', $curr_session) && $curr_session['area'] !== false)
 			$header .= "<td>Area</td><td>".$curr_session['area']."</td>";
 		else
-			$header .= "<td>Area</td><td>--</td>";
-			
-		if($curr_session['local'] !== false)
+			$header .= "<td>Area</td><td>--</td>";	
+		if($curr_session['search'] == 'LOCAL SEARCH')
 			$header .= "<td>Journey type:</td><td>Local</td>";
-		else
+		if($curr_session['search'] == 'OUTSTATION SEARCH')
 			$header .= "<td>Journey type:</td><td>Outstation</td>";
 			
 		$header .= "</tr>";
 		$header .= "<tr>";
-		
-		
-		if($curr_session['localoption'] !== false)
-			$header .= "<td>Choice:</td><td>".$curr_session['localoption']."</td>";
-		else if($curr_session('option') !== false)
+	
+		if($curr_session['option'] !== false)
 			$header .= "<td>Choice:</td><td>".$curr_session['option']."</td>";
 		
 		
-		if($curr_session['localestimationjourney'] !== false)
-			$header .= "<td>Est km:</td><td>".$curr_session['localestimationjourney']."</td>";
-		else if($curr_session('estimationjourney') !== false)
+		if($curr_session['estimationjourney'] !== false)
 			$header .= "<td>Est km:</td><td>".$curr_session['estimationjourney']."</td>";
 		
-		if($curr_session['localestimationtime'] !== false)
-			$header .= "<td>Est hr:</td><td>".$curr_session['localestimationtime']."</td>";
-		else if($curr_session('estimationtime') !== false)
+		if($curr_session['estimationtime'] !== false)
 			$header .= "<td>Est hr:</td><td>".$curr_session['estimationtime']."</td>";
 		
-		if($curr_session['localCarType'] !== false)
-			$header .= "<td>Car type</td><td>".$curr_session['localCarType']."</td>";
-		else if($curr_session['carType'] !== false)
-			$header .= "<td>Car type</td><td>".$curr_session['carType']."</td>";
+		if($curr_session['car_type'] !== false)
+			$header .= "<td>Car type</td><td>".$curr_session['car_type']."</td>";
 		
 		$header .= "</tr>";
 		$header .= "</table>";

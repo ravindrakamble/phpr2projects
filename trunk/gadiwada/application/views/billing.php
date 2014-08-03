@@ -36,9 +36,7 @@ $(function()
 		ampm:true,
 		useLocalTimezone:true,
 		dateFormat: 'dd-mm-yy',
-		hour:21
-
-});
+	});
 
 $(function()
 {
@@ -286,20 +284,20 @@ function stopCalc()
 			<tr valign="top">
 				<td class="clr">DATE </td>
 				<td>
-					<input type="hidden" name="jourdate" value="<?php echo $this->session->userdata('localjourneydate') ;?>"/>
-					<span><?php echo $this->session->userdata('localjourneydate');?></span></td>
+					<input type="hidden" name="jourdate" value="<?php echo $this->session->userdata('journeydate') ;?>"/>
+					<span><?php echo $this->session->userdata('journeydate');?></span></td>
 				<td class="clr">TIME</td>
 				<td>
-					<input type="hidden" name="jourtime" value="<?php echo '*****'; ?> "/>
-					<span><?php echo '*****'; ?></td>
+					<input type="hidden" name="jourtime" value="<?php echo $time; ?> "/>
+					<span><?php echo $time; ?></td>
 				<td class="clr">PICK-UP</td>
 				<td>
 				
-					<input type="hidden" name="area" value="<?php echo $this->session->userdata('localarea');?>"/>
-					<input type="hidden" name="city" value="<?php echo $this->session->userdata('localcity');?>" />
+					<input type="hidden" name="area" value="<?php echo $this->session->userdata('area');?>"/>
+					<input type="hidden" name="city" value="<?php echo $this->session->userdata('city');?>" />
 					 		
-				<span><?php echo $this->session->userdata('localcity').'<br/>'. 
-					 $this->session->userdata('localarea');?></span></td>
+				<span><?php echo $this->session->userdata('city').'<br/>'. 
+					 $this->session->userdata('area');?></span></td>
 			</tr>
 			<tr valign="top">
 				<td class="clr">DESTINATION</td>

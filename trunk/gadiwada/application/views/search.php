@@ -65,20 +65,20 @@
 			                <td>Car Type :   </td>
 			                <td><?php echo form_dropdown('car_type',$type);?></td>
 			            </tr>
-			           <tr> <td colspan="2"><input type="submit" name="outstation" value="SEARCH"/></td></tr>
+			           <tr> <td colspan="2"><input type="submit" class="btn btn-info" name="search" value="OUTSTATION SEARCH"/></td></tr>
 			        </table>
         		</div>
 		       	<div id="packageDiv" style="display: none" >
 		        	<table style="width: 40%">
 			            <tr>
 			                <td>Choose Package : </td>
-			                <td><?php echo form_dropdown('outpackage',$out_Package);?></td>
+			                <td><?php echo form_dropdown('package',$out_Package);?></td>
 			            </tr>
 			             <tr>
 			                <td>Car Type :   </td>
-			                <td><?php echo form_dropdown('outCarType',$type);?></td>
+			                <td><?php echo form_dropdown('CarTypePackage',$type);?></td>
 			            </tr>
-			             <tr> <td colspan="2"><input type="submit" name="outstation" value="SEARCH"/></td></tr>
+			             <tr> <td colspan="2"><input type="submit" class="btn btn-info" name="search" value="OUTSTATION SEARCH"/></tr>
 			        </table>
 	       		</div>
 				
@@ -91,7 +91,7 @@
 			<table style="width: 40%">
 	            <tr>
 	                <td>Journey Date : </td>
-	                <td> <input class="dt" name='journeydate' id='localjourneydate' /></td>
+	                <td> <input class="dt" name='journeydate' id='journeydate' /></td>
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
@@ -103,8 +103,8 @@
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
-	                	<input type="radio" name="localoption" onclick="localoptions(this.value)" value='Flexible'/>Flexible
-	                	<input type="radio" name="localoption" onclick="localoptions(this.value)"value='Package'/>Package
+	                	<input type="radio" name="option" onclick="localoptions(this.value)" value='Flexible'/>Flexible
+	                	<input type="radio" name="option" onclick="localoptions(this.value)"value='Package'/>Package
 	                </td>
 	            </tr>
 	        </table>
@@ -120,9 +120,9 @@
 		            </tr>
 		             <tr>
 		                <td>Car Type :   </td>
-		                <td><?php echo form_dropdown('localCarType',$type);?></td>
+		                <td><?php echo form_dropdown('car_type',$type);?></td>
 		            </tr>
-		            <tr> <td colspan="2"><input type="submit" name="local" value="SEARCH"/></td></tr>
+		            <tr> <td colspan="2"><input type="submit" class="btn btn-info" name="search" value="LOCAL SEARCH"/></td></tr>
 		        </table>
        		</div>
 	        <div id="localpackageDiv" style="display: none" >
@@ -135,7 +135,7 @@
 		                <td>Car Type :   </td>
 		                <td><?php echo form_dropdown('CarTypePackage',$type);?></td>
 		            </tr>
-		             <tr> <td colspan="2"><input type="submit" name="local" value="SEARCH"/></td></tr>
+		             <tr> <td colspan="2"><input type="submit" class="btn btn-info" name="search" value="LOCAL SEARCH"/></td></tr>
 		        </table>
         	</div>
 			</form>
@@ -196,6 +196,7 @@ function sendrequest(city){
 		});
 	
 }
+
 function options(val){
 	if(val == 'Flexible'){
 		$('#flexibleDiv').show();
