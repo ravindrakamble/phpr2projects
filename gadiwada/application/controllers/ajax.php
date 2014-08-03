@@ -102,6 +102,18 @@ class Ajax extends CI_Controller {
 	{
 		$this->discounts_m->delete_discount($id);
 	}
+	
+	function get_car_name($car_type)
+	{
+		$model = $this->car_type_m->get_car_name($car_type);
+		if(count($model) == 0){
+			echo "";
+		} else {
+			foreach($model as $r){
+				echo "<option value=".$r->ID.">".$r->MODEL_NAME."</option>";
+			}
+		}
+	}
 }
 
 

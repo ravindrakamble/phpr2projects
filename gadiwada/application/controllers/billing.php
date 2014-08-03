@@ -11,8 +11,11 @@ class Billing extends CI_Controller {
 	}*/
 	function new_booking($id)
 	{
+		date_default_timezone_set('asia/kolkata');
+		$time = date('h:i a', time());
 		$data['billno'] = $id.time();
 		$data['id'] = $id;
+		$data['time'] = $time;
 		$data['result'] = $this->inventory_m->get_detailsForBilling($id); 
 		$data['rcptAuto'] =array();//$this->receipts_m->get_auto_data(); // Get reciept data fields for auto filling input boxes
 		$data['busAuto'] =array();//$this->bus_m->get_auto_data();

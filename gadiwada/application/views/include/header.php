@@ -57,7 +57,7 @@
 				<div class="top-header">
 					<div class="top-header-left">
 						<p>Travel Agency</p>
-						<p>GADAVADA</p>
+						<p>GADIVADA</p>
 					</div>
 					<div class="top-header-right">
 						<div class="top-header-contact-info">

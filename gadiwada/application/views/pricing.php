@@ -1,6 +1,6 @@
 <?php $this->load->view('include/header');?>
 <script type="text/javascript">
-var TSort_Data = new Array ('inventory_table', 's', 's', 's','i','d','d','');
+var TSort_Data = new Array ('localflxtable', 's', 's', 's','i','d','d','');
 </script>
 <!-- content -->
 <div class="content-boxs">
@@ -53,14 +53,22 @@ if(isset($info) && !empty($info))
 	<div class="tab-content">
 	<?php 
 	$type = array();
-		$type['0']='--';
-		    foreach($car_type as $c){
-			  $type[$c->ID]=$c->TYPE_NAME;
-		}
+	$type['0']='--';
+	    foreach($car_type as $c){
+		  $type[$c->ID]=$c->TYPE_NAME;
+	}
 	$features = array();
-		    foreach($feature as $f){
-			  $features[$f->ID]=$f->FEATURE_NAME;
-		}
+	    foreach($feature as $f){
+		  $features[$f->ID]=$f->FEATURE_NAME;
+	}
+	$locals= array();
+	foreach($local as $f){
+		$locals[$f->ID]=$f->LOCAL_NAME;
+	}
+	$outstations= array();
+	foreach($outstation as $f){
+		$outstations[$f->ID]=$f->OUTSTATION_NAME;
+	}
 	?>
 		<!--Local Div Start-->
 		<div id='local' class="tab-pane fade  active in" >
@@ -71,21 +79,25 @@ if(isset($info) && !empty($info))
 			<div id="localFlexibledata" style="display: none">
 				<div id='LocalFlexible'>
 				<h3 align="center">Local Flexible Details</h3>
-				<form name="inventory" id="inventory" method="POST" action="<?php echo base_url()?>inventory/show/<?php echo $action.'/'.$id; ?>">
+				<form name="localflexibleForm" id="localflexibleForm" method="POST" 
+					  action="<?php echo base_url()?>pricing/localFlexible" >
 				<table width="100%">
-						<tr>																															<td style="padding-left: 15%">
+						<tr>																												<td style="padding-left: 15%">
 								<table>
 								<tr>
 									<th colspan="2"><h5>Car Details</h5></th>
 								</tr>
 								<tr>
 									<td>Car Type</td>
-									<td><?php echo form_dropdown('car_type',$type,$CAR_TYPES,$disable);?></td>
+									<td><?php 
+								   $js ='id="car_type" onChange="get_car_name(this.value);" ';
+								   echo form_dropdown('car_type',$type,$CAR_TYPES,$js);?></td>
 								</tr>
 								<tr>
 									<td>Car Name</td>
-									<td><input  value="<?php echo $CAR_NAME?>" type="text" 
-									name="car_name" maxlength="20"/></td>
+									<td>
+								<?php echo form_dropdown('car_name',array(0=>'--'),$CAR_NAME,"class='car_type'");?>
+									</td>
 								</tr>
 								<tr>
 									<td>Ac/Non Ac</td>
@@ -95,9 +107,9 @@ if(isset($info) && !empty($info))
 									<th colspan="2"><h5>Price Details</h5></th>
 								</tr>
 								<tr>
-									<td>Minmum halt time in min/hr</td>
+									<td>Minimum halt time in min/hr</td>
 									<td><input  type="text" value="<?php echo $PURCHASE_YEAR?>"
-									name="time"  maxlength="4"/></td>
+									name="min_halt_time"  maxlength="4"/></td>
 								</tr>
 								<tr>
 									<td>Price per minimum booking time</td>
@@ -107,7 +119,7 @@ if(isset($info) && !empty($info))
 								<tr>
 									<td>Price per kilometer</td>
 									<td><input  type="text" value="<?php echo $PURCHASE_YEAR?>"
-									name="extraprice"  maxlength="4"/></td>
+									name="per_km_price"  maxlength="4"/></td>
 								</tr>
 							</table>
 							</td>
@@ -144,59 +156,81 @@ if(isset($info) && !empty($info))
 								<tr>
 									<td>Local calculator </td>
 									<td>
-									<input type="text" name="cal" readonly="true" class="basicCalculator">
+									<input type="text" name="calculator" readonly="true" class="basicCalculator">
 									</td>
 								</tr>
 							</table>
 							</td>
 						</tr>
 						<tr>
-							<td style="padding-left: 30%">
-							<input type="submit" name="submit" value="<?php echo $butlabel;?>" class="btn btn-info"/> </td>
+							<td style="padding-left: 20%">
+							<input type="submit" name="localFlexibleSubmit" value="<?php echo $butlabel;?>" class="btn btn-info"/> </td>
 							<td><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
 						</tr>
 					</table>
 				</form>  
 			</div>
 				<div id='LocalFlexibleView'>
-				<table id="inventory_table" class="table table-bordered table-striped table-condensed">
+				<table id="localflxtable" class="table table-bordered table-striped table-condensed">
 					<tr>
 						<th>Car type</th>
-						<th>Car name</th>
-						<th>Car number</th>
-						<th>Purchase year</th>
-						<th>Agreement start date</th>
-						<th>Agreement end date</th>
-						<th colspan="3" width="10%">Action</th>
+						<th>Car Name</th>
+						<th>Ac/ Non AC</th>
+						<th>Minmum halt time in min/hr</th>
+						<th>Price per minimum booking time</th>
+						<th>Price per kilometer</th>
+						<th>Base operating area 0</th>
+						<th>Base operating area 1</th>
+						<th>Base operating area 2</th>
+						<th>Base operating area 3</th>
+						<th>Base operating area 4</th>
+						<th>(Commission by admin)Fixed</th>
+						<th>(Commission by admin)Percentage</th>
+						<th>Edit</th><th>Delete</th>
 					</tr>
 					
-					<?php if(!empty($result) && isset($result))
+					<?php if(!empty($localflxprice) && isset($localflxprice))
 					{
-						foreach($result as $row): ?>
+						foreach($localflxprice as $row): ?>
 						<TR>
-						<td><?php echo $row->CAR_TYPE ?></td>
-						<td><?php echo $row->CAR_NAME ?></td>
-						<td><?php echo $row->CAR_NUMBER ?></td>
-						<td><?php echo $row->PURCHASE_YEAR ?></td>
-						<td><?php echo $row->AGREEMEST_START_DATE ?></td>
-						<td><?php echo $row->AGREEMEST_END_DATE ?></td>
-					<?php  if($row->ISEXPIRED == '0')  $status ='Active';  else $status ='Inactive';?>
-						<td><span class="btn-danger btn-small"><?php echo $status ?></span></td>
-						<td><a href="<?php echo base_url().'inventory/edit/'.$row->ID ?>" 
-							class="btn btn-warning btn-small">Edit</a></td>
+						<td><?php echo $row->car_type ?></td>
+						<td><?php echo $row->car_name ?></td>
+						<td><?php echo $row->ac_nonac ?></td>
+						<td><?php echo $row->min_halt_time ?></td>
+						<td><?php echo $row->price ?></td>
+						<td><?php echo $row->per_km_price ?></td>
+						<td><?php echo $row->area0 ?></td>
+						<td><?php echo $row->area1 ?></td>
+						<td><?php echo $row->area2 ?></td>
+						<td><?php echo $row->area3 ?></td>
+						<td><?php echo $row->area4 ?></td>
+						<td><?php echo $row->comm_fixed ?></td>
+						<td><?php echo $row->comm_percentage ?></td>
+						<td>
+						<a href="javascript: editlocalflexprice(<?php echo $c->ID ?>)">
+							<img src='<?php echo base_url()?>"img/mono-icons/notepencil32.png' 
+							title='Edit' alt='Edit' class='alignleft' style='width:15px;' />
+						</a>
+						</td>
 							
-						<td><a class="btn btn-success btn-small" 
-								href="javascript:void(0)" onclick="viewdetails(<?php echo $row->ID ?>);"> View</a></td>
+						<td>
+						<a>
+							href="javascript: removelocalflexprice(<?php echo $c->ID ?>)">
+							<img src='<?php echo base_url()?>"img/mono-icons/minus32.png' 
+							title='Edit' alt='Edit' class='alignleft' style='width:15px;' />
+						</a>
+						</td>
 						</TR>	
 						<?php endforeach;
-					} else { echo "</tr><td colspan='8'>No Result Found</td></tr>"; } ?>
+					} else { echo "</tr><td colspan='16'>No Result Found</td></tr>"; } ?>
 				</table>
 				</div>
 			</div>
 			<div id="localPackagedata" style="display: none">
 				<div id='LocalPackage'>
 				<h3 align="center">Local Package Details</h3>
-				<form name="inventory" id="inventory" method="POST" action="<?php echo base_url()?>inventory/show/<?php echo $action.'/'.$id; ?>">
+				<form name="localpackageForm" id="localpackageForm" method="POST" 
+					  action="<?php echo base_url()?>pricing/localPackage" >
 					<table width="100%">
 						<tr>																												<td style="padding-left: 15%">
 								<table>
@@ -205,12 +239,15 @@ if(isset($info) && !empty($info))
 								</tr>
 								<tr>
 									<td>Car Type</td>
-									<td><?php echo form_dropdown('car_type',$type,$CAR_TYPES,$disable);?></td>
+									<td><?php 
+								   $js ='id="car_type" onChange="get_car_name(this.value);" ';
+								   echo form_dropdown('car_type',$type,$CAR_TYPES,$js);?></td>
 								</tr>
 								<tr>
 									<td>Car Name</td>
-									<td><input  value="<?php echo $CAR_NAME?>" type="text" 
-									name="car_name" maxlength="20"/></td>
+									<td>
+								<?php echo form_dropdown('car_name',array(0=>'--'),$CAR_NAME,"class='car_type'");?>
+									</td>
 								</tr>
 								<tr>
 									<td>Ac/Non Ac</td>
@@ -220,14 +257,8 @@ if(isset($info) && !empty($info))
 									<th colspan="2"><h5>Price Details</h5></th>
 								</tr>
 								<tr>
-									<td>Airport</td>
-									<td><input  type="text" value="<?php echo $PURCHASE_YEAR?>"
-									name="time"  maxlength="4"/></td>
-								</tr>
-								<tr>
-									<td>Railway Station</td>
-									<td><input  type="text" value="<?php echo $PURCHASE_YEAR?>"
-									name="price"  maxlength="4"/></td>
+									<td>Package</td>
+									<td><?php echo form_dropdown('package',$locals);?></td>
 								</tr>
 								<tr>
 									<td>4hr/40km</td>
@@ -279,14 +310,14 @@ if(isset($info) && !empty($info))
 								<tr>
 									<td>Local calculator </td>
 									<td>
-									<input type="text" name="cal" readonly="true" class="basicCalculator">
+									<input type="text" name="calculator" readonly="true" class="basicCalculator">
 									</td>
 								</tr>
 							</table>
 							</td>
 						</tr>
 						<tr>
-							<td style="padding-left: 40%"><input type="submit" name="submit" value="<?php echo $butlabel;?>" class="btn btn-info"/> </td>
+							<td style="padding-left: 20%"><input type="submit" name="submit" value="<?php echo $butlabel;?>" class="btn btn-info"/> </td>
 							<td><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
 						</tr>
 					</table>
@@ -296,34 +327,57 @@ if(isset($info) && !empty($info))
 					<table id="inventory_table" class="table table-bordered table-striped table-condensed">
 						<tr>
 							<th>Car type</th>
-							<th>Car name</th>
-							<th>Car number</th>
-							<th>Purchase year</th>
-							<th>Agreement start date</th>
-							<th>Agreement end date</th>
-							<th colspan="3" width="10%">Action</th>
+							<th>Car Name</th>
+							<th>Ac/ Non AC</th>
+							<th>Package Name</th>
+							<th>4hr/40km</th>
+							<th>Extra Rs/km</th>
+							<th>Extra Rs/hr</th>
+							<th>Base operating area 0</th>
+							<th>Base operating area 1</th>
+							<th>Base operating area 2</th>
+							<th>Base operating area 3</th>
+							<th>Base operating area 4</th>
+							<th>(Commission by admin)Fixed</th>
+							<th>(Commission by admin)Percentage</th>
+							<th>Edit</th><th>Delete</th>
 						</tr>
 						
-						<?php if(!empty($result) && isset($result))
+						<?php if(!empty($localpackprice) && isset($localpackprice))
 						{
-							foreach($result as $row): ?>
+							foreach($localpackprice as $row): ?>
 							<TR>
-							<td><?php echo $row->CAR_TYPE ?></td>
-							<td><?php echo $row->CAR_NAME ?></td>
-							<td><?php echo $row->CAR_NUMBER ?></td>
-							<td><?php echo $row->PURCHASE_YEAR ?></td>
-							<td><?php echo $row->AGREEMEST_START_DATE ?></td>
-							<td><?php echo $row->AGREEMEST_END_DATE ?></td>
-						<?php  if($row->ISEXPIRED == '0')  $status ='Active';  else $status ='Inactive';?>
-							<td><span class="btn-danger btn-small"><?php echo $status ?></span></td>
-							<td><a href="<?php echo base_url().'inventory/edit/'.$row->ID ?>" 
-								class="btn btn-warning btn-small">Edit</a></td>
-								
-							<td><a class="btn btn-success btn-small" 
-									href="javascript:void(0)" onclick="viewdetails(<?php echo $row->ID ?>);"> View</a></td>
+							<td><?php echo $row->car_type ?></td>
+							<td><?php echo $row->car_name ?></td>
+							<td><?php echo $row->ac_nonac ?></td>
+							<td><?php echo $row->package ?></td>
+							<td><?php echo $row->extraprice ?></td>
+							<td><?php echo $row->kilometerprice ?></td>
+							<td><?php echo $row->hourprice ?></td>
+							<td><?php echo $row->area0 ?></td>
+							<td><?php echo $row->area1 ?></td>
+							<td><?php echo $row->area2 ?></td>
+							<td><?php echo $row->area3 ?></td>
+							<td><?php echo $row->area4 ?></td>
+							<td><?php echo $row->comm_fixed ?></td>
+							<td><?php echo $row->comm_percentage ?></td>
+							
+							<td>
+							<a href="javascript: editlocalflexprice(<?php echo $c->ID ?>)">
+								<img src='<?php echo base_url()?>"img/mono-icons/notepencil32.png' 
+								title='Edit' alt='Edit' class='alignleft' style='width:15px;' />
+							</a>
+							</td>
+							<td>
+							<a>
+								href="javascript: removelocalflexprice(<?php echo $c->ID ?>)">
+								<img src='<?php echo base_url()?>"img/mono-icons/minus32.png' 
+								title='Edit' alt='Edit' class='alignleft' style='width:15px;' />
+							</a>
+							</td>
 							</TR>	
 							<?php endforeach;
-						} else { echo "</tr><td colspan='8'>No Result Found</td></tr>"; } ?>
+						} else { echo "</tr><td colspan='16'>No Result Found</td></tr>"; } ?>
 					</table>
 				</div>
 			</div>		
@@ -337,21 +391,25 @@ if(isset($info) && !empty($info))
 			<div id="outstationFlexibledata" style="display: none">
 				<div id='outstationFlexible'>
 				<h3 align="center">Outstation Flexible Details</h3>
-				<form name="inventory" id="inventory" method="POST" action="<?php echo base_url()?>inventory/show/<?php echo $action.'/'.$id; ?>">
+				<form name="outstationflexibleForm" id="outstationflexibleForm" method="POST" 
+					  action="<?php echo base_url()?>pricing/outstationFlexible" >
 				<table width="100%">
-						<tr>																															<td style="padding-left: 15%">
+						<tr>																													<td style="padding-left: 15%">
 								<table>
 								<tr>
 									<th colspan="2"><h5>Car Details</h5></th>
 								</tr>
 								<tr>
 									<td>Car Type</td>
-									<td><?php echo form_dropdown('car_type',$type,$CAR_TYPES,$disable);?></td>
+									<td><?php 
+								   $js ='id="car_type" onChange="get_car_name(this.value);" ';
+								   echo form_dropdown('car_type',$type,$CAR_TYPES,$js);?></td>
 								</tr>
 								<tr>
 									<td>Car Name</td>
-									<td><input  value="<?php echo $CAR_NAME?>" type="text" 
-									name="car_name" maxlength="20"/></td>
+									<td>
+								<?php echo form_dropdown('car_name',array(0=>'--'),$CAR_NAME,"class='car_type'");?>
+									</td>
 								</tr>
 								<tr>
 									<td>Ac/Non Ac</td>
@@ -408,9 +466,14 @@ if(isset($info) && !empty($info))
 									maxlength="5"/></td>
 								</tr>
 								<tr>
+									<td>Base operating area 4 &nbsp;&nbsp;</td>
+									<td><input type="text" name="area4" value="<?php echo $OWNER_NAME?>" 
+									maxlength="5"/></td>
+								</tr>
+								<tr>
 									<td>Local calculator </td>
 									<td>
-									<input type="text" name="cal" readonly="true" class="basicCalculator">
+									<input type="text" name="calculator" readonly="true" class="basicCalculator">
 									</td>
 								</tr>
 							</table>
@@ -418,51 +481,75 @@ if(isset($info) && !empty($info))
 						</tr>
 						<tr>
 							<td style="padding-left: 30%">
-							<input type="submit" name="submit" value="<?php echo $butlabel;?>" class="btn btn-info"/> </td>
+							<input type="submit" name="outstationFlexibleSubmit" value="<?php echo $butlabel;?>" class="btn btn-info"/> </td>
 							<td><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
 						</tr>
 					</table>
 				</form>  
 			</div>
-				<div id='outstationFlexibleView'>
+				<div id='OutstationFlexibleView'>
 				<table id="inventory_table" class="table table-bordered table-striped table-condensed">
 					<tr>
 						<th>Car type</th>
-						<th>Car name</th>
-						<th>Car number</th>
-						<th>Purchase year</th>
-						<th>Agreement start date</th>
-						<th>Agreement end date</th>
-						<th colspan="3" width="10%">Action</th>
+						<th>Car Name</th>
+						<th>Ac/ Non AC</th>
+						<th>Minmum booking time in hrs</th>
+						<th>Price per minimum booking time</th>
+						<th>Extra price in 1 hr</th>
+						<th>Price per kilometer</th>
+						<th>Base operating area 0</th>
+						<th>Base operating area 1</th>
+						<th>Base operating area 2</th>
+						<th>Base operating area 3</th>
+						<th>Base operating area 4</th>
+						<th>(Commission by admin)Fixed</th>
+						<th>(Commission by admin)Percentage</th>
+						<th>Edit</th><th>Delete</th>
 					</tr>
 					
-					<?php if(!empty($result) && isset($result))
+					<?php if(!empty($outflxprice) && isset($outflxprice))
 					{
-						foreach($result as $row): ?>
+						foreach($outflxprice as $row): ?>
 						<TR>
-						<td><?php echo $row->CAR_TYPE ?></td>
-						<td><?php echo $row->CAR_NAME ?></td>
-						<td><?php echo $row->CAR_NUMBER ?></td>
-						<td><?php echo $row->PURCHASE_YEAR ?></td>
-						<td><?php echo $row->AGREEMEST_START_DATE ?></td>
-						<td><?php echo $row->AGREEMEST_END_DATE ?></td>
-					<?php  if($row->ISEXPIRED == '0')  $status ='Active';  else $status ='Inactive';?>
-						<td><span class="btn-danger btn-small"><?php echo $status ?></span></td>
-						<td><a href="<?php echo base_url().'inventory/edit/'.$row->ID ?>" 
-							class="btn btn-warning btn-small">Edit</a></td>
+						<<td><?php echo $row->car_type ?></td>
+						<td><?php echo $row->car_name ?></td>
+						<td><?php echo $row->ac_nonac ?></td>
+						<td><?php echo $row->time ?></td>
+						<td><?php echo $row->price ?></td>
+						<td><?php echo $row->extraprice ?></td>
+						<td><?php echo $row->kilometerprice ?></td>
+						<td><?php echo $row->area0 ?></td>
+						<td><?php echo $row->area1 ?></td>
+						<td><?php echo $row->area2 ?></td>
+						<td><?php echo $row->area3 ?></td>
+						<td><?php echo $row->area4 ?></td>
+						<td><?php echo $row->comm_fixed ?></td>
+						<td><?php echo $row->comm_percentage ?></td>
+						<td>
+						<a href="javascript: editoutstationflexprice(<?php echo $c->ID ?>)">
+							<img src='<?php echo base_url()?>"img/mono-icons/notepencil32.png' 
+							title='Edit' alt='Edit' class='alignleft' style='width:15px;' />
+						</a>
+						</td>
 							
-						<td><a class="btn btn-success btn-small" 
-								href="javascript:void(0)" onclick="viewdetails(<?php echo $row->ID ?>);"> View</a></td>
+						<td>
+						<a>
+							href="javascript: removeoutstationflexprice(<?php echo $c->ID ?>)">
+							<img src='<?php echo base_url()?>"img/mono-icons/minus32.png' 
+							title='Edit' alt='Edit' class='alignleft' style='width:15px;' />
+						</a>
+						</td>
 						</TR>	
 						<?php endforeach;
-					} else { echo "</tr><td colspan='8'>No Result Found</td></tr>"; } ?>
+					} else { echo "</tr><td colspan='17'>No Result Found</td></tr>"; } ?>
 				</table>
 				</div>
 			</div>
 			<div id="outstationPackagedata" style="display: none">
 				<div id='outstationPackage'>
 				<h3 align="center">Outstation Package Details</h3>
-				<form name="inventory" id="inventory" method="POST" action="<?php echo base_url()?>inventory/show/<?php echo $action.'/'.$id; ?>">
+				<form name="outstationPackageForm" id="outstationPackageForm" method="POST" 
+					  action="<?php echo base_url()?>pricing/outstationPackage" >
 					<table width="100%">
 						<tr>																												<td style="padding-left: 15%">
 								<table>
@@ -471,12 +558,15 @@ if(isset($info) && !empty($info))
 								</tr>
 								<tr>
 									<td>Car Type</td>
-									<td><?php echo form_dropdown('car_type',$type,$CAR_TYPES,$disable);?></td>
+									<td><?php 
+								   $js ='id="car_type" onChange="get_car_name(this.value);" ';
+								   echo form_dropdown('car_type',$type,$CAR_TYPES,$js);?></td>
 								</tr>
 								<tr>
 									<td>Car Name</td>
-									<td><input  value="<?php echo $CAR_NAME?>" type="text" 
-									name="car_name" maxlength="20"/></td>
+									<td>
+								<?php echo form_dropdown('car_name',array(0=>'--'),$CAR_NAME,"class='car_type'");?>
+									</td>
 								</tr>
 								<tr>
 									<td>Ac/Non Ac</td>
@@ -486,24 +576,13 @@ if(isset($info) && !empty($info))
 									<th colspan="2"><h5>Price Details</h5></th>
 								</tr>
 								<tr>
-									<td>Puri</td>
-									<td><input  type="text" value="<?php echo $PURCHASE_YEAR?>"
-									name="time"  maxlength="4"/></td>
-								</tr>
-								<tr>
-									<td>Puri+ Konark</td>
-									<td><input  type="text" value="<?php echo $PURCHASE_YEAR?>"
-									name="price"  maxlength="4"/></td>
+									<td>Package Name</td>
+									<td><?php echo form_dropdown('package',$outstations);?></td>
 								</tr>
 								<tr>
 									<td>10hr/100km	</td>
 									<td><input  type="text" value="<?php echo $PURCHASE_YEAR?>"
 									name="extraprice"  maxlength="4"/></td>
-								</tr>
-								<tr>
-									<td>Package Name</td>
-									<td><input  type="text" value="<?php echo $PURCHASE_YEAR?>"
-									name="kilometerprice"  maxlength="5"/></td>
 								</tr>
 								<tr>
 									<td>Extra Rs/km</td>
@@ -513,7 +592,7 @@ if(isset($info) && !empty($info))
 								<tr>
 									<td>Extra Rs/hr</td>
 									<td><input  type="text" value="<?php echo $PURCHASE_YEAR?>"
-									name="kilometerprice"  maxlength="5"/></td>
+									name="hourprice"  maxlength="5"/></td>
 								</tr>
 							</table>
 							</td>
@@ -542,22 +621,26 @@ if(isset($info) && !empty($info))
 									<td><input type="text" name="area3" value="<?php echo $OWNER_NAME?>" 
 									maxlength="5"/></td>
 								</tr>
-									<tr>
+								<tr>
 									<td>Base operating area 4 &nbsp;&nbsp;</td>
-									<td><input type="text" name="area3" value="<?php echo $OWNER_NAME?>" 
+									<td><input type="text" name="area4" value="<?php echo $OWNER_NAME?>" 
 									maxlength="5"/></td>
 								</tr>
+								
 								<tr>
 									<td>Local calculator </td>
 									<td>
-									<input type="text" name="cal" readonly="true" class="basicCalculator">
+									<input type="text" name="calculator" readonly="true" class="basicCalculator">
 									</td>
 								</tr>
 							</table>
 							</td>
 						</tr>
 						<tr>
-							<td style="padding-left: 30%"><input type="submit" name="submit" value="<?php echo $butlabel;?>" class="btn btn-info"/> </td>
+							<td style="padding-left: 30%">
+								<input type="submit" name="outstationPackageSubmit" 
+								value="<?php echo $butlabel;?>" class="btn btn-info"/> 
+							</td>
 							<td><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
 						</tr>
 					</table>
@@ -565,37 +648,60 @@ if(isset($info) && !empty($info))
 			</div>
 				<div id='outstationPackageView'>
 					<table id="inventory_table" class="table table-bordered table-striped table-condensed">
-						<tr>
-							<th>Car type</th>
-							<th>Car name</th>
-							<th>Car number</th>
-							<th>Purchase year</th>
-							<th>Agreement start date</th>
-							<th>Agreement end date</th>
-							<th colspan="3" width="10%">Action</th>
-						</tr>
-						
-						<?php if(!empty($result) && isset($result))
-						{
-							foreach($result as $row): ?>
-							<TR>
-							<td><?php echo $row->CAR_TYPE ?></td>
-							<td><?php echo $row->CAR_NAME ?></td>
-							<td><?php echo $row->CAR_NUMBER ?></td>
-							<td><?php echo $row->PURCHASE_YEAR ?></td>
-							<td><?php echo $row->AGREEMEST_START_DATE ?></td>
-							<td><?php echo $row->AGREEMEST_END_DATE ?></td>
-						<?php  if($row->ISEXPIRED == '0')  $status ='Active';  else $status ='Inactive';?>
-							<td><span class="btn-danger btn-small"><?php echo $status ?></span></td>
-							<td><a href="<?php echo base_url().'inventory/edit/'.$row->ID ?>" 
-								class="btn btn-warning btn-small">Edit</a></td>
-								
-							<td><a class="btn btn-success btn-small" 
-									href="javascript:void(0)" onclick="viewdetails(<?php echo $row->ID ?>);"> View</a></td>
-							</TR>	
-							<?php endforeach;
-						} else { echo "</tr><td colspan='8'>No Result Found</td></tr>"; } ?>
-					</table>
+					<tr>
+						<th>Car type</th>
+						<th>Car Name</th>
+						<th>Ac/ Non AC</th>
+						<th>Minmum booking time in hrs</th>
+						<th>Price per minimum booking time</th>
+						<th>Extra price in 1 hr</th>
+						<th>Price per kilometer</th>
+						<th>Base operating area 0</th>
+						<th>Base operating area 1</th>
+						<th>Base operating area 2</th>
+						<th>Base operating area 3</th>
+						<th>Base operating area 4</th>
+						<th>(Commission by admin)Fixed</th>
+						<th>(Commission by admin)Percentage</th>
+						<th>Edit</th><th>Delete</th>
+					</tr>
+					
+					<?php if(!empty($outflxprice) && isset($outflxprice))
+					{
+						foreach($outflxprice as $row): ?>
+						<TR>
+						<<td><?php echo $row->car_type ?></td>
+						<td><?php echo $row->car_name ?></td>
+						<td><?php echo $row->ac_nonac ?></td>
+						<td><?php echo $row->time ?></td>
+						<td><?php echo $row->price ?></td>
+						<td><?php echo $row->extraprice ?></td>
+						<td><?php echo $row->kilometerprice ?></td>
+						<td><?php echo $row->area0 ?></td>
+						<td><?php echo $row->area1 ?></td>
+						<td><?php echo $row->area2 ?></td>
+						<td><?php echo $row->area3 ?></td>
+						<td><?php echo $row->area4 ?></td>
+						<td><?php echo $row->comm_fixed ?></td>
+						<td><?php echo $row->comm_percentage ?></td>
+						<td>
+						<a href="javascript: editoutstationpackprice(<?php echo $c->ID ?>)">
+							<img src='<?php echo base_url()?>"img/mono-icons/notepencil32.png' 
+							title='Edit' alt='Edit' class='alignleft' style='width:15px;' />
+						</a>
+						</td>
+							
+						<td>
+						<a>
+							href="javascript: removeoutstationpackprice(<?php echo $c->ID ?>)">
+							<img src='<?php echo base_url()?>"img/mono-icons/minus32.png' 
+							title='Edit' alt='Edit' class='alignleft' style='width:15px;' />
+						</a>
+						</td>
+						</TR>	
+						<?php endforeach;
+					} else { echo "</tr><td colspan='17'>No Result Found</td></tr>"; } ?>
+				</table>
 				</div>
 			</div>
 		</div>
@@ -616,6 +722,65 @@ $(document).ready(function() {
 	var outval = document.getElementById('outstationselbox').value;
 	localsel(localval);
 	outstationsel(outval);
+	
+	
+	//Local Flexible Form Submit
+	var localflexibleForm = { 
+		target:        '#LocalFlexibleView', // target element(s) to be updated with server response 
+		beforeSubmit:  function(){
+			$.blockUI({ message: "<h6>Submiting data...please wait.</h6>" }) 			
+		},  // pre-submit callback 
+		success: function(){	 	 
+			$.unblockUI();	
+		},  // post-submit callback 
+		resetForm: true ,      // reset the form after successful submit 
+		cache:false
+	};
+	
+	//Local Package Form Submit
+	var localpackageForm = { 
+		target:        '#LocalPackageView', // target element(s) to be updated with server response 
+		beforeSubmit:  function(){
+			$.blockUI({ message: "<h6>Submiting data...please wait.</h6>" }) 			
+		},  // pre-submit callback 
+		success: function(){	 	 
+			$.unblockUI();	
+		},  // post-submit callback 
+		resetForm: true ,      // reset the form after successful submit 
+		cache:false
+	};
+	
+	//Outstation Flexible Form Submit
+	var outstationflexibleForm = { 
+		target:        '#OutstationFlexibleView', // target element(s) to be updated with server response 
+		beforeSubmit:  function(){
+			$.blockUI({ message: "<h6>Submiting data...please wait.</h6>" }) 			
+		},  // pre-submit callback 
+		success: function(){	 	 
+			$.unblockUI();	
+		},  // post-submit callback 
+		resetForm: true ,      // reset the form after successful submit 
+		cache:false
+	};
+	
+	//Outstation Package Form Submit
+	var outstationPackageForm = { 
+		target:        '#outstationPackageView', // target element(s) to be updated with server response 
+		beforeSubmit:  function(){
+			$.blockUI({ message: "<h6>Submiting data...please wait.</h6>" }) 			
+		},  // pre-submit callback 
+		success: function(){	 	 
+			$.unblockUI();	
+		},  // post-submit callback 
+		resetForm: true ,      // reset the form after successful submit 
+		cache:false
+	};
+	
+	$('#localflexibleForm').ajaxForm(localflexibleForm);
+	$('#localpackageForm').ajaxForm(localpackageForm);
+	
+	$('#outstationflexibleForm').ajaxForm(outstationflexibleForm);
+	$('#outstationPackageForm').ajaxForm(outstationPackageForm);
 });
 
 
@@ -685,6 +850,23 @@ var end = $('#end').datepicker(
 {
 	end.hide();
 }).data('datepicker');
+
+function get_car_name(car_type)
+{
+	jQuery.ajax({
+		type:"POST",
+		url: "<?php echo base_url();?>ajax/get_car_name/"+car_type,
+		data: car_type,
+		success: function(response) {
+			if(response == ""){
+				$('.car_type').empty();
+			}else{
+				$('.car_type').html(response);
+			}
+			
+		}
+	});
+}
 </script>
 <!--<script type="text/javascript">
 var frmvalidator = new Validator("inventory");
