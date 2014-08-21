@@ -343,6 +343,36 @@
 					<input type="button" id="blkno" value="No" /> 
 				</div>
 				<div id="agentlist">
+					<table>
+						<tr>
+							<?php 
+							$agt = array();
+							$agt['0']='--';
+							foreach($agents as $c){
+								$agt[$c->ID]=$c->ID;
+							}
+							?>
+							<td>Agent id </td>
+							<td><?php echo form_dropdown('agent_id',$agt);?></td>
+							<?php 
+							$agency_name = array();
+							$agency_name['0']='--';
+							foreach($agents as $c){
+								$agency_name[$c->BUSINESS_NAME]=$c->BUSINESS_NAME;
+							}
+							?>
+							<td>&nbsp;</td>
+							<td>Agency name </td>
+							<td><?php echo form_dropdown('agency_name',$agency_name);?></td>
+							
+							<?php 
+							$action = array('-'=>'--','block'=>'Block','unblock'=>'Unblock')
+							?>
+							<td>&nbsp;</td>
+							<td>Action </td>
+							<td><?php echo form_dropdown('agency_action',$action);?></td>
+						</tr>
+					</table>
 					<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
 						<thead>
 						<tr><th>Agent ID</th><th>Agency name</th><th>Contact name</th><th>Contact number</th><th>Place</th><th>City</th><th>Action</th></tr>
@@ -374,6 +404,36 @@
 			</div>
 			<div id="user" class="tab-pane fade">
 				<div id="userlist">
+					<table>
+						<tr>
+							<?php 
+							$user = array();
+							$user['0']='--';
+							foreach($users as $c){
+								$user[$c->ID]=$c->ID;
+							}
+							?>
+							<td>User id </td>
+							<td><?php echo form_dropdown('user_id',$user);?></td>
+							<?php 
+							$email = array();
+							$email['0']='--';
+							foreach($users as $c){
+								$email[$c->EMAIL]=$c->EMAIL;
+							}
+							?>
+							<td>&nbsp;</td>
+							<td>User email </td>
+							<td><?php echo form_dropdown('user_email',$email);?></td>
+							
+							<?php 
+							$action = array('-'=>'--','block'=>'Block','unblock'=>'Unblock')
+							?>
+							<td>&nbsp;</td>
+							<td>Action </td>
+							<td><?php echo form_dropdown('user_action',$action);?></td>
+						</tr>
+					</table>
 					<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
 						<thead>
 						<tr><th>User ID</th><th>User Name</th><th>Email</th><th>Contact number</th><th>Action</th></tr>
