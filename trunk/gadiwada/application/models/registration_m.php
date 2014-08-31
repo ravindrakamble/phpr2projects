@@ -11,6 +11,11 @@ Class Registration_m extends CI_Model{
 		$this->db->insert('agent_contacts',$contact);
 		return true;
 	}
+	
+	function get_booking_info()
+	{
+		
+	}
 }
 	
 ?>

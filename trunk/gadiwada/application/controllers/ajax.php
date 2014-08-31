@@ -11,6 +11,7 @@ class Ajax extends CI_Controller {
 		$this->load->model('car_model_m');
 		$this->load->model('features_m');
 		$this->load->model('packages_m');
+		$this->load->model('pricing_m');
 		$this->load->model('discounts_m');
 	}
 	
@@ -22,6 +23,7 @@ class Ajax extends CI_Controller {
 	function delete_city($id)
 	{
 		$this->city_m->delete_city($id);
+		redirect('admin_c/city');
 	}
 
 	function edit_area($id)
@@ -33,6 +35,7 @@ class Ajax extends CI_Controller {
 	function delete_area($id)
 	{
 		$this->area_m->delete_area($id);
+		redirect('admin_c/area');
 	}
 
 	function edit_car_type($id)
@@ -44,6 +47,7 @@ class Ajax extends CI_Controller {
 	function delete_car_type($id)
 	{
 		$this->car_type_m->delete_car_type($id);
+		redirect('admin_c/car_type');
 	}
 	
 	function edit_car_model($id)
@@ -55,6 +59,7 @@ class Ajax extends CI_Controller {
 	function delete_car_model($id)
 	{
 		$this->car_model_m->delete_car_model($id);
+		redirect('admin_c/car_model');
 	}
 
 	function edit_car_feature($id)
@@ -66,6 +71,7 @@ class Ajax extends CI_Controller {
 	function delete_car_feature($id)
 	{
 		$this->features_m->delete_car_feature($id);
+		redirect('admin_c/features');
 	}
 
 
@@ -78,6 +84,7 @@ class Ajax extends CI_Controller {
 	function delete_local_package($id)
 	{
 		$this->packages_m->delete_local_package($id);
+		redirect('admin_c/local_package');
 	}
 	
 	function edit_outstaion_package($id)
@@ -89,6 +96,7 @@ class Ajax extends CI_Controller {
 	function delete_outstaion_package($id)
 	{
 		$this->packages_m->delete_outstaion_package($id);
+		redirect('admin_c/outstation_package');
 	}
 	
 	function edit_discount($id)
@@ -101,6 +109,7 @@ class Ajax extends CI_Controller {
 	function delete_discount($id)
 	{
 		$this->discounts_m->delete_discount($id);
+		redirect('admin_c/discount');
 	}
 	
 	function get_car_name($car_type)
@@ -113,6 +122,16 @@ class Ajax extends CI_Controller {
 				echo "<option value=".$r->ID.">".$r->MODEL_NAME."</option>";
 			}
 		}
+	}
+	
+	function delete_localFlexiblePrice($id)
+	{
+		$this->pricing_m->delete_localFlexiblePrice($id);
+	}
+	
+	function delete_outstation_price($id)
+	{
+		$this->pricing_m->delete_outstation_price($id);
 	}
 }
 

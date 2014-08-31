@@ -178,7 +178,7 @@
 		</tr>
 		<tr>
 			<td>Password:</td>
-			<td><input type="password" required="" name="password" id="password" maxlength='40'/> </td>
+			<td><input type="password" required="" name="password" id="loginpassword" maxlength='40'/> </td>
 		</tr>
 		<tr>
 			<td colspan="2">
@@ -205,7 +205,7 @@
 			</tr>
 			<tr>
 				<td>Enter password:</td>
-				<td><input type="password" name="password" id="password" maxlength='15'/> </td>
+				<td><input type="password" name="password" id="signpassword" maxlength='15'/> </td>
 			</tr>
 			<tr>
 				<td>Retype password:</td>
@@ -243,7 +243,7 @@ function login(type1)
 function checkLogin()
 {
 	var username = $('input#username').val();	
-	var password = $('input#password').val();
+	var password = $('input#loginpassword').val();
 	var dataString = 'username='+ username
 					+'&password=' + password
 					+'&type=' + type
@@ -272,7 +272,7 @@ function customer_register()
 	var name = $('input#name').val();	
 	var email = $('input#email').val();
 	var phone = $('input#phone').val();
-	var password = $('input#password').val();
+	var password = $('input#signpassword').val();
 	var dataString = 'name='+name
 					+ '&email='+email			
 					+ '&phone='+phone			

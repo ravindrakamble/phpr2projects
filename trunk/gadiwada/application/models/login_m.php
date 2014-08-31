@@ -8,7 +8,7 @@ Class Login_m extends CI_Model{
 		$q = $this->db->select('USERNAME,PASSWORD')
                             ->from('travel_agent')
                             ->where('USERNAME', $uname);
-                          /*  ->where('PASSWORD',md5($pass));*/
+                           /* ->where('PASSWORD',md5($pass));*/
 							/*->where('PASSWORD',($pass));*/
 							$this->db->where('STATUS',1);
         $query = $q->get()->result();
@@ -39,7 +39,7 @@ Class Login_m extends CI_Model{
                             ->where('EMAIL', $uname)
                             ->where('PASSWORD',md5($pass));
         $query = $q->get()->result();
-        echo $this->db->last_query();
+        //echo $this->db->last_query();
 		if($query)
 	    	return 1;
 		else
@@ -56,6 +56,19 @@ Class Login_m extends CI_Model{
 	    {
 			return $t->ID;
 	    }
+	}
+	
+	function checkAdminLogin($uname,$pass)
+	{
+		$q = $this->db->select('email')
+                            ->from('admin')
+                            ->where('email', $uname)
+                            ->where('password',md5($pass));
+        $query = $q->get()->result();
+		if($query)
+	    	return 1;
+		else
+	    	return 0;
 	}
 	
 }

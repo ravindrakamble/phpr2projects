@@ -6,7 +6,27 @@ class login extends CI_Controller
     parent::__construct();
         $this->load->model('login_m');
     }
-   
+   	function admin_login()
+	{
+		$uname = $this->input->post('username');
+	    $pass = $this->input->post('password');
+	    $check= $this->login_m->checkAdminLogin($uname,$pass);
+		if($check==1)
+	    {
+			//$usrId = $this->login_m->getAdminId($uname);
+				$data = array(
+					'username'    => $uname,
+					//'id'          => $usrId,
+					'type'        => 'admin',
+					'is_admin_logged_in'=> true
+				);
+			$this->session->set_userdata($data);
+			echo $check;
+	    }
+		else{
+			echo $check;
+		}
+	}
     function checkLogin()
     {
     	
@@ -70,7 +90,6 @@ class login extends CI_Controller
 	
     function logout()
     {
-        //destroying the session data.
         $this->session->sess_destroy();
 		redirect(base_url());
     }
