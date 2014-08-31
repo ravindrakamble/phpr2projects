@@ -342,8 +342,7 @@
 					<input type="button" id="blkyes" value="Yes" /> 
 					<input type="button" id="blkno" value="No" /> 
 				</div>
-				<div id="agentlist">
-					<table>
+				<table>
 						<tr>
 							<?php 
 							$agt = array();
@@ -373,6 +372,8 @@
 							<td><?php echo form_dropdown('agency_action',$action);?></td>
 						</tr>
 					</table>
+				<div id="agentlist">
+					
 					<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
 						<thead>
 						<tr><th>Agent ID</th><th>Agency name</th><th>Contact name</th><th>Contact number</th><th>Place</th><th>City</th><th>Action</th></tr>
@@ -403,7 +404,6 @@
 				</div>
 			</div>
 			<div id="user" class="tab-pane fade">
-				<div id="userlist">
 					<table>
 						<tr>
 							<?php 
@@ -434,6 +434,8 @@
 							<td><?php echo form_dropdown('user_action',$action);?></td>
 						</tr>
 					</table>
+				<div id="userlist">
+					
 					<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
 						<thead>
 						<tr><th>User ID</th><th>User Name</th><th>Email</th><th>Contact number</th><th>Action</th></tr>

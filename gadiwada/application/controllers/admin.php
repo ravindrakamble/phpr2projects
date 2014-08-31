@@ -35,15 +35,17 @@ class Admin extends CI_Controller {
 		$city = array( 'CITY_NAME' => $this->input->post('city'));
 		if(isset($_POST['city']) != '' && $this->input->post('submitcity'))
 		{
+			$this->session->set_flashdata('city_msg', "Successfully Added.");
 			$this->db->insert('city',$city);
 		}
 		if($this->input->post('updatecity'))
 		{
+			$this->session->set_flashdata('city_msg', "Successfully Updated.");
 			$this->db->where('ID',$this->input->post('cityid'));
 			$this->db->update('city',$city);
 		}
-		$result = $this->city_m->get_all_cities('ajax');
-		echo $result;
+		
+		redirect('admin_c/city');
 	}
 
 	public function area()
@@ -51,15 +53,16 @@ class Admin extends CI_Controller {
 		$area = array( 'AREA_NAME' => $this->input->post('area'),'CITY_ID' =>$this->input->post('city'));
 		if(isset($_POST['area']) != '' && $this->input->post('submitarea'))
 		{
+			$this->session->set_flashdata('area_msg', "Successfully Added.");
 			$this->db->insert('area',$area);
 		}
 		if($this->input->post('updatearea'))
 		{
+			$this->session->set_flashdata('area_msg', "Successfully Updated.");
 			$this->db->where('ID',$this->input->post('areaid'));
 			$this->db->update('area',$area);
 		}
-		$result = $this->area_m->get_all_areas('ajax');
-		echo $result;
+		redirect('admin_c/area');
 	}
 
 	public function car_type()
@@ -67,15 +70,16 @@ class Admin extends CI_Controller {
 		$car_type = array('TYPE_NAME' => $this->input->post('cartype'));
 		if(isset($_POST['cartype']) != '' && $this->input->post('submitcartype'))
 		{
+			$this->session->set_flashdata('type_msg', "Successfully Added.");
 			$this->db->insert('car_type',$car_type);
 		}
 		if($this->input->post('updatecartype'))
 		{
+			$this->session->set_flashdata('type_msg', "Successfully Updated.");
 			$this->db->where('ID',$this->input->post('cartypeid'));
 			$this->db->update('car_type',$car_type);
 		}
-		$result = $this->car_type_m->get_all_car_type('ajax');
-		echo $result;
+		redirect('admin_c/car_type');
 	}
 	//Not yet Complited
 	public function car_model()
@@ -83,15 +87,16 @@ class Admin extends CI_Controller {
 		$seater = array( 'MODEL_NAME' => $this->input->post('model'),'TYPE_ID' =>$this->input->post('cartype'));
 		if(isset($_POST['model']) != '' && $this->input->post('submitseater'))
 		{
+			$this->session->set_flashdata('model', "Successfully Added.");
 			$this->db->insert('car_model',$seater);
 		}
 		if($this->input->post('updateseater'))
 		{
+			$this->session->set_flashdata('model', "Successfully Updated.");
 			$this->db->where('ID',$this->input->post('modelid'));
 			$this->db->update('car_model',$seater);
 		}
-		$result = $this->car_model_m->get_all_car_model('ajax');
-		echo $result;
+		redirect('admin_c/car_model');
 	}
 
 	public function features()
@@ -99,48 +104,51 @@ class Admin extends CI_Controller {
 		$feature = array('FEATURE_NAME' => $this->input->post('feature'));
 		if(isset($_POST['feature']) != '' && $this->input->post('submitfeatures'))
 		{
+			$this->session->set_flashdata('msg', "Successfully Added.");
 			$this->db->insert('features',$feature);
 		}
 		if($this->input->post('updatefeatures'))
 		{
+			$this->session->set_flashdata('msg', "Successfully Updated.");
 			$this->db->where('ID',$this->input->post('featureid'));
 			$this->db->update('features',$feature);
 		}
-		$result = $this->features_m->get_all_features('ajax');
-		echo $result;
+		redirect('admin_c/features');
 	}
 	
-	public function packages()
+	public function packages($type='')
 	{
-		if($this->input->post('chkpackage') == 'Local')
+		if($type =='local')
 		{
 		$local = array('CITY_ID' => $this->input->post('city'),'LOCAL_NAME' => $this->input->post('package'));
 			if(isset($_POST['package']) != '' && $this->input->post('submitpackage'))
 			{
+				$this->session->set_flashdata('msg', "Successfully Added.");
 				$this->db->insert('package_local',$local);
 			}
 			if($this->input->post('updatepackage'))
 			{
+				$this->session->set_flashdata('msg', "Successfully Updated.");
 				$this->db->where('ID',$this->input->post('packageid'));
 				$this->db->update('package_local',$local);
 			}
-			$result = $this->packages_m->get_all_local_packages('ajax');
-			echo $result;
+			redirect('admin_c/local_package');
 		}
-		if($this->input->post('chkpackage') == 'Outstation')
+		if($type =='outstation')
 		{
 			$outstation = array('CITY_ID' => $this->input->post('city'),'OUTSTATION_NAME' => $this->input->post('package'));
 			if(isset($_POST['package']) != '' && $this->input->post('submitpackage'))
 			{
+				$this->session->set_flashdata('msg', "Successfully Added.");
 				$this->db->insert('package_outstation',$outstation);
 			}
 			if($this->input->post('updatepackage'))
 			{
+				$this->session->set_flashdata('msg', "Successfully Updated.");
 				$this->db->where('ID',$this->input->post('packageid'));
 				$this->db->update('package_outstation',$outstation);
 			}
-			$result = $this->packages_m->get_all_outstation_packages('ajax');
-			echo $result;
+			redirect('admin_c/outstation_package');
 		}
 		
 	}
@@ -159,15 +167,16 @@ class Admin extends CI_Controller {
 		);
 		if($this->input->post('submitdiscount'))
 		{
+			$this->session->set_flashdata('msg', "Successfully Added.");
 			$this->db->insert('discount_coupons',$info);
 		}
 		if($this->input->post('updatediscount'))
 		{
+			$this->session->set_flashdata('msg', "Successfully Updated.");
 			$this->db->where('ID',$this->input->post('discountid'));
 			$this->db->update('discount_coupons',$info);
 		}
-		$result = $this->discounts_m->get_all_discounts('ajax');
-		echo $result;
+		redirect('admin_c/discount');
 	}
 	
 	function block($id,$type)
@@ -175,12 +184,14 @@ class Admin extends CI_Controller {
 		$this->db->where('ID',$id);
 		$this->db->set('STATUS',0);
 		if($type == 'agent'){
+			$this->session->set_flashdata('msg', "Successfully Blocked Agent.");
 			$this->db->update('travel_agent');
-			$this->agentlistView();
+			echo 1;
 		}
 		if($type == 'user'){
+			$this->session->set_flashdata('msg', "Successfully Blocked User.");
 			$this->db->update('customer');
-			$this->userlistView();
+			echo 1;
 		}
 	
 	}
@@ -189,16 +200,18 @@ class Admin extends CI_Controller {
 		$this->db->where('ID',$id);
 		$this->db->set('STATUS',1);
 		if($type == 'agent'){
+			$this->session->set_flashdata('msg', "Successfully Unblocked Agent.");
 			$this->db->update('travel_agent');
-			$this->agentlistView();
+			echo 1;
 		}
 		if($type == 'user'){
+			$this->session->set_flashdata('msg', "Successfully Unblocked User.");
 			$this->db->update('customer');
-			$this->userlistView();
+			echo 1;
 		}
 	}
 	
-	function agentlistView()
+	/*function agentlistView()
 	{
 		$agents = $this->admin_m->get_all_agents();	
 		$view = '';
@@ -262,5 +275,5 @@ class Admin extends CI_Controller {
 		</table>";
 		
 		echo $view;
-	}
+	}*/
 }

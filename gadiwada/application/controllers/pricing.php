@@ -9,176 +9,182 @@ class Pricing extends CI_Controller {
 		$this->load->model('inventory_m');
 		$this->load->model('car_type_m');
 		$this->load->model('packages_m');
+		$this->load->model('pricing_m');
 	}
-	public function show($action='',$id=0)
+	public function show()
 	{
-		if($this->input->post('submit'))
-		{
-			if($action == 'add'&& $id == 0){
-				$car_features = implode(',',$this->input->post('car_features'));
-				$inventory = array(
-					'AGENT_ID'            =>$this->session->userdata('id'),
-					'CAR_TYPE'            => $this->input->post('car_type'),
-					'CAR_NAME'            => $this->input->post('car_name'),
-					'CAR_NUMBER'          => $this->input->post('car_no'),
-					'PURCHASE_YEAR'       => $this->input->post('year'),
-					'CAR_FEATURES'        => $car_features,
-					'OWNER_NAME'          => $this->input->post('owner_name'),
-					'OWNER_NUMBER'        => $this->input->post('owner_no'),
-					'AGREEMEST_START_DATE'=> $this->input->post('agg_start'),
-					'AGREEMEST_END_DATE'  => $this->input->post('agg_end'),
-					'AC'                  => $this->input->post('ac'),
-					'NON_AC'              => $this->input->post('nonac'),
-					'LOCAL'               => $this->input->post('local'),
-					'OUTSTATION'          => $this->input->post('outstation')
-				);
-				$this->inventory_m->save($inventory);
-			}
-			if($action == 'update' && $id > 0 )
-			{
-				$inventory_update = array(
-				'OWNER_NAME'          => $this->input->post('owner_name'),
-				'OWNER_NUMBER'        => $this->input->post('owner_no'),
-				'AGREEMEST_START_DATE'=> $this->input->post('agg_start'),
-				'AGREEMEST_END_DATE'  => $this->input->post('agg_end'),
-				'AC'                  => $this->input->post('ac'),
-				'NON_AC'              => $this->input->post('nonac'),
-				'LOCAL'               => $this->input->post('local'),
-				'OUTSTATION'          => $this->input->post('outstation')
-				);
-				$this->inventory_m->update($inventory_update,$id);
-			}
-		}
-		$data['result'] = $this->inventory_m->get_all_data();
+		$active = $this->session->flashdata('actives');
+		$type = $this->session->flashdata('type');
+		$data['price_type'] = $type;
+		$data['active'] = $active;
+		$data['out_price_type'] = $type;
 		$data['local'] = $this->packages_m->get_all_local_packages();
 		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
 		$data['pricing'] = 'active';
 		$data['feature'] = $this->admin_m->get_all_feature();
 		$data['car_type'] = $this->car_type_m->get_all_car_type();
-		//$data['localflxprice'] = $this->packages_m->get_all_local_flexible_data();
-		//$data['localpackprice'] = $this->packages_m->get_all_local_package_data();
-		//$data['$outflxprice'] = $this->packages_m->get_all_outstation_flexible_data();
-		//$data['$outpackprice'] = $this->packages_m->get_all_outstation_package_data();
+		$data['localFlexiData'] = $this->pricing_m->get_all_local_flexible_data('flexible');
+		$data['localPackData'] = $this->pricing_m->get_all_local_flexible_data('package');
+		$data['outFlexiData'] = $this->pricing_m->get_all_outstation_flexible_data('flexible');
+		$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package');
 		$this->load->view('pricing',$data);
 	}
-	
-	/*public function view($id)
+
+	public function edit($id=0,$type='')
 	{
-		$result = $this->inventory_m->get_inventory_details($id);
-		$view = '';
-		$view .= "<h4>Inventory Details</h4><table id='inventory_table'  class='table table-bordered table-striped table-condensed'>
-			<tr><th>Car type</th><td>".$result->CAR_TYPE."</td></tr>
-			<tr>	<th>Car name</th><td>". $result->CAR_NAME."</td></tr>
-			<tr>	<th>Car number</th><td>". $result->CAR_NUMBER."</td></tr>
-			<tr>	<th>Purchase year</th><td>". $result->PURCHASE_YEAR."</td></tr>
-			<tr>	<th>Car Features</th><td>". $result->CAR_FEATURES."</td></tr>
-			<tr>	<th>Owner Name</th><td>". $result->OWNER_NAME."</td></tr>
-			<tr>	<th>Owner Number</th><td>". $result->OWNER_NUMBER."</td></tr>
-			<tr>	<th>Agreement start date</th><td>". $result->AGREEMEST_START_DATE."</td></tr>
-			<tr>	<th>Agreement end date</th><td>". $result->AGREEMEST_END_DATE ."</td></tr>";
-		$view .="</table>";
-		echo $view;
-	}
-	*/
-	
-	public function edit($id)
-	{
+		$data['price_type'] = $type;
 		$data['edtyp'] = 'Update';
 		$data['result'] = $this->inventory_m->get_all_data();
-		$data['inventory'] = 'active';
+		$data['pricing'] = 'active';
+		$data['active'] = 'local';
 		$data['feature'] = $this->admin_m->get_all_feature();
 		$data['car_type'] = $this->car_type_m->get_all_car_type();
-		$data['info'] = $this->inventory_m->get_inventory_details($id);
+		$data['local'] = $this->packages_m->get_all_local_packages();
+		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
+		$data['localFlexi'] = $this->pricing_m->get_all_local_flexible_data('flexible',$id);
+		$data['localPack'] = $this->pricing_m->get_all_local_flexible_data('package',$id);
+		$data['localFlexiData'] = $this->pricing_m->get_all_local_flexible_data('flexible');
+		$data['localPackData'] = $this->pricing_m->get_all_local_flexible_data('package');
+		$data['outFlexiData'] = $this->pricing_m->get_all_outstation_flexible_data('flexible');
+		$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package');
 		$this->load->view('pricing',$data);
 	}
 	
-	public function localFlexible()
+	public function localFlexible($action='',$type='')
 	{
-		$localPricing = array(
-			'car_type' => $this->input->post('car_type'),
-			'car_name' => $this->input->post('car_name'),
+		if($type == 'flexible')
+		{
+			$localPricing = array(
+			'price_for' => $this->input->post('price_for'),
+			'car_type_id' => $this->input->post('car_type'),
+			'car_model_id' => $this->input->post('car_name'),
 			'ac_nonac' => $this->input->post('ac_nonac'),
 			'min_halt_time' => $this->input->post('min_halt_time'),
-			'price' => $this->input->post('price'),
-			'per_km_price' => $this->input->post('per_km_price'),
-			'area0' => $this->input->post('area0'),
-			'area1' => $this->input->post('area1'),
-			'area2' => $this->input->post('area2'),
-			'area3' => $this->input->post('area3'),
-			'area4' => $this->input->post('area4'),
-			'calculator' => $this->input->post('calculator')
+			'price_per_min_booking_time' => $this->input->post('price'),
+			'price_per_km' => $this->input->post('per_km_price'),
+			'base_operating_area_0' => $this->input->post('area0'),
+			'base_operating_area_1' => $this->input->post('area1'),
+			'base_operating_area_2' => $this->input->post('area2'),
+			'base_operating_area_3' => $this->input->post('area3'),
+			'base_operating_area_4' => $this->input->post('area4')
 			);
-		if($this->input->post('localFlexibleSubmit'))
-		{
-			$this->db->insert('local_flexible_pricing',$localPricing);
+			if($action == 'add')
+			{
+				$this->db->insert('pricing_local',$localPricing);
+			}
+			if($action == 'update')
+			{
+				$this->db->where('ID',$this->input->post('localflxid'));
+				$this->db->update('pricing_local',$localPricing);
+			}
+			$this->session->set_flashdata('type', $this->input->post('price_for'));
+			redirect('pricing/show');
 		}
-		if($this->input->post('localFlexibleUpdate'))
+		if($type == 'package')
 		{
-			$this->db->where('ID',$this->input->post('localflxid'));
-			$this->db->update('local_flexible_pricing',$localPricing);
-		}
-		$result = $this->packages_m->get_all_local_flexible_data('ajax');
-		echo $result;
-	}
-	
-	function localPackage()
-	{
-		$localPricing = array(
-			'car_type' => $this->input->post('car_type'),
-			'car_name' => $this->input->post('car_name'),
+			$localPricingPackage = array(
+			'price_for' => $this->input->post('price_for'),
+			'car_type_id' => $this->input->post('car_type'),
+			'car_model_id' => $this->input->post('car_name'),
 			'ac_nonac' => $this->input->post('ac_nonac'),
 			'package' => $this->input->post('package'),
-			'extraprice' => $this->input->post('extraprice'),
-			'kilometerprice' => $this->input->post('kilometerprice'),
-			'hourprice' => $this->input->post('hourprice'),
-			'area0' => $this->input->post('area0'),
-			'area1' => $this->input->post('area1'),
-			'area2' => $this->input->post('area2'),
-			'area3' => $this->input->post('area3'),
-			'area4' => $this->input->post('area4'),
-			'calculator' => $this->input->post('calculator')
+			'extra_per_km' => $this->input->post('extra_per_km'),
+			'extra_per_hr' => $this->input->post('extra_per_hr'),
+			'base_operating_area_0' => $this->input->post('area0'),
+			'base_operating_area_1' => $this->input->post('area1'),
+			'base_operating_area_2' => $this->input->post('area2'),
+			'base_operating_area_3' => $this->input->post('area3'),
+			'base_operating_area_4' => $this->input->post('area4')
 			);
-		if($this->input->post('localPackageSubmit'))
-		{
-			$this->db->insert('local_package_pricing',$localPricing);
+			if($action == 'add')
+			{
+				$this->db->insert('pricing_local',$localPricingPackage);
+			}
+			if($action == 'update')
+			{
+				$this->db->where('ID',$this->input->post('localflxid'));
+				$this->db->update('pricing_local',$localPricingPackage);
+			}
+			$this->session->set_flashdata('type', $this->input->post('price_for'));
+			redirect('pricing/show');
 		}
-		if($this->input->post('localPackageUpdate'))
-		{
-			$this->db->where('ID',$this->input->post('localflxid'));
-			$this->db->update('local_package_pricing',$localPricing);
-		}
-		$result = $this->packages_m->get_all_local_package_data('ajax');
-		echo $result;
-	}   
-		  
-	public function outstationFlexible()
+	}
+	
+	public function update($id=0,$type='')
 	{
-		$outstationPricing = array(
-			'car_type' => $this->input->post('car_type'),
-			'car_name' => $this->input->post('car_name'),
+		$data['out_price_type'] = $type;
+		$data['edtyp'] = 'Update';
+		$data['result'] = $this->inventory_m->get_all_data();
+		$data['active'] = 'outstation';
+		$data['feature'] = $this->admin_m->get_all_feature();
+		$data['car_type'] = $this->car_type_m->get_all_car_type();
+		$data['local'] = $this->packages_m->get_all_local_packages();
+		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
+		$data['outFlexi'] = $this->pricing_m->get_all_outstation_flexible_data('flexible',$id);
+		$data['outPack'] = $this->pricing_m->get_all_outstation_flexible_data('package',$id);
+		$data['outFlexiData'] = $this->pricing_m->get_all_outstation_flexible_data('flexible');
+		$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package');
+		$this->load->view('pricing',$data);
+	}
+	
+	public function outstationFlexible($action='',$type='')
+	{
+		if($type == 'flexible')
+		{
+			$outstationPricing = array(
+			'price_for' => $this->input->post('price_for'),
+			'car_type_id' => $this->input->post('car_type'),
+			'car_model_id' => $this->input->post('car_name'),
 			'ac_nonac' => $this->input->post('ac_nonac'),
-			'time' => $this->input->post('time'),
-			'price' => $this->input->post('price'),
-			'extraprice' => $this->input->post('extraprice'),
-			'kilometerprice' => $this->input->post('kilometerprice'),
-			'area0' => $this->input->post('area0'),
-			'area1' => $this->input->post('area1'),
-			'area2' => $this->input->post('area2'),
-			'area3' => $this->input->post('area3'),
-			'area4' => $this->input->post('area4'),
-			'calculator' => $this->input->post('calculator')
+			'min_time_hr' => $this->input->post('min_time_hr'),
+			'price_per_min_booking_time' => $this->input->post('booking_time'),
+			'extra_price_per_hr' => $this->input->post('extra_price_per_hr'),
+			'price_per_km' => $this->input->post('kilometerprice'),
+			'base_operating_area_0' => $this->input->post('area0'),
+			'base_operating_area_1' => $this->input->post('area1'),
+			'base_operating_area_2' => $this->input->post('area2'),
+			'base_operating_area_3' => $this->input->post('area3'),
+			'base_operating_area_4' => $this->input->post('area4')
 			);
-		if($this->input->post('localFlexibleSubmit'))
-		{
-			$this->db->insert('local_outstation_pricing',$outstationPricing);
+			if($action == 'add')
+			{
+				$this->db->insert('pricing_outstation',$outstationPricing);
+			}
+			if($action == 'update')
+			{
+				$this->db->where('ID',$this->input->post('outflxid'));
+				$this->db->update('pricing_outstation',$outstationPricing);
+			}
 		}
-		if($this->input->post('localFlexibleUpdate'))
+		if($type == 'package')
 		{
-			$this->db->where('ID',$this->input->post('localflxid'));
-			$this->db->update('local_outstation_pricing',$outstationPricing);
+			$outPricingPackage = array(
+			'price_for' => $this->input->post('price_for'),
+			'car_type_id' => $this->input->post('car_type'),
+			'car_model_id' => $this->input->post('car_name'),
+			'ac_nonac' => $this->input->post('ac_nonac'),
+			'package' => $this->input->post('package'),
+			'extra_per_km' => $this->input->post('extra_per_km'),
+			'extra_per_hr' => $this->input->post('extra_per_hr'),
+			'base_operating_area_0' => $this->input->post('area0'),
+			'base_operating_area_1' => $this->input->post('area1'),
+			'base_operating_area_2' => $this->input->post('area2'),
+			'base_operating_area_3' => $this->input->post('area3'),
+			'base_operating_area_4' => $this->input->post('area4')
+			);
+			if($action == 'add')
+			{
+				$this->db->insert('pricing_outstation',$outPricingPackage);
+			}
+			if($action == 'update')
+			{
+				$this->db->where('ID',$this->input->post('localflxid'));
+				$this->db->update('pricing_outstation',$outPricingPackage);
+			}
 		}
-		$result = $this->packages_m->get_all_outstation_flexible_data('ajax');
-		echo $result;
+		$this->session->set_flashdata('type', $this->input->post('price_for'));
+		$this->session->set_flashdata('actives','outstation');
+		redirect('pricing/show','refresh');
 	}
 
 	function outstationPackage()
@@ -210,4 +216,5 @@ class Pricing extends CI_Controller {
 		$result = $this->packages_m->get_all_outstation_package_data('ajax');
 		echo $result;
 	}
+
 }

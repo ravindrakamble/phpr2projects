@@ -121,7 +121,7 @@
 								maxlength="12"/></td>
 								<td valign="top"  width="5%">
 									<a href="javascript:contacts_add();"> 
-										<img src="<?php echo base_url()?>images/Knob Add.png" width=16 alt="Add"> 
+										<img src="<?php echo base_url()?>images/KnobAdd.png" width=16 alt="Add"> 
 									</a>
 								</td>
 							</tr>

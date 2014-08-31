@@ -245,10 +245,10 @@ body{
 	display: block;
 }
 .box a{
-	color:#fff;
+	/*color:#fff;*/
 	font-size:1em;
 	text-transform:uppercase;
-	display:block;
+	display: inline;
 	transition: 0.5s ease;
 	-o-transition: 0.5s ease;
 	-webkit-transition: 0.5s ease;
