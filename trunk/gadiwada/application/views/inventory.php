@@ -1,9 +1,9 @@
-<?php $this->load->view('include/header');?>
-<script type="text/javascript">
-var TSort_Data = new Array ('inventory_table', 's', 's', 's','i','d','d','');
-</script>
-<!-- content -->
-<div class="content-boxs">
+<?php $this->load->view('include/admin_header');?>
+<style>
+table td, table th{
+	padding: 3px 10px !important;
+}
+</style>
 <?php if(isset($edtyp))$butlabel = 'Update'; else $butlabel = 'Submit';
 	   if($butlabel == 'Submit')$action ='add' ; else $action='update';?>
 <?php
@@ -47,8 +47,9 @@ if(isset($info) && !empty($info))
 		$i++;
 	/*}*/
 }?>
+
+	<h3>Inventory Details</h3>
 	<div id='inventory_data'>
-		<h3 align="center">Inventory Details</h3>
 		<form name="inventory" id="inventory" method="POST" action="<?php echo base_url()?>inventory/show/<?php echo $action.'/'.$id; ?>">
 		<?php 
 		$type = array();
@@ -138,28 +139,31 @@ if(isset($info) && !empty($info))
 					</td>
 				</tr>
 				<tr>
-					<td style="padding-left: 40%"><input type="submit" name="submit" value="<?php echo $butlabel;?>" class="btn btn-info"/> </td>
-					<td><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
+					<td align="right"><input type="submit" name="submit" value="<?php echo $butlabel;?>" class="btn btn-info"/> </td>
+					<td align="left"><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
 				</tr>
 			</table>
 		</form>  
 	</div>
 	<div id='inventory_view'>
-		<table id="inventory_table" class="table table-bordered table-striped table-condensed">
-			<tr>
-				<th>Car type</th>
-				<th>Car name</th>
-				<th>Car number</th>
-				<th>Purchase year</th>
-				<th>Agreement start date</th>
-				<th>Agreement end date</th>
-				<th colspan="3" width="10%">Action</th>
-			</tr>
-			
-			<?php if(!empty($result) && isset($result))
-			{
-				foreach($result as $row): ?>
+		<div id="collapse4" class="body">	
+		<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
+			<thead>
+				<tr>
+					<th>Car type</th>
+					<th>Car name</th>
+					<th>Car number</th>
+					<th>Purchase year</th>
+					<th>Agreement start date</th>
+					<th>Agreement end date</th>
+					<th colspan="3" width="10%">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php $numbers = 1;
+			foreach($result as $row){?>
 				<TR>
+				<td><?php echo $numbers;?></td>
 				<td><?php echo $row->CAR_TYPE ?></td>
 				<td><?php echo $row->CAR_NAME ?></td>
 				<td><?php echo $row->CAR_NUMBER ?></td>
@@ -173,33 +177,15 @@ if(isset($info) && !empty($info))
 					
 				<td><a class="btn btn-success btn-small" 
 						href="javascript:void(0)" onclick="viewdetails(<?php echo $row->ID ?>);"> View</a></td>
-				</TR>	
-				<?php endforeach;
-			} else { echo "</tr><td colspan='8'>No Result Found</td></tr>"; } ?>
+				<?php $numbers ++; ?>
+				</tr>	
+			<?php } ?>
+			</tbody>
 		</table>
+		</div>
 	</div>
-</div>
-<div id='viewdetails' style="display:none">
-
-</div>
 <script type="text/javascript">
 $(document).ready(function() {
-	/*var inventory = { 
-		target:        '#inventory_view', // target element(s) to be updated with server response 
-		beforeSubmit:  function(){
-			$.blockUI({ message: "<h6>Submiting data...please wait.</h6>" }) 			
-		},  // pre-submit callback 
-		success: function(){
-			$("a.fancybox").fancybox({ 
-					'overlayColor':	'#000'
-				});
-			$('#inventory').ajaxForm(inventory);			 
-			jQuery.unblockUI();
-		},  // post-submit callback 
-		resetForm: true ,      // reset the form after successful submit 
-		cache:false
-	};
-	$('#inventory').ajaxForm(inventory);*/
 });
 
 function viewdetails(id)
@@ -263,4 +249,4 @@ frmvalidator.addValidation("owner_no","numeric");
 frmvalidator.addValidation("agg_start","req","Please enter Agreement start date");
 frmvalidator.addValidation("agg_end","req","Please enter Agreement end date");
 </script>
-<?php $this->load->view('include/footer');?>
+<?php $this->load->view('include/admin_footer');?>

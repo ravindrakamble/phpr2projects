@@ -228,7 +228,7 @@ body{
 	margin-right:2%;
 }
 .box h3{
-	color:#FFF;
+	color:#0000;
 	font-size: 2.66em;
 }
 .box p{
@@ -238,7 +238,7 @@ body{
 	line-height: 1.5em;
 }
 .box span{
-	color: #A18825;
+	/*color: #A18825;*/
 	font-size: 0.875em;
 	padding:0 0 1em 0;
 	line-height: 1.5em;

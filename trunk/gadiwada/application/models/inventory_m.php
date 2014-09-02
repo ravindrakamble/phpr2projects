@@ -18,10 +18,9 @@ Class Inventory_m extends CI_Model{
 	function get_all_data()
 	{
 		$id = $this->session->userdata('id');
-		$query = $this->db->query("SELECT *,IF(STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') < NOW(),TRUE,FALSE) as ISEXPIRED FROM INVENTORY where AGENT_ID =$id");
+		$query = $this->db->query("SELECT distinct *,IF(STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') < NOW(),TRUE,FALSE) as ISEXPIRED FROM INVENTORY where AGENT_ID = $id");
 				 /*$this->db->select("IF(STR_TO_DATE(AGREEMEST_END_DATE,'%d/%m/%Y') < NOW(),1,0) as ISEXPIRED");
 		 $this->db->get('inventory');*/
-		$this->db->distinct();
 		return $query->result();
 	}
 	
