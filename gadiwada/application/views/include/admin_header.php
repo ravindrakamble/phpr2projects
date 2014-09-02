@@ -52,11 +52,7 @@
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.fancybox.pack.js?v=2.1.0"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/gen_validatorv4.js"></script>
         <script src="<?php echo base_url();?>js/jquery.numeric.js"></script>
-		<!--Block UI Start-->
 		
-        <script type="text/javascript" src="<?php echo base_url();?>js/jquery.blockUI.js"></script>
-		<script src="<?php echo base_url();?>js/jquery.form.js" type="text/javascript" charset="utf-8"></script>
-		<!--Block UI End-->
 		
 		<!--Calculator start-->
 		<link rel="stylesheet" href="<?php echo base_url();?>calculator/jquery.calculator.css">
@@ -106,6 +102,7 @@
 		t>    
 
 	<!--main Header End-->
+	
 </head>
 <body class="admin">
 <div id="over">
@@ -196,6 +193,7 @@
 	<!-- /.user-media -->
 	<!-- #menu -->
 	<ul id="menu" class="unstyled accordion collapse in">
+		<?php if($this->session->userdata('is_admin_logged_in') == true):?>
 			<li <?php if(isset($city)) echo "class='active'"; ?>>
 				<a href="<?php echo base_url()?>admin_c/city">
 					<i class="icon-building icon-large">
@@ -260,6 +258,45 @@
 					</i>Cancellation policy
 				</a>
 			</li>
+		<?php endif; ?>
+		<?php if($this->session->userdata('is_agent_logged_in') == true):?>
+			<li <?php if(isset($book)) echo "class='active'"; ?>>
+				<a href="<?php echo base_url()?>booking">
+					<i class="icon-shopping-cart icon-large">
+					</i>Booking
+				</a>
+			</li>
+			<li <?php if(isset($inventory)) echo "class='active'"; ?>>
+				<a href="<?php echo base_url()?>inventory/show">
+					<i class="icon-bar-chart icon-large">
+					</i>Inventory
+				</a>
+			</li>
+			<li <?php if(isset($lf)) echo "class='active'"; ?>>
+				<a href="<?php echo base_url()?>pricing/local/flexible">
+					<i class="icon-truck icon-large">
+					</i>Local Flexible 
+				</a>
+			</li>
+			<li <?php if(isset($lp)) echo "class='active'"; ?>>
+				<a href="<?php echo base_url()?>pricing/local/package">
+					<i class="icon-ambulance icon-large">
+					</i>Local Package 
+				</a>
+			</li>
+			<li <?php if(isset($of)) echo "class='active'"; ?>>
+				<a href="<?php echo base_url()?>pricing/outstation/flexible">
+					<i class="icon-truck icon-large">
+					</i>Outstation Flexible
+				</a>
+			</li>
+			<li <?php if(isset($op)) echo "class='active'"; ?>>
+				<a href="<?php echo base_url()?>pricing/outstation/package">
+					<i class="icon-ambulance icon-large">
+					</i>Outstation Package 
+				</a>
+			</li>
+		<?php endif; ?>
 	</ul>
 	<!-- /#menu -->
 

@@ -11,45 +11,78 @@ class Pricing extends CI_Controller {
 		$this->load->model('packages_m');
 		$this->load->model('pricing_m');
 	}
-	public function show()
+	public function local($view)
 	{
-		$active = $this->session->flashdata('actives');
-		$type = $this->session->flashdata('type');
-		$data['price_type'] = $type;
-		$data['active'] = $active;
-		$data['out_price_type'] = $type;
 		$data['local'] = $this->packages_m->get_all_local_packages();
-		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
-		$data['pricing'] = 'active';
 		$data['feature'] = $this->admin_m->get_all_feature();
 		$data['car_type'] = $this->car_type_m->get_all_car_type();
-		$data['localFlexiData'] = $this->pricing_m->get_all_local_flexible_data('flexible');
-		$data['localPackData'] = $this->pricing_m->get_all_local_flexible_data('package');
-		$data['outFlexiData'] = $this->pricing_m->get_all_outstation_flexible_data('flexible');
-		$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package');
-		$this->load->view('pricing',$data);
+		if($view == 'flexible'){
+			$data['lf'] = 'active';
+			$data['localFlexiData'] = $this->pricing_m->get_all_local_flexible_data('flexible');
+			$this->load->view('local_flexible',$data);
+		}
+		if($view == 'package'){
+			$data['lp'] = 'active';
+			$data['localPackData'] = $this->pricing_m->get_all_local_flexible_data('package');
+			$this->load->view('local_package',$data);
+		}
 	}
-
+	public function outstation($view)
+	{
+		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
+		$data['feature'] = $this->admin_m->get_all_feature();
+		$data['car_type'] = $this->car_type_m->get_all_car_type();
+		if($view == 'flexible'){
+			$data['of'] = 'active';
+			$data['outFlexiData'] = $this->pricing_m->get_all_outstation_flexible_data('flexible');
+			$this->load->view('outstation_flexible',$data);
+		}
+		if($view == 'package'){
+			$data['op'] = 'active';
+			$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package');
+			$this->load->view('outstation_package',$data);
+		}
+	}
 	public function edit($id=0,$type='')
 	{
-		$data['price_type'] = $type;
 		$data['edtyp'] = 'Update';
-		$data['result'] = $this->inventory_m->get_all_data();
-		$data['pricing'] = 'active';
-		$data['active'] = 'local';
 		$data['feature'] = $this->admin_m->get_all_feature();
 		$data['car_type'] = $this->car_type_m->get_all_car_type();
 		$data['local'] = $this->packages_m->get_all_local_packages();
-		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
-		$data['localFlexi'] = $this->pricing_m->get_all_local_flexible_data('flexible',$id);
-		$data['localPack'] = $this->pricing_m->get_all_local_flexible_data('package',$id);
-		$data['localFlexiData'] = $this->pricing_m->get_all_local_flexible_data('flexible');
-		$data['localPackData'] = $this->pricing_m->get_all_local_flexible_data('package');
-		$data['outFlexiData'] = $this->pricing_m->get_all_outstation_flexible_data('flexible');
-		$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package');
-		$this->load->view('pricing',$data);
+		if($type == 'flexible'){
+			$data['lf'] = 'active';
+			$data['localFlexi'] = $this->pricing_m->get_all_local_flexible_data('flexible',$id);
+			$data['localFlexiData'] = $this->pricing_m->get_all_local_flexible_data('flexible');
+			$this->load->view('local_flexible',$data);
+		}
+		if($type == 'package'){
+			$data['lp'] = 'active';
+			$data['localPack'] = $this->pricing_m->get_all_local_flexible_data('package',$id);
+			$data['localPackData'] = $this->pricing_m->get_all_local_flexible_data('package');
+			$this->load->view('local_package',$data);
+		}
+		
 	}
-	
+	function outstation_edit($id=0,$type='')
+	{
+		$data['edtyp'] = 'Update';
+		$data['feature'] = $this->admin_m->get_all_feature();
+		$data['car_type'] = $this->car_type_m->get_all_car_type();
+		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
+		if($type == 'flexible'){
+			$data['of'] = 'active';
+			$data['outFlexi'] = $this->pricing_m->get_all_outstation_flexible_data('flexible',$id);
+			$data['outFlexiData'] = $this->pricing_m->get_all_outstation_flexible_data('flexible');
+			$this->load->view('outstation_flexible',$data);
+		}
+		if($type == 'package'){
+			$data['op'] = 'active';
+			$data['outpack'] = $this->pricing_m->get_all_outstation_flexible_data('package',$id);
+			$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package');
+			$this->load->view('outstation_package',$data);
+		}
+		
+	}
 	public function localFlexible($action='',$type='')
 	{
 		if($type == 'flexible')
@@ -70,15 +103,16 @@ class Pricing extends CI_Controller {
 			);
 			if($action == 'add')
 			{
+				$this->session->set_flashdata('lpmsg', "Successfully Added.");
 				$this->db->insert('pricing_local',$localPricing);
 			}
 			if($action == 'update')
 			{
 				$this->db->where('ID',$this->input->post('localflxid'));
 				$this->db->update('pricing_local',$localPricing);
+				$this->session->set_flashdata('lpmsg', "Successfully Updated.");
 			}
-			$this->session->set_flashdata('type', $this->input->post('price_for'));
-			redirect('pricing/show');
+			redirect('pricing/local/flexible');
 		}
 		if($type == 'package')
 		{
@@ -98,35 +132,18 @@ class Pricing extends CI_Controller {
 			);
 			if($action == 'add')
 			{
+				$this->session->set_flashdata('lpmsg', "Successfully Added.");
 				$this->db->insert('pricing_local',$localPricingPackage);
 			}
 			if($action == 'update')
 			{
 				$this->db->where('ID',$this->input->post('localflxid'));
 				$this->db->update('pricing_local',$localPricingPackage);
+				$this->session->set_flashdata('lpmsg', "Successfully Updated.");
 			}
-			$this->session->set_flashdata('type', $this->input->post('price_for'));
-			redirect('pricing/show');
+			redirect('pricing/local/package');
 		}
 	}
-	
-	public function update($id=0,$type='')
-	{
-		$data['out_price_type'] = $type;
-		$data['edtyp'] = 'Update';
-		$data['result'] = $this->inventory_m->get_all_data();
-		$data['active'] = 'outstation';
-		$data['feature'] = $this->admin_m->get_all_feature();
-		$data['car_type'] = $this->car_type_m->get_all_car_type();
-		$data['local'] = $this->packages_m->get_all_local_packages();
-		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
-		$data['outFlexi'] = $this->pricing_m->get_all_outstation_flexible_data('flexible',$id);
-		$data['outPack'] = $this->pricing_m->get_all_outstation_flexible_data('package',$id);
-		$data['outFlexiData'] = $this->pricing_m->get_all_outstation_flexible_data('flexible');
-		$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package');
-		$this->load->view('pricing',$data);
-	}
-	
 	public function outstationFlexible($action='',$type='')
 	{
 		if($type == 'flexible')
@@ -148,13 +165,16 @@ class Pricing extends CI_Controller {
 			);
 			if($action == 'add')
 			{
+				$this->session->set_flashdata('omsg', "Successfully Added.");
 				$this->db->insert('pricing_outstation',$outstationPricing);
 			}
 			if($action == 'update')
 			{
 				$this->db->where('ID',$this->input->post('outflxid'));
 				$this->db->update('pricing_outstation',$outstationPricing);
+				$this->session->set_flashdata('omsg', "Successfully Updated.");
 			}
+			redirect('pricing/outstation/flexible','refresh');
 		}
 		if($type == 'package')
 		{
@@ -181,13 +201,32 @@ class Pricing extends CI_Controller {
 				$this->db->where('ID',$this->input->post('localflxid'));
 				$this->db->update('pricing_outstation',$outPricingPackage);
 			}
+			redirect('pricing/outstation/package','refresh');
 		}
-		$this->session->set_flashdata('type', $this->input->post('price_for'));
-		$this->session->set_flashdata('actives','outstation');
-		redirect('pricing/show','refresh');
 	}
 
-	function outstationPackage()
+
+	/*public function update($id=0,$type='')
+	{
+		$data['out_price_type'] = $type;
+		$data['edtyp'] = 'Update';
+		$data['result'] = $this->inventory_m->get_all_data();
+		$data['active'] = 'outstation';
+		$data['feature'] = $this->admin_m->get_all_feature();
+		$data['car_type'] = $this->car_type_m->get_all_car_type();
+		$data['local'] = $this->packages_m->get_all_local_packages();
+		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
+		$data['outFlexi'] = $this->pricing_m->get_all_outstation_flexible_data('flexible',$id);
+		$data['outPack'] = $this->pricing_m->get_all_outstation_flexible_data('package',$id);
+		$data['outFlexiData'] = $this->pricing_m->get_all_outstation_flexible_data('flexible');
+		$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package');
+		if($type == 'flexible')
+		redirect('pricing/local/flexible');
+		if($type == 'package')
+		redirect('pricing/local/package');
+	}*/
+	
+	/*function outstationPackage()
 	{
 		$outstationPricing = array(
 			'car_type' => $this->input->post('car_type'),
@@ -215,6 +254,6 @@ class Pricing extends CI_Controller {
 		}
 		$result = $this->packages_m->get_all_outstation_package_data('ajax');
 		echo $result;
-	}
+	}*/
 
 }

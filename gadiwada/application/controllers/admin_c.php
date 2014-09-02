@@ -87,5 +87,11 @@ class Admin_c extends CI_Controller {
 		$data['users'] = $this->admin_m->get_all_users();
 		$this->load->view('admin/block_unblock_user',$data);
 	}
+	function commission()
+	{
+		$data['comm'] ='active';
+		$data['users'] = $this->admin_m->get_all_users();
+		$this->load->view('admin/commission',$data);
+	}
 }
 ?>

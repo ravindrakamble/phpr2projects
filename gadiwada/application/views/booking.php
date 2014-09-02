@@ -1,14 +1,9 @@
-<?php $this->load->view('include/header');?>
-<script type="text/javascript">
-var TSort_Data = new Array ('mytable', 'd', 's', 's','s','i','d','');
-/*tsRegister();*/
-</script>
-<!-- content -->
-<div class="content-boxs">
+<?php $this->load->view('include/admin_header');?>
+
+
+<div id="collapse4" class="body">	
+	<h3>Booking</h3>
 	<table width="100%" frame="box">
-		<tr>
-			<td style="border: none" align="center" width="100%" colspan="6"><h3>Booking</h3></td>
-		</tr>
 		<tr>
 			<td>From Date :</td>
 			<td><input name="fromdate" type="text" id="fromdate" /></td>
@@ -17,46 +12,26 @@ var TSort_Data = new Array ('mytable', 'd', 's', 's','s','i','d','');
 			<td style="width: 30%"><input type="submit" name="btnSubmit" value="SHOW" id="btnSubmit" />	</td>
 		</tr>
 	</table>
-	<table width="100%" class="table table-bordered table-striped table-condensed" id="mytable">
-		<tr>
-			<th>Date</th>
-			<th>Car Type</th>
-			<th>Car Name</th>
-			<th>Car Number</th>
-			<th>Purchase Year</th>
-			<th>Agreement End Date</th>
-			<th></th>
-			<th></th>
-		</tr>
-		<tr>
-			<td>12/03/2014</td>
-			<td>4 seater</td>
-			<td>Indica</td>
-			<td>OR-05-AB-1990</td>
-			<td>2012</td>
-			<td>31/01/2014</td>
-			<td><a class="btn-warning">Book</a></td>
-			<td><a class="btn-danger">Cancel</a></td>
-		</tr>
-		<tr>
-			<td>14/03/2014</td>
-			<td>10 seater</td>
-			<td>Tavera</td>
-			<td>OR-05-AB-1992</td>
-			<td>2015</td>
-			<td>31/06/2014</td>
-			<td colspan="2"><span title="Can not be edited/ cancelled" class="btn-success">Booked by travelder</span></td>
-		</tr>
-		<tr>
-			<td>12/03/2014</td>
-			<td>4 seater</td>
-			<td>Indica</td>
-			<td>OR-05-AB-1990</td>
-			<td>2012</td>
-			<td>31/01/2014</td>
-			<td><a class="btn-inverse">Booked</a></td>
-			<td><a class="btn-danger">Cancel</a></td>
-		</tr>
+	<table  id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Car Type</th>
+				<th>Car Name</th>
+				<th>Car Number</th>
+				<th>Purchase Year</th>
+				<th>Agreement End Date</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php $numbers = 1;
+		foreach($booking_info as $b){ ?>
+		<!--DATA-->
+		<?php $numbers ++; 
+		 } ?>
+		</tbody>
 	</table>
 </div>
 <script type="text/javascript">
@@ -94,4 +69,4 @@ var todate = $('#todate').datepicker(
 }).data('datepicker');
 //Date Select From Datepicker end
 </script>
-<?php $this->load->view('include/footer');?>
+<?php $this->load->view('include/admin_footer');?>

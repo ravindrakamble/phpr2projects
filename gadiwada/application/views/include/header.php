@@ -260,9 +260,16 @@ function checkLogin()
 			    setTimeout(function(){ jQuery("#error").fadeOut(); }, 3500);
 			}
 			else{
-				//$("#success").fadeIn();
-				window.location.reload(true);
-			    setTimeout(function(){ window.location = "<?php echo base_url() ?>"; }, 500);
+				if(type == 'agent'){
+					//$("#success").fadeIn();
+					window.location.reload(true);
+				    setTimeout(function(){ window.location = "<?php echo base_url()?>booking"; }, 500);
+				}
+				else
+				{
+					window.location.reload(true);
+				    setTimeout(function(){ window.location = "<?php echo base_url()?>"; }, 500);
+				}
 			}
 		}
 	});  			

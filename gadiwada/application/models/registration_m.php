@@ -14,7 +14,7 @@ Class Registration_m extends CI_Model{
 	
 	function get_booking_info()
 	{
-		
+		return array();
 	}
 }
 	
