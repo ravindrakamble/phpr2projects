@@ -49,11 +49,11 @@
 		
 	</head>
 	<body>
-		<!-----start-header----->
+		<!--start-header-->
 		<div class="header">
-			<!---start-wrap---->
+			<!--start-wrap-->
 			<div class="wrap">
-				<!---start-top-header---->
+				<!--start-top-header-->
 				<div class="top-header">
 					<div class="top-header-left">
 						<p>Travel Agency</p>
@@ -99,7 +99,7 @@
 									else {
 										
 										echo 
-									"<li><a href='javascript:login(&apos;agent&apos;);'>
+									"<li><a href='".base_url()."agent'>
 											Travel Agent
 										</a>
 									</li>" ;
@@ -112,8 +112,8 @@
 					</div>
 					<div class="clear"> </div>
 				</div>
-				<!---End-top-header---->
-				<!----start-main-header----->
+				<!---End-top-header-->
+				<!--start-main-header-->
 				<div class="main-header">
 					<div class="logo">
 						<a href="index.html"><img src="<?php echo base_url()?>images/logo1.png" title="logo" /></a>
@@ -163,7 +163,7 @@
 					</div>
 					<div class="clear"> </div>
 				</div>
-				<!----End-main-header----->
+				<!--End-main-heade-->
 			</div>
 		</div>
 		<div class="clear"> </div>
@@ -261,14 +261,12 @@ function checkLogin()
 			}
 			else{
 				if(type == 'agent'){
-					//$("#success").fadeIn();
-					window.location.reload(true);
-				    setTimeout(function(){ window.location = "<?php echo base_url()?>booking"; }, 500);
+				    setTimeout(function(){ window.location = "<?php echo base_url()?>booking"; }, 50);
 				}
 				else
 				{
 					window.location.reload(true);
-				    setTimeout(function(){ window.location = "<?php echo base_url()?>"; }, 500);
+				    setTimeout(function(){ window.location = "<?php echo base_url()?>"; }, 50);
 				}
 			}
 		}
@@ -283,9 +281,7 @@ function customer_register()
 	var dataString = 'name='+name
 					+ '&email='+email			
 					+ '&phone='+phone			
-					+ '&password='+password
-	alert(dataString)	
-							
+					+ '&password='+password							
 	jQuery.ajax({
 		type:"POST",
 		url: "<?php echo base_url();?>login/create_customer_login",

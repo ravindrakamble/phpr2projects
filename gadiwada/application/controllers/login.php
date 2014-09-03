@@ -3,7 +3,7 @@ class login extends CI_Controller
 {
     function __construct()
     {
-    parent::__construct();
+    	parent::__construct();
         $this->load->model('login_m');
     }
    	function admin_login()
@@ -27,6 +27,30 @@ class login extends CI_Controller
 			echo $check;
 		}
 	}
+
+	function agent_login()
+	{
+		$uname = $this->input->post('username');
+	    $pass = $this->input->post('password');
+	    $check= $this->login_m->checkAgentLogin($uname,$pass);
+	    if($check==1)
+	    {
+			$usrId = $this->login_m->getAgentID($uname);
+				$data = array(
+					'username'    => $uname,
+					'id'          => $usrId,
+					'type'        => 'agent',
+					'is_agent_logged_in'=> true
+				);
+			$this->session->set_userdata($data);
+			//redirect(base_url());
+			echo $check;
+	    }
+		else{
+			echo $check;
+		}
+	}
+
     function checkLogin()
     {
     	
@@ -51,7 +75,7 @@ class login extends CI_Controller
 				echo $check;
 			}
 		}
-		else{
+		/*else{
 			$uname = $this->input->post('username');
 		    $pass = $this->input->post('password');
 		    $check= $this->login_m->checkAgentLogin($uname,$pass);
@@ -71,8 +95,7 @@ class login extends CI_Controller
 			else{
 				echo $check;
 			}
-		}
-	    
+		} */
 	}
 	
 	function create_customer_login()
