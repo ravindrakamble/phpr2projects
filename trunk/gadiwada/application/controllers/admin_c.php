@@ -12,18 +12,17 @@ class Admin_c extends CI_Controller {
 		$this->load->model('features_m');
 		$this->load->model('packages_m');
 		$this->load->model('discounts_m');
+		$this->load->model('pricing_m');
 	}
 	public function index()
 	{
 		$this->load->view('admin/login');
 	}
-	
 	function city(){
 		$data['city']='active';
 		$data['cities'] = $this->city_m->get_all_cities();
 		$this->load->view('admin/city',$data);
 	}
-	
 	function area()
 	{
 		$data['area']='active';
@@ -31,7 +30,6 @@ class Admin_c extends CI_Controller {
 		$data['areas']  = $this->area_m->get_all_areas();
 		$this->load->view('admin/area',$data);
 	}
-	
 	function car_type()
 	{
 		$data['type']='active';
@@ -45,14 +43,12 @@ class Admin_c extends CI_Controller {
 		$data['car_type'] = $this->car_type_m->get_all_car_type();
 		$this->load->view('admin/car_model',$data);
 	}
-	
 	function features()
 	{
 		$data['features']='active';
 		$data['features']  = $this->features_m->get_all_features();
 		$this->load->view('admin/features',$data);
 	}
-	
 	function local_package()
 	{
 		$data['localP']='active';
@@ -67,14 +63,12 @@ class Admin_c extends CI_Controller {
 		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
 		$this->load->view('admin/outstation_package',$data);
 	}
-	
 	function discount()
 	{
 		$data['disc']='active';
 		$data['discount']  = $this->discounts_m->get_all_discounts();
 		$this->load->view('admin/discount',$data);
 	}
-	
 	function block_unblock_agent()
 	{
 		$data['agt']='active';
@@ -87,11 +81,59 @@ class Admin_c extends CI_Controller {
 		$data['users'] = $this->admin_m->get_all_users();
 		$this->load->view('admin/block_unblock_user',$data);
 	}
+	public function local_flexible_commission()
+	{
+		$data['localFlexiData'] = $this->pricing_m->get_all_local_flexible_data('flexible');
+		$data['com'] = 'active';
+		$this->load->view('admin/local_flexible_commission',$data);
+	}
+	public function local_package_commission()
+	{
+		$data['com'] = 'active';
+		$data['localPackData'] = $this->pricing_m->get_all_local_flexible_data('package');
+		$this->load->view('admin/local_package_commission',$data);
+	}
+	public function outstation_flexible_commission()
+	{
+		$data['com'] = 'active';
+		$data['outFlexiData'] = $this->pricing_m->get_all_outstation_flexible_data('flexible');
+		$this->load->view('admin/outstation_flexible_commission',$data);
+	}
+	public function outstation_package_commission()
+	{
+		$data['com'] = 'active';
+		$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package');
+		$this->load->view('admin/outstation_package_commission',$data);
+	}
+	
 	function commission()
 	{
-		$data['comm'] ='active';
-		$data['users'] = $this->admin_m->get_all_users();
+		$data['com'] = 'active';
 		$this->load->view('admin/commission',$data);
+	}
+	
+	function commission_select()
+	{
+		$val = $this->input->post('comm');
+		if(!empty($val))
+		{
+			if($val == 'local_flexible'){
+				redirect('admin_c/local_flexible_commission');
+			}
+			if($val == 'local_package'){
+				redirect('admin_c/local_package_commission');
+			}
+			if($val == 'outstation_flexible'){
+				redirect('admin_c/outstation_flexible_commission');
+			}
+			if($val == 'outstation_package'){
+				redirect('admin_c/outstation_package_commission');
+			}
+		}
+		else{
+			redirect('admin_c/commission');
+		}
+		
 	}
 }
 ?>

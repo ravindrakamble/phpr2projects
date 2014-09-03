@@ -240,6 +240,24 @@
 					</i> Discount coupon
 				</a>
 			</li>
+			<!--<li <?php if(isset($lc)) echo "class='active'"; ?>>
+				<a href="<?php echo base_url()?>admin_c/local">
+					<i class="icon-truck icon-large">
+					</i>Local Commission 
+				</a>
+			</li>
+			<li <?php if(isset($oc)) echo "class='active'"; ?>>
+				<a href="<?php echo base_url()?>admin_c/outstation">
+					<i class="icon-truck icon-large">
+					</i>Outstation Commission
+				</a>
+			</li>-->
+			<li <?php if(isset($com)) echo "class='active'"; ?>>
+				<a href="<?php echo base_url()?>admin_c/commission">
+					<i class="icon-money icon-large">
+					</i>Commission 
+				</a>
+			</li>
 			<li <?php if(isset($agt)) echo "class='active'"; ?>>
 				<a href="<?php echo base_url()?>admin_c/block_unblock_agent">
 					<i class="icon-user icon-large">

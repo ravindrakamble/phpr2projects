@@ -61,7 +61,6 @@ class Pricing extends CI_Controller {
 			$data['localPackData'] = $this->pricing_m->get_all_local_flexible_data('package');
 			$this->load->view('local_package',$data);
 		}
-		
 	}
 	function outstation_edit($id=0,$type='')
 	{
@@ -77,11 +76,10 @@ class Pricing extends CI_Controller {
 		}
 		if($type == 'package'){
 			$data['op'] = 'active';
-			$data['outpack'] = $this->pricing_m->get_all_outstation_flexible_data('package',$id);
+			$data['outPack'] = $this->pricing_m->get_all_outstation_flexible_data('package',$id);
 			$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package');
 			$this->load->view('outstation_package',$data);
 		}
-		
 	}
 	public function localFlexible($action='',$type='')
 	{
@@ -184,8 +182,8 @@ class Pricing extends CI_Controller {
 			'car_model_id' => $this->input->post('car_name'),
 			'ac_nonac' => $this->input->post('ac_nonac'),
 			'package' => $this->input->post('package'),
-			'extra_per_km' => $this->input->post('extra_per_km'),
-			'extra_per_hr' => $this->input->post('extra_per_hr'),
+			'price_per_km' => $this->input->post('extra_per_km'),
+			'extra_price_per_hr' => $this->input->post('extra_per_hr'),
 			'base_operating_area_0' => $this->input->post('area0'),
 			'base_operating_area_1' => $this->input->post('area1'),
 			'base_operating_area_2' => $this->input->post('area2'),
@@ -194,12 +192,14 @@ class Pricing extends CI_Controller {
 			);
 			if($action == 'add')
 			{
+				$this->session->set_flashdata('omsg', "Successfully Added.");
 				$this->db->insert('pricing_outstation',$outPricingPackage);
 			}
 			if($action == 'update')
 			{
-				$this->db->where('ID',$this->input->post('localflxid'));
+				$this->db->where('ID',$this->input->post('outflxid'));
 				$this->db->update('pricing_outstation',$outPricingPackage);
+				$this->session->set_flashdata('omsg', "Successfully Updated.");
 			}
 			redirect('pricing/outstation/package','refresh');
 		}
