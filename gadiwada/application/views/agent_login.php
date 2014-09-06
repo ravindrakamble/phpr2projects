@@ -1,9 +1,9 @@
 <?php $this->load->view('include/header');?>
 <div class="content-boxs" align="center">
 
-<p id="success" class="alert alert-success"></p>
-<p id="error" class="alert alert-danger"></p>
 <h2>Agent Login</h2>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/form-validation.js"></script>
+    <p width="20%" id="errors" class="alert alert-error"></p>
 	<form id="agentform" name="agentform">
 		<table>
 			<tr>
@@ -57,20 +57,27 @@ function form_submit(){
 }
 </script>-->
 <script type="text/javascript">
-$(document).ready(function() { 
-	$("#error").hide();
-	$("#success").hide();
+jQuery(document).ready(function($) {   
+	// hide messages 
+	$("#errors").hide();
+	
+	$("input").keypress(function(event) {
+	    if (event.which == 13) {
+	        event.preventDefault();
+	      	$("#agentform #submit").click();
+	    }
+	});
 	
 
 	// on submit...
 	$("#agentform #submit").click(function() {
-		$("#error").hide();
+		$("#errors").hide();
 		//required:
 		
 		//username
 		var username = $("input#unm").val();
 		if(username == ""){
-			$("#error").fadeIn().text("Username required.");
+			$("#errors").fadeIn().text("Email ID Required.");
 			$("input#username").focus();
 			return false;
 		}
@@ -78,7 +85,7 @@ $(document).ready(function() {
 		//password
 		var password = $("input#password").val();
 		if(password == ""){
-			$("#error").fadeIn().text("Password required");
+			$("#errors").fadeIn().text("Password Required");
 			$("input#password").focus();
 			return false;
 		}
@@ -95,15 +102,12 @@ $(document).ready(function() {
 			success: function(data) {
 			   if(data==1)
 			   {
-				  $("#success").html("Login Success");   
-				  $("#success").fadeIn();
-				  $("#agentform").fadeOut();
 			  	  setTimeout(function(){ window.location = "<?php echo base_url() ?>booking"; }, 50);
 			   }
 			   else
 			   {
-				   $("#error").html("INVALID LOGIN PLEASE TYR AGAIN...")
-				   $("#error").fadeIn();
+				   $("#errors").html("INVALID LOGIN PLEASE TRY AGAIN...")
+				   $("#errors").fadeIn();
 			   }
 			}
 		});

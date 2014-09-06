@@ -5,6 +5,7 @@ Class City_m extends CI_Model{
 	{
 		$this->db->distinct('city');
 		$this->db->select('*');
+		$this->db->where('CITY_NAME !=','');
 		$query=$this->db->get('city')->result();
 		return $query;
 	}

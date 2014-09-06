@@ -32,6 +32,7 @@ Class Area_m extends CI_Model{
 		$this->db->from('area');
 		$this->db->join('city','area.CITY_ID = city.ID');
 		$this->db->where('city.CITY_NAME',$city);
+		$this->db->where('AREA_NAME !=','');
 		$query = $this->db->get()->result();
 		return $query;
 	}

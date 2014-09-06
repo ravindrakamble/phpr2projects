@@ -11,10 +11,10 @@ var TSort_Data = new Array ('dataTable', 'd', 's', 's','s','s','s','i','');
 			</tr>
 			<tr>
 				<td>Booking Id (Bill Number):</td>
-				<td><input name="txtBookingId" type="text" id="txtBookingId" /></td>
+				<td><input name="txtBookingId" maxlength="15" type="text" id="txtBookingId" /></td>
 				<td>Phone Number :</td>
 				<td><input name="txtPhn" type="text" id="txtPhn" /></td>
-				<td><input type="button" onclick="javascript:ticket_info();" name="btnSubmit" value="Submit" id="btnSubmit" /></td>
+				<td><input type="button" maxlength="12" onclick="javascript:ticket_info();" name="btnSubmit" value="Submit" id="btnSubmit" /></td>
 			</tr>
 		</table>
 	</form>

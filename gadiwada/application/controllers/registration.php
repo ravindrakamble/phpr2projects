@@ -8,7 +8,7 @@ class Registration extends CI_Controller {
 		$this->load->model('city_m');
 		$this->load->model('registration_m');
 	}
-	public function index()
+	public function index($id=0)
 	{
 		if($this->input->post('submit')){
 			$info = array (
@@ -34,12 +34,12 @@ class Registration extends CI_Controller {
 			$email = $this->input->post('contact_email');
 			$phone = $this->input->post('contact_phone');
 			$mobile = $this->input->post('contact_mobile');
-			if(count($con_name) != 0)
+			if(count($con_name) != 0 && $id > 0)
 			{
 				for($i=0; $i<count($con_name); $i++)
 				{
 					$contact = array(
-						'BUSINESS_ID' => $id,
+						'AGENT_ID' => $id,
 						'CONTACT_NAME'=> $con_name[$i],
 						'EMAIL'       => $email[$i],
 						'PHONE_NO'    => $phone[$i],

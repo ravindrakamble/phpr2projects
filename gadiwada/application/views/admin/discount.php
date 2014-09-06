@@ -4,7 +4,7 @@
     display:none;
 }
 table td, table th{
-	padding: 3px 10px !important;
+	/*padding: 3px 10px !important;*/
 }
 </style>
 	<?php
@@ -42,10 +42,10 @@ table td, table th{
 			</tr>
 			<tr>
 				<td>Coupon type</td>
-				<td><input type="radio" data-id="General" name='coupontype' required="true" value="General">
+				<td><input type="radio" onclick="coupon_type(this.value);" id="cou_General" name='coupontype' required="true" value="General">
 				&nbsp;&nbsp;General
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="radio" data-id="Specific" required="true" name='coupontype' value="Specific" >
+				<input type="radio" onclick="coupon_type(this.value);" id="cou_Specific" required="true" name='coupontype' value="Specific" >
 				&nbsp;&nbsp;Specific</td>
 			</tr>
 			
@@ -111,14 +111,10 @@ table td, table th{
 jQuery(document).ready(function($)
 { 
 	jQuery( "#datepicker" ).datepicker({
-        showButtonPanel: true
+        showButtonPanel: true,
+		dateFormat: 'dd/mm/yy'
     });
-	
-	$(':radio').change(function (event) {
-	    var id = $(this).data('id');
-	    $('#' + id).addClass('none').siblings().removeClass('none');
-	});
-	
+		
  	$("#alert").fadeTo(2000,2000).fadeOut(2000, function(){
     }); 
 	$(".delete_btn").click(function()
@@ -131,6 +127,10 @@ jQuery(document).ready(function($)
 		return true;
 	});
 });
+function coupon_type(id)
+{
+    $('#' + id).addClass('none').siblings().removeClass('none');
+}
 //Discount 
 function editdiscount(id)
 {
@@ -145,14 +145,35 @@ function editdiscount(id)
 			$('input#code').val(discount.COUPON_CODE);
 			$('input#amount').val(discount.DISCOUNT_AMOUNT);
 			$('input#percentage').val(discount.DISCOUNT_PERCENTAGE);
-			$('input#lastdate').val(discount.EXPIRY_DATE);
+			var jsondt = discount.EXPIRY_DATE;
+			var dt = jsondt.replace(/\\/g, '');
+			$('input#datepicker').val(dt);
 			$('input#minprice').val(discount.MIN_PURCHASE_PRICE);
-			$('input#coupontype').val(discount.COUPON_TYPE);
+			if(discount.COUPON_TYPE == 'General') {
+				 $('#cou_General').attr("checked", "checked");
+			}else {
+				$('#cou_Specific').attr("checked", "checked");
+			}
+			//$('#'+'cou_'+discount.COUPON_TYPE).is(':checked') ;
+			//$('input#coupontype').val(discount.COUPON_TYPE);
 			$('input#limit').val(discount.MAX_LIMIT);
 			$('input#mobile').val(discount.PASSENGER_MOBILE_NO);
+			coupon_type(discount.COUPON_TYPE);
 			$("#updatediscount").show();
 		}
 	});
 }
+var frmvalidator = new Validator("discountform");
+frmvalidator.addValidation("code","req","Please enter Coupon code");
+
+frmvalidator.addValidation("amount","req","Please enter Discount Amount");
+frmvalidator.addValidation("amount","numeric",'Please Enter Numeric Value');
+frmvalidator.addValidation("percentage","req","Please enter Discount Percentage");
+frmvalidator.addValidation("percentage","numeric",'Please Enter Numeric Value');
+frmvalidator.addValidation("lastdate","req","Please enter Last date of discount");
+frmvalidator.addValidation("minprice","req","Please enter Minimum Purchase price");
+frmvalidator.addValidation("minprice","numeric",'Please Enter Numeric Value');
+
+frmvalidator.addValidation("coupontype","req","Please Select Coupon type");
 </script>
 <?php  $this->load->view('include/admin_footer'); ?>

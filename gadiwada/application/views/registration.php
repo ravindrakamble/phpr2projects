@@ -96,7 +96,7 @@
 						</tr>
 						<tr>
 							<td>Email Id (Username)</td>
-							<td><input type="email" name="username" maxlength="20"/></td>
+							<td><input type="email" name="username" maxlength="40"/></td>
 						</tr>
 						<tr>
 							<td>Password</td>
@@ -121,7 +121,7 @@
 								maxlength="12"/></td>
 								<td valign="top"  width="5%">
 									<a href="javascript:contacts_add();"> 
-										<img src="<?php echo base_url()?>images/KnobAdd.png" width=16 alt="Add"> 
+										<img src="<?php echo base_url()?>img/KnobAdd.png" width=16 alt="Add"> 
 									</a>
 								</td>
 							</tr>
@@ -143,7 +143,7 @@ $(document).ready(function($) {
 });
 function contacts_add()
 {
-	var appendTxt = "<tr><td width='10%'><input type='text' name='contact_name[]' id='contact_name'maxlength='30' /></td><td  width='10%'><input type='email' name='contact_email[]' id='contact_email' maxlength='30'/></td><td  width='10%'><input type='text' name='contact_phone[]' id='contact_phone' maxlength='12'/></td><td  width='10%'><input type='text' name='contact_mobile[]' id='contact_mobile' maxlength='12'/></td><td width='5%' valign='top'><a onclick='deleteRow(this)'><img style='margin-top:5px;' class='del' src='<?php echo base_url()?>images/Knob Remove Red.png' width=16 alt='Remove'></a></td></tr>";
+	var appendTxt = "<tr><td width='10%'><input type='text' name='contact_name[]' id='contact_name'maxlength='30' /></td><td  width='10%'><input type='email' name='contact_email[]' id='contact_email' maxlength='30'/></td><td  width='10%'><input type='text' name='contact_phone[]' id='contact_phone' maxlength='12'/></td><td  width='10%'><input type='text' name='contact_mobile[]' id='contact_mobile' maxlength='12'/></td><td width='5%' valign='top'><a onclick='deleteRow(this)'><img style='margin-top:5px;' class='del' src='<?php echo base_url()?>img/KnobRemove.png' width=16 alt='Remove'></a></td></tr>";
 		$('#contacts tr:last').after(appendTxt);
 }
 function deleteRow(row)

@@ -98,10 +98,12 @@ class Search_result extends CI_Controller {
 						
 						if($this->session->userdata('is_customer_logged_in') == 'ture')
 						{
-	$search_result.="<a href='".base_url()."billing/new_booking/".$row->ID."' class='btn-small btn-warning'>Book</a></td></tr>";
+	$search_result.="<a href='".base_url()."billing/new_booking/".$row->ID."' class='btn-small btn-success'>Book</a></td></tr>";
 						}
 						else{
-	$search_result.="<span class='btn-small btn-inverse'>Login</spna></td></tr>";
+	$search_result.="<a class='btn-min btn-warning' href='javascript:login(&apos;cust&apos;);'>
+											Login
+										</a></td></tr>";
 						}
 						
 		
@@ -130,7 +132,6 @@ class Search_result extends CI_Controller {
 		$attributes = array('id' => 'search', 'name' => 'search', 'class' => 'form');
 
 		$filter_result .= form_open("#",$attributes);
-		$filter_result .= form_fieldset();
 		
 		$isChecked = false;
 		foreach ($car_model as $model){

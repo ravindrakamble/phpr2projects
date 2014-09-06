@@ -9,7 +9,7 @@
 	<h2>Local Packages</h2>
 	<?php 
 		$city = array();
-		$city['0']='--';
+		$city['']='--';
 		foreach($cities as $c){
 			$city[$c->ID]=$c->CITY_NAME;
 		}

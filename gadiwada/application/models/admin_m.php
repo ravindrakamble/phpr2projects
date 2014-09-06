@@ -6,6 +6,7 @@ Class Admin_m extends CI_Model{
 	{
 		$this->db->distinct('MODEL_NAME');
 		$this->db->select('MODEL_NAME');
+		$this->db->where('MODEL_NAME !=','');
 		$query=$this->db->get('car_model');
 		return $query->result();
 	}
@@ -14,6 +15,7 @@ Class Admin_m extends CI_Model{
 	{
 		$this->db->distinct('FEATURE_NAME');
 		$this->db->select('FEATURE_NAME,ID');
+		$this->db->where('FEATURE_NAME !=','');
 		$query=$this->db->get('features');
 		return $query->result();
 	}
@@ -22,6 +24,7 @@ Class Admin_m extends CI_Model{
 	{
 		$this->db->distinct();
 		$this->db->select('*')->from('travel_agent');
+		$this->db->where('BUSINESS_NAME !=','');
 		$this->db->where('STATUS',1);
 		$query = $this->db->get();
 		return $query->result();
@@ -41,6 +44,7 @@ Class Admin_m extends CI_Model{
 	{
 		$this->db->distinct();
 		$this->db->select('*')->from('customer');
+		$this->db->where('CUST_NAME !=','');
 		$query = $this->db->get();
 		return $query->result();
 	}

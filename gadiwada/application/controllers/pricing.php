@@ -85,7 +85,9 @@ class Pricing extends CI_Controller {
 	{
 		if($type == 'flexible')
 		{
+			$agent_id = $this->session->userdata('id');
 			$localPricing = array(
+			'agent_id' => $agent_id,
 			'price_for' => $this->input->post('price_for'),
 			'car_type_id' => $this->input->post('car_type'),
 			'car_model_id' => $this->input->post('car_name'),
@@ -114,7 +116,9 @@ class Pricing extends CI_Controller {
 		}
 		if($type == 'package')
 		{
+			$agent_id = $this->session->userdata('id');
 			$localPricingPackage = array(
+			'agent_id' => $agent_id,
 			'price_for' => $this->input->post('price_for'),
 			'car_type_id' => $this->input->post('car_type'),
 			'car_model_id' => $this->input->post('car_name'),
@@ -146,7 +150,9 @@ class Pricing extends CI_Controller {
 	{
 		if($type == 'flexible')
 		{
+			$agent_id = $this->session->userdata('id');
 			$outstationPricing = array(
+			'agent_id' =>$agent_id,
 			'price_for' => $this->input->post('price_for'),
 			'car_type_id' => $this->input->post('car_type'),
 			'car_model_id' => $this->input->post('car_name'),
@@ -176,7 +182,9 @@ class Pricing extends CI_Controller {
 		}
 		if($type == 'package')
 		{
+			$agent_id = $this->session->userdata('id');
 			$outPricingPackage = array(
+			'agent_id' =>$agent_id,
 			'price_for' => $this->input->post('price_for'),
 			'car_type_id' => $this->input->post('car_type'),
 			'car_model_id' => $this->input->post('car_name'),

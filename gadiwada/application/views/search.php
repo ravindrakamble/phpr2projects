@@ -1,5 +1,6 @@
 <?php $this->load->view('include/header');?>
 			<!-- content -->
+<style>th, td{ padding: 5px;}table{margin-left:20%;}</style>
 	<div class="content-boxs">
 		<?php 
 		$city = array();
@@ -34,7 +35,7 @@
 				<table style="width: 40%">
 	            <tr>
 	                <td>Journey Date : </td>
-	                <td> <input class="dt" name='journeydate' id='journeydate' /></td>
+	                <td> <input class="dt" name='journeydate' id='journeydate1' /></td>
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
@@ -91,7 +92,7 @@
 			<table style="width: 40%">
 	            <tr>
 	                <td>Journey Date : </td>
-	                <td> <input class="dt" name='journeydate' id='journeydate' /></td>
+	                <td> <input class="dt" name='journeydate' id='journeydate2' /></td>
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
@@ -145,15 +146,22 @@
 	</div>
 	<!--content end-->
 <script type="text/javascript">
-$(document).ready(function() {
-	$('#myTab a:first').tab('show');
-	$(".dt").datepicker(
-	{
-		minDate: '0',
+$(function() {
+	$('#journeydate1').datepicker({
+		dateFormat: 'dd/mm/yy',
+		minDate: 0
+	});
+	$('#journeydate2').datepicker({
+		dateFormat: 'dd/mm/yy',
+		minDate: 0
+	});
+	/*$(".dt").datepicker(
+	{ 
+		startDate: '-0m',
 		format: 'dd/mm/yyyy'
 	}).on('changeDate', function(e){
     $(this).datepicker('hide');
-	});
+	});*/
 	
 	if($(".city").val() != "--" && $(".city").val() != "0"){
 		sendrequest($(".city").val());
@@ -189,6 +197,7 @@ function sendrequest(city){
 				if(response == ""){
 					$('.area').empty();
 				}else{
+					$('.area').empty();
 					$('.area').append(response);
 				}
 				

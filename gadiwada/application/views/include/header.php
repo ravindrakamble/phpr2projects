@@ -1,33 +1,36 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
 		<title>Gadivada</title>
-		<link href='http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css">
+		<!--<link href='http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>-->
 		<!--Templete CSS  -->
 		<link href="<?php echo base_url()?>css/style.css" rel="stylesheet" type="text/css"  media="all" />
 		<!--<link href="<?php echo base_url()?>css/responsiveslides.css" rel="stylesheet" type="text/css"  media="all" />-->
 		<!--Templete CSS End -->
-		<link href='<?php echo base_url();?>css/datepicker.css' rel='stylesheet' type='text/css'/>
+		<!--<link href='<?php echo base_url();?>css/datepicker.css' rel='stylesheet' type='text/css'/>-->
 		<link href='<?php echo base_url();?>css/bootstrap.css' rel='stylesheet' type='text/css'/>
 		
 		
         <link rel="stylesheet" href="<?php echo base_url();?>css/jquery.fancybox.css?v=2.1.0" type="text/css" media="screen" />
 		<!--Jquery Tab CSS-->
-		<!--<link href="<?php echo base_url()?>css/ion.tabs.css" rel="stylesheet" type="text/css"  media="all" />
+		<link href="<?php echo base_url()?>css/ion.tabs.css" rel="stylesheet" type="text/css"  media="all" />
 		<link href="<?php echo base_url()?>css/ion.tabs.skinBordered.css" rel="stylesheet" type="text/css"  media="all" />
 		<link href="<?php echo base_url()?>css/ion.tabs.skinFlat.css" rel="stylesheet" type="text/css"  media="all" />
-		<link href="<?php echo base_url()?>css/normalize.css" rel="stylesheet" type="text/css"  media="all" />-->
+		<link href="<?php echo base_url()?>css/normalize.css" rel="stylesheet" type="text/css"  media="all" />
 		<!--Jquery Tab CSS End -->
 		
 		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
 		<script src="<?php echo base_url()?>js/bootstrap.js"></script>
-		<script src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>
+		<!--<script src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>-->
 		
 		<script type="text/javascript" src="<?php echo base_url();?>js/gs_sortable.js"></script>
-        <script type="text/javascript" src="<?php echo base_url()?>js/jquery.fancybox.pack.js?v=2.1.0"></script>
+        <script type="text/javascript" src="<?php echo base_url()?>js/jquery.fancybox.pack.js?v=2.1.0">
+		</script>
         <script type="text/javascript" src="<?php echo base_url()?>js/gen_validatorv4.js"></script>
         <script src="<?php echo base_url();?>js/jquery.numeric.js"></script>
 		<!--Block UI Start-->
@@ -36,9 +39,9 @@
 		<!--Block UI End-->
 		
 		<!--Calculator start-->
-		<link rel="stylesheet" href="<?php echo base_url();?>calculator/jquery.calculator.css">
+		<!--<link rel="stylesheet" href="<?php echo base_url();?>calculator/jquery.calculator.css">
 		<script src="<?php echo base_url();?>calculator/jquery.plugin.js"></script>
-		<script src="<?php echo base_url();?>calculator/jquery.calculator.js"></script>
+		<script src="<?php echo base_url();?>calculator/jquery.calculator.js"></script>-->
 		<!--Calculator end-->
 
 		<!--<script src="<?php echo base_url()?>js/responsiveslides.min.js"></script>-->
@@ -47,6 +50,16 @@
 		<script src="<?php echo base_url()?>js/vendor/jquery-1.10.2.min.js"></script>-->
 		<!--Jquery Tab JS END-->
 		
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54184848-1', 'auto');
+  ga('send', 'pageview');
+</script>
 	</head>
 	<body>
 		<!--start-header-->
@@ -77,12 +90,22 @@
 									</li>-->
 									&nbsp;&nbsp;
 									<?php if($this->session->userdata('type') == 'customer' && $this->session->userdata('is_customer_logged_in') == 'ture' ){
-									echo "<a href='".base_url()."login/logout'>
+									/*echo "<a href='".base_url()."login/logout'>
 											Logout
+										</a>";*/
+									} 
+									elseif($this->session->userdata('type') == 'agent' && $this->session->userdata('is_agent_logged_in') == 'ture' ){
+									echo "<a href='".base_url()."booking'>
+											Agent View
+										</a>";
+									}
+									
+									elseif($this->session->userdata('type') == 'admin' && $this->session->userdata('is_admin_logged_in') == 'ture' ){
+									echo "<a href='".base_url()."admin_c/city'>
+											Admin View
 										</a>";
 									}
 									else {
-										
 										echo 
 									"<li><a href='javascript:login(&apos;cust&apos;);'>
 											My Account
@@ -91,18 +114,15 @@
 									}
 									?>
 									&nbsp;&nbsp;&nbsp;
-									<?php if($this->session->userdata('type') == 'agent' && $this->session->userdata('is_agent_logged_in') == 'ture' ){
+									<?php if($this->session->userdata('is_login') == 'ture' ){
 									echo "<a href='".base_url()."login/logout'>
 											Logout
 										</a>";
 									}
-									else {
-										
-										echo 
-									"<li><a href='".base_url()."agent'>
-											Travel Agent
-										</a>
-									</li>" ;
+									else{
+									echo "<a href='".base_url()."agent'>
+											Agent Login
+										</a>";
 									}
 									?>
 								</ul>
@@ -132,33 +152,6 @@
 							
 							<li  <?php if(isset($registration)&& !empty($registration)) echo "class='active'"; ?>>
 							<a href="<?php echo base_url()?>registration"> Registration </a></li>
-							
-							
-							<?php if($this->session->userdata('type') == 'agent' && $this->session->userdata('is_agent_logged_in') == 'ture' ) { ?>
-							<li <?php if(isset($inventory) || isset($booking) || isset($pricing) || isset($billing) ) echo "class='active dropdown'" ; else echo "class='dropdown'" ; ?> >
-								<a  class="dropdown-toggle" data-toggle="dropdown" 
-									href=""> 
-									Agent <b class="caret"></b>
-								</a>
-								<ul class="dropdown-menu">
-									<li <?php if(isset($inventory)&& !empty($inventory)) echo "class='active'"; ?>>
-										<a href="<?php echo base_url()?>inventory/show/"> 
-											Inventory
-										</a>
-									</li>
-									<li <?php if(isset($booking)&&!empty($booking)) echo "class='active'"; ?> >
-										<a href="<?php echo base_url()?>booking">Booking</a>
-									</li>
-									<li <?php if(isset($pricing)&&!empty($pricing)) echo "class='active'"; ?> >
-										<a href="<?php echo base_url()?>pricing/show">Pricing</a>
-									</li>
-									<li <?php if(isset($billing)&&!empty($billing)) echo "class='active'"; ?> >
-										<a href="<?php echo base_url()?>billing">Billing</a>
-									</li>
-								</ul>
-							<?php } ?>
-							</li>
-							
 						</ul>
 					</div>
 					<div class="clear"> </div>
@@ -189,8 +182,14 @@
 </div>
 <div id="signup" style="display: none">
 	<form name="signup" id='signup' method="POST">
-		<h4>Create a new account</h4>
 		<table>
+			<tr>
+				<td><font color="#26819b">Already Registered Please</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+				<td>
+				<a  class="btn-small btn-warning" href="javascript:parent.jQuery.fancybox.open({href :'#travelAgent'});">LOGIN</a>
+				</td>
+			</tr>
+			<tr><td colspan="2"><h4>Create a new account</h4></td></tr>
 			<tr>
 				<td>Enter your name:</td>
 				<td><input type="text" name="name" id="name" maxlength='30'/> </td>
@@ -216,12 +215,6 @@
 				<td><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
 			</tr>
 			<tr><td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
-			<tr>
-				<td><font color="#26819b">Already Registered Please</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-				<td>
-				<a  class="btn-warning" href="javascript:parent.jQuery.fancybox.open({href :'#travelAgent'});">LOGIN</a>
-				</td>
-			</tr>
 		</table>
 	</form>
 </div>
