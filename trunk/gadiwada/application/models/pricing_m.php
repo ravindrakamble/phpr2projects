@@ -2,10 +2,15 @@
 Class Pricing_m extends CI_Model{
 	function get_all_local_flexible_data($type='',$id=0)
 	{
+		$agent_id=0;
+		$agent_id = $this->session->userdata('id');
 		$q = $this->db->select('pricing_local.*,car_type.TYPE_NAME,car_model.MODEL_NAME')
 			->from('pricing_local');
 			$this->db->join('car_type', 'car_type.ID = pricing_local.car_type_id');
 			$this->db->join('car_model', 'car_model.TYPE_ID = car_type.ID and car_model.ID = pricing_local.car_model_id ');
+			if($agent_id > 0){
+				$this->db->where('agent_id',$agent_id);
+			}
 			if($id > 0){
 				$this->db->where('pricing_local.ID',$id);
 			}
@@ -22,10 +27,15 @@ Class Pricing_m extends CI_Model{
 	
 	function get_all_outstation_flexible_data($type='',$id=0)
 	{
+		$agent_id=0;
+		$agent_id = $this->session->userdata('id');
 		$q = $this->db->select('pricing_outstation.*,car_type.TYPE_NAME,car_model.MODEL_NAME')
 			->from('pricing_outstation');
 			$this->db->join('car_type', 'car_type.ID = pricing_outstation.car_type_id');
 			$this->db->join('car_model', 'car_model.TYPE_ID = car_type.ID and car_model.ID = pricing_outstation.car_model_id ');
+			if($agent_id > 0){
+				$this->db->where('agent_id',$agent_id);
+			}
 			if($id > 0){
 				$this->db->where('pricing_outstation.ID',$id);
 			}

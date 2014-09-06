@@ -9,7 +9,7 @@
 	<h2>Car Model</h2>
 	<?php 
 		$type = array();
-		$type['0']='--';
+		$type['']='--';
 		    foreach($car_type as $c){
 			  $type[$c->ID]=$c->TYPE_NAME;
 		}

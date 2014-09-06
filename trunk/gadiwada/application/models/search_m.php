@@ -27,12 +27,11 @@ Class Search_m extends CI_Model
 		if($opr_names != '0' && $opr_names != ''){
 			$this->db->where_in('travel_agent.BUSINESS_NAME',explode(',',$opr_names));
 		}
-		
 		if($features != '0'  && $features != ''){
 			$this->db->like('inventory.CAR_FEATURES',$features);
 		}
 		$query = $this->db->get();
-		//echo $this->db->last_query();
+		echo $this->db->last_query();
 		return $query->result();
 	}
 	

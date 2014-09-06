@@ -164,4 +164,5 @@ function inputValidation()
 		</td>
 	</tr>
 </table>
+
 <?php $this->load->view('include/footer');?>

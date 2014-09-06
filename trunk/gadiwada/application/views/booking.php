@@ -41,6 +41,7 @@ var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(),
 var fromdate = $('#fromdate').datepicker(
 {
 	format:'dd/mm/yyyy',
+		minDate: 0,
 	onRender: function(date)
 	{
 		return date.valueOf() < now.valueOf() ? 'disabled' : '';
@@ -59,6 +60,7 @@ var fromdate = $('#fromdate').datepicker(
 var todate = $('#todate').datepicker(
 {
 	format:'dd/mm/yyyy',
+		minDate: 0,
 	onRender: function(date)
 	{
 		return date.valueOf() <= fromdate.date.valueOf() ? 'disabled' : '';

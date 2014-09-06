@@ -14,9 +14,8 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-50843743-1', 'admizon.com');
+  ga('create', 'UA-54184848-1', 'auto');
   ga('send', 'pageview');
-
 </script>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -24,12 +23,13 @@
 	<meta name="description" content="Bizstrap: Bootstrap Responsive Admin Theme">
 	<meta name="viewport" content="width=device-width">
 	<title>Gadivada</title>
-		<link href='http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css">
 		<!--Templete CSS  -->
 		<link href="<?php echo base_url()?>css/style.css" rel="stylesheet" type="text/css"  media="all" />
 		<!--<link href="<?php echo base_url()?>css/responsiveslides.css" rel="stylesheet" type="text/css"  media="all" />-->
 		<!--Templete CSS End -->
-		<link href='<?php echo base_url();?>css/datepicker.css' rel='stylesheet' type='text/css'/>
+		<!--<link href='<?php echo base_url();?>css/datepicker.css' rel='stylesheet' type='text/css'/>-->
 		<link href='<?php echo base_url();?>css/bootstrap.css' rel='stylesheet' type='text/css'/>
 		
 		
@@ -43,10 +43,11 @@
 		
 		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 		
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
 		<script src="<?php echo base_url()?>js/bootstrap.js"></script>
-		<script src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>
+		<!--<script src="<?php echo base_url()?>js/bootstrap-datepicker.js"></script>-->
 		
 		<script type="text/javascript" src="<?php echo base_url();?>js/gs_sortable.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.fancybox.pack.js?v=2.1.0"></script>
@@ -73,7 +74,7 @@
 	<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/css/font-awesome.min.css"/>
 	<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css">
 	<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/css/DT_bootstrap.css"/>
-	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/responsive-tables.css">
+	<!--<link rel="stylesheet" href="<?php echo base_url();?>assets/css/responsive-tables.css">-->
 
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/theme.css">
 	
@@ -123,7 +124,7 @@
 					<span class="icon-bar">
 					</span>
 				</a>
-				<a class="brand" href="index.html">
+				<a class="brand" href="<?php echo base_url()?>">
 					Gadivada
 				</a>	
 
@@ -156,13 +157,15 @@
 	
 	<!-- ."main-bar -->
 	<div class="main-bar">
-		<div class="container-fluid">
+		<div class="container-fluid" style="margin-top: 7px">
 			<div class="row-fluid">
 				<div class="span12">
-					<h3>
+					<h2>
 						<i class="icon-home icon-large">
-						</i>Gadivada
-					</h3>
+						</i><a style="color:Black" class="brand" href="<?php echo base_url()?>">
+					Gadivada
+				</a>
+					</h2>
 				</div>
 			</div>
 			<!-- /.row-fluid -->
@@ -270,7 +273,7 @@
 					</i>Block/Unblock User
 				</a>
 			</li>
-			<li <?php if(isset($user)) echo "class='active'"; ?>>
+			<li <?php if(isset($cancel)) echo "class='active'"; ?>>
 				<a href="<?php echo base_url()?>admin_c/cancellation">
 					<i class="icon-trash icon-large">
 					</i>Cancellation policy

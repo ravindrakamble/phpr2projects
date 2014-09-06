@@ -9,7 +9,7 @@
 	<h2>Area</h2>
 	<?php 
 		$city = array();
-		$city['0']='--';
+		$city['']='--';
 		foreach($cities as $c){
 			$city[$c->ID]=$c->CITY_NAME;
 		}
@@ -86,5 +86,11 @@ function editarea(id)
 		}
 	});
 }
+</script>
+<!-- Validation  -->
+<script type="text/javascript">
+/*var frmvalidator = new Validator("areaform");
+frmvalidator.addValidation("city","dontselect=0","Please select city");
+frmvalidator.addValidation("area","req","Please enter area");*/
 </script>
 <?php  $this->load->view('include/admin_footer'); ?>

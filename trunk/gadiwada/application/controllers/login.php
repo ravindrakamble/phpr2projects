@@ -18,7 +18,8 @@ class login extends CI_Controller
 					'username'    => $uname,
 					//'id'          => $usrId,
 					'type'        => 'admin',
-					'is_admin_logged_in'=> true
+					'is_admin_logged_in'=> true,
+						'is_login'  =>true
 				);
 			$this->session->set_userdata($data);
 			echo $check;
@@ -40,7 +41,8 @@ class login extends CI_Controller
 					'username'    => $uname,
 					'id'          => $usrId,
 					'type'        => 'agent',
-					'is_agent_logged_in'=> true
+					'is_agent_logged_in'=> true,
+						'is_login'  =>true
 				);
 			$this->session->set_userdata($data);
 			//redirect(base_url());
@@ -66,7 +68,8 @@ class login extends CI_Controller
 						'username'    => $uname,
 						'id'          => $usrId,
 						'type'        => 'customer',
-						'is_customer_logged_in'=> true
+						'is_customer_logged_in'=> true,
+						'is_login'  =>true
 					);
 				$this->session->set_userdata($data);
 				echo $check;

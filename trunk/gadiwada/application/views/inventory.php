@@ -1,7 +1,7 @@
 <?php $this->load->view('include/admin_header');?>
 <style>
 table td, table th{
-	padding: 3px 10px !important;
+	/*padding: 3px 10px !important;*/
 }
 </style>
 <?php if(isset($edtyp))$butlabel = 'Update'; else $butlabel = 'Submit';
@@ -26,8 +26,8 @@ $disable = '';
 $readonly = '';
 if(isset($info) && !empty($info))
 {
-	/*foreach($info as $in)
-	{*/
+	foreach($info as $in)
+	{
 		$id = $info->ID;
 		$CAR_TYPES = $info->CAR_TYPE;
 		$CAR_NAME = $info->CAR_NAME;
@@ -45,21 +45,20 @@ if(isset($info) && !empty($info))
 		$disable = 'disabled';
 		$readonly = 'readonly';
 		$i++;
-	/*}*/
+	}
 }?>
 
 	<h3>Inventory Details</h3>
-	<div id='inventory_data'>
 		<form name="inventory" id="inventory" method="POST" action="<?php echo base_url()?>inventory/show/<?php echo $action.'/'.$id; ?>">
 		<?php 
 		$type = array();
 			$type['0']='--';
 			    foreach($car_type as $c){
-				  $type[$c->ID]=$c->TYPE_NAME;
+				  $type[$c->TYPE_NAME]=$c->TYPE_NAME;
 			}
 		$features = array();
 			    foreach($feature as $f){
-				  $features[$f->ID]=$f->FEATURE_NAME;
+				  $features[$f->FEATURE_NAME]=$f->FEATURE_NAME;
 			}
 		?>
 			<table width="100%">
@@ -139,24 +138,24 @@ if(isset($info) && !empty($info))
 					</td>
 				</tr>
 				<tr>
-					<td align="right"><input type="submit" name="submit" value="<?php echo $butlabel;?>" class="btn btn-info"/> </td>
-					<td align="left"><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
+					<td><input type="submit" name="submit" value="<?php echo $butlabel;?>" class="btn btn-info"/> </td>
+					<td><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
 				</tr>
 			</table>
 		</form>  
-	</div>
-	<div id='inventory_view'>
 		<div id="collapse4" class="body">	
 		<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
 			<thead>
 				<tr>
+					<th>ID</th>
 					<th>Car type</th>
 					<th>Car name</th>
 					<th>Car number</th>
 					<th>Purchase year</th>
 					<th>Agreement start date</th>
 					<th>Agreement end date</th>
-					<th colspan="3" width="10%">Action</th>
+					<th>Status</th>
+					<th width="13%">Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -171,39 +170,43 @@ if(isset($info) && !empty($info))
 				<td><?php echo $row->AGREEMEST_START_DATE ?></td>
 				<td><?php echo $row->AGREEMEST_END_DATE ?></td>
 			<?php  if($row->ISEXPIRED == '0')  $status ='Active';  else $status ='Inactive';?>
-				<td><span class="btn-danger btn-small"><?php echo $status ?></span></td>
+				<td>
+				<?php 
+				if($row->ISEXPIRED == '0')
+				echo '<label class="label label-success">Active</label>';
+				else
+				echo '<label class="label label-danger">Inactive</label>';
+				?>
+				</td>
 				<td><a href="<?php echo base_url().'inventory/edit/'.$row->ID ?>" 
-					class="btn btn-warning btn-small">Edit</a></td>
+					class="btn btn-warning btn-small">Edit</a>&nbsp;&nbsp;
 					
-				<td><a class="btn btn-success btn-small" 
+				<a class="btn btn-success btn-small" 
 						href="javascript:void(0)" onclick="viewdetails(<?php echo $row->ID ?>);"> View</a></td>
-				<?php $numbers ++; ?>
+				<?php $numbers++ ; ?>
 				</tr>	
 			<?php } ?>
 			</tbody>
 		</table>
 		</div>
-	</div>
 <script type="text/javascript">
-$(document).ready(function() {
-});
-
 function viewdetails(id)
 {
- $.ajax({ 
-    type    : "POST", 
-    url     : "<?php echo base_url()?>inventory/view/"+id, 
-    success : function(data) { 
-            $.fancybox(data); 
-	} 
-}); 
-return false; 
+	 $.ajax({ 
+	    type    : "POST", 
+	    url     : "<?php echo base_url()?>inventory/view/"+id, 
+	    success : function(data) { 
+	            $.fancybox(data); 
+		} 
+	}); 
+	return false; 
 }
 var nowTemp = new Date();
 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 var start = $('#start').datepicker(
 {
-	format:'dd/mm/yyyy',
+	dateFormat: 'dd/mm/yy',
+		minDate: 0,
 	onRender: function(date)
 	{
 		return date.valueOf() < now.valueOf() ? 'disabled' : '';
@@ -222,6 +225,7 @@ var start = $('#start').datepicker(
 var end = $('#end').datepicker(
 {
 	format:'dd/mm/yyyy',
+		minDate: 0,
 	onRender: function(date)
 	{
 		return date.valueOf() <= start.date.valueOf() ? 'disabled' : '';
@@ -231,20 +235,19 @@ var end = $('#end').datepicker(
 	end.hide();
 }).data('datepicker');
 </script>
+
 <script type="text/javascript">
 var frmvalidator = new Validator("inventory");
 frmvalidator.addValidation("car_type","dontselect=0","Please select your car type");
 frmvalidator.addValidation("car_name","req","Please enter your Car Name");
-frmvalidator.addValidation("car_name","alpha","Alphabetic chars only");
 frmvalidator.addValidation("car_no","req","Please enter your Car Number");
 frmvalidator.addValidation("year","req","Please enter your Purchase year");
-frmvalidator.addValidation("year","numeric");
-//frmvalidator.addValidation("car_features","dontselect=0",'Please select your Car Features');
+frmvalidator.addValidation("year","numeric",'Please Enter Numeric Value');
+frmvalidator.addValidation("car_features[]","req",'Please select your Car Features');
 
 frmvalidator.addValidation("owner_name","req","Please enter your Name");
-frmvalidator.addValidation("owner_name","alpha","Please enter valid name");
 frmvalidator.addValidation("owner_no","req","Please enter owner number");
-frmvalidator.addValidation("owner_no","numeric");
+frmvalidator.addValidation("owner_no","numeric",'Please Enter Numeric Value');
 
 frmvalidator.addValidation("agg_start","req","Please enter Agreement start date");
 frmvalidator.addValidation("agg_end","req","Please enter Agreement end date");

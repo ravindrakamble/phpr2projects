@@ -32,87 +32,117 @@ class Admin extends CI_Controller {
 
 	public function city()
 	{
-		$city = array( 'CITY_NAME' => $this->input->post('city'));
-		if(isset($_POST['city']) != '' && $this->input->post('submitcity'))
-		{
-			$this->session->set_flashdata('city_msg', "Successfully Added.");
-			$this->db->insert('city',$city);
+		$ci = $this->input->post('city');
+		if(!empty($ci)){
+			$city = array( 'CITY_NAME' => $ci);
+			if(isset($_POST['city']) != '' && $this->input->post('submitcity'))
+			{
+				$this->session->set_flashdata('city_msg', "Successfully Added.");
+				$this->db->insert('city',$city);
+			}
+			if($this->input->post('updatecity'))
+			{
+				$this->session->set_flashdata('city_msg', "Successfully Updated.");
+				$this->db->where('ID',$this->input->post('cityid'));
+				$this->db->update('city',$city);
+			}
 		}
-		if($this->input->post('updatecity'))
-		{
-			$this->session->set_flashdata('city_msg', "Successfully Updated.");
-			$this->db->where('ID',$this->input->post('cityid'));
-			$this->db->update('city',$city);
-		}
-		
+		else
+		$this->session->set_flashdata('city_msg', "Please Enter City.");
 		redirect('admin_c/city');
 	}
 
 	public function area()
 	{
-		$area = array( 'AREA_NAME' => $this->input->post('area'),'CITY_ID' =>$this->input->post('city'));
-		if(isset($_POST['area']) != '' && $this->input->post('submitarea'))
+		$areas = $this->input->post('area');
+		$city = $this->input->post('city');
+		if(!empty($areas) && !empty($city))
 		{
-			$this->session->set_flashdata('area_msg', "Successfully Added.");
-			$this->db->insert('area',$area);
+			$area = array( 'AREA_NAME' => $areas,'CITY_ID' =>$city);
+			if(isset($_POST['area']) != '' && $this->input->post('submitarea'))
+			{
+				$this->session->set_flashdata('area_msg', "Successfully Added.");
+				$this->db->insert('area',$area);
+			}
+			if($this->input->post('updatearea'))
+			{
+				$this->session->set_flashdata('area_msg', "Successfully Updated.");
+				$this->db->where('ID',$this->input->post('areaid'));
+				$this->db->update('area',$area);
+			}
 		}
-		if($this->input->post('updatearea'))
-		{
-			$this->session->set_flashdata('area_msg', "Successfully Updated.");
-			$this->db->where('ID',$this->input->post('areaid'));
-			$this->db->update('area',$area);
-		}
+		else
+		$this->session->set_flashdata('area_msg', "Please Enter Area.");
 		redirect('admin_c/area');
 	}
 
 	public function car_type()
 	{
-		$car_type = array('TYPE_NAME' => $this->input->post('cartype'));
-		if(isset($_POST['cartype']) != '' && $this->input->post('submitcartype'))
+		$car_type = $this->input->post('cartype');
+		if(!empty($car_type))
 		{
-			$this->session->set_flashdata('type_msg', "Successfully Added.");
-			$this->db->insert('car_type',$car_type);
+			$car_type = array('TYPE_NAME' => $this->input->post('cartype'));
+			if(isset($_POST['cartype']) != '' && $this->input->post('submitcartype'))
+			{
+				$this->session->set_flashdata('type_msg', "Successfully Added.");
+				$this->db->insert('car_type',$car_type);
+			}
+			if($this->input->post('updatecartype'))
+			{
+				$this->session->set_flashdata('type_msg', "Successfully Updated.");
+				$this->db->where('ID',$this->input->post('cartypeid'));
+				$this->db->update('car_type',$car_type);
+			}
 		}
-		if($this->input->post('updatecartype'))
-		{
-			$this->session->set_flashdata('type_msg', "Successfully Updated.");
-			$this->db->where('ID',$this->input->post('cartypeid'));
-			$this->db->update('car_type',$car_type);
-		}
+		else
+		$this->session->set_flashdata('type_msg', "Please Select Car Type.");
 		redirect('admin_c/car_type');
 	}
 	//Not yet Complited
 	public function car_model()
 	{
-		$seater = array( 'MODEL_NAME' => $this->input->post('model'),'TYPE_ID' =>$this->input->post('cartype'));
+		$model = $this->input->post('model');
+		$cartype = $this->input->post('cartype');
+		if(!empty($model) && !empty($cartype))
+		{
+			$seater = array( 'MODEL_NAME' =>$model,'TYPE_ID' =>$cartype);
 		if(isset($_POST['model']) != '' && $this->input->post('submitseater'))
-		{
-			$this->session->set_flashdata('model', "Successfully Added.");
-			$this->db->insert('car_model',$seater);
+			{
+				$this->session->set_flashdata('model', "Successfully Added.");
+				$this->db->insert('car_model',$seater);
+			}
+			if($this->input->post('updateseater'))
+			{
+				$this->session->set_flashdata('model', "Successfully Updated.");
+				$this->db->where('ID',$this->input->post('modelid'));
+				$this->db->update('car_model',$seater);
+			}
 		}
-		if($this->input->post('updateseater'))
-		{
-			$this->session->set_flashdata('model', "Successfully Updated.");
-			$this->db->where('ID',$this->input->post('modelid'));
-			$this->db->update('car_model',$seater);
-		}
+		else
+		$this->session->set_flashdata('model', "Please Enter Car Model.");
 		redirect('admin_c/car_model');
 	}
 
 	public function features()
 	{
-		$feature = array('FEATURE_NAME' => $this->input->post('feature'));
-		if(isset($_POST['feature']) != '' && $this->input->post('submitfeatures'))
+		$features = $this->input->post('feature');
+		if(!empty($features))
 		{
-			$this->session->set_flashdata('msg', "Successfully Added.");
-			$this->db->insert('features',$feature);
+			$feature = array('FEATURE_NAME' => $features);
+			if(isset($_POST['feature']) != '' && $this->input->post('submitfeatures'))
+			{
+				$this->session->set_flashdata('msg', "Successfully Added.");
+				$this->db->insert('features',$feature);
+			}
+			if($this->input->post('updatefeatures'))
+			{
+				$this->session->set_flashdata('msg', "Successfully Updated.");
+				$this->db->where('ID',$this->input->post('featureid'));
+				$this->db->update('features',$feature);
+			}
 		}
-		if($this->input->post('updatefeatures'))
-		{
-			$this->session->set_flashdata('msg', "Successfully Updated.");
-			$this->db->where('ID',$this->input->post('featureid'));
-			$this->db->update('features',$feature);
-		}
+		else
+		$this->session->set_flashdata('msg', "Please Enter Features.");
 		redirect('admin_c/features');
 	}
 	
@@ -120,34 +150,48 @@ class Admin extends CI_Controller {
 	{
 		if($type =='local')
 		{
-		$local = array('CITY_ID' => $this->input->post('city'),'LOCAL_NAME' => $this->input->post('package'));
-			if(isset($_POST['package']) != '' && $this->input->post('submitpackage'))
+			$city = $this->input->post('city');
+			$package = $this->input->post('package');
+			if(!empty($city) && !empty($package))
 			{
-				$this->session->set_flashdata('msg', "Successfully Added.");
-				$this->db->insert('package_local',$local);
+				$local = array('CITY_ID' => $city,'LOCAL_NAME' => $package);
+				if(isset($_POST['package']) != '' && $this->input->post('submitpackage'))
+				{
+					$this->session->set_flashdata('msg', "Successfully Added.");
+					$this->db->insert('package_local',$local);
+				}
+				if($this->input->post('updatepackage'))
+				{
+					$this->session->set_flashdata('msg', "Successfully Updated.");
+					$this->db->where('ID',$this->input->post('packageid'));
+					$this->db->update('package_local',$local);
+				}
 			}
-			if($this->input->post('updatepackage'))
-			{
-				$this->session->set_flashdata('msg', "Successfully Updated.");
-				$this->db->where('ID',$this->input->post('packageid'));
-				$this->db->update('package_local',$local);
-			}
+			else
+			$this->session->set_flashdata('msg', "All Fields are required.");
 			redirect('admin_c/local_package');
 		}
 		if($type =='outstation')
 		{
-			$outstation = array('CITY_ID' => $this->input->post('city'),'OUTSTATION_NAME' => $this->input->post('package'));
-			if(isset($_POST['package']) != '' && $this->input->post('submitpackage'))
+			$city = $this->input->post('city');
+			$package = $this->input->post('package');
+			if(!empty($city) && !empty($package))
 			{
-				$this->session->set_flashdata('msg', "Successfully Added.");
-				$this->db->insert('package_outstation',$outstation);
+				$outstation = array('CITY_ID' =>$city,'OUTSTATION_NAME' => $package);
+				if(isset($_POST['package']) != '' && $this->input->post('submitpackage'))
+				{
+					$this->session->set_flashdata('msg', "Successfully Added.");
+					$this->db->insert('package_outstation',$outstation);
+				}
+				if($this->input->post('updatepackage'))
+				{
+					$this->session->set_flashdata('msg', "Successfully Updated.");
+					$this->db->where('ID',$this->input->post('packageid'));
+					$this->db->update('package_outstation',$outstation);
+				}
 			}
-			if($this->input->post('updatepackage'))
-			{
-				$this->session->set_flashdata('msg', "Successfully Updated.");
-				$this->db->where('ID',$this->input->post('packageid'));
-				$this->db->update('package_outstation',$outstation);
-			}
+			else
+			$this->session->set_flashdata('msg', "All Fields are required.");
 			redirect('admin_c/outstation_package');
 		}
 		
@@ -211,6 +255,35 @@ class Admin extends CI_Controller {
 		}
 	}
 	
+	function comm_fixed_save($id,$txtval)
+	{
+		$this->db->set('commision_fixed',$txtval);
+		$this->db->where('ID',$id);
+		$this->db->update('pricing_local');
+		echo 1;//$this->db->affected_rows();
+	}
+	function comm_percentage_save($id,$txtval)
+	{
+		$this->db->set('commision_percentage',$txtval);
+		$this->db->where('ID',$id);
+		$this->db->update('pricing_local');
+		echo 1;//$this->db->affected_rows();
+	}
+	
+	function comm_out_fixed_save($id,$txtval)
+	{
+		$this->db->set('commision_fixed',$txtval);
+		$this->db->where('ID',$id);
+		$this->db->update('pricing_outstation');
+		echo 1;
+	}
+	function comm_out_percentage_save($id,$txtval)
+	{
+		$this->db->set('commision_percentage',$txtval);
+		$this->db->where('ID',$id);
+		$this->db->update('pricing_outstation');
+		echo 1;
+	}
 	/*function agentlistView()
 	{
 		$agents = $this->admin_m->get_all_agents();	
