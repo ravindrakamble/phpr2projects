@@ -82,7 +82,7 @@ if(isset($localFlexi) && !empty($localFlexi))
 				<tr>
 					<td>Car Name</td>
 					<td>
-				<?php echo form_dropdown('car_name',array(0=>'--'),$car_model_id,"class='car_type'");?>
+				<?php echo form_dropdown('car_name',array('0'=>'--'),$car_model_id,"class='car_type'");?>
 					</td>
 				</tr>
 				<tr>
@@ -262,5 +262,15 @@ function removelocalflexprice(val)
        return false; 
     }); 
 }
+
+var frmvalidator = new Validator("localflexibleForm");
+frmvalidator.addValidation("car_type","dontselect=0","Please select your car type");
+frmvalidator.addValidation("car_name","req","Please select your car name");
+frmvalidator.addValidation("min_halt_time","req","Please Enter Minimum halt time");
+frmvalidator.addValidation("min_halt_time","numeric",'Please Enter Numeric Value');
+frmvalidator.addValidation("price","req","Please Enter Price");
+frmvalidator.addValidation("price","numeric",'Please Enter Numeric Value');
+frmvalidator.addValidation("per_km_price","req","Please Enter Price Per KM");
+frmvalidator.addValidation("per_km_price","numeric",'Please Enter Numeric Value');
 </script>
 <?php  $this->load->view('include/admin_footer'); ?>

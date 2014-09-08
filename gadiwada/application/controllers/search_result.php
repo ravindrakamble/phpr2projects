@@ -86,7 +86,7 @@ class Search_result extends CI_Controller {
 						<table class='table table-bordered' width=100% id='search_table'>
 						<tr><th>Operator name</th><th>Car name</th><th>Features</th><th>AC NON-AC</th><th>Price</th><th></th></tr>";
 						foreach($result as $row):
-						$search_result.= "<tr><td>".$row->BUSINESS_NAME."</td><td>".$row->CAR_NAME."</td><td>".$row->CAR_FEATURES."</td><td>";
+						$search_result.= "<tr><td>".$row->BUSINESS_NAME."</td><td>".$row->MODEL_NAME."</td><td>".$row->CAR_FEATURES."</td><td>";
 						if($row->AC == 1)
 						$acnonac = 'AC';
 						if($row->NON_AC == 1)

@@ -258,5 +258,12 @@ function removelocalflexprice(val)
        return false; 
     }); 
 }
+
+var frmvalidator = new Validator("localflexibleForm");
+frmvalidator.addValidation("car_type","dontselect=0","Please select your car type");
+frmvalidator.addValidation("car_name","req","Please select your car name");
+frmvalidator.addValidation("package","req","Please Select your Package.");
+frmvalidator.addValidation("extra_per_km","req","Please Enter Extra per KM");
+frmvalidator.addValidation("extra_per_hr","req","Please Enter Extra Per Hour");
 </script>
 <?php  $this->load->view('include/admin_footer'); ?>
