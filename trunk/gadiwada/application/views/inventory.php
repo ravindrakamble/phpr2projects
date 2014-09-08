@@ -10,6 +10,7 @@ table td, table th{
 $i = 1;
 $id = 0;
 $CAR_TYPES = '';
+$MODEL_NAME = '';
 $CAR_NAME = '';
 $CAR_NUMBER = '';
 $PURCHASE_YEAR = '';
@@ -22,6 +23,7 @@ $AC = 0;
 $NON_AC = 0;
 $LOCAL = 0;
 $OUTSTATION = 0;
+$car_model_id=0;
 $disable = '';
 $readonly = '';
 if(isset($info) && !empty($info))
@@ -31,6 +33,7 @@ if(isset($info) && !empty($info))
 		$id = $info->ID;
 		$CAR_TYPES = $info->CAR_TYPE;
 		$CAR_NAME = $info->CAR_NAME;
+		$MODEL_NAME = $info->MODEL_NAME;
 		$CAR_NUMBER = $info->CAR_NUMBER;
 		$PURCHASE_YEAR = $info->PURCHASE_YEAR;
 		$CAR_FEATURES =explode(',',$info->CAR_FEATURES);
@@ -54,7 +57,7 @@ if(isset($info) && !empty($info))
 		$type = array();
 			$type['0']='--';
 			    foreach($car_type as $c){
-				  $type[$c->TYPE_NAME]=$c->TYPE_NAME;
+				  $type[$c->ID]=$c->TYPE_NAME;
 			}
 		$features = array();
 			    foreach($feature as $f){
@@ -66,15 +69,30 @@ if(isset($info) && !empty($info))
 						<table>
 						<tr>
 							<td>Car Type</td>
-							<td><?php echo form_dropdown('car_type',$type,$CAR_TYPES,$disable);?></td>
+							<?php $js ='id="car_type" '.$disable.' onChange="get_car_name(this.value);" '; ?>
+							<td><?php echo form_dropdown('car_type',$type,$CAR_TYPES,$js);?></td>
 						</tr>
 						<tr>
 							<th colspan="2"><h5>Car Details</h5></th>
 						</tr>
 						<tr>
 							<td>Car Name</td>
-							<td><input <?php echo $readonly ?> value="<?php echo $CAR_NAME?>" type="text" 
-							name="car_name" maxlength="20"/></td>
+							
+							<td>
+							<?php if(isset($edtyp))
+							{
+								echo "<input type='text' readonly='true' value='".$MODEL_NAME."'>";
+								echo "<input type='hidden' value='".$CAR_NAME."' name='car_name'>";
+							}
+							else
+							{
+								$js ='id="car_name" '.$readonly.' ';
+								echo form_dropdown('car_name',array(0=>'--'),$car_model_id,$js);
+								/*<!--<input <?php echo $readonly ?> value="<?php echo $CAR_NAME?>" type="text" 
+								name="car_name" maxlength="20"/>-->*/
+							}
+							?>
+							</td>
 						</tr>
 						<tr>
 							<td>Car Number</td>
@@ -163,8 +181,8 @@ if(isset($info) && !empty($info))
 			foreach($result as $row){?>
 				<TR>
 				<td><?php echo $numbers;?></td>
-				<td><?php echo $row->CAR_TYPE ?></td>
-				<td><?php echo $row->CAR_NAME ?></td>
+				<td><?php echo $row->TYPE_NAME ?></td>
+				<td><?php echo $row->MODEL_NAME ?></td>
 				<td><?php echo $row->CAR_NUMBER ?></td>
 				<td><?php echo $row->PURCHASE_YEAR ?></td>
 				<td><?php echo $row->AGREEMEST_START_DATE ?></td>
@@ -181,8 +199,9 @@ if(isset($info) && !empty($info))
 				<td><a href="<?php echo base_url().'inventory/edit/'.$row->ID ?>" 
 					class="btn btn-warning btn-small">Edit</a>&nbsp;&nbsp;
 					
-				<a class="btn btn-success btn-small" 
-						href="javascript:void(0)" onclick="viewdetails(<?php echo $row->ID ?>);"> View</a></td>
+					<a class="btn btn-success btn-small" 
+						href="javascript:void(0)" onclick="viewdetails(<?php echo $row->ID ?>);"> View</a>
+				</td>
 				<?php $numbers++ ; ?>
 				</tr>	
 			<?php } ?>
@@ -190,6 +209,23 @@ if(isset($info) && !empty($info))
 		</table>
 		</div>
 <script type="text/javascript">
+function get_car_name(car_type)
+{
+	jQuery.ajax({
+		type:"POST",
+		url: "<?php echo base_url();?>ajax/get_car_name/"+car_type,
+		data: car_type,
+		success: function(response) {
+			if(response == ""){
+				$('#car_name').empty();
+			}else{
+				$('#car_name').empty();
+				$('#car_name').html(response);
+			}
+			
+		}
+	});
+}
 function viewdetails(id)
 {
 	 $.ajax({ 

@@ -56,7 +56,7 @@ class Inventory extends CI_Controller {
 		$this->load->view('inventory',$data);
 	}
 	
-	public function view($id)
+	/*public function view($id)
 	{
 		$result = $this->inventory_m->get_inventory_details($id);
 		$view = '';
@@ -72,7 +72,7 @@ class Inventory extends CI_Controller {
 			<tr>	<th>Agreement end date</th><td>". $result->AGREEMEST_END_DATE ."</td></tr>";
 		$view .="</table>";
 		echo $view;
-	}
+	}*/
 	
 	public function edit($id)
 	{

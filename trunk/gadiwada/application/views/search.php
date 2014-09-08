@@ -182,10 +182,6 @@ $(function() {
 	frmvalidator.addValidation("journeydate","req","Please select your journey date");
 	frmvalidator.addValidation("city","dontselect=0","Please select city");
 	frmvalidator.addValidation("area","req","Please select area");
-	frmvalidator.addValidation("estimationjourney","numeric");
-	frmvalidator.addValidation("estimationjourney","req","Please enter estimated total KM");
-	frmvalidator.addValidation("estimationtime","numeric","Please enter only in numbers");
-	frmvalidator.addValidation("estimationtime","req","Please enter estimated total time in hours");
 });
 
 function sendrequest(city){

@@ -269,5 +269,17 @@ function removeoutprice(val)
        return false; 
     }); 
 }
+
+var frmvalidator = new Validator("outstationflexibleForm");
+frmvalidator.addValidation("car_type","dontselect=0","Please select your car type");
+frmvalidator.addValidation("car_name","req","Please select your car name");
+frmvalidator.addValidation("min_time_hr","req","Please Enter Minimum Booking Hour");
+frmvalidator.addValidation("min_time_hr","numeric",'Please Enter Numeric Value');
+frmvalidator.addValidation("booking_time","req","Please Enter Booking time");
+frmvalidator.addValidation("booking_time","numeric",'Please Enter Numeric Value');
+frmvalidator.addValidation("extra_price_per_hr","req","Please Enter  Extra price per hour");
+frmvalidator.addValidation("extra_price_per_hr","numeric",'Please Enter Numeric Value');
+frmvalidator.addValidation("kilometerprice","req","Please Enter Kilometer Price");
+frmvalidator.addValidation("kilometerprice","numeric",'Please Enter Numeric Value');
 </script>
 <?php  $this->load->view('include/admin_footer'); ?>

@@ -5,7 +5,7 @@ Class Admin_m extends CI_Model{
 	function get_all_car_model()
 	{
 		$this->db->distinct('MODEL_NAME');
-		$this->db->select('MODEL_NAME');
+		$this->db->select('ID,MODEL_NAME');
 		$this->db->where('MODEL_NAME !=','');
 		$query=$this->db->get('car_model');
 		return $query->result();
