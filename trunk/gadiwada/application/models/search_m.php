@@ -38,11 +38,10 @@ Class Search_m extends CI_Model
 		if($features != '0'  && $features != ''){
 			$this->db->like('inventory.CAR_FEATURES',$features);
 		}
-		//STR_TO_DATE(t.datestring, '%d/%m/%Y')
-		//$where = strtotime('AGREEMEST_END_DATE', '%d/%m/%Y') < DATE();
-		//$this->db->where($where);
+		$this->db->where('BOOKING_STATUS',1);
+		$where = "STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') > CURDATE()";
+		$this->db->where($where);
 		$query = $this->db->get();
-		echo $this->db->last_query();die;
 		return $query->result();
 	}
 	

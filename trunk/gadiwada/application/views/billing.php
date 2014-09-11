@@ -11,22 +11,21 @@ $(function()
 {
 	$( "#rcptDate" ).datepicker(
 	{
-		dateFormat: 'dd-mm-yy'
+		dateFormat: 'dd/mm/yy',
 
 	});
 
 	$( "#return" ).datepicker(
 	{
-		dateFormat: 'dd-mm-yy'
+		dateFormat: 'dd/mm/yy',
 	});
 
-	$( "#onwReporting" ).datetimepicker(
+	$( "#onwReporting" ).datepicker(
 	{
 		ampm:true,
 		timeOnly:true,
 		useLocalTimezone:true,
-		dateFormat: 'dd-mm-yy',
-		hour:20
+		dateFormat: 'dd/mm/yy',
 
 	});
 

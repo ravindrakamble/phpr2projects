@@ -4,6 +4,7 @@ class Admin_c extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$this->is_admin();
 		$this->load->model('admin_m');
 		$this->load->model('city_m');
 		$this->load->model('car_type_m');
@@ -134,6 +135,15 @@ class Admin_c extends CI_Controller {
 			redirect('admin_c/commission');
 		}
 		
+	}
+	
+	function is_admin()
+	{
+		$is_admin_logged_in = $this->session->userdata('is_admin_logged_in');
+		if(!isset($is_admin_logged_in) || $is_admin_logged_in != true)
+		{
+		   //redirect(base_url().'admin_c');
+		}	
 	}
 }
 ?>

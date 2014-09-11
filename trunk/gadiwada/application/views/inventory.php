@@ -260,7 +260,7 @@ var start = $('#start').datepicker(
 }).data('datepicker');
 var end = $('#end').datepicker(
 {
-	format:'dd/mm/yyyy',
+	dateFormat: 'dd/mm/yy',
 		minDate: 0,
 	onRender: function(date)
 	{

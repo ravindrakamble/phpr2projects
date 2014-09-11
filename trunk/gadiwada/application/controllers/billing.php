@@ -43,7 +43,13 @@ class Billing extends CI_Controller {
 			'REMARKS'     => $this->input->post('remarks')
 		);
 		$this->db->insert('cust_booking',$info);
-		
+		$taxi_id = $this->input->post('inventoryid');
+		if($taxi_id> 0 )
+		{
+			$this->db->where('ID',$taxi_id);
+			$this->db->set('BOOKING_STATUS',0);
+			$this->db->update('inventory');
+		}
 		$inventoryid = $this->input->post('inventoryid');
 		$data['TOTAL_AMOUNT'] = $this->input->post('totamount');
 		$data['AMOUNT_PAID'] = $this->input->post('amt_paid');
