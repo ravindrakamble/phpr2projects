@@ -40,7 +40,7 @@ var nowTemp = new Date();
 var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
 var fromdate = $('#fromdate').datepicker(
 {
-	format:'dd/mm/yyyy',
+	dateFormat: 'dd/mm/yy',
 		minDate: 0,
 	onRender: function(date)
 	{
@@ -59,7 +59,7 @@ var fromdate = $('#fromdate').datepicker(
 }).data('datepicker');
 var todate = $('#todate').datepicker(
 {
-	format:'dd/mm/yyyy',
+	dateFormat: 'dd/mm/yy',
 		minDate: 0,
 	onRender: function(date)
 	{

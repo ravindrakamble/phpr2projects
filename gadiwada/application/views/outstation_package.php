@@ -81,7 +81,7 @@ if(isset($outPack) && !empty($outPack))
 				<tr>
 					<td>Car Name</td>
 					<td>
-				<?php echo form_dropdown('car_name','',$car_model_id,"class='car_type'");?>
+				<?php echo form_dropdown('car_name',array(0=>'--'),$car_model_id,"class='car_type'");?>
 					</td>
 				</tr>
 				<tr>
