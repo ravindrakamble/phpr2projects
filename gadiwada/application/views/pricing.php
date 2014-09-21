@@ -197,35 +197,35 @@ if(isset($outFlexi) && !empty($outFlexi))
 								<tr>
 									<td>Car Type</td>
 									<td><?php 
-								   $js ='id="car_type" onChange="get_car_name(this.value);" ';
+								   $js ='id="car_type" required="true" onChange="get_car_name(this.value);" ';
 								   echo form_dropdown('car_type',$type,$car_type_id,$js);?></td>
 								</tr>
 								<tr>
 									<td>Car Name</td>
 									<td>
-								<?php echo form_dropdown('car_name',array(0=>'--'),$car_model_id,"class='car_type'");?>
+								<?php echo form_dropdown('car_name',array(0=>'--'),$car_model_id,"class='car_type', required='true' ");?>
 									</td>
 								</tr>
 								<tr>
 									<td>Ac/Non Ac</td>
-									<td><?php echo form_dropdown('ac_nonac',array('AC' =>'AC','NON AC'=>'NON AC'),$ac_nonac);?></td>
+									<td><?php echo form_dropdown('ac_nonac',array('AC' =>'AC','NON AC'=>'NON AC'),$ac_nonac," required='true' ");?></td>
 								</tr>
 								<tr>
 									<th colspan="2"><h5>Price Details</h5></th>
 								</tr>
 								<tr>
 									<td>Minimum halt time in min/hr</td>
-									<td><input  type="text" value="<?php echo $min_halt_time?>"
+									<td><input  type="text"  required="true"  value="<?php echo $min_halt_time?>"
 									name="min_halt_time"  maxlength="4"/></td>
 								</tr>
 								<tr>
 									<td>Price per minimum booking time</td>
-									<td><input  type="text" value="<?php echo $price_per_min_booking_time?>"
+									<td><input  type="text"  required="true"  value="<?php echo $price_per_min_booking_time?>"
 									name="price"  maxlength="4"/></td>
 								</tr>
 								<tr>
 									<td>Price per kilometer</td>
-									<td><input  type="text" value="<?php echo $price_per_km?>"
+									<td><input  type="text"  required="true"  value="<?php echo $price_per_km?>"
 									name="per_km_price"  maxlength="4"/></td>
 								</tr>
 							</table>
@@ -352,35 +352,35 @@ if(isset($outFlexi) && !empty($outFlexi))
 								<tr>
 									<td>Car Type</td>
 									<td><?php 
-								   $js ='id="car_type" onChange="get_car_name(this.value);" ';
+								   $js ='id="car_type" required="true"  onChange="get_car_name(this.value);" ';
 								   echo form_dropdown('car_type',$type,$lcar_type_id,$js);?></td>
 								</tr>
 								<tr>
 									<td>Car Name</td>
 									<td>
-								<?php echo form_dropdown('car_name',array(0=>'--'),$lcar_model_id,"class='car_type'");?>
+								<?php echo form_dropdown('car_name',array(0=>'--'),$lcar_model_id,"class='car_type' required='true' ");?>
 									</td>
 								</tr>
 								<tr>
 									<td>Ac/Non Ac</td>
-									<td><?php echo form_dropdown('ac_nonac',array('AC' =>'AC','NON AC'=>'NON AC',$lac_nonac));?></td>
+									<td><?php echo form_dropdown('ac_nonac',array('AC' =>'AC','NON AC'=>'NON AC',$lac_nonac, "required='true'" ));?></td>
 								</tr>
 								<tr>
 									<th colspan="2"><h5>Price Details</h5></th>
 								</tr>
 								<tr>
 									<td>Package</td>
-									<td><?php echo form_dropdown('package',array(),$lpackage);?></td>
+									<td><?php echo form_dropdown('package',array(),$lpackage,' required="true" ');?></td>
 								</tr>
 								
 								<tr>
 									<td>Extra Rs/km</td>
-									<td><input  type="text" value="<?php echo $extra_per_km?>"
+									<td><input  type="text" required="true"  value="<?php echo $extra_per_km?>"
 									name="extra_per_km"  maxlength="5"/></td>
 								</tr>
 								<tr>
 									<td>Extra Rs/hr</td>
-									<td><input  type="text" value="<?php echo $extra_per_hr?>"
+									<td><input  type="text"  required="true"  value="<?php echo $extra_per_hr?>"
 									name="extra_per_hr"  maxlength="5"/></td>
 								</tr>
 							</table>
@@ -493,13 +493,14 @@ if(isset($outFlexi) && !empty($outFlexi))
 				<div id='outstationFlexible'>
 				<h3 align="center">Outstation Flexible Details</h3>
 				<form name="outstationflexibleForm" id="outstationflexibleForm" method="POST" 
-					action="<?php echo base_url()?>pricing/outstationFlexible/<?php echo $action?>/flexible">					<input type="hidden" name="outflxid" value="<?php echo $oid;?>"/>
+					action="<?php echo base_url()?>pricing/outstationFlexible/<?php echo $action?>/flexible">
+					<input type="hidden" name="outflxid" value="<?php echo $oid;?>"/>
 					<?php 
    					   $out_price = array('Flexible' =>'Flexible','Package' =>'Package');
 					   $js ='id="outstationselbox" onChange="outstationsel(this.value);" ';
 					   echo form_dropdown('price_for',$out_price,$out_price_type,$js);?>
 					<table width="100%">
-						<tr>																											<td style="padding-left: 15%">
+						<tr><td style="padding-left: 15%">
 								<table>
 								<tr>
 									<th colspan="2"><h5>Car Details</h5></th>
@@ -507,40 +508,40 @@ if(isset($outFlexi) && !empty($outFlexi))
 								<tr>
 									<td>Car Type</td>
 									<td><?php 
-								   $js ='id="car_type" onChange="get_car_name(this.value);" ';
+								   $js ='id="car_type"  required="true"  onChange="get_car_name(this.value);" ';
 								   echo form_dropdown('car_type',$type,$ocar_type_id,$js);?></td>
 								</tr>
 								<tr>
 									<td>Car Name</td>
 									<td>
-								<?php echo form_dropdown('car_name',array(0=>'--'),$ocar_model_id,"class='car_type'");?>
+								<?php echo form_dropdown('car_name',array(0=>'--'),$ocar_model_id,"class='car_type' ,required='true' ");?>
 									</td>
 								</tr>
 								<tr>
 									<td>Ac/Non Ac</td>
-									<td><?php echo form_dropdown('ac_nonac',array('AC' =>'AC','NON AC'=>'NON AC',$oac_nonac));?></td>
+									<td><?php echo form_dropdown('ac_nonac',array('AC' =>'AC','NON AC'=>'NON AC',$oac_nonac,' required="true" '));?></td>
 								</tr>
 								<tr>
 									<th colspan="2"><h5>Price Details</h5></th>
 								</tr>
 								<tr>
 									<td>Minimum booking time in hrs</td>
-									<td><input  type="text" value="<?php echo $min_time_hr?>"
+									<td><input  required="true" type="text" value="<?php echo $min_time_hr?>"
 									name="min_time_hr"  maxlength="4"/></td>
 								</tr>
 								<tr>
 									<td>Price per minimum booking time</td>
-									<td><input  type="text" value="<?php echo $price_per_min_booking_time?>"
+									<td><input required="true" type="text" value="<?php echo $price_per_min_booking_time?>"
 									name="booking_time"  maxlength="4"/></td>
 								</tr>
 								<tr>
 									<td>Extra price in 1 hr</td>
-									<td><input  type="text" value="<?php echo $extra_price_per_hr?>"
+									<td><input  required="true"  type="text" value="<?php echo $extra_price_per_hr?>"
 									name="extra_price_per_hr"  maxlength="4"/></td>
 								</tr>
 								<tr>
 									<td>Price per kilometer</td>
-									<td><input  type="text" value="<?php echo $price_per_km?>"
+									<td><input  required="true"  type="text" value="<?php echo $price_per_km?>"
 									name="kilometerprice"  maxlength="5"/></td>
 								</tr>
 							</table>
@@ -668,34 +669,34 @@ if(isset($outFlexi) && !empty($outFlexi))
 								<tr>
 									<td>Car Type</td>
 									<td><?php 
-								   $js ='id="car_type" onChange="get_car_name(this.value);" ';
+								   $js ='id="car_type"  required="true" onChange="get_car_name(this.value);" ';
 								   echo form_dropdown('car_type',$type,$oocar_type_id,$js);?></td>
 								</tr>
 								<tr>
 									<td>Car Name</td>
 									<td>
-								<?php echo form_dropdown('car_name',array(0=>'--'),$oocar_model_id,"class='car_type'");?>
+								<?php echo form_dropdown('car_name',array(0=>'--'),$oocar_model_id,"class='car_type', required='true' ");?>
 									</td>
 								</tr>
 								<tr>
 									<td>Ac/Non Ac</td>
-									<td><?php echo form_dropdown('ac_nonac',array('AC' =>'AC','NON AC'=>'NON AC',$ooac_nonac));?></td>
+									<td><?php echo form_dropdown('ac_nonac',array('AC' =>'AC','NON AC'=>'NON AC',$ooac_nonac,' required="true" '));?></td>
 								</tr>
 								<tr>
 									<th colspan="2"><h5>Price Details</h5></th>
 								</tr>
 								<tr>
 									<td>Package Name</td>
-									<td><?php echo form_dropdown('package',$outstations,$opackage);?></td>
+									<td><?php echo form_dropdown('package',$outstations,$opackage,' required="true" ');?></td>
 								</tr>
 								<tr>
 									<td>Extra Rs/km</td>
-									<td><input  type="text" value="<?php echo $ooprice_per_km?>"
+									<td><input  type="text"  required="true"  value="<?php echo $ooprice_per_km?>"
 									name="kilometerprice"  maxlength="5"/></td>
 								</tr>
 								<tr>
 									<td>Extra Rs/hr</td>
-									<td><input  type="text" value="<?php echo $ooextra_price_per_hr?>"
+									<td><input  type="text" required="true"  value="<?php echo $ooextra_price_per_hr?>"
 									name="hourprice"  maxlength="5"/></td>
 								</tr>
 							</table>

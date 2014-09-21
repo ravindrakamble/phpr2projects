@@ -286,6 +286,51 @@ class Admin extends CI_Controller {
 		echo 1;
 	}
 	
+	function cancellation($type='',$action='')
+	{
+		$data = array(
+			"payers" => $type,
+			"deduction" => $this->input->post('deduction'),
+			"time1" => $this->input->post('time1'),
+			"time2" => $this->input->post('time2'),
+			"time3" => $this->input->post('time3')
+		);
+		$payer_id = $this->input->post('payer_id');
+ 		if($type == 'full')
+		{
+			if($action == 'add'){
+			//insertion code
+				$this->db->insert('cancellation',$data);
+				$this->session->set_flashdata('msg', "Successfully Inserted.");
+			}
+			if($action == 'update'){
+				//update code
+				$this->db->where('id',$payer_id);
+				$this->db->where('payers',$type);
+				$this->db->update('cancellation',$data);
+				$this->session->set_flashdata('msg', "Successfully Updated.");
+			}
+			redirect('admin_c/full_payers');
+		}
+		if($type == 'partial')
+		{
+			if($action == 'add'){
+			//insertion code
+				$this->db->insert('cancellation',$data);
+				$this->session->set_flashdata('msg', "Successfully Inserted.");
+			}
+			if($action == 'update'){
+				//update code
+				$this->db->where('id',$payer_id);
+				$this->db->where('payers',$type);
+				$this->db->update('cancellation',$data);
+				$this->session->set_flashdata('msg', "Successfully Updated.");
+			}
+			redirect('admin_c/partial_payers');
+		}
+	}
+
+	
 	function is_admin()
 	{
 		$is_admin_logged_in = $this->session->userdata('is_admin_logged_in');
@@ -293,6 +338,24 @@ class Admin extends CI_Controller {
 		{
 		   //redirect(base_url().'admin_c');
 		}	
+	}
+
+	function payer_delete($id = 0,$type='')
+	{
+		if($type == 'full' && $id > 0)
+		{
+			$this->db->where('id',$id);
+			$this->db->where('payers',$type);
+			$this->db->delete('cancellation');
+			echo 1;
+		}
+		if($type == 'partial' && $id > 0)
+		{
+			$this->db->where('id',$id);
+			$this->db->where('payers',$type);
+			$this->db->delete('cancellation');
+			echo 1;
+		}
 	}
 	/*function agentlistView()
 	{

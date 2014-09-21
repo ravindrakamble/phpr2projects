@@ -55,6 +55,9 @@
 	</table>
 </div>
 <script type="text/javascript">
+var frmvalidator = new Validator("seaterform");
+frmvalidator.addValidation("cartype","req","Please Select your Car Type");
+frmvalidator.addValidation("model","req","Please Enter your car model");
 jQuery(document).ready(function($)
 { 
  	$("#alert").fadeTo(2000,2000).fadeOut(2000, function(){

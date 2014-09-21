@@ -35,20 +35,20 @@
 				<table style="width: 40%">
 	            <tr>
 	                <td>Journey Date : </td>
-	                <td> <input class="dt" name='journeydate' id='journeydate1' /></td>
+	                <td> <input class="dt" required="true"  name='journeydate' id='journeydate1' /></td>
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
-	                <td><?php echo form_dropdown('city',$city,'',"class='city'");?></td>
+	                <td><?php echo form_dropdown('city',$city,'',"class='city', required='true' ");?></td>
 	            </tr>
 	            <tr>
 	                <td>From Area :   </td>
-	                <td><?php echo form_dropdown('area',array(),'',"class='area'");?></td>
+	                <td><?php echo form_dropdown('area',array(),'',"class='area', required='true' ");?></td>
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
-	                	<input type="radio" name="option" onclick="options(this.value)" value='Flexible'/>Flexible
-	                	<input type="radio" name="option" onclick="options(this.value)"value='Package'/>Package
+	                	<input type="radio" required="true"  name="option" onclick="options(this.value)" value='Flexible'/>Flexible
+	                	<input type="radio"  required="true"  name="option" onclick="options(this.value)"value='Package'/>Package
 	                </td>
 	            </tr>
 	        </table>
@@ -73,11 +73,11 @@
 		        	<table style="width: 40%">
 			            <tr>
 			                <td>Choose Package : </td>
-			                <td><?php echo form_dropdown('package',$out_Package);?></td>
+			                <td><?php echo form_dropdown('package',$out_Package,array(),' required="true" ');?></td>
 			            </tr>
 			             <tr>
 			                <td>Car Type :   </td>
-			                <td><?php echo form_dropdown('CarTypePackage',$type);?></td>
+			                <td><?php echo form_dropdown('CarTypePackage',$type,array(),' required="true" ');?></td>
 			            </tr>
 			             <tr> <td colspan="2"><input type="submit" class="btn btn-info" name="search" value="OUTSTATION SEARCH"/></tr>
 			        </table>
@@ -92,20 +92,20 @@
 			<table style="width: 40%">
 	            <tr>
 	                <td>Journey Date : </td>
-	                <td> <input class="dt" name='journeydate' id='journeydate2' /></td>
+	                <td> <input  required="true" class="dt" name='journeydate' id='journeydate2' /></td>
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
-	                <td><?php echo form_dropdown('city',$city,'',"class='city'");?></td>
+	                <td><?php echo form_dropdown('city',$city,'',"class='city', required='true' ");?></td>
 	            </tr>
 	            <tr>
 	                <td>From Area :   </td>
-	                <td><?php echo form_dropdown('area',array(),'',"class='area'");?></td>
+	                <td><?php echo form_dropdown('area',array(),'',"class='area',required='true'");?></td>
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
-	                	<input type="radio" name="option" onclick="localoptions(this.value)" value='Flexible'/>Flexible
-	                	<input type="radio" name="option" onclick="localoptions(this.value)"value='Package'/>Package
+	                	<input type="radio" required='true' name="option" onclick="localoptions(this.value)" value='Flexible'/>Flexible
+	                	<input type="radio" required='true' name="option" onclick="localoptions(this.value)"value='Package'/>Package
 	                </td>
 	            </tr>
 	        </table>
@@ -113,15 +113,15 @@
 		        <table style="width: 40%">
 		            <tr>
 		                <td>Estimated total km of journey : </td>
-		                <td> <input name='estimationjourney' id='estimationjourney' /> </td>
+		                <td> <input  required='true' name='estimationjourney' id='estimationjourney' /> </td>
 		            </tr>
 		            <tr>
 		                <td>Estimated total time of hire : </td>
-		                <td> <input name='estimationtime' id=estimationtime' />  </td>
+		                <td> <input  required='true' name='estimationtime' id='estimationtime' />  </td>
 		            </tr>
 		             <tr>
 		                <td>Car Type :   </td>
-		                <td><?php echo form_dropdown('car_type',$type);?></td>
+		                <td><?php echo form_dropdown('car_type',$type,array()," required='true' ");?></td>
 		            </tr>
 		            <tr> <td colspan="2"><input type="submit" class="btn btn-info" name="search" value="LOCAL SEARCH"/></td></tr>
 		        </table>
@@ -130,11 +130,11 @@
 	        	<table style="width: 40%">
 		            <tr>
 		                <td>Choose Package : </td>
-		                <td><?php echo form_dropdown('package',$local_Package);?></td>
+		                <td><?php echo form_dropdown('package',$local_Package,array()," required='true' ");?></td>
 		            </tr>
 		             <tr>
 		                <td>Car Type :   </td>
-		                <td><?php echo form_dropdown('CarTypePackage',$type);?></td>
+		                <td><?php echo form_dropdown('CarTypePackage',$type,array()," required='true' ");?></td>
 		            </tr>
 		             <tr> <td colspan="2"><input type="submit" class="btn btn-info" name="search" value="LOCAL SEARCH"/></td></tr>
 		        </table>
@@ -177,11 +177,14 @@ $(function() {
 			$('.area').empty();
 		}
 	});
-	//Outstation validation
-	var frmvalidator = new Validator("outsearch");
+/*	var frmvalidator = new Validator("outsearch");
 	frmvalidator.addValidation("journeydate","req","Please select your journey date");
 	frmvalidator.addValidation("city","dontselect=0","Please select city");
 	frmvalidator.addValidation("area","req","Please select area");
+	var frmvalidator = new Validator("localsearch");
+	frmvalidator.addValidation("journeydate","req","Please select your journey date");
+	frmvalidator.addValidation("city","dontselect=0","Please select city");
+	frmvalidator.addValidation("area","req","Please select area");*/
 });
 
 function sendrequest(city){

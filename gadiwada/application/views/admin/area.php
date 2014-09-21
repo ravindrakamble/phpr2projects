@@ -55,6 +55,9 @@
 	</table>
 </div>
 <script type="text/javascript">
+var frmvalidator = new Validator("areaform");
+frmvalidator.addValidation("city","req","Please Select your city");
+frmvalidator.addValidation("area","req","Please Enter your area");
 jQuery(document).ready(function($)
 { 
  	$("#alert").fadeTo(2000,2000).fadeOut(2000, function(){

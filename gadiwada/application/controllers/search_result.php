@@ -7,6 +7,8 @@ class Search_result extends CI_Controller {
 		$this->load->model('search_m');
 		$this->load->model('admin_m');
 		$this->load->model('city_m');
+		$this->load->model('packages_m');
+		$this->load->model('car_type_m');
 	}
 
 	public function index()
@@ -48,6 +50,10 @@ class Search_result extends CI_Controller {
 			$data['search_result'] = $this->build_result_html($result);
 			$data['filter_data'] = $this->build_filter_html(0,0,$filter=null);
 			$data['header'] = $this->search_header();
+			$data['cities'] = $this->city_m->get_all_cities();
+			$data['local'] = $this->packages_m->get_all_local_packages();
+			$data['outstation'] = $this->packages_m->get_all_outstation_packages();
+			$data['car_type'] = $this->car_type_m->get_all_car_type();
 			$this->load->view('search_result',$data);
 		}
 	}
@@ -74,6 +80,10 @@ class Search_result extends CI_Controller {
 		else{
 			$data['search_result'] = $this->build_result_html($result);
 			$data['filter_data'] = $this->build_filter_html($selval, $opr_names, $features);
+			$data['cities'] = $this->city_m->get_all_cities();
+			$data['local'] = $this->packages_m->get_all_local_packages();
+			$data['outstation'] = $this->packages_m->get_all_outstation_packages();
+			$data['car_type'] = $this->car_type_m->get_all_car_type();
 			$data['header'] = $this->search_header();
 			$this->load->view('search_result',$data);
 		}
@@ -222,7 +232,6 @@ class Search_result extends CI_Controller {
 			
 		$header .= "</tr>";
 		$header .= "<tr>";
-	
 		if($curr_session['option'] !== false)
 			$header .= "<td>Choice:</td><td>".$curr_session['option']."</td>";
 		
@@ -233,9 +242,13 @@ class Search_result extends CI_Controller {
 		if($curr_session['estimationtime'] !== false)
 			$header .= "<td>Est hr:</td><td>".$curr_session['estimationtime']."</td>";
 		
-		if($curr_session['car_type'] !== false)
+		if(array_key_exists('car_type', $curr_session) && $curr_session['car_type'] !== false &&
+		$curr_session['car_type'] != 0)
 			$header .= "<td>Car type</td><td>".$curr_session['car_type']."</td>";
 		
+		if(array_key_exists('CarTypePackage', $curr_session) && $curr_session['CarTypePackage'] !== false &&
+		$curr_session['CarTypePackage'] != 0)
+			$header .= "<td>Car type</td><td>".$curr_session['CarTypePackage']."</td>";
 		$header .= "</tr>";
 		$header .= "</table>";
 		

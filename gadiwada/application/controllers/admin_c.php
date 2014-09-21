@@ -14,6 +14,7 @@ class Admin_c extends CI_Controller {
 		$this->load->model('packages_m');
 		$this->load->model('discounts_m');
 		$this->load->model('pricing_m');
+		$this->load->model('cancellation_m');
 	}
 	public function index()
 	{
@@ -137,12 +138,60 @@ class Admin_c extends CI_Controller {
 		
 	}
 	
+	function cancellation()
+	{
+		$data['cancel'] = 'active';
+		$this->load->view('admin/cancellation',$data);
+	}
+
+	function cancellation_payers()
+	{
+		$payers = $this->input->post('payers');
+		if(!empty($payers))
+		{
+			if($payers == 'partial_payers'){
+				redirect('admin_c/partial_payers');
+			}
+			if($payers == 'full_payers'){
+				redirect('admin_c/full_payers');
+			}
+		}
+		else
+		{
+			redirect('admin_c/cancellation');
+		}
+	}
+
+	function partial_payers($id = 0)
+	{
+		if($id > 0 )
+		{
+			$data['edtyp'] = 'Update';
+			$data['partial_payers_edit'] = $this->cancellation_m->edit_payers($id,'partial');
+		}
+		$data['cancel'] = 'active';
+		$data['partial_payers'] = $this->cancellation_m->get_all_payers('partial');
+		$this->load->view('admin/partial_payers',$data);
+	}
+
+	function full_payers($id = 0)
+	{
+		if($id > 0 )
+		{
+			$data['edtyp'] = 'Update';
+			$data['full_payers_edit'] = $this->cancellation_m->edit_payers($id,'full');
+		}
+		$data['cancel'] = 'active';
+		$data['full_payers'] = $this->cancellation_m->get_all_payers('full');
+		$this->load->view('admin/full_payers',$data);
+	}
+
 	function is_admin()
 	{
 		$is_admin_logged_in = $this->session->userdata('is_admin_logged_in');
 		if(!isset($is_admin_logged_in) || $is_admin_logged_in != true)
 		{
-		   //redirect(base_url().'admin_c');
+		  	//redirect(base_url().'admin_c');
 		}	
 	}
 }
