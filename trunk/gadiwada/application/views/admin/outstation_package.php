@@ -55,6 +55,9 @@
 	</table>
 </div>
 <script type="text/javascript">
+var frmvalidator = new Validator("packagesform");
+frmvalidator.addValidation("city","req","Please select your City.");
+frmvalidator.addValidation("package","req","Please Enter your package name.");
 jQuery(document).ready(function($)
 { 
  	$("#alert").fadeTo(2000,2000).fadeOut(2000, function(){

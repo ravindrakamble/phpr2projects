@@ -40,7 +40,7 @@ Class Search_m extends CI_Model
 		}
 		$this->db->where('BOOKING_STATUS',1);
 		$where = "STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') > CURDATE()";
-		$this->db->where($where);
+		$this->db->where($where,NULL,FALSE);
 		$query = $this->db->get();
 		return $query->result();
 	}

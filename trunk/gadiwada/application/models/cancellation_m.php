@@ -3,10 +3,12 @@ Class Cancellation_m extends CI_Model{
 	
 	function cancel_ticket($billno)
 	{
+		$where = "STR_TO_DATE(RECEIPT_DATE, '%d/%m/%Y') > CURDATE()";
+		$this->db->where($where,NULL,FALSE);
 		$this->db->where('BILL_NO',$billno);
 		$this->db->set('STATUS',0);
 		$this->db->update('cust_booking');
-		return true;
+		return $this->db->affected_rows();
 	}
 	
 	function get_ticket_details($billno,$phone)
@@ -16,6 +18,8 @@ Class Cancellation_m extends CI_Model{
 				$this->db->where('BILL_NO',$billno);
 				$this->db->where('PHONE',$phone);
 				$this->db->where('cust_booking.STATUS',1);
+				$where = "STR_TO_DATE(RECEIPT_DATE, '%d/%m/%Y') > CURDATE()";
+				$this->db->where($where,NULL,FALSE);
 		$info = $query->get()->row_array();
 		if(!empty($info) && isset($info)){
 			$view = '';
@@ -54,12 +58,33 @@ Class Cancellation_m extends CI_Model{
 
 	function booking_history($cust_id)
 	{
-		$query = $this->db->select('*')->from('cust_booking');
-				$this->db->where('CUST_ID',$cust_id);
-				$this->db->where('STATUS',1);
-				$this->db->order_by('ID','DESC');
-				$this->db->distinct();
-		return  $query->get()->result();
+		if(!empty($cust_id) && isset($cust_id)){
+			$query = $this->db->select('*')->from('cust_booking');
+					$this->db->where('CUST_ID',$cust_id);
+					$this->db->where('STATUS',1);
+					$this->db->order_by('ID','DESC');
+					$this->db->distinct();
+					$where = "STR_TO_DATE(RECEIPT_DATE, '%d/%m/%Y') > CURDATE()";
+					$this->db->where($where,NULL,FALSE);
+			return  $query->get()->result();
+		}
+		else{
+			return array();
+		}
+	}
+
+	function get_all_payers($type)
+	{
+		$query = $this->db->get_where('cancellation', array('payers' => $type));
+		return $query->result();
+	}
+	
+	function edit_payers($id,$type)
+	{
+		$q = $this->db->select('*')->from('cancellation');
+			 $this->db->where('id',$id);
+			 $this->db->where('payers',$type);
+		return $q->get()->result();
 	}
 }
 ?>

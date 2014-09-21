@@ -46,6 +46,8 @@
 	</table>
 </div>
 <script type="text/javascript">
+var frmvalidator = new Validator("featuresform");
+frmvalidator.addValidation("feature","req","Please Enter your feature");
 jQuery(document).ready(function($)
 { 
  	$("#alert").fadeTo(2000,2000).fadeOut(2000, function(){

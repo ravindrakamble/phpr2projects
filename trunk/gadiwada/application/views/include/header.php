@@ -69,8 +69,9 @@
 				<!--start-top-header-->
 				<div class="top-header">
 					<div class="top-header-left">
-						<p>Travel Agency</p>
-						<p>GADIVADA</p>
+					<div class="logo">
+						<a href="index.html"><img src="<?php echo base_url()?>images/logo1.png" title="logo" /></a>
+					</div>
 					</div>
 					<div class="top-header-right">
 						<div class="top-header-contact-info">
@@ -82,7 +83,7 @@
 								<ul>
 									<li><a href="#"><img src="<?php echo base_url()?>images/facebook.png" title="facebook"></a></li>
 									<li><a href="#"><img src="<?php echo base_url()?>images/twitter.png" title="Twiiter"></a></li>
-									<li><a href="#"><img src="<?php echo base_url()?>images/rss.png" title="Rss"></a></li>
+									
 									<li><a href="#"><img src="<?php echo base_url()?>images/gpluse.png" title="Google+"></a></li>
 									<!--<li><a href="javascript:parent.jQuery.fancybox.open({href :'#signup'});">
 											<img src="<?php echo base_url()?>images/login.jpg" title="Login">
@@ -135,9 +136,6 @@
 				<!---End-top-header-->
 				<!--start-main-header-->
 				<div class="main-header">
-					<div class="logo">
-						<a href="index.html"><img src="<?php echo base_url()?>images/logo1.png" title="logo" /></a>
-					</div>
 					<div class="top-nav">
 						<ul>
 							<li <?php if(isset($search) && !empty($search) ) echo "class='active'"; ?>>
@@ -148,10 +146,24 @@
 							<li <?php if(isset($cancellation)&& !empty($cancellation)) echo "class='active'"; ?> >
 								<a href="<?php echo base_url()?>cancellation">Cancellation</a></li>
 							
-							
+						<?php
+							if($this->session->userdata('type') != 'agent' && $this->session->userdata('is_agent_logged_in') != 'ture'):?>
 							
 							<li  <?php if(isset($registration)&& !empty($registration)) echo "class='active'"; ?>>
 							<a href="<?php echo base_url()?>registration"> Registration </a></li>
+							<?php endif;?>
+							
+							<li <?php if(isset($about)&& !empty($about)) echo "class='active'"; ?> >
+							<a href="<?php echo base_url()?>home/about_us">About Us</a></li>
+							
+							<li <?php if(isset($policy)&& !empty($policy)) echo "class='active'"; ?> >
+							<a href="<?php echo base_url()?>home/privacy_policy">Privacy Policy</a></li>
+							
+							<li <?php if(isset($terms)&& !empty($terms)) echo "class='active'"; ?> >
+						<a href="<?php echo base_url()?>home/terms_and_canditions">Terms & Canditions</a></li>
+							
+							<li <?php if(isset($contact_us)&& !empty($contact_us)) echo "class='active'"; ?> >
+							<a href="<?php echo base_url()?>home/contact_us">Contact Us</a></li>
 						</ul>
 					</div>
 					<div class="clear"> </div>

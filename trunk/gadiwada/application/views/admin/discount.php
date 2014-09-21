@@ -3,6 +3,12 @@
 .none {
     display:none;
 }
+input[type="checkbox"]{
+	vertical-align:top !important;
+}
+input[type="submit"]{
+	margin-top:10px !important;
+}
 table td, table th{
 	/*padding: 3px 10px !important;*/
 }
@@ -58,8 +64,8 @@ table td, table th{
 				<td><input type='text' name='mobile' maxlength="10" id='mobile'></td>
 			</tr>
 			<tr><td colspan="2">
-			<input type="submit" name="submitdiscount" id="submitdiscount" value="ADD"/>
-			<input type='submit' name='updatediscount'id='updatediscount' 
+			<input type="submit" class="btn btn-success" name="submitdiscount" id="submitdiscount" value="ADD"/>
+			<input type='submit' class="btn btn-success"  name='updatediscount'id='updatediscount' 
 		 style="display: none" value='UPDATE'>
 			</td></tr>
 		</table>

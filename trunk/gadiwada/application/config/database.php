@@ -47,10 +47,7 @@
 
 $active_group = 'default';
 $active_record = TRUE;
-/*$db['default']['hostname'] = "localhost";
-$db['default']['username'] = "traveld1";
-$db['default']['password'] ="2Cf27bew3X";
-$db['default']['database'] = "traveld1_gadivada";*/
+
 $db['default']['hostname'] = "localhost";
 $db['default']['username'] = "root";
 $db['default']['password'] ="";
