@@ -4,7 +4,7 @@ Class Search_m extends CI_Model
 	
 	function search($selval = '0', $opr_names = '0', $features = '0')
 	{
-		$curr_session = $this->session->all_userdata();
+		$curr_session = $this->session->userdata('userdata');
 		$this->db->distinct();
 		$this->db->select('inventory.*, travel_agent.BUSINESS_NAME,TYPE_NAME,MODEL_NAME');
 		$this->db->from('inventory');
