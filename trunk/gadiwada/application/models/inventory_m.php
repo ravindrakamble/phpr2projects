@@ -39,12 +39,15 @@ join car_model ON car_model.ID = inventory.CAR_NAME WHERE AGENT_ID = $AGENT_ID A
 	
 	function get_detailsForBilling($id)
 	{
-		$query = $this->db->select('*')->from('travel_agent');
+		$query = $this->db->select('BUSINESS_NAME,AGENT_ID,CAR_NUMBER,MODEL_NAME,TYPE_NAME,OWNER_NUMBER')->from('travel_agent');
 				$this->db->join('inventory','travel_agent.id = inventory.AGENT_ID');
+				$this->db->join('car_type','car_type.id = inventory.CAR_TYPE');
+				$this->db->join('car_model','car_model.id = inventory.CAR_NAME');
 				$this->db->where('inventory.ID',$id);
 				$this->db->distinct();
 				$this->db->where('STATUS',1);
 		return $query->get()->row_array();
+		// echo $this->db->last_query();
 	}
 }
 ?>

@@ -106,7 +106,7 @@ class Search_result extends CI_Controller {
 		$search_result.= $acnonac."</td><td>price</td>
 						<td>";
 						
-						if($this->session->userdata('is_customer_logged_in') == 'ture')
+						if($this->session->userdata('is_customer_logged_in') == 'ture' || $this->session->userdata('is_agent_logged_in') == 'ture')
 						{
 	$search_result.="<a href='".base_url()."billing/new_booking/".$row->ID."' class='btn-small btn-success'>Book</a></td></tr>";
 						}

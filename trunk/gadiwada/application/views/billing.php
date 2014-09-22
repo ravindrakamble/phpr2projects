@@ -251,15 +251,15 @@ function stopCalc()
 					VEHICLE NO
 				</td>
 				<td>
-					<input type="hidden" name="car_name" value="<?php echo $result['CAR_NAME'] ;?>"/>
-					<span><?php echo $result['CAR_NAME'];?></span>
+					<input type="hidden" name="car_name" value="<?php echo $result['CAR_NUMBER'] ;?>"/>
+					<span><?php echo $result['CAR_NUMBER'];?></span>
 				</td>
 				<td class="clr">
 					VEHICLE TYPE
 				</td>
 				<td>
-				<input type="hidden" name="car_type" value="<?php echo $result['CAR_TYPE'] ;?>"/>
-					<span><?php echo $result['CAR_TYPE'];?></span>
+				<input type="hidden" name="car_type" value="<?php echo $result['TYPE_NAME'] ;?>"/>
+					<span><?php echo $result['TYPE_NAME'];?></span>
 				</td>
 				<td class="clr">
 					OWNER MOBILE
