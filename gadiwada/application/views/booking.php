@@ -39,7 +39,11 @@
 			<td><?php echo $b->CAR_NUMBER?></td>
 			<td><?php echo $b->PURCHASE_YEAR?></td>
 			<td><?php echo $b->AGREEMEST_END_DATE?></td>
-			<td><label class="label label-success">BOOK</label></td>
+			<?php if($b->BOOKED_BY == 'agent'):?>
+			<td><label class="label label-success">BOOKED</label></td>
+			<?php else: ?>
+			<td><label class="label label-success">Booked By Travelder</label></td>
+			<?php endif;?>
 			<td><label class="label label-danger">Cancel</label></td>
 		<?php $numbers ++; 
 		ECHO "</TR>";

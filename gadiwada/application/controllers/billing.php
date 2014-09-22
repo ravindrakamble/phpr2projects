@@ -18,11 +18,17 @@ class Billing extends CI_Controller {
 		$data['time'] = $time;
 		$data['result'] = $this->inventory_m->get_detailsForBilling($id); 
 		$data['rcptAuto'] =array();//$this->receipts_m->get_auto_data(); // Get reciept data fields for auto filling input boxes
+		//var_dump($data['result']);
 		$data['busAuto'] =array();//$this->bus_m->get_auto_data();
 		$this->load->view('billing',$data);
 	}
 	function save()
 	{
+		$booked_by = '';
+		if($this->session->userdata('is_agent_logged_in') == true && $this->session->userdata('type') == 'agent' )
+		$booked_by = 'agent';
+		if($this->session->userdata('is_customer_logged_in') == true && $this->session->userdata('type') == 'customer')
+		$booked_by = 'customer';
 		$info = array(
 			'CUST_ID'     => $this->session->userdata('id'),
 			'AGENT_ID'    => $this->input->post('agent_id'),
@@ -40,7 +46,8 @@ class Billing extends CI_Controller {
 			'TOTAL_AMOUNT'=> $this->input->post('totamount'),
 			'AMOUNT_PAID' => $this->input->post('amt_paid'),
 			'BALANCE'     => $this->input->post('amt_balance'),
-			'REMARKS'     => $this->input->post('remarks')
+			'REMARKS'     => $this->input->post('remarks'),
+			'BOOKED_BY'     => $booked_by
 		);
 		$this->db->insert('cust_booking',$info);
 		$taxi_id = $this->input->post('inventoryid');

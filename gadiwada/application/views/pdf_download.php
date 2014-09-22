@@ -32,13 +32,13 @@
 					VEHICLE NO
 				</td>
 				<td>
-					<span><?php echo $result['CAR_NAME'];?></span>
+					<span><?php echo $result['CAR_NUMBER'];?></span>
 				</td>
 				<td class="clr">
 					VEHICLE TYPE
 				</td>
 				<td>
-					<span><?php echo $result['CAR_TYPE'];?></span>
+					<span><?php echo $result['TYPE_NAME'];?></span>
 				</td>
 				<td class="clr">
 					OWNER MOBILE

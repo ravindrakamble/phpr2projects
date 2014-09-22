@@ -16,7 +16,7 @@ Class Registration_m extends CI_Model{
 	{
 		$where ='';
 		$this->db->distinct();
-		$this->db->select('RECEIPT_DATE,inventory.*, travel_agent.BUSINESS_NAME,TYPE_NAME,MODEL_NAME');
+		$this->db->select('RECEIPT_DATE,inventory.*, travel_agent.BUSINESS_NAME,TYPE_NAME,MODEL_NAME,BOOKED_BY');
 		$this->db->from('inventory');
 		$this->db->join('travel_agent','inventory.AGENT_ID = travel_agent.ID');
 		$this->db->join('car_type','car_type.ID = inventory.CAR_TYPE');
@@ -33,7 +33,7 @@ Class Registration_m extends CI_Model{
 		$query = $this->db->get();
 		//echo $this->db->last_query();
 		return $query->result();
-		return array();
+		//return array();
 	}
 }
 	
