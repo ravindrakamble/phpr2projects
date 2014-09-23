@@ -67,6 +67,7 @@ function block(id,type)
 		});
 	});
 	jQuery('#blkno').click(function() { 
+		id =0;
         $.unblockUI(); 
        return false; 
     }); 
@@ -85,6 +86,7 @@ function unblock(id,type)
 		});
 	});
 	jQuery('#blkno').click(function() { 
+		id =0;
         $.unblockUI(); 
        return false; 
     }); 

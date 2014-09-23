@@ -258,6 +258,7 @@ function removelocalflexprice(val)
 		});
 	});
 	jQuery('#no').click(function() { 
+		val =0; 
         $.unblockUI(); 
        return false; 
     }); 

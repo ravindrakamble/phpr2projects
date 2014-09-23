@@ -49,7 +49,7 @@ body{
 }
 .top-header-right{
 	float:right;
-	width: 65%;
+	width: 75%;
 }
 .top-header-left p{
 	font-family: 'Raleway', sans-serif;
@@ -110,7 +110,7 @@ body{
 }
 .top-nav ul li{
 	display:inline-block;
-	float:left;
+	/*float:left;*/
 	border-left: 2px solid white;
 }
 .top-nav ul li:nth-child(1){
@@ -1173,7 +1173,7 @@ body{
 		width: 50%;
 	}
 	.top-nav ul li a {
-		padding: 15px 51.7px;
+		/*padding: 15px 51.7px;*/
 	}
 	.box1 {
 		width: 16.8%;

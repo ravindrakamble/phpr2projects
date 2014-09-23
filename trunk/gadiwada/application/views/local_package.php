@@ -57,6 +57,7 @@ if(isset($localPack) && !empty($localPack))
 		  $features[$f->ID]=$f->FEATURE_NAME;
 	}
 	$locals= array();
+	$locals['0']='--';
 	foreach($local as $f){
 		$locals[$f->ID]=$f->LOCAL_NAME;
 	}
@@ -93,7 +94,7 @@ if(isset($localPack) && !empty($localPack))
 				</tr>
 				<tr>
 					<td>Package</td>
-					<td><?php echo form_dropdown('package',array(),$package);?></td>
+					<td><?php echo form_dropdown('package',$locals,$package);?></td>
 				</tr>
 				
 				<tr>
@@ -187,7 +188,7 @@ if(isset($localPack) && !empty($localPack))
 				<td><?php echo $row->TYPE_NAME ?></td>
 				<td><?php echo $row->MODEL_NAME ?></td>
 				<td><?php echo $row->ac_nonac ?></td>
-				<td><?php echo $row->package ?></td>
+				<td><?php echo $row->LOCAL_NAME ?></td>
 				<td><?php echo $row->extra_per_km ?></td>
 				<td><?php echo $row->extra_per_hr ?></td>
 				<td><?php echo $row->base_operating_area_0 ?></td>
@@ -254,6 +255,7 @@ function removelocalflexprice(val)
 		});
 	});
 	$('#no').click(function() { 
+		val =0;
         $.unblockUI(); 
        return false; 
     }); 
@@ -262,7 +264,7 @@ function removelocalflexprice(val)
 var frmvalidator = new Validator("localflexibleForm");
 frmvalidator.addValidation("car_type","dontselect=0","Please select your car type");
 frmvalidator.addValidation("car_name","req","Please select your car name");
-frmvalidator.addValidation("package","req","Please Select your Package.");
+frmvalidator.addValidation("package","dontselect=0","Please Select your Package.");
 frmvalidator.addValidation("extra_per_km","req","Please Enter Extra per KM");
 frmvalidator.addValidation("extra_per_hr","req","Please Enter Extra Per Hour");
 </script>

@@ -639,6 +639,7 @@ function removecity(id)
 		});
 	});
 	jQuery('#no').click(function() { 
+		id = 0;
         $.unblockUI(); 
        return false; 
     }); 
@@ -676,6 +677,7 @@ function removearea(id)
 		});
 	});
 	jQuery('#no').click(function() { 
+		id = 0;
         $.unblockUI(); 
        return false; 
     }); 
@@ -711,6 +713,7 @@ function removecartype(id)
 		});
 	});
 	jQuery('#no').click(function() { 
+		id = 0;
         $.unblockUI(); 
        return false; 
     }); 
@@ -747,6 +750,7 @@ function removecarmodel(id)
 		});
 	});
 	jQuery('#no').click(function() { 
+		id = 0;
         $.unblockUI(); 
        return false; 
     }); 
@@ -782,6 +786,7 @@ function removefeature(id)
 		});
 	});
 	jQuery('#no').click(function() { 
+		id = 0;
         $.unblockUI(); 
        return false; 
     }); 
@@ -820,6 +825,7 @@ function removelocal(id)
 		});
 	});
 	jQuery('#no').click(function() { 
+		id = 0;
         $.unblockUI(); 
        return false; 
     }); 
@@ -858,6 +864,7 @@ function removeout(id)
 		});
 	});
 	jQuery('#no').click(function() { 
+		id = 0;
         $.unblockUI(); 
        return false; 
     }); 
@@ -901,6 +908,7 @@ function removediscount(id)
 		});
 	});
 	jQuery('#no').click(function() { 
+		id = 0;
         $.unblockUI(); 
        return false; 
     }); 
@@ -926,6 +934,7 @@ function block(id,type)
 		});
 	});
 	jQuery('#blkno').click(function() { 
+		id = 0;
         $.unblockUI(); 
        return false; 
     }); 
@@ -948,7 +957,8 @@ function unblock(id,type)
 			}
 		});
 	});
-	jQuery('#blkno').click(function() { 
+	jQuery('#blkno').click(function() {
+		id = 0; 
         $.unblockUI(); 
        return false; 
     }); 

@@ -200,27 +200,46 @@ class Admin extends CI_Controller {
 	
 	function discount()
 	{
-		$info = array( 
-			'COUPON_CODE' => $this->input->post('code'),
-			'DISCOUNT_AMOUNT' =>$this->input->post('amount'),
-			'DISCOUNT_PERCENTAGE' =>$this->input->post('percentage'),
-			'EXPIRY_DATE' =>$this->input->post('lastdate'),
-			'MIN_PURCHASE_PRICE' =>$this->input->post('minprice'),
-			'COUPON_TYPE' =>$this->input->post('coupontype'),
-			'MAX_LIMIT' =>$this->input->post('limit'),
-			'PASSENGER_MOBILE_NO' =>$this->input->post('mobile')
-		);
-		if($this->input->post('submitdiscount'))
+		$COUPON_TYPE = $this->input->post('coupontype');
+		echo $COUPON_TYPE;die;
+		if(!empty($COUPON_TYPE))
 		{
-			$this->session->set_flashdata('msg', "Successfully Added.");
-			$this->db->insert('discount_coupons',$info);
+			if($COUPON_TYPE == 'Specific')
+			{
+				$info = array( 
+					'COUPON_CODE' => $this->input->post('code'),
+					'DISCOUNT_AMOUNT' =>$this->input->post('amount'),
+					'DISCOUNT_PERCENTAGE' =>$this->input->post('percentage'),
+					'EXPIRY_DATE' =>$this->input->post('lastdate'),
+					'MIN_PURCHASE_PRICE' =>$this->input->post('minprice'),
+					'PASSENGER_MOBILE_NO' =>$this->input->post('mobile')
+				);
+			}
+			if($COUPON_TYPE == 'General')
+			{
+				$info = array( 
+					'COUPON_CODE' => $this->input->post('code'),
+					'DISCOUNT_AMOUNT' =>$this->input->post('amount'),
+					'DISCOUNT_PERCENTAGE' =>$this->input->post('percentage'),
+					'EXPIRY_DATE' =>$this->input->post('lastdate'),
+					'MIN_PURCHASE_PRICE' =>$this->input->post('minprice'),
+					'MAX_LIMIT' =>$this->input->post('limit')
+				);
+			}
+			if($this->input->post('submitdiscount'))
+			{
+				$this->session->set_flashdata('msg', "Successfully Added.");
+				$this->db->insert('discount_coupons',$info);
+			}
+			if($this->input->post('updatediscount'))
+			{
+				$this->session->set_flashdata('msg', "Successfully Updated.");
+				$this->db->where('ID',$this->input->post('discountid'));
+				$this->db->update('discount_coupons',$info);
+			}
 		}
-		if($this->input->post('updatediscount'))
-		{
-			$this->session->set_flashdata('msg', "Successfully Updated.");
-			$this->db->where('ID',$this->input->post('discountid'));
-			$this->db->update('discount_coupons',$info);
-		}
+		else
+		$this->session->set_flashdata('msg', "Invalid data Inserted.");
 		redirect('admin_c/discount');
 	}
 	
