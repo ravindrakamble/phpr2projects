@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2014 at 05:34 PM
+-- Generation Time: Sep 23, 2014 at 07:52 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -80,6 +80,30 @@ INSERT INTO `area` (`ID`, `CITY_ID`, `AREA_NAME`) VALUES
 (4, 27, 'Dombivli'),
 (5, 29, 'Place1'),
 (6, 30, 'kol');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cancellation`
+--
+
+CREATE TABLE IF NOT EXISTS `cancellation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `payers` varchar(100) NOT NULL,
+  `deduction` varchar(50) NOT NULL,
+  `time1` varchar(50) NOT NULL,
+  `time2` varchar(50) NOT NULL,
+  `time3` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `cancellation`
+--
+
+INSERT INTO `cancellation` (`id`, `payers`, `deduction`, `time1`, `time2`, `time3`) VALUES
+(1, 'full', '12', '1', '2', '3'),
+(3, 'partial', '33333', '2312', '1231', '1232');
 
 -- --------------------------------------------------------
 
@@ -216,6 +240,7 @@ CREATE TABLE IF NOT EXISTS `cust_booking` (
   `BALANCE` int(11) DEFAULT NULL,
   `REMARKS` varchar(255) DEFAULT NULL,
   `STATUS` int(11) NOT NULL DEFAULT '1',
+  `BOOKED_BY` varchar(50) NOT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_cust_booking.CUST_ID` (`CUST_ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
@@ -224,8 +249,8 @@ CREATE TABLE IF NOT EXISTS `cust_booking` (
 -- Dumping data for table `cust_booking`
 --
 
-INSERT INTO `cust_booking` (`ID`, `CUST_ID`, `AGENT_ID`, `RECEIPT_DATE`, `BILL_NO`, `CAR_NO`, `CAR_TYPE`, `OWNER_MOBILE`, `JOURNEY_DATE`, `JOURNEY_TIME`, `AREA`, `CITY`, `DESTINATION`, `FARE`, `TOTAL_AMOUNT`, `AMOUNT_PAID`, `BALANCE`, `REMARKS`, `STATUS`) VALUES
-(1, 2, 2, '09-09-2014', 31410285508, '13', '13', 2147483647, '', '11:28 pm ', '', '0', '******', '******', 0, 0, 0, '', 1);
+INSERT INTO `cust_booking` (`ID`, `CUST_ID`, `AGENT_ID`, `RECEIPT_DATE`, `BILL_NO`, `CAR_NO`, `CAR_TYPE`, `OWNER_MOBILE`, `JOURNEY_DATE`, `JOURNEY_TIME`, `AREA`, `CITY`, `DESTINATION`, `FARE`, `TOTAL_AMOUNT`, `AMOUNT_PAID`, `BALANCE`, `REMARKS`, `STATUS`, `BOOKED_BY`) VALUES
+(1, 2, 4, '22-09-2014', 21411406933, 'KA-02-2011', '12 Seater', 2147483647, '23/09/2014', '10:58 pm ', '', '0', '******', '******', 0, 0, 0, '', 1, 'agent');
 
 -- --------------------------------------------------------
 
@@ -244,15 +269,14 @@ CREATE TABLE IF NOT EXISTS `discount_coupons` (
   `MAX_LIMIT` int(11) DEFAULT NULL,
   `PASSENGER_MOBILE_NO` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `discount_coupons`
 --
 
 INSERT INTO `discount_coupons` (`ID`, `COUPON_CODE`, `DISCOUNT_AMOUNT`, `DISCOUNT_PERCENTAGE`, `EXPIRY_DATE`, `MIN_PURCHASE_PRICE`, `COUPON_TYPE`, `MAX_LIMIT`, `PASSENGER_MOBILE_NO`) VALUES
-(1, 'AXMGG123', 100, 10, '30/09/2014', 2000, 'General', 50, ''),
-(2, 'AXMGG124', 200, 20, '31/10/2014', 3000, 'Specific', 0, '9898989989');
+(1, 'AXMGG123', 100, 10, '01/09/2014', 2000, 'Specific', NULL, '2366565675');
 
 -- --------------------------------------------------------
 
@@ -307,8 +331,8 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 --
 
 INSERT INTO `inventory` (`ID`, `AGENT_ID`, `CAR_TYPE`, `CAR_NAME`, `CAR_NUMBER`, `PURCHASE_YEAR`, `CAR_FEATURES`, `OWNER_NAME`, `OWNER_NUMBER`, `AGREEMEST_START_DATE`, `AGREEMEST_END_DATE`, `AC`, `NON_AC`, `LOCAL`, `OUTSTATION`, `BOOKING_STATUS`) VALUES
-(1, 4, '13', '13', 'KA-09-9090', '2010', 'Video,Music', 'Shantosh', '8978675645', '07/09/2014', '10/11/2014', 1, 0, 1, 0, b'1'),
-(2, 4, '17', '16', 'KA-02-2011', '2012', 'Video,Music,Luggage carrier', 'Shravan', '878767655567', '30/09/2014', '10/10/2014', 1, 0, 1, 0, b'1'),
+(1, 4, '13', '13', 'KA-09-9090', '2010', 'Video,Music', 'Shantosh', '8978675645', '07/09/2014', '10/11/2014', 1, 0, 1, 0, b'0'),
+(2, 4, '17', '16', 'KA-02-2011', '2012', 'Video,Music,Luggage carrier', 'Shravan', '878767655567', '30/09/2014', '10/10/2014', 1, 0, 1, 0, b'0'),
 (3, 2, '13', '13', 'DL-98-9098', '1990', 'Music,Luggage carrier', 'Ganesh', '887767667655', '23/09/2014', '10/12/2014', 0, 1, 1, 0, b'0'),
 (4, 2, '14', '15', 'MH-01-2000', '2000', 'Video,Music', 'Uttam', '986767654543', '30/09/2014', '10/11/2014', 1, 0, 0, 1, b'1'),
 (5, 2, '17', '17', 'LO-09-8787', '1020', 'Video,Luggage carrier', 'Vakratund', '9845124567', '30/09/2014', '10/11/2014', 1, 0, 0, 1, b'1');
@@ -334,7 +358,7 @@ CREATE TABLE IF NOT EXISTS `package_local` (
 INSERT INTO `package_local` (`ID`, `CITY_ID`, `LOCAL_NAME`) VALUES
 (1, 28, 'Airport'),
 (2, 28, 'Railway station'),
-(3, 26, 'Airport'),
+(3, 26, 'Airport Road'),
 (4, 29, '40km/4hr');
 
 -- --------------------------------------------------------
@@ -395,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `pricing_local` (
 --
 
 INSERT INTO `pricing_local` (`ID`, `agent_id`, `price_for`, `car_type_id`, `car_model_id`, `ac_nonac`, `package`, `extra_per_km`, `extra_per_hr`, `min_halt_time`, `price_per_min_booking_time`, `price_per_km`, `commision_fixed`, `commision_percentage`, `base_operating_area_0`, `base_operating_area_1`, `base_operating_area_2`, `base_operating_area_3`, `base_operating_area_4`) VALUES
-(2, 2, 'Flexible', 17, 17, 'AC', NULL, NULL, NULL, '123', 123, 123, NULL, NULL, '123', '123', '123', '123', '132');
+(2, 2, 'Package', 17, 17, 'AC', '2', 2, 2, NULL, NULL, NULL, NULL, NULL, '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -425,14 +449,16 @@ CREATE TABLE IF NOT EXISTS `pricing_outstation` (
   PRIMARY KEY (`ID`),
   KEY `FK_pricing_outstation.car_type_id` (`car_type_id`),
   KEY `FK_pricing_outstation.car_model_id` (`car_model_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `pricing_outstation`
 --
 
 INSERT INTO `pricing_outstation` (`ID`, `agent_id`, `price_for`, `car_type_id`, `car_model_id`, `ac_nonac`, `package`, `min_time_hr`, `price_per_min_booking_time`, `extra_price_per_hr`, `price_per_km`, `commision_fixed`, `commision_percentage`, `base_operating_area_0`, `base_operating_area_1`, `base_operating_area_2`, `base_operating_area_3`, `base_operating_area_4`) VALUES
-(2, 2, 'Flexible', 13, 14, 'AC', '', '123', 2341, 1231, 31231, NULL, NULL, '', '', '', '', '');
+(2, 2, 'Flexible', 13, 13, 'AC', '', '123', 2341, 1231, 31231, NULL, NULL, '', '', '', '', ''),
+(8, 2, 'Package', 14, 15, 'AC', '2', NULL, NULL, 11, 11, NULL, NULL, '', '', '', '', ''),
+(9, 2, 'Package', 17, 16, 'AC', '1', NULL, NULL, 22, 22, NULL, NULL, '', '', '', '', '');
 
 -- --------------------------------------------------------
 

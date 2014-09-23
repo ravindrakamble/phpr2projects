@@ -4,6 +4,7 @@ class Pricing extends CI_Controller {
 	public function __construct()
 	{
 		parent ::__construct();
+		$this->is_agent();
 		$this->load->model('admin_m');
 		$this->load->model('city_m');
 		$this->load->model('inventory_m');
@@ -214,6 +215,14 @@ class Pricing extends CI_Controller {
 	}
 
 
+	function is_agent()
+	{
+		$is_agent_logged_in = $this->session->userdata('is_agent_logged_in');
+		if(!isset($is_agent_logged_in) || $is_agent_logged_in != true)
+		{
+		   redirect(base_url());
+		}	
+	}
 	/*public function update($id=0,$type='')
 	{
 		$data['out_price_type'] = $type;

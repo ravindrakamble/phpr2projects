@@ -4,6 +4,7 @@ class Inventory extends CI_Controller {
 	public function __construct()
 	{
 		parent ::__construct();
+		$this->is_agent();
 		$this->load->model('admin_m');
 		$this->load->model('city_m');
 		$this->load->model('inventory_m');
@@ -83,5 +84,14 @@ class Inventory extends CI_Controller {
 		$data['car_type'] = $this->car_type_m->get_all_car_type();
 		$data['info'] = $this->inventory_m->get_inventory_details($id);
 		$this->load->view('inventory',$data);
+	}
+
+	function is_agent()
+	{
+		$is_agent_logged_in = $this->session->userdata('is_agent_logged_in');
+		if(!isset($is_agent_logged_in) || $is_agent_logged_in != true)
+		{
+		   redirect(base_url());
+		}	
 	}
 }

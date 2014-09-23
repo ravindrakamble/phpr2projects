@@ -21,8 +21,7 @@
 				<th>ID</th>
 				<th>Agent ID</th>
 				<th>Agency name</th>
-				<th>Contact name</th>
-				<th>Contact number</th>
+				<th>Website Url</th>
 				<th>Place</th>
 				<th>City</th>
 				<th width="10%">Action</th>
@@ -35,8 +34,7 @@
 			<td><?php echo $numbers;?></td>
 			<td><?php echo $ag->ID ?></td>
 			<td><?php echo $ag->BUSINESS_NAME ?></td>
-			<td>*******</td>
-			<td>*******</td>
+			<td><?php echo $ag->WEBSITE_URL ?></td>
 			<td><?php echo $ag->ADDRESS_LINE_1.",".$ag->ADDRESS_LINE_2 ?></td>
 			<td><?php echo $ag->CITY ?></td>
 		<?php 
