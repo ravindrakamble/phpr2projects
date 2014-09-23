@@ -14,7 +14,6 @@ class Admin extends CI_Controller {
 		$this->load->model('packages_m');
 		$this->load->model('discounts_m');
 	}
-	
 	public function index()
 	{
 		$data['search'] = 'active';
@@ -201,29 +200,32 @@ class Admin extends CI_Controller {
 	function discount()
 	{
 		$COUPON_TYPE = $this->input->post('coupontype');
-		echo $COUPON_TYPE;die;
 		if(!empty($COUPON_TYPE))
 		{
 			if($COUPON_TYPE == 'Specific')
 			{
 				$info = array( 
+					'COUPON_TYPE' =>$COUPON_TYPE,
 					'COUPON_CODE' => $this->input->post('code'),
 					'DISCOUNT_AMOUNT' =>$this->input->post('amount'),
 					'DISCOUNT_PERCENTAGE' =>$this->input->post('percentage'),
 					'EXPIRY_DATE' =>$this->input->post('lastdate'),
 					'MIN_PURCHASE_PRICE' =>$this->input->post('minprice'),
-					'PASSENGER_MOBILE_NO' =>$this->input->post('mobile')
+					'PASSENGER_MOBILE_NO' =>$this->input->post('mobile'),
+					'MAX_LIMIT' =>NULL
 				);
 			}
 			if($COUPON_TYPE == 'General')
 			{
 				$info = array( 
+					'COUPON_TYPE' =>$COUPON_TYPE,
 					'COUPON_CODE' => $this->input->post('code'),
 					'DISCOUNT_AMOUNT' =>$this->input->post('amount'),
 					'DISCOUNT_PERCENTAGE' =>$this->input->post('percentage'),
 					'EXPIRY_DATE' =>$this->input->post('lastdate'),
 					'MIN_PURCHASE_PRICE' =>$this->input->post('minprice'),
-					'MAX_LIMIT' =>$this->input->post('limit')
+					'MAX_LIMIT' =>$this->input->post('limit'),
+					'PASSENGER_MOBILE_NO' =>NULL
 				);
 			}
 			if($this->input->post('submitdiscount'))
@@ -355,7 +357,7 @@ class Admin extends CI_Controller {
 		$is_admin_logged_in = $this->session->userdata('is_admin_logged_in');
 		if(!isset($is_admin_logged_in) || $is_admin_logged_in != true)
 		{
-		   //redirect(base_url().'admin_c');
+		   redirect(base_url());
 		}	
 	}
 
