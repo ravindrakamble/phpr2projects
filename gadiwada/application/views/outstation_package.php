@@ -57,7 +57,8 @@ if(isset($outPack) && !empty($outPack))
 		  $features[$f->ID]=$f->FEATURE_NAME;
 	}
 	$outstations= array();
-	foreach($outstations as $f){
+	$outstations['0']='--';
+	foreach($outstation as $f){
 		$outstations[$f->ID]=$f->OUTSTATION_NAME;
 	}
 	?>
@@ -93,7 +94,7 @@ if(isset($outPack) && !empty($outPack))
 				</tr>
 				<tr>
 					<td>Package Name</td>
-					<td><?php echo form_dropdown('package',array(),$package);?></td>
+					<td><?php echo form_dropdown('package',$outstations,$package);?></td>
 				</tr>
 				<tr>
 					<td>Extra Rs/km</td>
@@ -188,7 +189,7 @@ if(isset($outPack) && !empty($outPack))
 				<td><?php echo $row->TYPE_NAME ?></td>
 				<td><?php echo $row->MODEL_NAME ?></td>
 				<td><?php echo $row->ac_nonac ?></td>
-				<td><?php echo $row->package ?></td>
+				<td><?php echo $row->OUTSTATION_NAME ?></td>
 				<td><?php echo $row->extra_price_per_hr ?></td>
 				<td><?php echo $row->price_per_km ?></td>
 				<td><?php echo $row->base_operating_area_0 ?></td>
@@ -245,16 +246,17 @@ function removeoutprice(val)
 {
 	$.blockUI({ message: jQuery('#question'), css: { width: '275px' } }); 
     jQuery('#yes').click(function() { 
-        $.ajax({
-			type:"POST",
-			url: "<?php echo base_url();?>ajax/delete_outstation_price/"+val,
-			success: function(data) {
-				$.growlUI('Sucessfully<br> Deleted !');
-				setTimeout(function(){window.location = "<?php echo base_url() ?>pricing/outstation/package"; },50);
-			}
-		});
+    $.ajax({
+		type:"POST",
+		url: "<?php echo base_url();?>ajax/delete_outstation_price/"+val,
+		success: function(data) {
+			$.growlUI('Sucessfully<br> Deleted !');
+			setTimeout(function(){window.location = "<?php echo base_url() ?>pricing/outstation/package"; },50);
+		}
+	});
 	});
 	jQuery('#no').click(function() { 
+		val = 0;
         $.unblockUI(); 
        return false; 
     }); 
@@ -263,7 +265,7 @@ function removeoutprice(val)
 var frmvalidator = new Validator("outstationPackageForm");
 frmvalidator.addValidation("car_type","dontselect=0","Please select your car type");
 frmvalidator.addValidation("car_name","req","Please select your car name");
-frmvalidator.addValidation("package","req","Please Select your Package.");
+frmvalidator.addValidation("package","dontselect=0","Please Select your Package.");
 frmvalidator.addValidation("extra_per_km","req","Please Enter Extra per KM");
 frmvalidator.addValidation("extra_per_hr","req","Please Enter Extra Per Hour");
 </script>

@@ -4,10 +4,11 @@ Class Pricing_m extends CI_Model{
 	{
 		$agent_id=0;
 		$agent_id = $this->session->userdata('id');
-		$q = $this->db->select('pricing_local.*,car_type.TYPE_NAME,car_model.MODEL_NAME')
+		$q = $this->db->select('pricing_local.*,car_type.TYPE_NAME,car_model.MODEL_NAME,LOCAL_NAME')
 			->from('pricing_local');
 			$this->db->join('car_type', 'car_type.ID = pricing_local.car_type_id');
 			$this->db->join('car_model', 'car_model.TYPE_ID = car_type.ID and car_model.ID = pricing_local.car_model_id ');
+			$this->db->join('package_local', 'package_local.ID = pricing_local.package');
 			if($agent_id > 0){
 				$this->db->where('agent_id',$agent_id);
 			}
@@ -29,10 +30,11 @@ Class Pricing_m extends CI_Model{
 	{
 		$agent_id=0;
 		$agent_id = $this->session->userdata('id');
-		$q = $this->db->select('pricing_outstation.*,car_type.TYPE_NAME,car_model.MODEL_NAME')
+		$q = $this->db->select('pricing_outstation.*,car_type.TYPE_NAME,car_model.MODEL_NAME,OUTSTATION_NAME')
 			->from('pricing_outstation');
 			$this->db->join('car_type', 'car_type.ID = pricing_outstation.car_type_id');
 			$this->db->join('car_model', 'car_model.TYPE_ID = car_type.ID and car_model.ID = pricing_outstation.car_model_id ');
+			$this->db->join('package_outstation', 'package_outstation.ID = pricing_outstation.package');
 			if($agent_id > 0){
 				$this->db->where('agent_id',$agent_id);
 			}
