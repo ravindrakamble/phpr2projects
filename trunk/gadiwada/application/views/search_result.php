@@ -101,7 +101,7 @@ var TSort_Data = new Array ('search_table', 's', 's', 's','s','s','');
 		</ul>
 		<div class="tab-content">
 			<!--Outstation Div Start-->
-			<div id='outstation' class="tab-pane fade" >
+			<div id='outstation' class="tab-pane fade <?php if($sel_search == 'OUTSTATION SEARCH') echo "active in";?>" >
 			<form name="outsearch" method="POST" action="<?php echo base_url()?>search_result">
 				<table style="width:100%;">
 	            <tr>
@@ -118,8 +118,8 @@ var TSort_Data = new Array ('search_table', 's', 's', 's','s','s','');
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
-	                	<input <?php if($sel_option =='Flexible')echo "checked = true";?> type="radio" name="option" onclick="options(this.value)" value='Flexible'/>Flexible
-	                	<input <?php if($sel_option =='Package') echo "checked = true '";?> type="radio" name="option" onclick="options(this.value)"value='Package'/>Package
+	                	<input <?php if($sel_option =='Flexible' && $sel_search == 'OUTSTATION SEARCH')echo "checked = true";?> type="radio" name="option" onclick="options(this.value)" value='Flexible'/>Flexible
+	                	<input <?php if($sel_option =='Package' && $sel_search == 'OUTSTATION SEARCH') echo "checked = true '";?> type="radio" name="option" onclick="options(this.value)"value='Package'/>Package
 	                </td>
 	            </tr>
 	        </table>
@@ -135,7 +135,7 @@ var TSort_Data = new Array ('search_table', 's', 's', 's','s','s','');
 			            </tr>
 			             <tr>
 			                <td>Car Type :   </td>
-			                <td><?php echo form_dropdown('car_type',array(),$sel_car_type);?></td>
+			                <td><?php echo form_dropdown('car_type',$type,$sel_car_type);?></td>
 			            </tr>
 			           <tr> <td colspan="2"><input type="submit" class="btn btn-info" name="search" value="OUTSTATION SEARCH"/></td></tr>
 			        </table>
@@ -158,7 +158,7 @@ var TSort_Data = new Array ('search_table', 's', 's', 's','s','s','');
 			</div>
 			<!--Outstation Div End -->
 			<!--Local Div Start -->
-			<div id='local' class="tab-pane fade  active in">
+			<div id='local' class="tab-pane fade <?php if($sel_search == 'LOCAL SEARCH') echo "active in";?>">
 			<form name="localsearch" method="POST" action="<?php echo base_url()?>search_result">
 			<table style="width:100%;">
 	            <tr>
@@ -175,8 +175,8 @@ var TSort_Data = new Array ('search_table', 's', 's', 's','s','s','');
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
-	                	<input <?php if($sel_option =='Flexible')echo "checked = true";?> type="radio" name="option" onclick="localoptions(this.value)" value='Flexible'/>Flexible
-	                	<input <?php if($sel_option =='Package')echo "checked = true";?> type="radio" name="option" onclick="localoptions(this.value)"value='Package'/>Package
+	                	<input <?php if($sel_option =='Flexible' && $sel_search == 'LOCAL SEARCH')echo "checked = true";?> type="radio" name="option" onclick="localoptions(this.value)" value='Flexible'/>Flexible
+	                	<input <?php if($sel_option =='Package' && $sel_search == 'LOCAL SEARCH')echo "checked = true";?> type="radio" name="option" onclick="localoptions(this.value)"value='Package'/>Package
 	                </td>
 	            </tr>
 	        </table>
@@ -299,10 +299,10 @@ $(function() {
 	var sel_option = "<?php echo $sel_option; ?>";
 	var sel_search = "<?php echo $sel_search ?>";
 	if(sel_search == 'LOCAL SEARCH'){
-		localoptions(sel_search);
+		localoptions(sel_option);
 	}
 	if(sel_search == 'OUTSTATION SEARCH'){
-		options(sel_search);
+		options(sel_option);
 	}
 	
 	sendrequest(sel_city);
@@ -329,14 +329,14 @@ $(function() {
 		}
 	});
 	//Outstation validation
-	var frmvalidator = new Validator("outsearch");
+	/*var frmvalidator = new Validator("outsearch");
 	frmvalidator.addValidation("journeydate","req","Please select your journey date");
 	frmvalidator.addValidation("city","dontselect=0","Please select city");
 	frmvalidator.addValidation("area","req","Please select area");
 	var frmvalidator = new Validator("localsearch");
 	frmvalidator.addValidation("journeydate","req","Please select your journey date");
 	frmvalidator.addValidation("city","dontselect=0","Please select city");
-	frmvalidator.addValidation("area","req","Please select area");
+	frmvalidator.addValidation("area","req","Please select area");*/
 });
 
 function sendrequest(city){
