@@ -47,7 +47,8 @@ class Billing extends CI_Controller {
 			'AMOUNT_PAID' => $this->input->post('amt_paid'),
 			'BALANCE'     => $this->input->post('amt_balance'),
 			'REMARKS'     => $this->input->post('remarks'),
-			'BOOKED_BY'     => $booked_by
+			'BOOKED_BY'     => $booked_by,
+			'INV_ID'     => $this->input->post('inventoryid')
 		);
 		$this->db->insert('cust_booking',$info);
 		$taxi_id = $this->input->post('inventoryid');
