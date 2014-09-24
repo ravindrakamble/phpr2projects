@@ -5,6 +5,7 @@ Class Search_m extends CI_Model
 	function search($selval = '0', $opr_names = '0', $features = '0')
 	{
 		$curr_session = $this->session->all_userdata();
+		var_dump($curr_session);
 		$this->db->distinct();
 		$this->db->select('inventory.*, travel_agent.BUSINESS_NAME,TYPE_NAME,MODEL_NAME');
 		$this->db->from('inventory');
@@ -14,6 +15,21 @@ Class Search_m extends CI_Model
 		//For Booked Cars Reject From List
 		$this->db->join('cust_booking','cust_booking.AGENT_ID = inventory.AGENT_ID','LEFT');
 		
+		/*//For LOCAL Packages
+		if($curr_session['search'] == 'LOCAL SEARCH' && $curr_session['option'] == 'Package' && $curr_session['package'] != '0')
+		{
+			$this->db->select('package,extra_per_km,extra_per_hr,min_halt_time,price_per_min_booking_time,price_per_km,commision_fixed,commision_percentage,base_operating_area_0,base_operating_area_2,base_operating_area_3,base_operating_area_4');
+			$this->db->join('pricing_local','pricing_local.agent_id = inventory.AGENT_ID');
+		}
+		
+		//For LOCAL Packages
+		if($curr_session['search'] == 'LOCAL SEARCH' && $curr_session['option'] == 'Package' && $curr_session['package'] != '0')
+		{
+			$this->db->select('package,min_time_hr,price_per_min_booking_time,extra_price_per_hr,price_per_km,commision_fixed,commision_percentage,base_operating_area_0,base_operating_area_2,base_operating_area_3,base_operating_area_4');
+			$this->db->join('pricing_outstation','pricing_outstation.agent_id = inventory.AGENT_ID');
+		}
+		//END Packages
+		*/
 		$this->db->where('travel_agent.STATUS',1);
 		if($curr_session['city'] != '0' ){
 			$this->db->where('travel_agent.CITY',$curr_session['city']);
@@ -24,9 +40,12 @@ Class Search_m extends CI_Model
 		if($curr_session['search'] == 'OUTSTATION SEARCH' ){
 			$this->db->where('inventory.OUTSTATION',1);
 		} 
-		/*else if($curr_session['outCarType'] != '0' ){
-			$this->db->where('inventory.CAR_TYPE',$curr_session['outCarType']);
-		}*/
+		if($curr_session['car_type'] != '0' ){
+			$this->db->where('inventory.CAR_TYPE',$curr_session['car_type']);
+		}
+		if($curr_session['CarTypePackage'] != '0' ){
+			$this->db->where('inventory.CAR_TYPE',$curr_session['CarTypePackage']);
+		}
 		
 		if($selval != '0'  && $selval != ''){
 			$this->db->where_in('car_model.MODEL_NAME',explode(',',$selval));
@@ -42,7 +61,7 @@ Class Search_m extends CI_Model
 		$where = "STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') > CURDATE()";
 		$this->db->where($where,NULL,FALSE);
 		$query = $this->db->get();
-		//echo $this->db->last_query();
+		echo $this->db->last_query();
 		return $query->result();
 	}
 	

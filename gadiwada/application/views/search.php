@@ -11,7 +11,7 @@
 		$type = array();
 		$type['0']='--';
 		    foreach($car_type as $c){
-			  $type[$c->TYPE_NAME]=$c->TYPE_NAME;
+			  $type[$c->ID]=$c->TYPE_NAME;
 		}
 		$local_Package = array();
 		$local_Package['0']='--';
@@ -39,16 +39,16 @@
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
-	                <td><?php echo form_dropdown('city',$city,'',"class='city', required='true' ");?></td>
+	                <td><?php echo form_dropdown('city',$city,'',"class='city'");?></td>
 	            </tr>
 	            <tr>
 	                <td>From Area :   </td>
-	                <td><?php echo form_dropdown('area',array(),'',"class='area', required='true' ");?></td>
+	                <td><?php echo form_dropdown('area',array(),'',"class='area' ");?></td>
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
-	                	<input type="radio" required="true"  name="option" onclick="options(this.value)" value='Flexible'/>Flexible
-	                	<input type="radio"  required="true"  name="option" onclick="options(this.value)"value='Package'/>Package
+	                	<input type="radio"  name="option" onclick="options(this.value)" value='Flexible'/>Flexible
+	                	<input type="radio"   name="option" onclick="options(this.value)"value='Package'/>Package
 	                </td>
 	            </tr>
 	        </table>
@@ -73,11 +73,11 @@
 		        	<table style="width: 40%">
 			            <tr>
 			                <td>Choose Package : </td>
-			                <td><?php echo form_dropdown('package',$out_Package,array(),' required="true" ');?></td>
+			                <td><?php echo form_dropdown('package',$out_Package);?></td>
 			            </tr>
 			             <tr>
 			                <td>Car Type :   </td>
-			                <td><?php echo form_dropdown('CarTypePackage',$type,array(),' required="true" ');?></td>
+			                <td><?php echo form_dropdown('CarTypePackage',$type);?></td>
 			            </tr>
 			             <tr> <td colspan="2"><input type="submit" class="btn btn-info" name="search" value="OUTSTATION SEARCH"/></tr>
 			        </table>
@@ -96,16 +96,16 @@
 	            </tr>
 	             <tr>
 	                <td>From City :   </td>
-	                <td><?php echo form_dropdown('city',$city,'',"class='city', required='true' ");?></td>
+	                <td><?php echo form_dropdown('city',$city,'',"class='city'");?></td>
 	            </tr>
 	            <tr>
 	                <td>From Area :   </td>
-	                <td><?php echo form_dropdown('area',array(),'',"class='area',required='true'");?></td>
+	                <td><?php echo form_dropdown('area',array(),'',"class='area'");?></td>
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
-	                	<input type="radio" required='true' name="option" onclick="localoptions(this.value)" value='Flexible'/>Flexible
-	                	<input type="radio" required='true' name="option" onclick="localoptions(this.value)"value='Package'/>Package
+	                	<input type="radio"  name="option" onclick="localoptions(this.value)" value='Flexible'/>Flexible
+	                	<input type="radio"  name="option" onclick="localoptions(this.value)"value='Package'/>Package
 	                </td>
 	            </tr>
 	        </table>
@@ -113,11 +113,11 @@
 		        <table style="width: 40%">
 		            <tr>
 		                <td>Estimated total km of journey : </td>
-		                <td> <input  required='true' name='estimationjourney' id='estimationjourney' /> </td>
+		                <td> <input  name='estimationjourney' id='estimationjourney' /> </td>
 		            </tr>
 		            <tr>
 		                <td>Estimated total time of hire : </td>
-		                <td> <input  required='true' name='estimationtime' id='estimationtime' />  </td>
+		                <td> <input  name='estimationtime' id='estimationtime' />  </td>
 		            </tr>
 		             <tr>
 		                <td>Car Type :   </td>
@@ -130,11 +130,11 @@
 	        	<table style="width: 40%">
 		            <tr>
 		                <td>Choose Package : </td>
-		                <td><?php echo form_dropdown('package',$local_Package,array()," required='true' ");?></td>
+		                <td><?php echo form_dropdown('package',$local_Package);?></td>
 		            </tr>
 		             <tr>
 		                <td>Car Type :   </td>
-		                <td><?php echo form_dropdown('CarTypePackage',$type,array()," required='true' ");?></td>
+		                <td><?php echo form_dropdown('CarTypePackage',$type);?></td>
 		            </tr>
 		             <tr> <td colspan="2"><input type="submit" class="btn btn-info" name="search" value="LOCAL SEARCH"/></td></tr>
 		        </table>
