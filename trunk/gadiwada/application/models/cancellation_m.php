@@ -3,6 +3,9 @@ Class Cancellation_m extends CI_Model{
 	
 	function cancel_ticket($billno)
 	{
+		/*$this->db->where('ID',$taxi_id);
+		$this->db->set('BOOKING_STATUS',1); // to show in Search
+		$this->db->update('inventory');*/
 		$where = "STR_TO_DATE(RECEIPT_DATE, '%d/%m/%Y') > CURDATE()";
 		$this->db->where($where,NULL,FALSE);
 		$this->db->where('BILL_NO',$billno);

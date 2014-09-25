@@ -30,6 +30,7 @@ Class Search_m extends CI_Model
 		}
 		//END Packages
 		*/
+		//Block UnBlock Agent
 		$this->db->where('travel_agent.STATUS',1);
 		if($curr_session['city'] != '0' ){
 			$this->db->where('travel_agent.CITY',$curr_session['city']);
