@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2014 at 07:52 PM
+-- Generation Time: Sep 25, 2014 at 07:20 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -241,16 +241,18 @@ CREATE TABLE IF NOT EXISTS `cust_booking` (
   `REMARKS` varchar(255) DEFAULT NULL,
   `STATUS` int(11) NOT NULL DEFAULT '1',
   `BOOKED_BY` varchar(50) NOT NULL,
+  `INV_ID` int(11) NOT NULL,
   PRIMARY KEY (`ID`),
-  KEY `FK_cust_booking.CUST_ID` (`CUST_ID`)
+  KEY `FK_cust_booking.CUST_ID` (`CUST_ID`),
+  KEY `FK_cust_booking.INV_ID` (`INV_ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `cust_booking`
 --
 
-INSERT INTO `cust_booking` (`ID`, `CUST_ID`, `AGENT_ID`, `RECEIPT_DATE`, `BILL_NO`, `CAR_NO`, `CAR_TYPE`, `OWNER_MOBILE`, `JOURNEY_DATE`, `JOURNEY_TIME`, `AREA`, `CITY`, `DESTINATION`, `FARE`, `TOTAL_AMOUNT`, `AMOUNT_PAID`, `BALANCE`, `REMARKS`, `STATUS`, `BOOKED_BY`) VALUES
-(1, 2, 4, '22-09-2014', 21411406933, 'KA-02-2011', '12 Seater', 2147483647, '23/09/2014', '10:58 pm ', '', '0', '******', '******', 0, 0, 0, '', 1, 'agent');
+INSERT INTO `cust_booking` (`ID`, `CUST_ID`, `AGENT_ID`, `RECEIPT_DATE`, `BILL_NO`, `CAR_NO`, `CAR_TYPE`, `OWNER_MOBILE`, `JOURNEY_DATE`, `JOURNEY_TIME`, `AREA`, `CITY`, `DESTINATION`, `FARE`, `TOTAL_AMOUNT`, `AMOUNT_PAID`, `BALANCE`, `REMARKS`, `STATUS`, `BOOKED_BY`, `INV_ID`) VALUES
+(1, 2, 2, '24-09-2014', 31411578436, 'DL-98-9098', '4 Seater', 2147483647, '29/09/2014', '10:37 pm ', '', '0', '******', '******', 0, 0, 0, '', 1, 'agent', 3);
 
 -- --------------------------------------------------------
 
@@ -331,8 +333,8 @@ CREATE TABLE IF NOT EXISTS `inventory` (
 --
 
 INSERT INTO `inventory` (`ID`, `AGENT_ID`, `CAR_TYPE`, `CAR_NAME`, `CAR_NUMBER`, `PURCHASE_YEAR`, `CAR_FEATURES`, `OWNER_NAME`, `OWNER_NUMBER`, `AGREEMEST_START_DATE`, `AGREEMEST_END_DATE`, `AC`, `NON_AC`, `LOCAL`, `OUTSTATION`, `BOOKING_STATUS`) VALUES
-(1, 4, '13', '13', 'KA-09-9090', '2010', 'Video,Music', 'Shantosh', '8978675645', '07/09/2014', '10/11/2014', 1, 0, 1, 0, b'0'),
-(2, 4, '17', '16', 'KA-02-2011', '2012', 'Video,Music,Luggage carrier', 'Shravan', '878767655567', '30/09/2014', '10/10/2014', 1, 0, 1, 0, b'0'),
+(1, 4, '13', '13', 'KA-09-9090', '2010', 'Video,Music', 'Shantosh', '8978675645', '07/09/2014', '10/11/2014', 1, 0, 1, 0, b'1'),
+(2, 4, '17', '16', 'KA-02-2011', '2012', 'Video,Music,Luggage carrier', 'Shravan', '878767655567', '30/09/2014', '10/10/2014', 1, 0, 1, 0, b'1'),
 (3, 2, '13', '13', 'DL-98-9098', '1990', 'Music,Luggage carrier', 'Ganesh', '887767667655', '23/09/2014', '10/12/2014', 0, 1, 1, 0, b'0'),
 (4, 2, '14', '15', 'MH-01-2000', '2000', 'Video,Music', 'Uttam', '986767654543', '30/09/2014', '10/11/2014', 1, 0, 0, 1, b'1'),
 (5, 2, '17', '17', 'LO-09-8787', '1020', 'Video,Luggage carrier', 'Vakratund', '9845124567', '30/09/2014', '10/11/2014', 1, 0, 0, 1, b'1');
@@ -517,7 +519,8 @@ ALTER TABLE `area`
 -- Constraints for table `cust_booking`
 --
 ALTER TABLE `cust_booking`
-  ADD CONSTRAINT `FK_cust_booking.CUST_ID` FOREIGN KEY (`CUST_ID`) REFERENCES `customer` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_cust_booking.CUST_ID` FOREIGN KEY (`CUST_ID`) REFERENCES `customer` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_cust_booking.INV_ID` FOREIGN KEY (`INV_ID`) REFERENCES `inventory` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `inventory`
