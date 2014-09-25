@@ -39,10 +39,12 @@
 			<td><?php echo $b['CAR_NUMBER']?></td>
 			<td><?php echo $b['PURCHASE_YEAR']?></td>
 			<td><?php echo $b['AGREEMEST_END_DATE']?></td>
-			<?php if($b['BOOKED_BY'] == 'agent'):?>
-			<td><label class="label label-success">BOOKED</label></td>
+			<?php if($b['BOOKED_BY'] == 'agent' && $b['INV_ID'] != NULL):?>
+			<td><label class="badge badge-success">BOOKED</label></td>
+			<?php elseif($b['BOOKED_BY'] == 'customer' && $b['INV_ID'] != NULL):?>
+			<td><label class="badge badge-warning">Booked By Travelder</label></td>
 			<?php else: ?>
-			<td><label class="label label-success">Booked By Travelder</label></td>
+			<td><label class="badge badge-info">Book</label></td>
 			<?php endif;?>
 			<td><label class="label label-danger">Cancel</label></td>
 		<?php $numbers ++; 
@@ -55,11 +57,13 @@
 //Date Select From Datepicker start
 var fromdate = $('#fromdate').datepicker(
 {
-	dateFormat: 'dd/mm/yy'
+	dateFormat: 'dd/mm/yy',
+	minDate: 0
 });
 var todate = $('#todate').datepicker(
 {
-	dateFormat: 'dd/mm/yy'
+	dateFormat: 'dd/mm/yy', maxDate: '+7d',
+		minDate: 0
 });
 //Date Select From Datepicker end
 </script>
