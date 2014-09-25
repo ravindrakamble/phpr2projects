@@ -33,13 +33,13 @@
 		<?php $numbers = 1;
 		foreach($booking_info as $b){ ?>
 		<TR>
-			<td><?php echo $b->RECEIPT_DATE?></td>
-			<td><?php echo $b->TYPE_NAME?></td>
-			<td><?php echo $b->MODEL_NAME?></td>
-			<td><?php echo $b->CAR_NUMBER?></td>
-			<td><?php echo $b->PURCHASE_YEAR?></td>
-			<td><?php echo $b->AGREEMEST_END_DATE?></td>
-			<?php if($b->BOOKED_BY == 'agent'):?>
+			<td><?php echo $b['RECEIPT_DATE']?></td>
+			<td><?php echo $b['TYPE_NAME']?></td>
+			<td><?php echo $b['MODEL_NAME']?></td>
+			<td><?php echo $b['CAR_NUMBER']?></td>
+			<td><?php echo $b['PURCHASE_YEAR']?></td>
+			<td><?php echo $b['AGREEMEST_END_DATE']?></td>
+			<?php if($b['BOOKED_BY'] == 'agent'):?>
 			<td><label class="label label-success">BOOKED</label></td>
 			<?php else: ?>
 			<td><label class="label label-success">Booked By Travelder</label></td>

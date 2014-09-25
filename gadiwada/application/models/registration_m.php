@@ -29,38 +29,42 @@ Class Registration_m extends CI_Model{
 		$this->db->join('car_model','car_model.ID = inventory.CAR_NAME');
 		$this->db->join('cust_booking','cust_booking.AGENT_ID = inventory.AGENT_ID AND cust_booking.INV_ID = inventory.ID','LEFT');
 		$where .= "STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') > CURDATE()";
-		if($from !='' && $to !='')
-		{
-			$where .= "AND RECEIPT_DATE >= '$from' ";
-			$where .= "AND RECEIPT_DATE <= '$to' ";
-		}
+		
 		$this->db->where($where);
 		$query = $this->db->get();
-		echo $this->db->last_query();
+		//echo $this->db->last_query();
 		if($from !='' && $to !='')
 		{
 			$retResult = array();
-			$result = $query->result();
+			$result = $query->result_array();
 			
 			$start_date = strtotime(str_replace("/","-",$from));
+			$to_date = strtotime(str_replace("/","-",$to));
 			
+			$diff = $to_date - $start_date;
+			$diffInDays = floor($diff/(60*60*24));;
 			$nextDate = date('d/m/Y', strtotime('+ 0 day', $start_date));
-			echo $nextDate;
+			if($diffInDays < $noOfDays ){
+				$noOfDays = $diffInDays + 2;	
+			}
 			$i = 1;
 			while ($i < $noOfDays)
 			{
 				foreach($result as $row){
-					echo $row->RECEIPT_DATE;
-					if($row->RECEIPT_DATE == $nextDate)
+					if($row['RECEIPT_DATE'] == $nextDate)
 					{
-						array_push($row, $retResult);
+						array_push($retResult, $row);
 					} else {
-						echo $row;
+						
+						$newData = array();
+						$newData = $row;
+						$newData['RECEIPT_DATE'] = $nextDate;
+						array_push($retResult, $newData);
 					}
 				}
    				$nextDate = date('d/m/Y', strtotime('+' . $i++ . ' day', $start_date));
-				echo $nextDate.'<br/>';
 			}
+			return $retResult;
 		} else {
 			return $query->result();
 		}
