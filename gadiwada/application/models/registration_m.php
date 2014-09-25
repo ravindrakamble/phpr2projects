@@ -32,7 +32,7 @@ Class Registration_m extends CI_Model{
 		
 		$this->db->where($where);
 		$query = $this->db->get();
-		//echo $this->db->last_query();
+		//echo $this->db->last_query();die;
 		if($from !='' && $to !='')
 		{
 			$retResult = array();
@@ -66,7 +66,7 @@ Class Registration_m extends CI_Model{
 			}
 			return $retResult;
 		} else {
-			return $query->result();
+			return $query->result_array();
 		}
 	}
 	
