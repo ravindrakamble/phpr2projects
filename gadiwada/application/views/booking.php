@@ -41,12 +41,13 @@
 			<td><?php echo $b['AGREEMEST_END_DATE']?></td>
 			<?php if($b['BOOKED_BY'] == 'agent' && $b['INV_ID'] != NULL):?>
 			<td><label class="badge badge-success">BOOKED</label></td>
+			<td><label class="label label-cancel">Cancel</label></td>
 			<?php elseif($b['BOOKED_BY'] == 'customer' && $b['INV_ID'] != NULL):?>
 			<td><label class="badge badge-warning">Booked By Travelder</label></td>
-			<?php else: ?>
-			<td><label class="badge badge-info">Book</label></td>
-			<?php endif;?>
 			<td><label class="label label-danger">Cancel</label></td>
+			<?php else: ?>
+			<td colspan="2"><label class="badge badge-info"> Book </label></td>
+			<?php endif;?>
 		<?php $numbers ++; 
 		ECHO "</TR>";
 		} ?>

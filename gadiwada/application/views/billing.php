@@ -236,7 +236,7 @@ function stopCalc()
 		<table class="table table-bordered" align="center">
 			<tr valign="top">
 				<td class="clr" height="25">RECEIPT DATE</td>
-				<td colspan="2"><input type="text" name="rcptDate" id="rcptDate" readonly="readonly" value="<?php echo date('d-m-Y');?>"/>	</td>
+				<td colspan="2"><input type="text" name="rcptDate" id="rcptDate" readonly="readonly" value="<?php echo date('d/m/Y');?>"/>	</td>
 				<td class="clr" height="25">Bill No	</td>
 				<td colspan="2">
 					<input type="text" name="billno" id="billno" readonly="readonly" value="<?php echo $billno ?>"/>	</td>
