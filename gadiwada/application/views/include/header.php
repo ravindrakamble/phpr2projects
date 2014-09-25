@@ -187,7 +187,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-			<input type="button" onclick="checkLogin()" name="submit" value="Submit" class="btn btn-info"/>
+			<input type="button" onclick="return checkLogin();" name="submit" value="Submit" class="btn btn-info"/>
 			</td>
 		</tr>
 	</table>
@@ -204,26 +204,27 @@
 			<tr><td colspan="2"><h4>Create a new account</h4></td></tr>
 			<tr>
 				<td>Enter your name:</td>
-				<td><input type="text" name="name" id="name" maxlength='30'/> </td>
+				<td><input type="text" required="true" name="name" id="name" maxlength='30'/> </td>
 			</tr>
 			<tr>
 				<td>Enter  email id:</td>
-				<td><input type="email" name="email" id="email" maxlength='35'/> </td>
+				<td><input type="email" required="true" name="email" id="email" maxlength='35'/> </td>
 			</tr>
 			<tr>
 				<td>Enter your phone number:</td>
-				<td><input type="tel" name="phone" id="phone" maxlength='12'/> </td>
+				<td><input type="tel" required="true" name="phone" id="phone" maxlength='12'/> </td>
 			</tr>
 			<tr>
 				<td>Enter password:</td>
-				<td><input type="password" name="password" id="signpassword" maxlength='15'/> </td>
+				<td><input type="password" required="true" name="password" id="signpassword" maxlength='15'/> </td>
 			</tr>
 			<tr>
 				<td>Retype password:</td>
-				<td><input type="password" name="repassword"  id="repassword" maxlength='15'/> </td>
+				<td><input type="password" required="true" name="repassword"  id="repassword" maxlength='15'/> </td>
 			</tr>
 			<tr>
-				<td><input type="button" onclick="customer_register()" name="submit" value="Submit" class="btn btn-info"/> </td>
+				<!--  onclick="return customer_register();" -->
+				<td><input type="submit" name="submit" value="Submit" class="btn btn-info"/> </td>
 				<td><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
 			</tr>
 			<tr><td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
@@ -277,33 +278,42 @@ function checkLogin()
 		}
 	});  			
 }
-function customer_register()
+//function customer_register()
+$("#signup").submit(function(e)
 {
 	var name = $('input#name').val();	
 	var email = $('input#email').val();
 	var phone = $('input#phone').val();
 	var password = $('input#signpassword').val();
+	var confirm_password = $('input#repassword').val();
 	var dataString = 'name='+name
 					+ '&email='+email			
 					+ '&phone='+phone			
-					+ '&password='+password							
-	jQuery.ajax({
-		type:"POST",
-		url: "<?php echo base_url();?>login/create_customer_login",
-		data: dataString,
-		success: function(res)
-		{
-			if(res == '1'){
-				$.blockUI({ theme: true,baseZ: 99999999, message: "<h5>Your account created successfully please Login...</h5>" }) 
-			    setTimeout(function(){ window.location = "<?php echo base_url() ?>"; }, 2000);
+					+ '&password='+password;
+	if(password == confirm_password)
+	{			
+		jQuery.ajax({
+			type:"POST",
+			url: "<?php echo base_url();?>login/create_customer_login",
+			data: dataString,
+			success: function(res)
+			{
+				if(res == '1'){
+					$.blockUI({ theme: true,baseZ: 99999999, message: "<h5>Your account created successfully please Login...</h5>" }) 
+				    setTimeout(function(){ window.location = "<?php echo base_url() ?>"; }, 2000);
+				}
+				else{
+					$.blockUI({ message: "<h5>Please try again...</h5>" }) 	
+				}
 			}
-			else{
-				$.blockUI({ message: "<h5>Please try again...</h5>" }) 	
-			}
-		}
-	});  			
-}
-$(document).ready(function() {
+		}); 
+	}
+	else{
+		alert("Your password and confirm password not match.");
+		return false;
+	}		 			
+});
+$(document).ready(function(){
 	$('#error').hide();
 	$('#success').hide();
 });
