@@ -81,7 +81,7 @@ var TSort_Data = new Array ('search_table', 's', 's', 's','s','s','');
 		$type = array();
 		$type['0']='--';
 		    foreach($car_type as $c){
-			  $type[$c->TYPE_NAME]=$c->TYPE_NAME;
+			  $type[$c->ID]=$c->TYPE_NAME;
 		}
 		$local_Package = array();
 		$local_Package['0']='--';
@@ -192,7 +192,7 @@ var TSort_Data = new Array ('search_table', 's', 's', 's','s','s','');
 		            </tr>
 		             <tr>
 		                <td>Car Type :   </td>
-		                <td><?php echo form_dropdown('car_type',array(),$sel_car_type);?></td>
+		                <td><?php echo form_dropdown('car_type',$type,$sel_car_type);?></td>
 		            </tr>
 		            <tr> <td colspan="2"><input type="submit" class="btn btn-info" name="search" value="LOCAL SEARCH"/></td></tr>
 		        </table>

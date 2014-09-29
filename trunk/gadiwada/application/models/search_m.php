@@ -4,31 +4,20 @@ Class Search_m extends CI_Model
 	
 	function search($selval = '0', $opr_names = '0', $features = '0')
 	{
+		$where ='';
 		$curr_session = $this->session->all_userdata();
 		$this->db->distinct();
-		$this->db->select('inventory.*, travel_agent.BUSINESS_NAME,TYPE_NAME,MODEL_NAME');
+		$this->db->select('inventory.*, travel_agent.BUSINESS_NAME,TYPE_NAME,MODEL_NAME,RECEIPT_DATE,INV_ID');
 		$this->db->from('inventory');
 		$this->db->join('travel_agent','inventory.AGENT_ID = travel_agent.ID');
 		$this->db->join('car_type','car_type.ID = inventory.CAR_TYPE');
 		$this->db->join('car_model','car_model.ID = inventory.CAR_NAME');
 		//For Booked Cars Reject From List
-		$this->db->join('cust_booking','cust_booking.AGENT_ID = inventory.AGENT_ID','LEFT');
+		$this->db->join('cust_booking','cust_booking.AGENT_ID = inventory.AGENT_ID AND cust_booking.INV_ID = inventory.ID AND cust_booking.RECEIPT_DATE >= DATE_FORMAT(CURDATE(),\'%d-%m-%Y\') and cust_booking.STATUS =1','LEFT');
 		
-		/*//For LOCAL Packages
-		if($curr_session['search'] == 'LOCAL SEARCH' && $curr_session['option'] == 'Package' && $curr_session['package'] != '0')
-		{
-			$this->db->select('package,extra_per_km,extra_per_hr,min_halt_time,price_per_min_booking_time,price_per_km,commision_fixed,commision_percentage,base_operating_area_0,base_operating_area_2,base_operating_area_3,base_operating_area_4');
-			$this->db->join('pricing_local','pricing_local.agent_id = inventory.AGENT_ID');
-		}
+		$where .= "STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') > CURDATE()";
+		$this->db->where($where);
 		
-		//For LOCAL Packages
-		if($curr_session['search'] == 'LOCAL SEARCH' && $curr_session['option'] == 'Package' && $curr_session['package'] != '0')
-		{
-			$this->db->select('package,min_time_hr,price_per_min_booking_time,extra_price_per_hr,price_per_km,commision_fixed,commision_percentage,base_operating_area_0,base_operating_area_2,base_operating_area_3,base_operating_area_4');
-			$this->db->join('pricing_outstation','pricing_outstation.agent_id = inventory.AGENT_ID');
-		}
-		//END Packages
-		*/
 		//Block UnBlock Agent
 		$this->db->where('travel_agent.STATUS',1);
 		if($curr_session['city'] != '0' ){
@@ -61,8 +50,30 @@ Class Search_m extends CI_Model
 		$where = "STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') > CURDATE()";
 		$this->db->where($where,NULL,FALSE);
 		$query = $this->db->get();
+		$result = $query->result_array();
 		//echo $this->db->last_query();
-		return $query->result();
+		$retResult = array();
+		if($opr_names != '0' && $opr_names != ''){
+			$nextDate = $curr_session['journeydate'];
+		}
+		else
+		$nextDate = date('d/m/Y');
+		foreach($result as $row){
+			
+			if($row['RECEIPT_DATE'] == ''.$nextDate)
+			{
+				array_push($retResult, $row);
+			} else {
+				$newData = array();
+				$newData = $row;
+				$newData['RECEIPT_DATE'] = $nextDate;
+				$newData['INV_ID'] = NULL;
+				$newData['BOOKED_BY'] = NULL;
+				array_push($retResult, $newData);
+			}
+		}
+		return $retResult;;
+		//return $query->result();
 	}
 	
 
