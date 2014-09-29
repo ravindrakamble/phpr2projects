@@ -133,6 +133,18 @@ class Ajax extends CI_Controller {
 	{
 		$this->pricing_m->delete_outstation_price($id);
 	}
+	
+	function get_unique_carname($car_type,$type)
+	{
+		$model = $this->car_type_m->get_unique_carname($car_type,$type);
+		if(count($model) == 0){
+			echo "";
+		} else {
+			foreach($model as $r){
+				echo "<option value=".$r->ID.">".$r->MODEL_NAME."</option>";
+			}
+		}
+	}
 }
 
 

@@ -214,7 +214,13 @@ class Pricing extends CI_Controller {
 		}
 	}
 
-
+	function is_car_available($type,$model)
+	{
+		$query = $this->db->get_where('pricing_local',array('car_type_id'=>$type,'car_model_id'=>$model));
+		$count = $query->num_rows();
+		echo $count; 
+	}
+	
 	function is_agent()
 	{
 		$is_agent_logged_in = $this->session->userdata('is_agent_logged_in');

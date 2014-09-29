@@ -33,4 +33,13 @@ Class Car_type_m extends CI_Model{
 		$query = $this->db->get()->result();
 		return $query;
 	}
+	
+	function get_unique_carname($car_type,$type)
+	{
+		$agent_id = $this->session->userdata('id');
+		$q = $this->db->query("SELECT DISTINCT *FROM (car_model)WHERE TYPE_ID =  $car_type AND id NOT IN (select car_model_id from pricing_local where agent_id =$agent_id  and car_type_id = $car_type and price_for = '$type') ");
+		$query = $q->result();
+		//echo $this->db->last_query();
+		return $query;
+	}
 }
