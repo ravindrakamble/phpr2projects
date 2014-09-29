@@ -67,13 +67,21 @@ Class Pricing_m extends CI_Model{
 		$this->db->delete('pricing_outstation');
 		$this->session->set_flashdata('omsg', "Successfully Deleted.");
 	}
-	function get_price_for_car($carID, $modelID){
-		$agentid = $this->session->userdata('id');
-		$this->db->select('price_per_km,price_per_min_booking_time');
-		$this->db->where('agent_id',$agentid);
+	
+	//Only For Local Flexible
+	function get_price_for_local($carID, $modelID,$type){
+		//$agentid = $this->session->userdata('id');
+		$q = $this->db->select('*')->from('pricing_local');
+		if($type != ''){
+			if($type == 'Flexible')
+			$this->db->where('price_for','Flexible');
+			if($type == 'Package')
+			$this->db->where('price_for','Package');
+		}
 		$this->db->where('car_type_id',$carID);
 		$this->db->where('car_model_id',$modelID);
-		return $this->db->get()->result();
+		$query = $q->get()->row();
+		return $query;
 	}
 }
 ?>

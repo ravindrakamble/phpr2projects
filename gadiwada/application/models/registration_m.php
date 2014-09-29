@@ -62,15 +62,15 @@ Class Registration_m extends CI_Model{
    				$nextDate = date('d/m/Y', strtotime('+' . $i++ . ' day', $start_date));
 			}
 			return $retResult;
-		} else {
+		} 
+		else 
+		{
 			$result = $query->result_array();
 			$nextDate = date('d/m/Y');
 			foreach($result as $row){
 				
 				if($row['RECEIPT_DATE'] == ''.$nextDate)
 				{
-					//var_dump($row['RECEIPT_DATE']);
-				    //var_dump(''.$nextDate);
 					array_push($retResult, $row);
 				} else {
 					$newData = array();

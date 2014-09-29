@@ -9,7 +9,7 @@ class Billing extends CI_Controller {
 	/*function _remap($id){
         $this->index($id);
 	}*/
-	function new_booking($id)
+	function new_booking($id,$date='')
 	{
 		date_default_timezone_set('asia/kolkata');
 		$time = date('h:i a', time());
