@@ -21,4 +21,12 @@ class general
 		   //redirect(base_url().'agent');
 		}	
 	}
+	
+	function get_price($carID, $modelID)
+	{
+		//Price calculation	
+	   $ci =& get_instance();
+	   $ci->load->model('pricing_m');
+	   $price = $ci->pricing_m->get_price_for_car($carID, $modelID);
+	}
 }

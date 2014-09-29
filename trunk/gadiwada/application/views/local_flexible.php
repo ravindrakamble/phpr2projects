@@ -82,7 +82,7 @@ if(isset($localFlexi) && !empty($localFlexi))
 				<tr>
 					<td>Car Name</td>
 					<td>
-				<?php echo form_dropdown('car_name',array('0'=>'--'),$car_model_id,"class='car_type'");?>
+				<?php echo form_dropdown('car_name',array('0'=>'--'),$car_model_id,"class='car_type' id='car_model'");?>
 					</td>
 				</tr>
 				<tr>
@@ -218,6 +218,7 @@ if(isset($localFlexi) && !empty($localFlexi))
 	</table>
 </div>
 <script type="text/javascript">
+var count = 0;
 $(document).ready(function() {
 	var val = document.getElementById('car_type').value;
 	get_car_name(val);
@@ -232,7 +233,7 @@ function get_car_name(car_type)
 {
 	jQuery.ajax({
 		type:"POST",
-		url: "<?php echo base_url();?>ajax/get_car_name/"+car_type,
+		url: "<?php echo base_url();?>ajax/get_unique_carname/"+car_type+'/Flexible',
 		data: car_type,
 		success: function(response) {
 			if(response == ""){
@@ -240,7 +241,6 @@ function get_car_name(car_type)
 			}else{
 				$('.car_type').html(response);
 			}
-			
 		}
 	});
 }

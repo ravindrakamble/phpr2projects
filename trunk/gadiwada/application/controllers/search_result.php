@@ -13,7 +13,7 @@ class Search_result extends CI_Controller {
 
 	public function index()
 	{
-		$this->session->unset_userdata('post-data');
+		$this->session->unset_userdata('post-data');		
 		$_SESSION['post-data'] = $_POST;
 		$this->session->set_userdata($_SESSION['post-data']);
 		$this->result();
@@ -91,11 +91,13 @@ class Search_result extends CI_Controller {
 	
 	public function build_result_html($result)
 	{
+		$this->load->library('general');
 		$search_result="";
 		$search_result.="<center>
 						<table class='table table-bordered' width=100% id='search_table'>
 						<tr><th>Operator name</th><th>Car name</th><th>Features</th><th>AC NON-AC</th><th>Price</th><th></th></tr>";
 						foreach($result as $row):
+						$price = $this->general->get_price($row->CAR_TYPE, $row->CAR_NAME);
 						$search_result.= "<tr><td>".$row->BUSINESS_NAME."</td><td>".$row->MODEL_NAME."</td><td>".$row->CAR_FEATURES."</td><td>";
 						if($row->AC == 1)
 						$acnonac = 'AC';

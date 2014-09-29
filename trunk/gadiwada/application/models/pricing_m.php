@@ -7,8 +7,8 @@ Class Pricing_m extends CI_Model{
 		$q = $this->db->select('pricing_local.*,car_type.TYPE_NAME,car_model.MODEL_NAME,LOCAL_NAME')
 			->from('pricing_local');
 			$this->db->join('car_type', 'car_type.ID = pricing_local.car_type_id');
-			$this->db->join('car_model', 'car_model.TYPE_ID = car_type.ID and car_model.ID = pricing_local.car_model_id ');
-			$this->db->join('package_local', 'package_local.ID = pricing_local.package');
+			$this->db->join('car_model', 'car_model.TYPE_ID = car_type.ID and car_model.ID = pricing_local.car_model_id');
+			$this->db->join('package_local', 'package_local.ID = pricing_local.package','left');
 			if($agent_id > 0){
 				$this->db->where('agent_id',$agent_id);
 			}
@@ -23,6 +23,7 @@ Class Pricing_m extends CI_Model{
 			}
 			$this->db->distinct();
 		$query=$this->db->get()->result();
+		//echo $this->db->last_query();
 		return $query;
 	}
 	
@@ -34,7 +35,7 @@ Class Pricing_m extends CI_Model{
 			->from('pricing_outstation');
 			$this->db->join('car_type', 'car_type.ID = pricing_outstation.car_type_id');
 			$this->db->join('car_model', 'car_model.TYPE_ID = car_type.ID and car_model.ID = pricing_outstation.car_model_id ');
-			$this->db->join('package_outstation', 'package_outstation.ID = pricing_outstation.package');
+			$this->db->join('package_outstation', 'package_outstation.ID = pricing_outstation.package','left');
 			if($agent_id > 0){
 				$this->db->where('agent_id',$agent_id);
 			}
@@ -65,6 +66,14 @@ Class Pricing_m extends CI_Model{
 		$this->db->where('ID',$id);
 		$this->db->delete('pricing_outstation');
 		$this->session->set_flashdata('omsg', "Successfully Deleted.");
+	}
+	function get_price_for_car($carID, $modelID){
+		$agentid = $this->session->userdata('id');
+		$this->db->select('price_per_km,price_per_min_booking_time');
+		$this->db->where('agent_id',$agentid);
+		$this->db->where('car_type_id',$carID);
+		$this->db->where('car_model_id',$modelID);
+		return $this->db->get()->result();
 	}
 }
 ?>
