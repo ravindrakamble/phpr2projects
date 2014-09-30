@@ -16,6 +16,11 @@ class Billing extends CI_Controller {
 		$data['billno'] = $id.time();
 		$data['id'] = $id;
 		$data['time'] = $time;
+		
+		if($date == '')
+		$date = date('d-m-Y');
+
+		$data['date'] = $date;
 		$data['result'] = $this->inventory_m->get_detailsForBilling($id); 
 		$data['rcptAuto'] =array();//$this->receipts_m->get_auto_data(); // Get reciept data fields for auto filling input boxes
 		//var_dump($data['result']);

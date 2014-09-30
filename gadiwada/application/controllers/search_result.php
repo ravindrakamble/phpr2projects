@@ -110,7 +110,7 @@ class Search_result extends CI_Controller {
 						
 						if($this->session->userdata('is_customer_logged_in') == 'ture' || $this->session->userdata('is_agent_logged_in') == 'ture')
 						{
-	$search_result.="<a href='".base_url()."billing/new_booking/".$row['ID']."' class='btn-small btn-success'>Book</a></td></tr>";
+	$search_result.="<a href='".base_url()."billing/new_booking/".$row['ID']."/".$row['RECEIPT_DATE']."' class='btn-small btn-success'>Book</a></td></tr>";
 						}
 						else{
 	$search_result.="<a class='btn-min btn-warning' href='javascript:login(&apos;cust&apos;);'>

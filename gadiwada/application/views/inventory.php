@@ -96,12 +96,12 @@ if(isset($info) && !empty($info))
 						</tr>
 						<tr>
 							<td>Car Number</td>
-							<td><input <?php echo $readonly ?> type="text" value="<?php echo $CAR_NUMBER ?>" 
+							<td><input <?php echo $readonly ?>  required type="text" value="<?php echo $CAR_NUMBER ?>" 
 							name="car_no"  maxlength="20"/></td>
 						</tr>
 						<tr>
 							<td>Purchase year</td>
-							<td><input <?php echo $readonly ?> type="text" value="<?php echo $PURCHASE_YEAR?>"
+							<td><input <?php echo $readonly ?> required type="text" value="<?php echo $PURCHASE_YEAR?>"
 							name="year"  maxlength="4"/></td>
 						</tr>
 						<tr>
@@ -117,12 +117,12 @@ if(isset($info) && !empty($info))
 						</tr>
 						<tr>
 							<td>Owner Name</td>
-							<td><input type="text" name="owner_name" value="<?php echo $OWNER_NAME?>" 
+							<td><input type="text" required name="owner_name" value="<?php echo $OWNER_NAME?>" 
 							maxlength="30"/></td>
 						</tr>
 						<tr>
 							<td>Owner Number</td>
-							<td><input type="text" name="owner_no" value="<?php echo $OWNER_NUMBER?>"
+							<td><input type="text" required name="owner_no" value="<?php echo $OWNER_NUMBER?>"
 							 maxlength="12"/></td>
 						</tr>
 						<tr>
@@ -131,26 +131,26 @@ if(isset($info) && !empty($info))
 						<tr>
 							<td>Agreement start date</td>
 							<td>
-							<input type="text" name="agg_start" value="<?php echo $AGREEMEST_START_DATE?>" id="start"/>
+							<input type="text" name="agg_start" required value="<?php echo $AGREEMEST_START_DATE?>" id="start"/>
 							</td>
 						</tr>
 						<tr>
 							<td>Agreement end date</td>
 							<td>
-							<input type="text" name="agg_end" value="<?php echo $AGREEMEST_END_DATE?>" id="end"/>
+							<input type="text" name="agg_end" required value="<?php echo $AGREEMEST_END_DATE?>" id="end"/>
 							</td>
 						</tr>
 						<tr>
-							<td><input <?php if($AC == '1') echo 'checked= "checked"'?> type="checkbox" 
-								name="ac" value="1"/> AC</td>
-							<td><input <?php if($NON_AC == '1') echo 'checked= "checked"'?> type="checkbox" 
-							name="nonac" value="1"/> Non-AC</td>
+							<td><input required <?php if($AC == '1') echo 'checked= "checked"'?> type="radio" 
+								name="ac_nonac" value="1"/> AC</td>
+							<td><input <?php if($NON_AC == '1') echo 'checked= "checked"'?> type="radio" 
+							name="ac_nonac" value="0"/> Non-AC</td>
 						</tr>
 						<tr>
-							<td><input <?php if($LOCAL == '1') echo 'checked= "checked"'?>  type="checkbox"
-								 name="local" value="1"/> Local</td>
-							<td><input <?php if($OUTSTATION == '1') echo 'checked= "checked"'?> type="checkbox" 
-								name="outstation" value="1"/> Outstation</td>
+							<td><input required <?php if($LOCAL == '1') echo 'checked= "checked"'?>  type="radio"
+								 name="local_out" value="1"/> Local</td>
+							<td><input <?php if($OUTSTATION == '1') echo 'checked= "checked"'?> type="radio" 
+								name="local_out" value="0"/> Outstation</td>
 						</tr>
 					</table>
 					</td>
@@ -287,5 +287,7 @@ frmvalidator.addValidation("owner_no","numeric",'Please Enter Numeric Value');
 
 frmvalidator.addValidation("agg_start","req","Please enter Agreement start date");
 frmvalidator.addValidation("agg_end","req","Please enter Agreement end date");
+frmvalidator.addValidation("ac_nonac","req","Please select one option");
+frmvalidator.addValidation("local_out","req","Please select one option");
 </script>
 <?php $this->load->view('include/admin_footer');?>

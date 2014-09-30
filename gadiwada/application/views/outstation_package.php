@@ -230,7 +230,7 @@ function get_car_name(car_type)
 {
 	jQuery.ajax({
 		type:"POST",
-		url: "<?php echo base_url();?>ajax/get_car_name/"+car_type,
+		url: "<?php echo base_url();?>ajax/get_unique_out_carname/"+car_type+'/Package',
 		data: car_type,
 		success: function(response) {
 			if(response == ""){

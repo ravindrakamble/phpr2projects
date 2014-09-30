@@ -2,6 +2,12 @@
 
 
 <div id="collapse4" class="body">	
+	<div id="question" style="display:none; cursor: default; padding:10px;"> 
+		<h6>Are you sure to cancel this ticket ?</h6> 
+		<br />
+		<input type="button" id="yes" value="Yes" /> 
+		<input type="button" id="no" value="No" /> 
+	</div>
 	<h3>Booking</h3>
 	<form name='agtbook' method="POST" action="<?php echo base_url()?>booking">
 	<table width="100%" frame="box">
@@ -25,13 +31,13 @@
 				<th>Car Number</th>
 				<th>Purchase Year</th>
 				<th>Agreement End Date</th>
-				<TH></TH>
-				<TH></TH>
+				<Th></Th>
+				<Th></Th>
 			</tr>
 		</thead>
 		<tbody>
 		<?php $numbers = 1;
-		foreach($booking_info as $b){ ?>
+		foreach($booking_info as $b){?>
 		<TR>
 			<td><?php echo $b['RECEIPT_DATE']?></td>
 			<td><?php echo $b['TYPE_NAME']?></td>
@@ -41,12 +47,24 @@
 			<td><?php echo $b['AGREEMEST_END_DATE']?></td>
 			<?php if($b['BOOKED_BY'] == 'agent' && $b['INV_ID'] != NULL):?>
 			<td><label class="badge badge-success">BOOKED</label></td>
-			<td><label class="label label-cancel">Cancel</label></td>
+			<td>
+				<a href="javascript:ticket_cancel(<?php echo $b['BILL_NO']?>)">
+					<label class="label label-danger">Cancel</label>
+				</a>
+			</td>
 			<?php elseif($b['BOOKED_BY'] == 'customer' && $b['INV_ID'] != NULL):?>
 			<td><label class="badge badge-warning">Booked By Travelder</label></td>
-			<td><label class="label label-danger">Cancel</label></td>
-			<?php else: ?>
-			<td colspan="2"><label class="badge badge-info"> Book </label></td>
+			<td>
+				<a href="<?php echo base_url()?>cancellation/index/<?php echo $b['BILL_NO']?>">
+					<label class="label label-danger">Cancel</label>
+				</a>
+			</td>
+			<?php else: 
+			?>
+			<td><a href="<?php echo base_url()?>billing/new_booking/<?php echo $b['ID'].'/'.$b['RECEIPT_DATE']?>">
+				<label class="badge badge-info"> Book</label>
+				</a>
+			</td><td></td>
 			<?php endif;?>
 		<?php $numbers ++; 
 		ECHO "</TR>";
@@ -58,14 +76,34 @@
 //Date Select From Datepicker start
 var fromdate = $('#fromdate').datepicker(
 {
-	dateFormat: 'dd/mm/yy',
+	dateFormat: 'dd-mm-yy',
 	minDate: 0
 });
 var todate = $('#todate').datepicker(
 {
-	dateFormat: 'dd/mm/yy', maxDate: '+7d',
+	dateFormat: 'dd-mm-yy', maxDate: '+7d',
 		minDate: 0
 });
 //Date Select From Datepicker end
+
+function ticket_cancel(billno)
+{
+	$.blockUI({ message: jQuery('#question'), css: { width: '275px' } }); 
+    jQuery('#yes').click(function() { 
+        $.ajax({
+			type:"POST",
+			url: "<?php echo base_url();?>cancellation/ticket_cancel/"+billno,
+			success: function(data) {
+				$.growlUI('Sucessfully<br> Deleted !');
+				setTimeout(function(){window.location = "<?php echo base_url() ?>booking"; },50);
+			}
+		});
+	});
+	jQuery('#no').click(function() {
+		billno =0;  
+        $.unblockUI(); 
+       return false; 
+    }); 
+}
 </script>
 <?php $this->load->view('include/admin_footer');?>
