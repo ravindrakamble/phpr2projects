@@ -128,12 +128,19 @@ class Ajax extends CI_Controller {
 	{
 		$this->pricing_m->delete_localFlexiblePrice($id);
 	}
+	function restore_price($id)
+	{
+		$this->pricing_m->restore_price($id);
+	}
 	
 	function delete_outstation_price($id)
 	{
 		$this->pricing_m->delete_outstation_price($id);
 	}
-	
+	function restore_outstation_price($id)
+	{
+		$this->pricing_m->restore_outstation_price($id);
+	}
 	function get_unique_carname($car_type,$type)
 	{
 		$model = $this->car_type_m->get_unique_carname($car_type,$type);
