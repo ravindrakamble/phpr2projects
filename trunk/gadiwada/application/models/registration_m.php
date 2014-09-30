@@ -18,7 +18,7 @@ Class Registration_m extends CI_Model{
 		$where ='';
 		$this->db->distinct();
 		
-		$this->db->select('RECEIPT_DATE,INV_ID,inventory.*, travel_agent.BUSINESS_NAME,TYPE_NAME,MODEL_NAME,BOOKED_BY');
+		$this->db->select('RECEIPT_DATE,cust_booking.INV_ID,inventory.*, travel_agent.BUSINESS_NAME,TYPE_NAME,MODEL_NAME,BOOKED_BY');
 		$this->db->from('inventory');
 		$this->db->join('travel_agent','inventory.AGENT_ID = travel_agent.ID');
 		$this->db->join('car_type','car_type.ID = inventory.CAR_TYPE');
@@ -33,13 +33,12 @@ Class Registration_m extends CI_Model{
 		{
 			
 			$result = $query->result_array();
-			
-			$start_date = strtotime(str_replace("/","-",$from));
-			$to_date = strtotime(str_replace("/","-",$to));
+			$start_date = strtotime($from);
+			$to_date = strtotime($to);
 			
 			$diff = $to_date - $start_date;
 			$diffInDays = floor($diff/(60*60*24));;
-			$nextDate = date('d/m/Y', strtotime('+ 0 day', $start_date));
+			$nextDate = date('d-m-Y', strtotime('+ 0 day', $start_date));
 			if($diffInDays < $noOfDays ){
 				$noOfDays = $diffInDays + 2;	
 			}
@@ -59,14 +58,14 @@ Class Registration_m extends CI_Model{
 						array_push($retResult, $newData);
 					}
 				}
-   				$nextDate = date('d/m/Y', strtotime('+' . $i++ . ' day', $start_date));
+   				$nextDate = date('d-m-Y', strtotime('+' . $i++ . ' day', $start_date));
 			}
 			return $retResult;
 		} 
 		else 
 		{
 			$result = $query->result_array();
-			$nextDate = date('d/m/Y');
+			$nextDate = date('d-m-Y');
 			foreach($result as $row){
 				
 				if($row['RECEIPT_DATE'] == ''.$nextDate)

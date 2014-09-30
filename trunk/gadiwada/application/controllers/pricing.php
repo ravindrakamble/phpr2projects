@@ -14,6 +14,8 @@ class Pricing extends CI_Controller {
 	}
 	public function local($view)
 	{
+		$id = $this->session->userdata('id');
+		$data['inventory'] = $this->inventory_m->get_inventory_details($id);
 		$data['local'] = $this->packages_m->get_all_local_packages();
 		$data['feature'] = $this->admin_m->get_all_feature();
 		$data['car_type'] = $this->car_type_m->get_all_car_type();

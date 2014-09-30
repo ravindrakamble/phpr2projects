@@ -5,7 +5,7 @@ Class Inventory_m extends CI_Model{
 	function save($inventory)
 	{
 		$this->db->insert('inventory',$inventory);
-		return true;
+		return $this->db->insert_id();
 	}
 	
 	function update($inventory,$id)

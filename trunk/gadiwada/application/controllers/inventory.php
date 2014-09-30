@@ -14,8 +14,25 @@ class Inventory extends CI_Controller {
 	{
 		if($this->input->post('submit'))
 		{
-			
-			if($action == 'add'&& $id == 0){
+			$outstation = 0;
+			$local = 0;
+			$nonac = 0;
+			$ac = 0;
+			$val = $this->input->post('local_out');
+			$ac_non = $this->input->post('ac_nonac');
+			if($val == 0)
+			$outstation = 1;
+			if($val == 1)
+			$local = 1;
+			//AC-NONAC
+			if($ac_non == 0)
+			$nonac = 1;
+			if($ac_non == 1)
+			$ac = 1;
+
+			if($action == 'add'&& $id == 0)
+			{
+
 				$car_features = implode(',',$this->input->post('car_features'));
 				$inventory = array(
 					'AGENT_ID'            =>$this->session->userdata('id'),
@@ -28,26 +45,36 @@ class Inventory extends CI_Controller {
 					'OWNER_NUMBER'        => $this->input->post('owner_no'),
 					'AGREEMEST_START_DATE'=> $this->input->post('agg_start'),
 					'AGREEMEST_END_DATE'  => $this->input->post('agg_end'),
-					'AC'                  => $this->input->post('ac'),
-					'NON_AC'              => $this->input->post('nonac'),
-					'LOCAL'               => $this->input->post('local'),
-					'OUTSTATION'          => $this->input->post('outstation')
+					'AC'                  => $ac,
+					'NON_AC'              => $nonac,
+					'LOCAL'               => $local,
+					'OUTSTATION'          => $outstation
 				);
 				$this->inventory_m->save($inventory);
+				if($local == 1)
+				{	
+					$price_local = array(
+						'inventory_id' => $inv_id,
+						'agent_id'=>$this->session->userdata('id'),
+						'car_type_id' => $this->input->post('car_type'),
+						'car_model_id' =>$this->input->post('car_name')
+					);
+					$this->db->insert('pricing_local',$price_local);
+				}	
 			}
 			if($action == 'update' && $id > 0 )
 			{
 				$inventory_update = array(
-				'OWNER_NAME'          => $this->input->post('owner_name'),
-				'OWNER_NUMBER'        => $this->input->post('owner_no'),
-				'AGREEMEST_START_DATE'=> $this->input->post('agg_start'),
-				'AGREEMEST_END_DATE'  => $this->input->post('agg_end'),
-				'AC'                  => $this->input->post('ac'),
-				'NON_AC'              => $this->input->post('nonac'),
-				'LOCAL'               => $this->input->post('local'),
-				'OUTSTATION'          => $this->input->post('outstation')
+					'OWNER_NAME'          => $this->input->post('owner_name'),
+					'OWNER_NUMBER'        => $this->input->post('owner_no'),
+					'AGREEMEST_START_DATE'=> $this->input->post('agg_start'),
+					'AGREEMEST_END_DATE'  => $this->input->post('agg_end'),
+					'AC'                  => $ac,
+					'NON_AC'              => $nonac,
+					'LOCAL'               => $local,
+					'OUTSTATION'          => $outstation
 				);
-				$this->inventory_m->update($inventory_update,$id);
+				$inv_id = $this->inventory_m->update($inventory_update,$id);
 			}
 		}
 		$data['result'] = $this->inventory_m->get_all_data();
