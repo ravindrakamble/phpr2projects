@@ -295,29 +295,29 @@
 				</a>
 			</li>
 			<li <?php if(isset($lf)) echo "class='active'"; ?>>
-				<a href="<?php echo base_url()?>pricing/local/flexible">
+				<a href="<?php echo base_url()?>pricing/local">
 					<i class="icon-truck icon-large">
-					</i>Local Flexible 
+					</i>Local Pricing 
 				</a>
 			</li>
-			<li <?php if(isset($lp)) echo "class='active'"; ?>>
+		<!--	<li <?php if(isset($lp)) echo "class='active'"; ?>>
 				<a href="<?php echo base_url()?>pricing/local/package">
 					<i class="icon-ambulance icon-large">
 					</i>Local Package 
 				</a>
-			</li>
+			</li>-->
 			<li <?php if(isset($of)) echo "class='active'"; ?>>
-				<a href="<?php echo base_url()?>pricing/outstation/flexible">
+				<a href="<?php echo base_url()?>pricing/outstation">
 					<i class="icon-truck icon-large">
-					</i>Outstation Flexible
+					</i>Outstation Pricing
 				</a>
 			</li>
-			<li <?php if(isset($op)) echo "class='active'"; ?>>
+			<!--<li <?php if(isset($op)) echo "class='active'"; ?>>
 				<a href="<?php echo base_url()?>pricing/outstation/package">
 					<i class="icon-ambulance icon-large">
 					</i>Outstation Package 
 				</a>
-			</li>
+			</li>-->
 		<?php endif; ?>
 	</ul>
 	<!-- /#menu -->

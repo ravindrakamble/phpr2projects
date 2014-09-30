@@ -50,17 +50,17 @@ class Inventory extends CI_Controller {
 					'LOCAL'               => $local,
 					'OUTSTATION'          => $outstation
 				);
-				$this->inventory_m->save($inventory);
-				if($local == 1)
-				{	
-					$price_local = array(
-						'inventory_id' => $inv_id,
-						'agent_id'=>$this->session->userdata('id'),
-						'car_type_id' => $this->input->post('car_type'),
-						'car_model_id' =>$this->input->post('car_name')
-					);
-					$this->db->insert('pricing_local',$price_local);
-				}	
+				$inv_id = $this->inventory_m->save($inventory);
+				$pricing = array(
+					'inventory_id' => $inv_id,
+					'agent_id'=> $this->session->userdata('id'),
+					'car_type_id' => $this->input->post('car_type'),
+					'car_model_id' =>$this->input->post('car_name')
+				);
+				if($local == 1)	
+					$this->db->insert('pricing_local',$pricing);
+				if($outstation == 1)	
+					$this->db->insert('pricing_outstation',$pricing);
 			}
 			if($action == 'update' && $id > 0 )
 			{
@@ -74,7 +74,7 @@ class Inventory extends CI_Controller {
 					'LOCAL'               => $local,
 					'OUTSTATION'          => $outstation
 				);
-				$inv_id = $this->inventory_m->update($inventory_update,$id);
+				$this->inventory_m->update($inventory_update,$id);
 			}
 		}
 		$data['result'] = $this->inventory_m->get_all_data();
@@ -89,8 +89,8 @@ class Inventory extends CI_Controller {
 		$result = $this->inventory_m->get_inventory_details($id);
 		$view = '';
 		$view .= "<h4>Inventory Details</h4><table id='inventory_table'  class='table table-bordered table-striped table-condensed'>
-			<tr><th>Car type</th><td>".$result->CAR_TYPE."</td></tr>
-			<tr>	<th>Car name</th><td>". $result->CAR_NAME."</td></tr>
+			<tr><th>Car type</th><td>".$result->TYPE_NAME."</td></tr>
+			<tr>	<th>Car name</th><td>". $result->MODEL_NAME."</td></tr>
 			<tr>	<th>Car number</th><td>". $result->CAR_NUMBER."</td></tr>
 			<tr>	<th>Purchase year</th><td>". $result->PURCHASE_YEAR."</td></tr>
 			<tr>	<th>Car Features</th><td>". $result->CAR_FEATURES."</td></tr>
