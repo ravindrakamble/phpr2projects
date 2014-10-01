@@ -22,9 +22,8 @@ class Cancellation extends CI_Controller {
 		$this->cancellation_m->get_ticket_details($billno,$phone);
 	}
 	
-	function ticket_cancel($billno)
+	function ticket_cancel($billno,$inv_id)
 	{
-		echo  $this->cancellation_m->cancel_ticket($billno);
-
+		echo  $this->cancellation_m->cancel_ticket($billno,$inv_id);
 	}
 }

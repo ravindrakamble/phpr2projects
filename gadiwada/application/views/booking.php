@@ -31,7 +31,7 @@
 				<th>Car Number</th>
 				<th>Purchase Year</th>
 				<th>Agreement End Date</th>
-				<Th></Th>
+				<th>Price</th>
 				<Th></Th>
 			</tr>
 		</thead>
@@ -45,26 +45,29 @@
 			<td><?php echo $b['CAR_NUMBER']?></td>
 			<td><?php echo $b['PURCHASE_YEAR']?></td>
 			<td><?php echo $b['AGREEMEST_END_DATE']?></td>
-			<?php if($b['BOOKED_BY'] == 'agent' && $b['INV_ID'] != NULL):?>
-			<td><label class="badge badge-success">BOOKED</label></td>
 			<td>
-				<a href="javascript:ticket_cancel(<?php echo $b['BILL_NO']?>)">
+				<?php
+				$price ='' ;
+				$price = $this->general->get_price($b['ID']); //Inventory ID
+				echo $price;
+				?>
+			</td>
+			<?php if($b['BOOKED_BY'] == 'agent' && $b['INV_ID'] != NULL):?>
+			<td><label class="badge badge-success">BOOKED</label>&nbsp;&nbsp;&nbsp;
+			
+				<a href="javascript:ticket_cancel(<?php echo $b['BILL_NO'].','.$b['INV_ID']?>)">
 					<label class="label label-danger">Cancel</label>
 				</a>
 			</td>
 			<?php elseif($b['BOOKED_BY'] == 'customer' && $b['INV_ID'] != NULL):?>
 			<td><label class="badge badge-warning">Booked By Travelder</label></td>
-			<td>
-				<a href="<?php echo base_url()?>cancellation/index/<?php echo $b['BILL_NO']?>">
-					<label class="label label-danger">Cancel</label>
-				</a>
-			</td>
 			<?php else: 
 			?>
-			<td><a href="<?php echo base_url()?>billing/new_booking/<?php echo $b['ID'].'/'.$b['RECEIPT_DATE']?>">
+			<td>
+				<a href="<?php echo base_url()?>billing/new_booking/<?php echo $b['ID'].'/'.$b['RECEIPT_DATE'].'/'.$price?>">
 				<label class="badge badge-info"> Book</label>
 				</a>
-			</td><td></td>
+			</td>
 			<?php endif;?>
 		<?php $numbers ++; 
 		ECHO "</TR>";
@@ -86,13 +89,13 @@ var todate = $('#todate').datepicker(
 });
 //Date Select From Datepicker end
 
-function ticket_cancel(billno)
+function ticket_cancel(billno,inv_id)
 {
 	$.blockUI({ message: jQuery('#question'), css: { width: '275px' } }); 
     jQuery('#yes').click(function() { 
         $.ajax({
 			type:"POST",
-			url: "<?php echo base_url();?>cancellation/ticket_cancel/"+billno,
+			url: "<?php echo base_url();?>cancellation/ticket_cancel/"+billno+'/'+inv_id,
 			success: function(data) {
 				$.growlUI('Sucessfully<br> Deleted !');
 				setTimeout(function(){window.location = "<?php echo base_url() ?>booking"; },50);

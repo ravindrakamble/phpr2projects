@@ -17,14 +17,13 @@ Class Registration_m extends CI_Model{
 		$noOfDays = 7;
 		$where ='';
 		$this->db->distinct();
-		
-		$this->db->select('RECEIPT_DATE,cust_booking.INV_ID,inventory.*, travel_agent.BUSINESS_NAME,TYPE_NAME,MODEL_NAME,BOOKED_BY');
+		$this->db->select('RECEIPT_DATE,cust_booking.INV_ID,inventory.*, travel_agent.BUSINESS_NAME,TYPE_NAME,MODEL_NAME,BOOKED_BY,BILL_NO');
 		$this->db->from('inventory');
 		$this->db->join('travel_agent','inventory.AGENT_ID = travel_agent.ID');
 		$this->db->join('car_type','car_type.ID = inventory.CAR_TYPE');
 		$this->db->join('car_model','car_model.ID = inventory.CAR_NAME');
-		$this->db->join('cust_booking','cust_booking.AGENT_ID = inventory.AGENT_ID AND cust_booking.INV_ID = inventory.ID AND cust_booking.RECEIPT_DATE >= DATE_FORMAT(CURDATE(),\'%d-%m-%Y\') and cust_booking.STATUS =1','LEFT');
-		$where .= "STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') > CURDATE()";
+		$this->db->join('cust_booking','cust_booking.INV_ID = inventory.ID AND cust_booking.RECEIPT_DATE >= DATE_FORMAT(CURDATE(),\'%d-%m-%Y\') AND cust_booking.STATUS =1','LEFT');
+		$where .= "STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') >= CURDATE()";
 		$this->db->where($where);
 		$query = $this->db->get();
 		//echo $this->db->last_query();

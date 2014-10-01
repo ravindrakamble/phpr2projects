@@ -48,17 +48,17 @@ if(isset($flash) && !empty($flash))
 		</tr>
 		<tr>
 			<th>Enter time level 1 before journey</th>
-			<td><input  type="text" value="<?php echo $time1?>"
+			<td><input class="time" type="text" value="<?php echo $time1?>"
 			name="time1" required="true"   maxlength="4"/></td>
 		</tr>
 		<tr>
 			<th>Enter time level 2 before journey</th>
-			<td><input  type="text" value="<?php echo $time2?>"
+			<td><input class="time" type="text" value="<?php echo $time2?>"
 			name="time2" required="true"  maxlength="4"/></td>
 		</tr>
 		<tr>
 			<th>Enter time level 3 before journey</th>
-			<td><input  type="text" value="<?php echo $time3?>"
+			<td><input class="time" type="text" value="<?php echo $time3?>"
 			name="time3" required="true"  maxlength="4"/></td>
 		</tr>
 		<tr>
@@ -120,6 +120,12 @@ if(isset($flash) && !empty($flash))
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
+$('.time').datetimepicker({
+    datepicker:false,
+    format:'H:i',
+    step:5
+});
+
  	$("#alert").fadeTo(2000,2000).fadeOut(2000, function(){
     });
 });

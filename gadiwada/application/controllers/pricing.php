@@ -29,7 +29,7 @@ class Pricing extends CI_Controller {
 		$data['feature'] = $this->admin_m->get_all_feature();
 		$data['car_type'] = $this->car_type_m->get_all_car_type();
 		$data['of'] = 'active';
-		$data['outData'] = $this->pricing_m->get_all_outstation_flexible_data();
+		$data['outData'] = $this->pricing_m->get_all_outstation_pricing_data();
 		$this->load->view('outstation_pricing',$data);
 	}
 	public function edit($id=0)
@@ -51,8 +51,8 @@ class Pricing extends CI_Controller {
 		$data['car_type'] = $this->car_type_m->get_all_car_type();
 		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
 		$data['of'] = 'active';
-		$data['outedit'] = $this->pricing_m->get_all_outstation_flexible_data($id);
-		$data['outData'] = $this->pricing_m->get_all_outstation_flexible_data();
+		$data['outedit'] = $this->pricing_m->get_all_outstation_pricing_data($id);
+		$data['outData'] = $this->pricing_m->get_all_outstation_pricing_data();
 		$this->load->view('outstation_pricing',$data);
 	}
 	public function localPricing()

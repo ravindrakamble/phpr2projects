@@ -23,7 +23,6 @@
 				<th>ID</th>
 				<th>Car type</th>
 				<th>Car Name</th>
-				<th>Ac/ Non AC</th>
 				<th>Package Name</th>
 				<th>Extra Rs/km</th>
 				<th>Extra Rs/hr</th>
@@ -43,7 +42,6 @@
 			<td><?php echo $numbers ?></td>
 			<td><?php echo $row->TYPE_NAME ?></td>
 			<td><?php echo $row->MODEL_NAME ?></td>
-			<td><?php echo $row->ac_nonac ?></td>
 			<td><?php echo $row->package ?></td>
 			<td><?php echo $row->extra_per_km ?></td>
 			<td><?php echo $row->extra_per_hr ?></td>

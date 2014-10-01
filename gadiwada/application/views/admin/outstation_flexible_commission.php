@@ -23,7 +23,6 @@
 				<th>ID</th>
 				<th>Car type</th>
 				<th>Car Name</th>
-				<th>Ac/ Non AC</th>
 				<th>Minmum booking time in hrs</th>
 				<th>Price per minimum booking time</th>
 				<th>Extra price in 1 hr</th>
@@ -44,7 +43,6 @@
 			<td><?php echo $numbers ?></td>
 			<td><?php echo $row->TYPE_NAME ?></td>
 			<td><?php echo $row->MODEL_NAME ?></td>
-			<td><?php echo $row->ac_nonac ?></td>
 			<td><?php echo $row->min_time_hr ?></td>
 			<td><?php echo $row->price_per_min_booking_time ?></td>
 			<td><?php echo $row->extra_price_per_hr ?></td>
