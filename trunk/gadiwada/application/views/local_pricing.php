@@ -28,6 +28,7 @@ $model = '';
 $car ='';
 $acnon = '';
 $package = '';
+$inv_id =0;
 if(isset($local_price_edit) && !empty($local_price_edit))
 {
 	foreach($local_price_edit as $info){

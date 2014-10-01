@@ -23,7 +23,6 @@
 				<th>ID</th>
 				<th>Car type</th>
 				<th>Car Name</th>
-				<th>Ac/ Non AC</th>
 				<th>Minmum halt time in min/hr</th>
 				<th>Price per minimum booking time</th>
 				<th>Price per kilometer</th>
@@ -43,7 +42,6 @@
 			<td><?php echo $numbers ?></td>
 			<td><?php echo $row->TYPE_NAME ?></td>
 			<td><?php echo $row->MODEL_NAME ?></td>
-			<td><?php echo $row->ac_nonac ?></td>
 			<td><?php echo $row->min_halt_time ?></td>
 			<td><?php echo $row->price_per_min_booking_time ?></td>
 			<td><?php echo $row->price_per_km ?></td>

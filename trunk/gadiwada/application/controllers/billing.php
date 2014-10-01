@@ -9,14 +9,14 @@ class Billing extends CI_Controller {
 	/*function _remap($id){
         $this->index($id);
 	}*/
-	function new_booking($id,$date='')
+	function new_booking($id,$date='',$price='')
 	{
 		date_default_timezone_set('asia/kolkata');
 		$time = date('h:i a', time());
 		$data['billno'] = $id.time();
 		$data['id'] = $id;
 		$data['time'] = $time;
-		
+		$data['price'] = $price;
 		if($date == '')
 		$date = date('d-m-Y');
 
@@ -30,13 +30,22 @@ class Billing extends CI_Controller {
 	function save()
 	{
 		$booked_by = '';
+		$AGENT_ID = NULL;
+		$CUST_ID = NULL;
+		$id = $this->session->userdata('id');
 		if($this->session->userdata('is_agent_logged_in') == true && $this->session->userdata('type') == 'agent' )
-		$booked_by = 'agent';
+		{
+			$booked_by = 'agent';
+			$AGENT_ID = $id;
+		}
 		if($this->session->userdata('is_customer_logged_in') == true && $this->session->userdata('type') == 'customer')
-		$booked_by = 'customer';
+		{
+			$booked_by = 'customer';
+			$CUST_ID = $id;
+		}
 		$info = array(
-			'CUST_ID'     => $this->session->userdata('id'),
-			'AGENT_ID'    => $this->input->post('agent_id'),
+			'CUST_ID'     => $CUST_ID,
+			'AGENT_ID'    => $AGENT_ID,
 			'RECEIPT_DATE'=> $this->input->post('rcptDate'),
 			'BILL_NO'     => $this->input->post('billno'),
 			'CAR_NO'      => $this->input->post('car_name'),

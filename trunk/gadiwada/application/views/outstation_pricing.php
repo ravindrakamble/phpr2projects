@@ -25,6 +25,7 @@ $model = '';
 $car ='';
 $acnon = '';
 $package = '';
+$inv_id  =0;
 if(isset($outedit) && !empty($outedit))
 {
 	foreach($outedit as $info){

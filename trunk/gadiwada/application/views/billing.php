@@ -301,12 +301,18 @@ function stopCalc()
 			<tr valign="top">
 				<td class="clr">DESTINATION</td>
 				<td>
-					<input type="hidden" name="destination" value="<?php echo '******'; ;?>"/>
-					<span><?php echo '******';?></span></td>
+					<?php 
+					 $curr_session = $this->session->all_userdata();
+					$destination =''; 
+					if(array_key_exists('area', $curr_session) && $curr_session['area'] !== false)
+					$destination = $curr_session['area'];
+				?>
+					<input type="hidden" name="destination" value="<?php echo $destination;?>"/>
+					<span><?php echo $destination;?></span></td>
 				<td class="clr">FARE</td>
 				<td>
-					<input type="hidden" name="fare" value="<?php echo '******'; ;?>"/>
-					<span><?php echo '*****';?></span></td>
+					<input type="hidden" name="fare" value="<?php echo $price ;?>"/>
+					<span><?php echo $price;?></span></td>
 				<td></td><td></td>
 			</tr>
 			<tr>

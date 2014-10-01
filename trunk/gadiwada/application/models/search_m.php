@@ -7,14 +7,14 @@ Class Search_m extends CI_Model
 		$where ='';
 		$curr_session = $this->session->all_userdata();
 		$this->db->distinct();
-		$this->db->select('inventory.*, travel_agent.BUSINESS_NAME,TYPE_NAME,MODEL_NAME,RECEIPT_DATE,INV_ID');
+		$this->db->select('RECEIPT_DATE, cust_booking.INV_ID, inventory.*, travel_agent.BUSINESS_NAME, TYPE_NAME, MODEL_NAME,BOOKED_BY');
 		$this->db->from('inventory');
 		$this->db->join('travel_agent','inventory.AGENT_ID = travel_agent.ID');
 		$this->db->join('car_type','car_type.ID = inventory.CAR_TYPE');
 		$this->db->join('car_model','car_model.ID = inventory.CAR_NAME');
 		//For Booked Cars Reject From List
-		$this->db->join('cust_booking','cust_booking.AGENT_ID = inventory.AGENT_ID AND cust_booking.INV_ID = inventory.ID AND cust_booking.RECEIPT_DATE >= DATE_FORMAT(CURDATE(),\'%d-%m-%Y\') and cust_booking.STATUS =1','LEFT');
-		$where .= "STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') > CURDATE()";
+		$this->db->join('cust_booking','cust_booking.INV_ID = inventory.ID AND cust_booking.RECEIPT_DATE >= DATE_FORMAT(CURDATE(),\'%d-%m-%Y\') AND cust_booking.STATUS =1','LEFT');
+		$where .= "STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') >= CURDATE()";
 		$this->db->where($where);
 		//Block UnBlock Agent
 		$this->db->where('travel_agent.STATUS',1);
@@ -45,7 +45,7 @@ Class Search_m extends CI_Model
 		}
 
 		$this->db->where('BOOKING_STATUS',1);
-		$where  = "STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') > CURDATE()";
+		$where  = "STR_TO_DATE(AGREEMEST_END_DATE, '%d/%m/%Y') >= CURDATE()";
 		$this->db->where($where,NULL,FALSE);
 		$query  = $this->db->get();
 		$result = $query->result_array();

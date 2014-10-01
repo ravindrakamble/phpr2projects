@@ -97,11 +97,11 @@ function ticket_info()
 		}
 	});
 }
-function ticket_cancel(id)
+function ticket_cancel(id,inv_id)
 {
 	jQuery.ajax({
 		type:'POST',
-		url:'<?php echo base_url()?>cancellation/ticket_cancel/'+id,
+		url:'<?php echo base_url()?>cancellation/ticket_cancel/'+id+'/'+inv_id,
 		success:function(responce){
 			if(responce > 0){
 				$.growlUI('Your Ticket <br>has been cancelled !');

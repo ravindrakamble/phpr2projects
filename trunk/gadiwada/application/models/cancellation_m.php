@@ -1,15 +1,14 @@
 <?php
 Class Cancellation_m extends CI_Model{
 	
-	function cancel_ticket($billno)
+	function cancel_ticket($billno,$inv_id)
 	{
-		//CAR_NO
-		/*$this->db->where('CAR_NO',$car_no);
+		$this->db->where('ID',$inv_id);
 		$this->db->set('BOOKING_STATUS',1); // to show in Search
-		$this->db->update('inventory');*/
-		$where = "STR_TO_DATE(RECEIPT_DATE, '%d-%m-%Y') > CURDATE()";
-		$this->db->where($where,NULL,FALSE);
+		$this->db->update('inventory');
+
 		$this->db->where('BILL_NO',$billno);
+		$this->db->where('INV_ID',$inv_id);
 		$this->db->set('STATUS',0);
 		$this->db->update('cust_booking');
 		return $this->db->affected_rows();
@@ -17,14 +16,21 @@ Class Cancellation_m extends CI_Model{
 	
 	function get_ticket_details($billno,$phone)
 	{
-		$query = $this->db->select('*')->from('customer');
-				$this->db->join('cust_booking','cust_booking.CUST_ID = customer.ID');
+		$query = $this->db->select('*')->from('cust_booking');
 				$this->db->where('BILL_NO',$billno);
-				$this->db->where('PHONE',$phone);
+				if($this->session->userdata('is_agent_logged_in') == true)
+				$this->db->where('OWNER_MOBILE',$phone);
+				if($this->session->userdata('is_customer_logged_in') == true)
+				{
+
+					$this->db->join('customer','customer.ID = cust_booking.CUST_ID');
+					$this->db->where('PHONE',$phone);
+				}
 				$this->db->where('cust_booking.STATUS',1);
-				$where = "STR_TO_DATE(RECEIPT_DATE, '%d/%m/%Y') > CURDATE()";
+				$where = "STR_TO_DATE(RECEIPT_DATE, '%d-%m-%Y') >= CURDATE()";
 				$this->db->where($where,NULL,FALSE);
 		$info = $query->get()->row_array();
+		//echo $this->db->last_query();
 		if(!empty($info) && isset($info)){
 			$view = '';
 			$view .= "<table id='dataTable' class='table table-bordered table-condensed table-hover table-striped'>
@@ -47,7 +53,7 @@ Class Cancellation_m extends CI_Model{
 				</tr>
 				<tr>
 					<th colspan=2>
-						<input type='button' onclick='ticket_cancel(".$info['BILL_NO'].")' value='CANCEL' />
+						<input type='button' onclick='ticket_cancel(".$info['BILL_NO'].','.$info['INV_ID'].")' value='CANCEL' />
 					</th>
 				</tr>";
 			$view  .= "</table>";

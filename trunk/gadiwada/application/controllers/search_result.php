@@ -95,10 +95,10 @@ class Search_result extends CI_Controller {
 		$search_result="";
 		$search_result.="<center>
 						<table class='table table-bordered' width=100% id='search_table'>
-						<tr><th>Operator name</th><th>Car name</th><th>Features</th><th>AC NON-AC</th><th>Price</th><th></th></tr>";
+						<tr><th>Date</th><th>Operator name</th><th>Car name</th><th>Features</th><th>AC NON-AC</th><th>Price</th><th></th></tr>";
 						foreach($result as $row):
-						$price = $this->general->get_price($row['CAR_TYPE'], $row['CAR_NAME']);
-						$search_result.= "<tr><td>".$row['BUSINESS_NAME']."</td><td>".$row['MODEL_NAME']."</td><td>".$row['CAR_FEATURES']."</td><td>";
+						$price = $this->general->get_price($row['ID']);
+						$search_result.= "<tr><td>".$row['RECEIPT_DATE']."</td><td>".$row['BUSINESS_NAME']."</td><td>".$row['MODEL_NAME']."</td><td>".$row['CAR_FEATURES']."</td><td>";
 						if($row['AC'] == 1)
 						$acnonac = 'AC';
 						if($row['NON_AC'] == 1)
@@ -110,7 +110,7 @@ class Search_result extends CI_Controller {
 						
 						if($this->session->userdata('is_customer_logged_in') == 'ture' || $this->session->userdata('is_agent_logged_in') == 'ture')
 						{
-	$search_result.="<a href='".base_url()."billing/new_booking/".$row['ID']."/".$row['RECEIPT_DATE']."' class='btn-small btn-success'>Book</a></td></tr>";
+	$search_result.="<a href='".base_url()."billing/new_booking/".$row['ID']."/".$row['RECEIPT_DATE']."/".$price. "' class='btn-small btn-success'>Book</a></td></tr>";
 						}
 						else{
 	$search_result.="<a class='btn-min btn-warning' href='javascript:login(&apos;cust&apos;);'>

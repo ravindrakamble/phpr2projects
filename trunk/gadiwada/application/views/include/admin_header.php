@@ -62,13 +62,11 @@
 		<script src="<?php echo base_url();?>calculator/jquery.calculator.js"></script>
 		<!--Calculator end-->
 
-		<!--<script src="<?php echo base_url()?>js/responsiveslides.min.js"></script>-->
-		<!--Jquery Tab JS-->
-		<!--<script src="<?php echo base_url()?>js/ion-tabs/ion.tabs.min.js"></script>
-		<script src="<?php echo base_url()?>js/vendor/jquery-1.10.2.min.js"></script>-->
-		<!--Jquery Tab JS END-->
+		<!--Jquery Datetimepicjer JS-->
+		<script src="<?php echo base_url()?>js/jquery.datetimepicker.js"></script>
+		<!--Jquery Datetimepicjer END-->
 		
-		<link rel="icon" type="image/ico" href="<?php echo base_url()?>img/fevicon.jpg"/>
+	<link rel="icon" type="image/ico" href="<?php echo base_url()?>img/fevicon.jpg"/>
 	<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css"/>
 	<link type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap-responsive.min.css" />
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
@@ -78,6 +76,9 @@
 	<!--<link rel="stylesheet" href="<?php echo base_url();?>assets/css/responsive-tables.css">-->
 
 	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/theme.css">
+
+		<!--Jquery Datetimepicjer CSS-->
+	<link rel="stylesheet" href="<?php echo base_url();?>css/jquery.datetimepicker.css">
 	
 	
 	<!--main Header-->
