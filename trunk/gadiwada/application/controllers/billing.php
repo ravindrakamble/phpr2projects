@@ -86,21 +86,22 @@ class Billing extends CI_Controller {
 			$pdf_filename  = 'Booking.pdf';
 			$this->load->library('dompdf_lib');
 			$this->dompdf_lib->convert_html_to_pdf($html, $pdf_filename, true);
+			redirect(base_url());
 
 		}
 		if($this->input->post('sms'))
 		{
-			
-			
+			redirect(base_url());
 		}
 		if($this->input->post('email'))
 		{
 			//Send EMAIL
-			$this->load->library('Mailer');
-			$body = $this->load->view('emails/parent_welcome',"", TRUE);
+			/*$this->load->library('Mailer');
+			$body = 'TESTING';//$this->load->view('emails/parent_welcome',"", TRUE);
 			$subject="Booking Details";		
 			$to = $this->session->userdata('username'); 
-			$result = $this->Mailer->send_mail('info@gadivada.com',$to, $subject, $body);
+			$result = $this->Mailer->send_mail('info@gadivada.com',$to, $subject, $body);*/
+			redirect(base_url());
 		}
 	}
 	

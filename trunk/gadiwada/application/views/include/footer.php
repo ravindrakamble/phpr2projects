@@ -69,13 +69,13 @@
 		<table border=0 cellpadding="0" cellspacing="0">
 			<tr> 
 				<td align=center valign="top" > 
-				<a href="javascript:openLogo('shopline2282')"><img src="http://www.ccavenue.com/images/100.gif" border=0></a>
+				<!--<a href="javascript:openLogo('shopline2282')"><img src="http://www.ccavenue.com/images/100.gif" border=0></a>-->
 				</td>
 			</tr>
 		</table>
 		</h4>
 		<p>
-		<script language='JavaScript'>
+		<!--<script language='JavaScript'>
 		function openLogo(ClientID)
 		{
 			var attributes = 'toolbar=0,location=0,directories=0,status=0, menubar=0,scrollbars=1,resizable=1,width=550,height=600,left=0,top=0';
@@ -83,7 +83,7 @@
 			self.name = 'mainWin'; 
 		}
 		</script> 
-
+-->
 		</p>
 	</div>
 	<div class="footer-grid2" align="right">

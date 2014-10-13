@@ -14,6 +14,28 @@
     Questions & comments please send to form.val (at) javascript-coder.com
     -------------------------------------------------------------------------  
 */
+function IsSpecialCharacter(pan)
+{
+	var regex = /^[a-zA-Z0-9\-'_]$/;
+	//var regex = /^[A-Za-z']+( [A-Za-z']+)*$/;
+	return regex.test(pan);
+}
+function DoCustomValidation()
+{
+    var frm = document.forms["registration"];
+	var pan = frm.pan.value;
+ 	//var pan = $("input#pan").val();
+ 	if(!IsSpecialCharacter(pan))
+	{
+		//alert('Special Character Not Allowed.');
+		sfm_show_error_msg('Special characters are not allowed!',frm.pan);
+		return false;
+	}
+  else
+  {
+    return true;
+  }
+}
 
 function Validator(frmname)
 {

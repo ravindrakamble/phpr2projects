@@ -21,6 +21,7 @@
 		<thead>
 			<tr>
 				<th>ID</th>
+				<th>Agent</th>
 				<th>Car type</th>
 				<th>Car Name</th>
 				<th>Package Name</th>
@@ -40,9 +41,10 @@
 		foreach($outPackData as $row){ ?>
 		<tr>				
 			<td><?php echo $numbers ?></td>
+			<td><?php echo $row->BUSINESS_NAME ?></td>
 			<td><?php echo $row->TYPE_NAME ?></td>
 			<td><?php echo $row->MODEL_NAME ?></td>
-			<td><?php echo $row->package ?></td>
+			<td><?php echo $row->OUTSTATION_NAME ?></td>
 			<td><?php echo $row->extra_price_per_hr ?></td>
 			<td><?php echo $row->price_per_km ?></td>
 			<td><?php echo $row->base_operating_area_0 ?></td>

@@ -211,8 +211,8 @@
 				<td><input type="email" required="true" name="email" id="email" maxlength='35'/> </td>
 			</tr>
 			<tr>
-				<td>Enter your phone number:</td>
-				<td><input type="tel" required="true" name="phone" id="phone" maxlength='12'/> </td>
+				<td>Enter your mobile number:</td>
+				<td><input type="tel" required="true" name="phone" id="phone" maxlength='10'/> </td>
 			</tr>
 			<tr>
 				<td>Enter password:</td>
@@ -245,7 +245,10 @@ function login(type1)
 		parent.jQuery.fancybox.open({href :'#signup'});
 	}
 }
-
+function IsPhone(phone){
+	var regex = /\d{10}$/;
+	return regex.test(phone);
+}
 function checkLogin()
 {
 	var username = $('input#username').val();	
@@ -290,6 +293,12 @@ $("#signup").submit(function(e)
 					+ '&email='+email			
 					+ '&phone='+phone			
 					+ '&password='+password;
+					
+	//var mobile = $("input#phone").val();
+	if(!IsPhone(phone)){
+		alert("Please enter valid mobile number.")
+		return false;
+	}	
 	if(password == confirm_password)
 	{			
 		jQuery.ajax({

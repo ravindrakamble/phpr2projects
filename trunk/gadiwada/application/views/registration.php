@@ -80,7 +80,7 @@
 						</tr>
 						<tr>
 							<td>PAN Card number</td>
-							<td><input type="text" name="pan"  maxlength="15"/></td>
+							<td><input type="text" name="pan" id="pan"  maxlength="15"/></td>
 						</tr>
 						<tr>
 							<td>TAN Number</td>
@@ -130,7 +130,7 @@
 				</tr>
 				
 				<tr>
-					<td style="padding-left: 40%"><input type="submit" name="submit" value="Submit" 
+					<td style="padding-left: 40%"><input onclick="javascript:return" type="submit" name="submit" value="Submit" 
 					class="btn btn-info"/> </td>
 					<td><input type="reset" name="reset" value="Reset" class="btn btn-inverse"/> </td>
 				</tr>
@@ -153,6 +153,7 @@ function deleteRow(row)
 }
 
 var frmvalidator = new Validator("registration");
+var pan = $("input#pan").val();
 frmvalidator.addValidation("bname","req","Please enter your Business Name");
 frmvalidator.addValidation("bname","alpha","Alphabetic chars only");
 frmvalidator.addValidation("btype","dontselect=--",'Please select your Business Type');
@@ -161,10 +162,24 @@ frmvalidator.addValidation("country","req","Please enter your country");
 frmvalidator.addValidation("country","alpha","Please enter valid country name");
 frmvalidator.addValidation("city","dontselect=--","Please select your City");
 frmvalidator.addValidation("pincode","req","Please enter your pincode");
-frmvalidator.addValidation("pincode","numeric");
+frmvalidator.addValidation("pincode","numeric",'Please Enter numeric value.');
 frmvalidator.addValidation("byear","req","Please enter Year of starting the business");
-frmvalidator.addValidation("byear","numeric");
+frmvalidator.addValidation("byear","numeric","Please Enter numeric value.");
 frmvalidator.addValidation("corpno","req","Please enter Corporation number");
+frmvalidator.addValidation("username","req","Please enter your email address");
+frmvalidator.addValidation("username","email","Please enter a valid email address");
+frmvalidator.addValidation("password","req","Please enter your password");
 frmvalidator.addValidation("pan","req","Please enter pan card number");
+frmvalidator.setAddnlValidationFunction(DoCustomValidation);
+/*function validation()
+{
+	var pan = $("input#pan").val();
+	if(!IsSpecialCharacter(pan))
+	{
+		alert('Special Character Not Allowed.');
+		return false;
+	}
+}*/
+
 </script>
 <?php $this->load->view('include/footer');?>

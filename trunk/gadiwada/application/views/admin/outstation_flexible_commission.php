@@ -21,6 +21,7 @@
 		<thead>
 			<tr>
 				<th>ID</th>
+				<th>Agent</th>
 				<th>Car type</th>
 				<th>Car Name</th>
 				<th>Minmum booking time in hrs</th>
@@ -41,6 +42,7 @@
 		foreach($outFlexiData as $row){ ?>
 		<tr>				
 			<td><?php echo $numbers ?></td>
+			<td><?php echo $row->BUSINESS_NAME ?></td>
 			<td><?php echo $row->TYPE_NAME ?></td>
 			<td><?php echo $row->MODEL_NAME ?></td>
 			<td><?php echo $row->min_time_hr ?></td>

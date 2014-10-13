@@ -63,11 +63,12 @@ Class Pricing_m extends CI_Model{
 	{
 		$agent_id=0;
 		$agent_id = $this->session->userdata('id');
-		$q = $this->db->select('pricing_outstation.*,NON_AC,AC,LOCAL,car_type.TYPE_NAME,car_model.MODEL_NAME,OUTSTATION_NAME')
+		$q = $this->db->select('pricing_outstation.*,NON_AC,AC,LOCAL,car_type.TYPE_NAME,car_model.MODEL_NAME,OUTSTATION_NAME,BUSINESS_NAME')
 			->from('pricing_outstation');
 			$this->db->join('inventory', 'inventory.ID = pricing_outstation.inventory_id');
 			$this->db->join('car_type', 'car_type.ID = pricing_outstation.car_type_id');
 			$this->db->join('car_model', 'car_model.TYPE_ID = car_type.ID and car_model.ID = pricing_outstation.car_model_id ');
+			$this->db->join('travel_agent', 'travel_agent.ID = inventory.AGENT_ID','left');
 			$this->db->join('package_outstation', 'package_outstation.ID = pricing_outstation.package','left');
 			if($agent_id > 0){
 				$this->db->where('inventory.agent_id',$agent_id);
@@ -89,12 +90,13 @@ Class Pricing_m extends CI_Model{
 	{
 		$agent_id=0;
 		$agent_id = $this->session->userdata('id');
-		$q = $this->db->select('pricing_local.*,NON_AC,AC,LOCAL,car_type.TYPE_NAME,car_model.MODEL_NAME,OUTSTATION_NAME')
+		$q = $this->db->select('pricing_local.*,NON_AC,AC,LOCAL,car_type.TYPE_NAME,car_model.MODEL_NAME,LOCAL_NAME,BUSINESS_NAME')
 			->from('pricing_local');
 			$this->db->join('inventory', 'inventory.ID = pricing_local.inventory_id');
 			$this->db->join('car_type', 'car_type.ID = pricing_local.car_type_id');
 			$this->db->join('car_model', 'car_model.TYPE_ID = car_type.ID and car_model.ID = pricing_local.car_model_id ');
-			$this->db->join('package_outstation', 'package_outstation.ID = pricing_local.package','left');
+			$this->db->join('travel_agent', 'travel_agent.ID = inventory.AGENT_ID','left');
+			$this->db->join('package_local', 'package_local.ID = pricing_local.package','left');
 			if($agent_id > 0){
 				$this->db->where('inventory.agent_id',$agent_id);
 			}

@@ -47,7 +47,7 @@
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
-	                	<input type="radio"  name="option" onclick="options(this.value)" value='Flexible'/>Flexible
+	                	<input type="radio" checked="true"  name="option" onclick="options(this.value)" value='Flexible'/>Flexible
 	                	<input type="radio"   name="option" onclick="options(this.value)"value='Package'/>Package
 	                </td>
 	            </tr>
@@ -104,7 +104,7 @@
 	            </tr>
 	             <tr>
 	                <td align="left" colspan="2">
-	                	<input type="radio"  name="option" onclick="localoptions(this.value)" value='Flexible'/>Flexible
+	                	<input type="radio" checked="true"  name="option" onclick="localoptions(this.value)" value='Flexible'/>Flexible
 	                	<input type="radio"  name="option" onclick="localoptions(this.value)"value='Package'/>Package
 	                </td>
 	            </tr>
@@ -147,6 +147,8 @@
 	<!--content end-->
 <script type="text/javascript">
 $(function() {
+	options('Flexible')
+	localoptions('Flexible')
 	$('#journeydate1').datepicker({
 		dateFormat: 'dd/mm/yy',
 		minDate: 0
