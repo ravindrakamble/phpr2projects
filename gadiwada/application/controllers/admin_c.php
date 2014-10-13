@@ -21,12 +21,14 @@ class Admin_c extends CI_Controller {
 		$this->load->view('admin/login');
 	}
 	function city(){
+		$this->is_admin();
 		$data['city']='active';
 		$data['cities'] = $this->city_m->get_all_cities();
 		$this->load->view('admin/city',$data);
 	}
 	function area()
 	{
+		$this->is_admin();
 		$data['area']='active';
 		$data['cities'] = $this->city_m->get_all_cities();
 		$data['areas']  = $this->area_m->get_all_areas();
@@ -34,12 +36,14 @@ class Admin_c extends CI_Controller {
 	}
 	function car_type()
 	{
+		$this->is_admin();
 		$data['type']='active';
 		$data['car_type'] = $this->car_type_m->get_all_car_type();
 		$this->load->view('admin/car_type',$data);
 	}
 	function car_model()
 	{
+		$this->is_admin();
 		$data['car_model']='active';
 		$data['car_model'] = $this->car_model_m->get_all_car_model();
 		$data['car_type'] = $this->car_type_m->get_all_car_type();
@@ -47,12 +51,14 @@ class Admin_c extends CI_Controller {
 	}
 	function features()
 	{
+		$this->is_admin();
 		$data['features']='active';
 		$data['features']  = $this->features_m->get_all_features();
 		$this->load->view('admin/features',$data);
 	}
 	function local_package()
 	{
+		$this->is_admin();
 		$data['localP']='active';
 		$data['cities'] = $this->city_m->get_all_cities();
 		$data['local'] = $this->packages_m->get_all_local_packages();
@@ -60,6 +66,7 @@ class Admin_c extends CI_Controller {
 	}
 	function outstation_package()
 	{
+		$this->is_admin();
 		$data['outP']='active';
 		$data['cities'] = $this->city_m->get_all_cities();
 		$data['outstation'] = $this->packages_m->get_all_outstation_packages();
@@ -67,18 +74,21 @@ class Admin_c extends CI_Controller {
 	}
 	function discount()
 	{
+		$this->is_admin();
 		$data['disc']='active';
 		$data['discount']  = $this->discounts_m->get_all_discounts();
 		$this->load->view('admin/discount',$data);
 	}
 	function block_unblock_agent()
 	{
+		$this->is_admin();
 		$data['agt']='active';
 		$data['agents'] = $this->admin_m->get_all_agents();	
 		$this->load->view('admin/block_unblock_agent',$data);
 	}
 	function block_unblock_user()
 	{
+		$this->is_admin();
 		$data['user']='active';
 		$data['users'] = $this->admin_m->get_all_users();
 		$this->load->view('admin/block_unblock_user',$data);
@@ -110,6 +120,7 @@ class Admin_c extends CI_Controller {
 	
 	function commission()
 	{
+		$this->is_admin();
 		$data['com'] = 'active';
 		$this->load->view('admin/commission',$data);
 	}
@@ -140,12 +151,14 @@ class Admin_c extends CI_Controller {
 	
 	function cancellation()
 	{
+		$this->is_admin();
 		$data['cancel'] = 'active';
 		$this->load->view('admin/cancellation',$data);
 	}
 
 	function cancellation_payers()
 	{
+		
 		$payers = $this->input->post('payers');
 		if(!empty($payers))
 		{
@@ -164,6 +177,7 @@ class Admin_c extends CI_Controller {
 
 	function partial_payers($id = 0)
 	{
+		$this->is_admin();
 		if($id > 0 )
 		{
 			$data['edtyp'] = 'Update';
@@ -176,6 +190,7 @@ class Admin_c extends CI_Controller {
 
 	function full_payers($id = 0)
 	{
+		$this->is_admin();
 		if($id > 0 )
 		{
 			$data['edtyp'] = 'Update';

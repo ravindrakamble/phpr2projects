@@ -21,6 +21,7 @@
 		<thead>
 			<tr>
 				<th>ID</th>
+				<th>Agent</th>
 				<th>Car type</th>
 				<th>Car Name</th>
 				<th>Minmum halt time in min/hr</th>
@@ -40,6 +41,7 @@
 		foreach($localFlexiData as $row){ ?>
 		<tr>				
 			<td><?php echo $numbers ?></td>
+			<td><?php echo $row->BUSINESS_NAME ?></td>
 			<td><?php echo $row->TYPE_NAME ?></td>
 			<td><?php echo $row->MODEL_NAME ?></td>
 			<td><?php echo $row->min_halt_time ?></td>

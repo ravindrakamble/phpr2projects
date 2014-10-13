@@ -99,6 +99,7 @@ function ticket_info()
 }
 function ticket_cancel(id,inv_id)
 {
+	alert(id+'---'+inv_id)
 	jQuery.ajax({
 		type:'POST',
 		url:'<?php echo base_url()?>cancellation/ticket_cancel/'+id+'/'+inv_id,

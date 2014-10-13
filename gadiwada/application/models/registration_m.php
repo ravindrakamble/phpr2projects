@@ -14,6 +14,7 @@ Class Registration_m extends CI_Model{
 	
 	function get_booking_info($from,$to)
 	{
+	
 		$noOfDays = 7;
 		$where ='';
 		$this->db->distinct();
@@ -42,9 +43,11 @@ Class Registration_m extends CI_Model{
 				$noOfDays = $diffInDays + 2;	
 			}
 			$i = 1;
+			
 			while ($i < $noOfDays)
 			{
 				foreach($result as $row){
+					//$price = $this->general->get_price($row['CAR_TYPE'], $row['CAR_NAME']);
 					if($row['RECEIPT_DATE'] == ''.$nextDate)
 					{
 						array_push($retResult, $row);
@@ -56,9 +59,11 @@ Class Registration_m extends CI_Model{
 						$newData['BOOKED_BY'] = NULL;
 						array_push($retResult, $newData);
 					}
+					
 				}
    				$nextDate = date('d-m-Y', strtotime('+' . $i++ . ' day', $start_date));
 			}
+			
 			return $retResult;
 		} 
 		else 
@@ -66,7 +71,7 @@ Class Registration_m extends CI_Model{
 			$result = $query->result_array();
 			$nextDate = date('d-m-Y');
 			foreach($result as $row){
-				
+				//$price = $this->general->get_price($row['CAR_TYPE'], $row['CAR_NAME']);
 				if($row['RECEIPT_DATE'] == ''.$nextDate)
 				{
 					array_push($retResult, $row);
@@ -79,7 +84,7 @@ Class Registration_m extends CI_Model{
 					array_push($retResult, $newData);
 				}
 			}
-			
+			//var_dump($retResult);
 			return $retResult;
 		}
 	}
