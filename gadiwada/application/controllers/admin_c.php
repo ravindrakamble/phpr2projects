@@ -82,15 +82,27 @@ class Admin_c extends CI_Controller {
 	function block_unblock_agent()
 	{
 		$this->is_admin();
+		$type= $this->input->post('type');
+		if(isset($type))
+		$type = $this->input->post('type');
+		else
+		$type ='';
+		$data['search'] = $type;
 		$data['agt']='active';
-		$data['agents'] = $this->admin_m->get_all_agents();	
+		$data['agents'] = $this->admin_m->get_all_agents($type);	
 		$this->load->view('admin/block_unblock_agent',$data);
 	}
 	function block_unblock_user()
 	{
 		$this->is_admin();
+		$type= $this->input->post('type');
+		if(isset($type))
+		$type = $this->input->post('type');
+		else
+		$type ='';
+		$data['search'] = $type;
 		$data['user']='active';
-		$data['users'] = $this->admin_m->get_all_users();
+		$data['users'] = $this->admin_m->get_all_users($type);
 		$this->load->view('admin/block_unblock_user',$data);
 	}
 	public function local_flexible_commission()

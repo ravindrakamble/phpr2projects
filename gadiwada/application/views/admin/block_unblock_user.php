@@ -7,7 +7,13 @@
 			}
 			?>
 			<h2>Block/Unblock Users</h2>
-		
+		<form name="myform" method="post" action="<?php echo base_url()?>admin_c/block_unblock_user">
+			<select name='type' onchange="this.form.submit()">
+				<option value="">--Select--</option>
+				<option <?php if($search === '1')echo "selected='selected'";?> value="1">Block</option>
+				<option <?php if($search === '0')echo "selected='selected'";?> value="0">Unblock</option>
+			</select>
+		</form>
 <div id="collapse4" class="body">
 	<div id="blockmsg" style="display:none; cursor: default; padding:10px;">				
 		<h6>Are you sure to block/unblock ?</h6> 
