@@ -30,21 +30,28 @@ Class Admin_m extends CI_Model{
 		return $query->result();
 	}
 	
-	function get_all_agents()
+	function get_all_agents($type)
 	{
 		$this->db->distinct();
 		$this->db->select('*')->from('travel_agent');
+		if($type != ''){
+			$this->db->where('STATUS',$type);
+		}
 		/*$this->db->join('inventory','inventory.AGENT_ID = travel_agent.ID');*/
 		//$this->db->where('STATUS',1);
 		$query = $this->db->get();
+		//echo $this->db->last_query();
 		return $query->result();
 	}
 
-	function get_all_users()
+	function get_all_users($type)
 	{
 		$this->db->distinct();
 		$this->db->select('*')->from('customer');
-		$this->db->where('CUST_NAME !=','');
+		$this->db->where('CUST_NAME !=','');	
+		if($type != ''){
+			$this->db->where('STATUS',$type);
+		}
 		$query = $this->db->get();
 		return $query->result();
 	}
