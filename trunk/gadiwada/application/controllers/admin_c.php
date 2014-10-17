@@ -15,6 +15,7 @@ class Admin_c extends CI_Controller {
 		$this->load->model('discounts_m');
 		$this->load->model('pricing_m');
 		$this->load->model('cancellation_m');
+		$this->load->model('registration_m');
 	}
 	public function index()
 	{
@@ -107,26 +108,62 @@ class Admin_c extends CI_Controller {
 	}
 	public function local_flexible_commission()
 	{
-		$data['localFlexiData'] = $this->pricing_m->get_all_local_flexible_data('flexible');
+		$id=0; $nm='';
+		if(!empty($_POST))
+		{
+			$id = $this->input->post('agent_id');
+			$nm = $this->input->post('agent_nm');
+		}
+		$data['agtid'] = $id;
+		$data['agtnm'] = $nm;
+		$data['agent_info'] = $this->registration_m->get_all_agent_info();
+		$data['localFlexiData'] = $this->pricing_m->get_all_local_flexible_data('flexible',$id,$nm);
 		$data['com'] = 'active';
 		$this->load->view('admin/local_flexible_commission',$data);
 	}
 	public function local_package_commission()
 	{
+		$id=0; $nm='';
+		if(!empty($_POST))
+		{
+			$id = $this->input->post('agent_id');
+			$nm = $this->input->post('agent_nm');
+		}
+		$data['agtid'] = $id;
+		$data['agtnm'] = $nm;
+		$data['agent_info'] = $this->registration_m->get_all_agent_info();
 		$data['com'] = 'active';
-		$data['localPackData'] = $this->pricing_m->get_all_local_flexible_data('package');
+		$data['localPackData'] = $this->pricing_m->get_all_local_flexible_data('package',$id,$nm);
 		$this->load->view('admin/local_package_commission',$data);
 	}
 	public function outstation_flexible_commission()
 	{
+		$id=0; $nm='';
+		if(!empty($_POST))
+		{
+			$id = $this->input->post('agent_id');
+			$nm = $this->input->post('agent_nm');
+		}
+		$data['agtid'] = $id;
+		$data['agtnm'] = $nm;
+		$data['agent_info'] = $this->registration_m->get_all_agent_info();
 		$data['com'] = 'active';
-		$data['outFlexiData'] = $this->pricing_m->get_all_outstation_flexible_data('flexible');
+		$data['outFlexiData'] = $this->pricing_m->get_all_outstation_flexible_data('flexible',$id,$nm);
 		$this->load->view('admin/outstation_flexible_commission',$data);
 	}
 	public function outstation_package_commission()
 	{
+		$id=0; $nm='';
+		if(!empty($_POST))
+		{
+			$id = $this->input->post('agent_id');
+			$nm = $this->input->post('agent_nm');
+		}
+		$data['agtid'] = $id;
+		$data['agtnm'] = $nm;
+		$data['agent_info'] = $this->registration_m->get_all_agent_info();
 		$data['com'] = 'active';
-		$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package');
+		$data['outPackData'] = $this->pricing_m->get_all_outstation_flexible_data('package',$id,$nm);
 		$this->load->view('admin/outstation_package_commission',$data);
 	}
 	

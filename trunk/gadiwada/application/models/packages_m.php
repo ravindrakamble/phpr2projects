@@ -20,7 +20,7 @@ Class Packages_m extends CI_Model{
 	
 	function edit_outstaion_package($id)
 	{
-		$q = $q = $this->db->select('package_outstation.ID,OUTSTATION_NAME,CITY_NAME,CITY_ID')->from('package_outstation')->join('city','city.ID = package_outstation.CITY_ID');
+		$q = $this->db->select('package_outstation.ID,OUTSTATION_NAME,CITY_NAME,CITY_ID')->from('package_outstation')->join('city','city.ID = package_outstation.CITY_ID');
 			$this->db->where('package_outstation.ID',$id);
 			 $this->db->distinct();
 		$query=$this->db->get()->result();
@@ -59,6 +59,17 @@ Class Packages_m extends CI_Model{
 		return $query;
 	}
 
+	function get_package($city)
+	{
+		$this->db->distinct();
+		$this->db->select('package_local.*');
+		$this->db->from('package_local');
+		$this->db->join('city','package_local.CITY_ID = city.ID');
+		$this->db->where('city.CITY_NAME',$city);
+		$this->db->where('LOCAL_NAME !=','');
+		$query = $this->db->get()->result();
+		return $query;
+	}
 
 	/*function get_all_outstation_flexible_data($type='')
 	{

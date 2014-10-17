@@ -31,7 +31,7 @@
 		<div class="tab-content">
 			<!--Outstation Div Start-->
 			<div id='outstation' class="tab-pane fade" >
-			<form name="outsearch" method="POST" action="<?php echo base_url()?>search_result">
+				<form name="outsearch" method="POST" action="<?php echo base_url()?>search_result">
 				<table style="width: 40%">
 	            <tr>
 	                <td>Journey Date : </td>
@@ -72,7 +72,7 @@
 		       	<div id="packageDiv" style="display: none" >
 		        	<table style="width: 40%">
 			            <tr>
-			                <td>Choose Package : </td>
+			                <td>Choose Package : </td> <!--$out_Package-->
 			                <td><?php echo form_dropdown('package',$out_Package);?></td>
 			            </tr>
 			             <tr>
@@ -87,8 +87,8 @@
 			</div>
 			<!--Outstation Div End -->
 			<!--Local Div Start -->
-		<div id='local' class="tab-pane fade  active in">
-			<form name="localsearch" method="POST" action="<?php echo base_url()?>search_result">
+			<div id='local' class="tab-pane fade active in">
+				<form name="localsearch" method="POST" action="<?php echo base_url()?>search_result">
 			<table style="width: 40%">
 	            <tr>
 	                <td>Journey Date : </td>
@@ -139,8 +139,8 @@
 		             <tr> <td colspan="2"><input type="submit" class="btn btn-info" name="search" value="LOCAL SEARCH"/></td></tr>
 		        </table>
         	</div>
-			</form>
-		</div>
+			</form>																						
+			</div>
 			<!--Local Div End -->
 		</div>
 	</div>
@@ -151,11 +151,13 @@ $(function() {
 	localoptions('Flexible')
 	$('#journeydate1').datepicker({
 		dateFormat: 'dd/mm/yy',
-		minDate: 0
+		minDate: 0,
+        maxDate: '+2m'
 	});
 	$('#journeydate2').datepicker({
 		dateFormat: 'dd/mm/yy',
-		minDate: 0
+		minDate: 0,
+        maxDate: '+2m'
 	});
 	/*$(".dt").datepicker(
 	{ 
@@ -175,10 +177,21 @@ $(function() {
     	//Display 'loading' status in the target select list
     	if(selectedValue != "0" && selectedValue != "--"){
 			sendrequest(selectedValue);
+			//get_package(selectedValue);
 		}else{
 			$('.area').empty();
 		}
 	});
+	
+	/*$(".city").change(function(){
+    	var selectedValue = this.value;
+    	//Display 'loading' status in the target select list
+    	if(selectedValue != "0" && selectedValue != "--"){
+			get_package(selectedValue);
+		}else{
+			$('.outpackage').empty();
+		}
+	});*/
 /*	var frmvalidator = new Validator("outsearch");
 	frmvalidator.addValidation("journeydate","req","Please select your journey date");
 	frmvalidator.addValidation("city","dontselect=0","Please select city");
@@ -191,20 +204,37 @@ $(function() {
 
 function sendrequest(city){
 	jQuery.ajax({
-			type:"POST",
-			url: "<?php echo base_url();?>search/get_areas/"+city,
-			data: city,
-			success: function(response) {
-				if(response == ""){
-					$('.area').empty();
-				}else{
-					$('.area').empty();
-					$('.area').append(response);
-				}
-				
+		type:"POST",
+		url: "<?php echo base_url();?>search/get_areas/"+city,
+		data: city,
+		success: function(response) {
+			if(response == ""){
+				$('.area').empty();
+			}else{
+				$('.area').empty();
+				$('.area').append(response);
 			}
-		});
+			
+		}
+	});
 	
+}
+function get_package(city)
+{
+	jQuery.ajax({
+		type:"POST",
+		url: "<?php echo base_url();?>search/get_package/"+city,
+		data: city,
+		success: function(response) {
+			if(response == ""){
+				$('.outpackage').empty();
+			}else{
+				$('.outpackage').empty();
+				$('.outpackage').append(response);
+			}
+			
+		}
+	});
 }
 
 function options(val){

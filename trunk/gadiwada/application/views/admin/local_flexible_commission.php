@@ -8,7 +8,8 @@
 		<option value="outstation_package">Outstation Package Commission</option>
 	</select>
 </form>
-</div>	
+</div>
+
 <div id="collapse4" class="body">
 	<div id="blockmsg" style="display:none; cursor: default; padding:10px;">				
 		<h6>Are you sure, you want to save changes ?</h6> 
@@ -17,6 +18,26 @@
 		<input type="button" id="blkno" value="No" /> 
 	</div>
 	<h3>Local Flexible Commission</h3>
+	<br/>
+	<form  method="post" action="<?php echo base_url()?>admin_c/local_flexible_commission">
+	<?php
+		$agent = array();
+		$agent[0]="Serach By Agent ID";
+		foreach($agent_info as $id){
+			$agent[$id->ID]=$id->ID;
+		}
+	$js = ' onChange="this.form.submit()" ';
+	echo form_dropdown('agent_id',$agent,$agtid,$js);
+	
+	$agentnm = array();
+	$agentnm['']= "Serach By Agent Name";
+	foreach($agent_info as $nm){
+		$agentnm[$nm->BUSINESS_NAME]= $nm->BUSINESS_NAME;
+	}
+	$js = 'onChange="this.form.submit()" ';
+	echo form_dropdown('agent_nm',$agentnm,$agtnm,$js);
+	?>
+</form>	
 	<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
 		<thead>
 			<tr>

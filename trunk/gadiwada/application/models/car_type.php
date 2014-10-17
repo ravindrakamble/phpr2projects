@@ -1,6 +1,6 @@
 <?php
 
-Class Car_type_m extends CI_Model{
+Class Car_type extends CI_Model{
 
 	function get_all_car_type($type='')
 	{
@@ -10,11 +10,11 @@ Class Car_type_m extends CI_Model{
 		return $query;
 	}
 
-	function get_city_name($id)
+	function get_type_name($id)
 	{
 		$query=$this->db->get_where('car_type',array('ID'=>$id))->result();
 		foreach($query as $c)
-		return $c->car_type.'-'.$c->ID;
+		return $c->TYPE_NAME;
 	}
 	
 	function delete_city($id)
