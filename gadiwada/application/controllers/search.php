@@ -33,4 +33,17 @@ class Search extends CI_Controller {
 		
 		//return $options;
 	}
+	
+	function get_package($city)
+	{
+		$package = $this->packages_m->get_package($city);
+		if(count($package) == 0){
+			echo "";
+		} else {
+			foreach($package as $r){
+				echo "<option value=".$r->LOCAL_NAME.">".$r->LOCAL_NAME."</option>";
+			}
+		}
+		
+	}
 }

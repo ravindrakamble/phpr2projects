@@ -95,10 +95,11 @@ class Search_result extends CI_Controller {
 		$search_result="";
 		$search_result.="<center>
 						<table class='table table-bordered' width=100% id='search_table'>
-						<tr><th>Date</th><th>Operator name</th><th>Car name</th><th>Features</th><th>AC NON-AC</th><th>Price</th><th></th></tr>";
+						<tr><th>Operator name</th><th>Car name</th><th>Features</th><th>AC NON-AC</th><th>Price</th><th></th></tr>";
+						/*<td>".$row['RECEIPT_DATE']."</td>*/
 						foreach($result as $row):
 						$price = $this->general->get_price($row['ID']);
-						$search_result.= "<tr><td>".$row['RECEIPT_DATE']."</td><td>".$row['BUSINESS_NAME']."</td><td>".$row['MODEL_NAME']."</td><td>".$row['CAR_FEATURES']."</td><td>";
+						$search_result.= "<tr><td>".$row['BUSINESS_NAME']."</td><td>".$row['MODEL_NAME']."</td><td>".$row['CAR_FEATURES']."</td><td>";
 						if($row['AC'] == 1)
 						$acnonac = 'AC';
 						if($row['NON_AC'] == 1)
@@ -113,8 +114,8 @@ class Search_result extends CI_Controller {
 	$search_result.="<a href='".base_url()."billing/new_booking/".$row['ID']."/".$row['RECEIPT_DATE']."/".$price. "' class='btn-small btn-success'>Book</a></td></tr>";
 						}
 						else{
-	$search_result.="<a class='btn-min btn-warning' href='javascript:login(&apos;cust&apos;);'>
-											Login
+	$search_result.="<a class='btn-small btn-success' href='javascript:login(&apos;cust&apos;);'>
+											Book
 										</a></td></tr>";
 						}
 						
@@ -245,12 +246,20 @@ class Search_result extends CI_Controller {
 			$header .= "<td>Est hr:</td><td>".$curr_session['estimationtime']."</td>";
 		
 		if(array_key_exists('car_type', $curr_session) && $curr_session['car_type'] !== false &&
-		$curr_session['car_type'] != 0)
-			$header .= "<td>Car type</td><td>".$curr_session['car_type']."</td>";
+		$curr_session['car_type'] != 0 && $curr_session['option'] == 'Flexible')
+		{
+			$this->load->model('car_type');
+			$typename = $this->car_type->get_type_name($curr_session['car_type']);
+			$header .= "<td>Car type</td><td>".$typename."</td>";
+		}
 		
 		if(array_key_exists('CarTypePackage', $curr_session) && $curr_session['CarTypePackage'] !== false &&
-		$curr_session['CarTypePackage'] != 0)
-			$header .= "<td>Car type</td><td>".$curr_session['CarTypePackage']."</td>";
+		$curr_session['CarTypePackage'] != 0 && $curr_session['option'] == 'Package')
+		{
+			$this->load->model('car_type');
+			$typename = $this->car_type->get_type_name($curr_session['CarTypePackage']);
+			$header .= "<td>Car type</td><td>".$typename."</td>";
+		}
 		$header .= "</tr>";
 		$header .= "</table>";
 		

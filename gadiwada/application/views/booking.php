@@ -31,7 +31,7 @@
 				<th>Car Number</th>
 				<th>Purchase Year</th>
 				<th>Agreement End Date</th>
-				<th>Price</th>
+				<!--<th>Price</th>-->
 				<Th></Th>
 			</tr>
 		</thead>
@@ -45,13 +45,13 @@
 			<td><?php echo $b['CAR_NUMBER']?></td>
 			<td><?php echo $b['PURCHASE_YEAR']?></td>
 			<td><?php echo $b['AGREEMEST_END_DATE']?></td>
-			<td>
+			<!--<td>
 				<?php
 				$price ='' ;
 				$price = $this->general->get_price($b['ID']); //Inventory ID
 				echo $price;
 				?>
-			</td>
+			</td>-->
 			<?php if($b['BOOKED_BY'] == 'agent' && $b['INV_ID'] != NULL):?>
 			<td><label class="badge badge-success">BOOKED</label>&nbsp;&nbsp;&nbsp;
 			
@@ -79,14 +79,20 @@
 //Date Select From Datepicker start
 var fromdate = $('#fromdate').datepicker(
 {
-	dateFormat: 'dd-mm-yy',
-	minDate: 0
+	dateFormat: 'dd-mm-yy', maxDate: '+7d',
+	minDate: 0,
+	onSelect: function(selected) {
+		$("#todate").datepicker("option","minDate", selected)
+	}
+
 });
 var todate = $('#todate').datepicker(
 {
-	dateFormat: 'dd-mm-yy', maxDate: '+7d',
-		minDate: 0
+	dt1: $('#fromdate').datepicker('getDate'),
+	dateFormat: 'dd-mm-yy', 
+	maxDate: '+10d',
 });
+
 //Date Select From Datepicker end
 
 function ticket_cancel(billno,inv_id)

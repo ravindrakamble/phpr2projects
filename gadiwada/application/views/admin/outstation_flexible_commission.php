@@ -17,6 +17,26 @@
 		<input type="button" id="blkno" value="No" /> 
 	</div>
 	<h3>Outstation Flexible Commission</h3>
+	<br/>
+	<form  method="post" action="<?php echo base_url()?>admin_c/outstation_flexible_commission">
+	<?php
+		$agent = array();
+		$agent[0]="Serach By Agent ID";
+		foreach($agent_info as $id){
+			$agent[$id->ID]=$id->ID;
+		}
+	$js = ' onChange="this.form.submit()" ';
+	echo form_dropdown('agent_id',$agent,$agtid,$js);
+	echo "&nbsp;&nbsp;&nbsp;&nbsp;";
+	$agentnm = array();
+	$agentnm['']= "Serach By Agent Name";
+	foreach($agent_info as $nm){
+		$agentnm[$nm->BUSINESS_NAME]= $nm->BUSINESS_NAME;
+	}
+	$js = 'onChange="this.form.submit()" ';
+	echo form_dropdown('agent_nm',$agentnm,$agtnm,$js);
+	?>
+</form>	
 	<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
 		<thead>
 			<tr>

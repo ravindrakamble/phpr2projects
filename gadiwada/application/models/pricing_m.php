@@ -59,7 +59,7 @@ Class Pricing_m extends CI_Model{
 		return $query;
 	}
 
-	function get_all_outstation_flexible_data($type='')
+	function get_all_outstation_flexible_data($type='',$id=0,$agtnm='')
 	{
 		$agent_id=0;
 		$agent_id = $this->session->userdata('id');
@@ -72,6 +72,12 @@ Class Pricing_m extends CI_Model{
 			$this->db->join('package_outstation', 'package_outstation.ID = pricing_outstation.package','left');
 			if($agent_id > 0){
 				$this->db->where('inventory.agent_id',$agent_id);
+			}
+			if($id > 0){
+				$this->db->where('travel_agent.ID',$id);
+			}
+			if($agtnm != ''){
+				$this->db->where('travel_agent.BUSINESS_NAME',$agtnm);
 			}
 			$this->db->where('inventory.OUTSTATION',1); 
 			if($type == 'package'){
@@ -86,7 +92,7 @@ Class Pricing_m extends CI_Model{
 	}
 
 
-	function get_all_local_flexible_data($type='')
+	function get_all_local_flexible_data($type='',$id=0,$agtnm='')
 	{
 		$agent_id=0;
 		$agent_id = $this->session->userdata('id');
@@ -100,9 +106,12 @@ Class Pricing_m extends CI_Model{
 			if($agent_id > 0){
 				$this->db->where('inventory.agent_id',$agent_id);
 			}
-			/*if($id > 0){
-				$this->db->where('pricing_local.inventory_id',$id);
-			}*/
+			if($id > 0){
+				$this->db->where('travel_agent.ID',$id);
+			}
+			if($agtnm != ''){
+				$this->db->where('travel_agent.BUSINESS_NAME',$agtnm);
+			}
 			if($type == 'package'){
 				$this->db->where('price_for','Package');
 			}

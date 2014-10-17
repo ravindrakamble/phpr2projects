@@ -88,6 +88,14 @@ Class Registration_m extends CI_Model{
 			return $retResult;
 		}
 	}
+	
+	function get_all_agent_info()
+	{
+		$q = $this->db->select('ID,BUSINESS_NAME')->from('travel_agent');
+			 $this->db->distinct();
+		$query = $this->db->get()->result();
+		return $query;
+	}
 }
 	
 ?>
