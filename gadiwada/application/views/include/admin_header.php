@@ -23,7 +23,7 @@
 	<meta name="description" content="Bizstrap: Bootstrap Responsive Admin Theme">
 	<meta name="viewport" content="width=device-width">
 	<link rel="icon" type="image/ico" href="<?php echo base_url()?>/img/Favi02.png"/>
-	<title>Gadivada</title>
+	<title> Book a taxi | Book a cab | India | travelder.com | gadivada.com</title>
 		
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css">
 		<!--Templete CSS  -->

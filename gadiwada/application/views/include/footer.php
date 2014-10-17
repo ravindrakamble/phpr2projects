@@ -46,7 +46,7 @@
 	<div class="clear">
 	</div>
 </div>
-<div class="footer-grids" style="height:30% !important;">
+<!--<div class="footer-grids" style="height:30% !important;">
 	<div class="footer-grid1">
 		<a href="#">
 			<img width="50%" src="<?php echo base_url()?>img/logo/Travelder-final-Bl.jpg" title="logo">
@@ -69,7 +69,7 @@
 		<table border=0 cellpadding="0" cellspacing="0">
 			<tr> 
 				<td align=center valign="top" > 
-				<!--<a href="javascript:openLogo('shopline2282')"><img src="http://www.ccavenue.com/images/100.gif" border=0></a>-->
+				<!--<a href="javascript:openLogo('shopline2282')"><img src="http://www.ccavenue.com/images/100.gif" border=0></a>
 				</td>
 			</tr>
 		</table>
@@ -83,7 +83,7 @@
 			self.name = 'mainWin'; 
 		}
 		</script> 
--->
+
 		</p>
 	</div>
 	<div class="footer-grid2" align="right">
@@ -117,7 +117,7 @@
 	</div>
 	<div class="clear">
 	</div>
-</div>
+</div>-->
 <!---End-footer-grids--->
 </div>
 </div>
