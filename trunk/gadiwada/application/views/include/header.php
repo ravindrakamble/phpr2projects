@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-		<title>Gadivada</title>
+		<title>Book a taxi | Book a cab | India | travelder.com | gadivada.com</title>
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css">
 		<!--<link href='http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css' rel='stylesheet' type='text/css'>-->
 		<!--Templete CSS  -->
@@ -139,12 +139,12 @@
 					<div class="top-nav">
 						<ul>
 							<li <?php if(isset($search) && !empty($search) ) echo "class='active'"; ?>>
-								<a href="<?php echo base_url()?>search">Search</a></li>
+								<a href="<?php echo base_url()?>search">Book</a></li>
 								
 							
 								
 							<li <?php if(isset($cancellation)&& !empty($cancellation)) echo "class='active'"; ?> >
-								<a href="<?php echo base_url()?>cancellation">Cancellation</a></li>
+								<a href="<?php echo base_url()?>cancellation">Cancel</a></li>
 							
 						<?php
 							if($this->session->userdata('type') != 'agent' && $this->session->userdata('is_agent_logged_in') != 'ture'):?>
