@@ -226,8 +226,11 @@ $(document).ready(function() {
  	$("#alert").fadeTo(2000,2000).fadeOut(2000, function(){
     });
 	 
-	$.calculator.setDefaults({showOn: 'both', buttonImageOnly: true, buttonImage: '<?php echo base_url()?>calculator/calculator.png'});
-	$('.basicCalculator').calculator();	
+	$.calculator.setDefaults({
+		showOn: 'both', 
+		buttonImageOnly: true, 
+		buttonImage: '<?php echo base_url()?>calculator/calculator.png'});
+		$('.basicCalculator').calculator();	
 });
 function get_car_name(car_type)
 {
