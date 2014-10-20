@@ -172,7 +172,7 @@ if(isset($local_price_edit) && !empty($local_price_edit))
 				<tr>
 					<td>Local calculator </td>
 					<td>
-					<input type="number" name="calculator" readonly="true" class="basicCalculator">
+					<input type="text" name="calculator" readonly="true" class="basicCalculator">
 					</td>
 				</tr>
 			</table>
@@ -266,13 +266,14 @@ $(document).ready(function() {
 	var val = "<?php echo $priceFor ?>";
 	package_show(val);
 });
-/*	
+
  	$("#alert").fadeTo(2000,2000).fadeOut(2000, function(){
     });
 	 
 	$.calculator.setDefaults({showOn: 'both', buttonImageOnly: true, buttonImage: '<?php echo base_url()?>calculator/calculator.png'});
 	$('.basicCalculator').calculator();	
-});
+//});
+/*
 function get_car_name(car_type)
 {
 	jQuery.ajax({

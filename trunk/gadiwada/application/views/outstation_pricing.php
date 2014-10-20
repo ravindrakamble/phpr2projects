@@ -274,9 +274,9 @@ $(document).ready(function() {
 	package_show(val);
 });
 
-/*$(document).ready(function() {
-	var val = document.getElementById('car_type').value;
-	get_car_name(val);
+$(document).ready(function() {
+	//var val = document.getElementById('car_type').value;
+	//get_car_name(val);
 	
  	$("#alert").fadeTo(2000,2000).fadeOut(2000, function(){
     });
@@ -284,6 +284,7 @@ $(document).ready(function() {
 	$.calculator.setDefaults({showOn: 'both', buttonImageOnly: true, buttonImage: '<?php echo base_url()?>calculator/calculator.png'});
 	$('.basicCalculator').calculator();	
 });
+/*
 function get_car_name(car_type)
 {
 	jQuery.ajax({
